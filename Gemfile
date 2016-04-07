@@ -7,6 +7,8 @@ gem 'rails', '4.2.6'
 gem 'pg', '~> 0.15'
 # Use puma so we can process concurrent requests
 gem 'puma'
+# Time out long running request
+gem 'rack-timeout'
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
