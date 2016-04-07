@@ -48,6 +48,9 @@ end
 group :test do
   # Provides convenient one-liners that test common Rails functionality
   gem 'shoulda-matchers'
+
+  # Use webmock to enforce whitelisting of hosts that can be sent requests during testing
+  gem 'webmock'
 end
 
 group :development do
