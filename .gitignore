@@ -14,3 +14,6 @@
 
 # Ignore file created by RSpec in order to support `--only-failures` and `--next-failure` CLI options.
 /spec/examples.txt
+
+# Ignore machine specific environment configuration
+/.env
