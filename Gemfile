@@ -55,6 +55,9 @@ group :test do
 
   # Use webmock to enforce whitelisting of hosts that can be sent requests during testing
   gem 'webmock'
+
+  # Report data from test suite to Code Climate
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :development do
