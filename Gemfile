@@ -27,6 +27,11 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
+  # Print things in a neat format with `ap`
+  gem 'awesome_print'
+  # Use pry in console instead of irb
+  gem 'pry'
+
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Use guard to automatically run specs as files are saved
