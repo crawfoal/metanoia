@@ -29,6 +29,9 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
+  # Use guard to automatically run specs as files are saved
+  gem 'guard-rspec', require: false
+
   # Use Factory Girl to create test data
   gem 'factory_girl'
   # Use RSpec for testing
