@@ -46,6 +46,7 @@ group :development, :test do
 end
 
 group :test do
+  # Provides convenient one-liners that test common Rails functionality
   gem 'shoulda-matchers'
 end
 
