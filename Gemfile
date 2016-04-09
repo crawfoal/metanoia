@@ -67,6 +67,9 @@ group :test do
 
   # Report data from test suite to Code Climate
   gem 'codeclimate-test-reporter', require: nil
+
+  # Report data from test suite to Codacy
+  gem 'codacy-coverage', require: false
 end
 
 group :development do
