@@ -46,7 +46,12 @@ guard :rspec, cmd: "bundle exec rspec" do
   # ----------------------------------------------------------------------------
 
   # Gyms
-  watch("app/models/forms/gym.rb") { "#{rspec.spec_dir}/features/gyms_spec.rb" }
+  watch("app/models/forms/gym.rb") do
+    [
+      "#{rspec.spec_dir}/features/gyms_spec.rb",
+      "#{rspec.spec_dir}/controllers/gyms_controller_spec.rb"
+    ]
+  end
   watch("app/controllers/gyms_controller.rb") { "#{rspec.spec_dir}/features/gyms_spec.rb" }
   watch("app/controllers/sections_controller.rb") { "#{rspec.spec_dir}/features/gyms_spec.rb" }
   watch("app/views/gyms/_section_fields.html.haml") { "#{rspec.spec_dir}/features/gyms_spec.rb" }

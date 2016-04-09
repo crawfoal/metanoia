@@ -36,7 +36,7 @@ module Forms
     private
 
     def persist!
-      @gym = ::Gym.create!(name: name, sections: self.sections)
+      @gym = ::Gym.create!(name: name, sections: self.sections.select{|section| section.name.present?})
     end
   end
 end
