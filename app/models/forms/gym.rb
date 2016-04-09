@@ -28,7 +28,7 @@ module Forms
 
     def sections_attributes=(set_of_attributes)
       self.sections ||= []
-      set_of_attributes.each do |index, attributes_for_this_record|
+      set_of_attributes.each do |_index, attributes_for_this_record|
         self.sections << Section.new(attributes_for_this_record)
       end
     end
