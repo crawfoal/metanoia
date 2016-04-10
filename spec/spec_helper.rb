@@ -1,7 +1,11 @@
 require "codeclimate-test-reporter"
 require 'codacy-coverage'
-CodeClimate::TestReporter.start
-Codacy::Reporter.start
+
+if ENV['CODACY_RUN_LOCAL']
+  Codacy::Reporter.start
+else
+  CodeClimate::TestReporter.start
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
