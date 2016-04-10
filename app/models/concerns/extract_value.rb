@@ -40,7 +40,7 @@ module ExtractValue
 
     result = result.to_h.compact
     if options[:reject_blanks]
-      result.reject!{ |attribute_name, value| value.blank? }
+      result.reject!{ |_attribute_name, value| value.blank? }
     end
 
     return result
