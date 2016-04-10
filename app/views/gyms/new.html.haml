@@ -1,4 +1,6 @@
 = form_for @gym_form, as: :gym, url: gyms_path do |f|
+  = render partial: 'shared/error_messages', locals: {target: @gym_form}
+
   = f.label :name
   = f.text_field :name
 

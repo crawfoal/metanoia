@@ -6,6 +6,8 @@ module Forms
     attribute :name, String
     attribute :sections, Array[Section]
 
+    validate :gym_cannot_be_blank
+
     def initialize(*args)
       super
       if sections.empty?
@@ -18,6 +20,7 @@ module Forms
     end
 
     def save
+      build_models
       if valid?
         persist!
         true
@@ -33,10 +36,22 @@ module Forms
       end
     end
 
+    def gym_cannot_be_blank
+      unless @gym.value(reject_blanks: true).present?
+        errors.add(:base, "Cannot create a empty record for a gym. You must define some information for the gym itself, or create some sections for the gym.")
+      end
+    end
+
     private
 
+    def build_models
+      sections = self.sections.select{|section| section.value(reject_blanks: true).present?}
+      @gym = ::Gym.new(name: name, sections: sections)
+    end
+
     def persist!
-      @gym = ::Gym.create!(name: name, sections: self.sections.select{|section| section.name.present?})
+      build_models unless @gym
+      @gym.save!
     end
   end
 end

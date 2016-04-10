@@ -6,13 +6,7 @@ RSpec.describe GymsController, type: :controller do
   it { should route(:get, '/gyms').to(action: :index) }
 
   it 'uses strong parameters for #create' do
-    params = {
-      gym: attributes_for(
-        :gym,
-        :with_name,
-        sections_attributes: dup_and_build_nested_params(attributes_for(:section, :with_name), 3)
-      )
-    }
+    params = {gym: attributes_for(:gym, :with_name)}
 
     expect(subject).to permit(:name, sections_attributes: [:name]).for(:create, params: params).on(:gym)
   end
@@ -22,7 +16,6 @@ RSpec.describe GymsController, type: :controller do
       params = {
         gym: attributes_for(
           :gym,
-          :with_name,
           sections_attributes: dup_and_build_nested_params(attributes_for(:section, name: ''), 3)
         )
       }
@@ -30,9 +23,27 @@ RSpec.describe GymsController, type: :controller do
       expect{post :create, params}.to_not change{Section.count}
     end
 
-    context 'with invalid params' do
-      it 're-renders the form'
-      it 'displays a flash'
+    context 'when all params are blank and/or not present' do
+      render_views
+
+      it 're-renders the form', focus: true do
+        post :create, params_for_gym_with_no_data
+        expect(response).to render_template :new
+      end
+      it 'displays the error messages' do
+        post :create, params_for_gym_with_no_data
+        expect(response.body).to include_errors
+      end
     end
+  end
+
+  def params_for_gym_with_no_data
+    {
+      gym: attributes_for(
+        :gym,
+        name: '',
+        sections_attributes: dup_and_build_nested_params(attributes_for(:section, name: ''), 3)
+      )
+    }
   end
 end
