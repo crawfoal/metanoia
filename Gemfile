@@ -56,6 +56,8 @@ group :development, :test do
   gem 'database_cleaner'
   # Use Selenium-Webdriver to run feature specs that require JavaScript
   gem 'selenium-webdriver'
+  # Install this helper gem so we can easily have Selenium use Chrome instead of Firefox
+  gem 'chromedriver-helper'
 end
 
 group :test do

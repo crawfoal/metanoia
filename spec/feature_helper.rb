@@ -2,6 +2,7 @@ require 'rails_helper'
 require 'capybara/rspec'
 require 'capybara/rails'
 Dir[Rails.root.join('spec/features/support/*.rb')].each { |f| require f }
+Dir[Rails.root.join('spec/features/support/configurations/*.rb')].each { |f| require f }
 
 RSpec.configure do |config|
   config.before(:each, type: :feature) do
