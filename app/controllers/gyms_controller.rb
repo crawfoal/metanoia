@@ -4,8 +4,8 @@ class GymsController < ApplicationController
   end
 
   def create
-    @gyms_form = Forms::Gym.new(gym_form_params)
-    if @gyms_form.save
+    @gym_form = Forms::Gym.new(gym_form_params)
+    if @gym_form.save
       redirect_to gyms_path, notice: "New gym successfully created!"
     else
       render :new
