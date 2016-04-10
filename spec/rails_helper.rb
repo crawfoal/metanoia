@@ -8,14 +8,13 @@ require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
 
+require_relative 'support/configurations/database_cleaner_config' # include this before any other support files
 Dir[Rails.root.join('spec/support/**/*.rb')].each { |f| require f }
 
 # Checks for pending migration and applies them before tests are run.
 ActiveRecord::Migration.maintain_test_schema!
 
 RSpec.configure do |config|
-
-  config.use_transactional_fixtures = true
 
   config.infer_spec_type_from_file_location!
 

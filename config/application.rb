@@ -25,7 +25,10 @@ module Metanoia
 
     # Customize the console
     console do
+      # Use `ap` method to print pretty, well formated output (as opposed to `puts`)
       require 'ap'
+
+      # Use `pry` instead of `irb` for the Rails console
       require 'pry'
       config.console = Pry
     end

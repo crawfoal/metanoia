@@ -1,5 +1,11 @@
 require "codeclimate-test-reporter"
-CodeClimate::TestReporter.start
+require 'codacy-coverage'
+
+if ENV['CODACY_RUN_LOCAL']
+  Codacy::Reporter.start
+else
+  CodeClimate::TestReporter.start
+end
 
 RSpec.configure do |config|
   config.expect_with :rspec do |expectations|
@@ -24,4 +30,4 @@ RSpec.configure do |config|
 end
 
 require 'webmock/rspec'
-WebMock.disable_net_connect!(allow_localhost: true, allow: 'codeclimate.com')
+WebMock.disable_net_connect!(allow_localhost: true, allow: ['codeclimate.com', 'api.codacy.com'])
