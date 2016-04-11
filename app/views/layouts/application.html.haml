@@ -9,5 +9,5 @@
   %body
     = render 'layouts/navbar'
     = render_flash
-    %main
+    %main{class: "#{controller_name} #{action_name}"}
       = yield
