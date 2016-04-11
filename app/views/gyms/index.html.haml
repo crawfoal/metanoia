@@ -1,0 +1,9 @@
+%table#gyms
+  %tr
+    %th{ colspan: '2' } Gym
+  - @gyms.each do |gym|
+    %tr
+      %td
+        = gym.name
+      %td
+        = icon 'minus'

@@ -10,6 +10,11 @@ gem 'puma'
 # Time out long running request
 gem 'rack-timeout'
 
+# Print things in a neat format with `ap`
+gem 'awesome_print'
+# Use pry in console instead of irb
+gem 'pry'
+
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
@@ -23,6 +28,11 @@ gem 'turbolinks'
 # Use haml instead of erb (for regular html views)
 gem 'haml'
 gem 'haml-rails'
+# Use Font Awesome for icons
+gem 'font-awesome-sass'
+
+# Use virtus to define attributes for form objects
+gem 'virtus'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -31,22 +41,23 @@ gem 'jbuilder', '~> 2.0'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
-  # Print things in a neat format with `ap`
-  gem 'awesome_print'
-  # Use pry in console instead of irb
-  gem 'pry'
-
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Use guard to automatically run specs as files are saved
   gem 'guard-rspec', require: false
 
   # Use Factory Girl to create test data
-  gem 'factory_girl'
+  gem 'factory_girl_rails'
   # Use RSpec for testing
   gem 'rspec-rails'
   # Use Capybara to interract with the browser during specs.
   gem 'capybara'
+  # Use Database cleaner to clean up between tests
+  gem 'database_cleaner'
+  # Use Selenium-Webdriver to run feature specs that require JavaScript
+  gem 'selenium-webdriver'
+  # Install this helper gem so we can easily have Selenium use Chrome instead of Firefox
+  gem 'chromedriver-helper'
 end
 
 group :test do
@@ -58,6 +69,9 @@ group :test do
 
   # Report data from test suite to Code Climate
   gem 'codeclimate-test-reporter', require: nil
+
+  # Report data from test suite to Codacy
+  gem 'codacy-coverage', require: false
 end
 
 group :development do
