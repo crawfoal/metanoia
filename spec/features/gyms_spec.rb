@@ -21,9 +21,8 @@ RSpec.feature "Gyms", type: :feature, js: true do
 
     ww = Gym.find_by_name('Wild Walls')
     expect(ww).to be_present
-    ww_sections = ww.sections
     ['The Cave', 'The Slab'].each do |section_name|
-      section = ww_sections.find_by_name section_name
+      section = ww.sections.find_by_name section_name
       expect(section).to be_present
     end
   end

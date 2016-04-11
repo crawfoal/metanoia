@@ -11,11 +11,11 @@ module PageObjects
         click_on 'add_new_section'
       end
 
-      def set_gym_name_to name
+      def set_gym_name_to(name)
         form_element.fill_in 'gym_name', with: name
       end
 
-      def set_next_section_name_to name
+      def set_next_section_name_to(name)
         sections_fieldset.fill_in "gym_sections_attributes_#{@num_sections_with_a_name}_name", with: name
         @num_sections_with_a_name += 1
       end
@@ -26,7 +26,7 @@ module PageObjects
       end
 
       # ----- Expectation Methods -----
-      def has_fields_for_this_many_sections? num
+      def has_fields_for_this_many_sections?(num)
         sections_fieldset.assert_selector('.section-fields', count: num)
       end
 

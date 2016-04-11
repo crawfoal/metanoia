@@ -1,11 +1,10 @@
 module PageObjects
   module Gyms
     class Index < Base
-
       # ----- Action Methods -----
 
       # ----- Expectation Methods -----
-      def has_gym? name
+      def has_gym?(name)
         gyms_table.has_content? name
       end
 

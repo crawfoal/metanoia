@@ -17,7 +17,8 @@ RSpec.describe ExtractValue do
     include ExtractValue
     extract_value_from :body, collections: :comments
 
-    # pretend 'body' is a column for this model, and 'comments' is a has_many association
+    # pretend 'body' is a column for this model
+    # pretend 'comments' is a has_many association
     attr_accessor :body, :comments
     attr_accessor :comments
     def initialize(options = {})
