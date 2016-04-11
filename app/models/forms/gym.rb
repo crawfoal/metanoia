@@ -38,7 +38,7 @@ module Forms
 
     def gym_cannot_be_blank
       unless @gym.value(reject_blanks: true).present?
-        errors.add(:base, 'Cannot create a empty record for a gym.' \
+        errors.add(:base, 'Cannot create a empty record for a gym. ' \
                           'You must define some information for the gym itself, '\
                           'or create some sections for the gym.')
       end
