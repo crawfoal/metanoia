@@ -1,9 +1,9 @@
-%header{ class: 'navigation', role: 'banner' }
+%header.navigation{ role: 'banner' }
   .navigation-wrapper
     = link_to root_path, class: 'logo' do
       = icon 'line-chart'
     = link_to 'MENU', '#', id: 'navbar_menu_button'
     %nav{ role: 'navigation' }
-      %ul#navbar-main-menu.show
+      %ul.show#navbar-main-menu
         %li.nav-link
           = link_to 'Gyms', gyms_path

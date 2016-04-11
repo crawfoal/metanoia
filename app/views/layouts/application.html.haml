@@ -2,12 +2,12 @@
 %html
   %head
     %title Climbalytics
-    %link{:href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Raleway", :rel => "stylesheet", :type => "text/css"}/
+    %link{ :href => "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700|Raleway", :rel => "stylesheet", :type => "text/css" }/
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
     = javascript_include_tag 'application', 'data-turbolinks-track' => true
     = csrf_meta_tags
   %body
     = render 'layouts/navbar'
     = render_flash
-    %main{class: "#{controller_name} #{action_name}"}
+    %main{ class: "#{controller_name} #{action_name}" }
       = yield
