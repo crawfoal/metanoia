@@ -1,3 +1,4 @@
+%h1 Create a New Gym
 = form_for @gym_form, as: :gym, url: gyms_path do |f|
   = render partial: 'shared/error_messages', locals: {target: @gym_form}
 
