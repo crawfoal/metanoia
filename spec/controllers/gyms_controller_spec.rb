@@ -16,6 +16,7 @@ RSpec.describe GymsController, type: :controller do
       params = {
         gym: attributes_for(
           :gym,
+          name: nil,
           sections_attributes: dup_and_build_nested_params(attributes_for(:section, name: ''), 3)
         )
       }
