@@ -16,7 +16,7 @@ RSpec.feature "Gyms", type: :feature, js: true do
     gym_form.submit
 
     index_page = PageObjects::Gyms::Index.on_page!
-    expect(page).to have_flash_with_content 'success'
+    expect(page).to show_flash_with 'success'
     expect(index_page).to have_gym 'Wild Walls'
 
     ww = Gym.find_by_name('Wild Walls')
