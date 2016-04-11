@@ -1,0 +1,8 @@
+#new_gym {
+  input[type="submit"] {
+    margin-top: $base-spacing;
+  }
+  #add_new_section {
+    @include compact-bitter-button;
+  }
+}

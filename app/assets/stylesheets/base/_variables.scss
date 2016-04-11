@@ -1,0 +1,56 @@
+// Breakpoints
+$medium-screen: 600px;
+$large-screen: 900px;
+
+// Typography
+$base-font-family: 'Source Sans Pro', sans-serif;
+$heading-font-family: 'Raleway', serif;
+$max-header-to-increase-font-size: 3;
+
+// Font Sizes
+$base-font-size: 1em;
+
+// Line height
+$base-line-height: 1.5;
+$heading-line-height: 1.2;
+
+// Other Sizes
+$base-border-radius: 3px;
+$base-spacing: $base-line-height * 1em;
+$small-spacing: $base-spacing / 2;
+$tiny-spacing: $small-spacing / 2;
+$base-z-index: 0;
+
+// Colors
+$blue: #1565c0;
+$dark-gray: #2e2e2e;
+$light-brown: #8a736b;
+$lighter-brown: lighten($light-brown, 10%);
+$cream: #fff2dc;
+$beige: #d7c3bc;
+$light-beige: #ffffee;
+$sea-green: #5ab59b;
+$brick-red: #b5433f;
+$light-brick-red: lighten($brick-red, 10%);
+$yellow: #ffd56e;
+$green: #649c43;
+
+// Font Colors
+$base-font-color: $dark-gray;
+$action-color: $light-brown;
+
+// Border
+$base-border-color: $beige;
+$base-border: 1px solid $base-border-color;
+
+// Background Colors
+$base-background-color: #fff;
+$secondary-background-color: tint($base-border-color, 75%);
+
+// Forms
+$form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
+$form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+
+// Animations
+$base-duration: 150ms;
+$base-timing: ease;

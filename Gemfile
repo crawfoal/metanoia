@@ -30,6 +30,10 @@ gem 'haml'
 gem 'haml-rails'
 # Use Font Awesome for icons
 gem 'font-awesome-sass'
+# Bourbon is a Sass mixin library
+gem 'bourbon'
+# Neat is a grid framework built with Bourbon
+gem 'neat'
 
 # Use virtus to define attributes for form objects
 gem 'virtus'

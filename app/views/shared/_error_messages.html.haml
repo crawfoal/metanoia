@@ -1,6 +1,6 @@
 - if target.try(:errors).try(:any?)
   #error_explanation
-    %h2
+    %header
       We couldn't save your changes due to the following #{"error".pluralize(target.errors.count)}:
     %ul
       - target.errors.full_messages.each do |message|
