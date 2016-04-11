@@ -1,9 +1,13 @@
-#{$all-buttons} {
+@mixin compact-button {
+  padding: $tiny-spacing $small-spacing;
+}
+
+@mixin bitter-button($color: $action-color, $text-color: white) {
   appearance: none;
-  background-color: $action-color;
+  background-color: $color;
   border: 0;
   border-radius: $base-border-radius;
-  color: #fff;
+  color: $text-color;
   cursor: pointer;
   display: inline-block;
   font-family: $base-font-family;
@@ -20,8 +24,8 @@
 
   &:hover,
   &:focus {
-    background-color: shade($action-color, 20%);
-    color: #fff;
+    background-color: shade($color, 20%);
+    color: $text-color;
   }
 
   &:disabled {
@@ -29,7 +33,37 @@
     opacity: 0.5;
 
     &:hover {
-      background-color: $action-color;
+      background-color: $color;
     }
+  }
+}
+
+@mixin color-button($color, $text-color) {
+  background-color: $color;
+  color: $text-color;
+
+  &:hover,
+  &:focus {
+    background-color: shade($color, 20%);
+    color: $text-color;
+  }
+
+  &:disabled {
+    &:hover {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin compact-bitter-button($color: $action-color) {
+  @include bitter-button($color);
+  @include compact-button;
+}
+
+#{$all-buttons} {
+  @include bitter-button;
+
+  &.close {
+    @include compact-button;
   }
 }
