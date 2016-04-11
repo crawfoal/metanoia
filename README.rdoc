@@ -1,5 +1,5 @@
-<a href="https://codeclimate.com/github/crawfoal/metanoia"><img src="https://codeclimate.com/github/crawfoal/metanoia/badges/gpa.svg" /></a>
-<a href="https://codeclimate.com/github/crawfoal/metanoia/coverage"><img src="https://codeclimate.com/github/crawfoal/metanoia/badges/coverage.svg" /></a>
+{<img src="https://codeclimate.com/github/crawfoal/metanoia/badges/gpa.svg" />}[https://codeclimate.com/github/crawfoal/metanoia]
+{<img src="https://codeclimate.com/github/crawfoal/metanoia/badges/coverage.svg" />}[https://codeclimate.com/github/crawfoal/metanoia/coverage]
 
 == README
 
