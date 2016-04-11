@@ -17,6 +17,12 @@ h6 {
   margin: 0 0 $small-spacing;
 }
 
+@for $i from 1 through $max-header-to-increase-font-size {
+  h#{$i} {
+    font-size: modular-scale($max-header-to-increase-font-size + 1 - $i);
+  }
+}
+
 p {
   margin: 0 0 $small-spacing;
 }
