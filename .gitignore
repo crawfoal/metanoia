@@ -17,3 +17,6 @@
 
 # Ignore machine specific environment configuration
 /.env
+
+# Ignore SimpleCov results
+/coverage
