@@ -38,7 +38,7 @@
   }
 }
 
-@mixin color-button($color, $text-color) {
+@mixin color-button($color, $text-color: white) {
   background-color: $color;
   color: $text-color;
 

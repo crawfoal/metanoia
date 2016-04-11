@@ -1,0 +1,31 @@
+div[class^='flash'] {
+  @include clearfix;
+
+  padding: $tiny-spacing;
+  text-align: center;
+
+  button.close {
+    float: right;
+  }
+}
+
+@mixin color-flash($color, $text-color: darken(shade($color, 20%), 20%)) {
+  background-color: $color;
+  color: $text-color;
+
+  button.close {
+    @include color-button(darken(shade($color, 15%), 10%));
+  }
+}
+
+div.flash-notice {
+  @include color-flash($green);
+}
+
+div.flash-warning {
+  @include color-flash($yellow);
+}
+
+div.flash-alert {
+  @include color-flash($brick-red, white);
+}
