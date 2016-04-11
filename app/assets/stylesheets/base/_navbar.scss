@@ -1,4 +1,4 @@
-header.navigation {
+.navigation {
   $navbar-padding: 1em;
   $navbar-background: $dark-gray;
   $navbar-color-hover: $cream;
@@ -72,7 +72,7 @@ header.navigation {
     }
   }
 
-  ul#navbar-main-menu {
+  #navbar-main-menu {
     clear: both;
     display: none;
     margin: 0 auto;
@@ -94,7 +94,7 @@ header.navigation {
 
   // The nav items
 
-  ul li.nav-link {
+  .nav-link {
     background: $navbar-background;
     display: block;
     line-height: $navbar-height;
