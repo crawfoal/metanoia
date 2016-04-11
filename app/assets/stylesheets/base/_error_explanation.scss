@@ -1,0 +1,21 @@
+#error_explanation {
+  color: white;
+  background-color: $brick-red;
+  margin-bottom: $base-spacing;
+  padding: $small-spacing;
+
+  header {
+    font-size: modular-scale(2);
+    margin-bottom: $tiny-spacing;
+  }
+
+  ul {
+    margin: auto $small-spacing;
+
+    li {
+      background-color: $light-brick-red;
+      margin-bottom: $tiny-spacing;
+      padding: $tiny-spacing $small-spacing;
+    }
+  }
+}
