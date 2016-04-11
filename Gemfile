@@ -30,6 +30,8 @@ gem 'haml'
 gem 'haml-rails'
 # Use Font Awesome for icons
 gem 'font-awesome-sass'
+# Bourbon is a Sass mixin library
+gem 'bourbon'
 
 # Use virtus to define attributes for form objects
 gem 'virtus'
