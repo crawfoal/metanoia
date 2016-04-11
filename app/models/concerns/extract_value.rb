@@ -35,27 +35,27 @@ module ExtractValue
     attributes_to_extract = self.class.attributes_to_extract
 
     result = attributes_to_extract.map do |attribute_name|
-      [attribute_name, self.send(attribute_name)]
+      [attribute_name, send(attribute_name)]
     end
 
     result = result.to_h.compact
     if options[:reject_blanks]
-      result.reject!{ |_attribute_name, value| value.blank? }
+      result.reject! { |_attribute_name, value| value.blank? }
     end
 
-    return result
+    result
   end
 
   def values_for_collections(options = {})
     result = {}
     self.class.collections_to_extract.each do |collection_name|
       values = []
-      self.send(collection_name).each do |item|
+      send(collection_name).each do |item|
         value = item.value(options)
-        values << value unless (value.blank? and options[:reject_blanks])
+        values << value unless value.blank? && options[:reject_blanks]
       end
       result[collection_name] = values unless values.empty?
     end
-    return result
+    result
   end
 end

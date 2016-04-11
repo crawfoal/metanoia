@@ -27,11 +27,11 @@ RSpec.describe ExtractValue do
   end
 
   describe '.extract_value_from' do
-    it 'builds `.attributes_to_extract`, which returns the names of the attributes that should be extracted when getting the "value" of the record' do
+    it 'adds the attribute names to `.attributes_to_extract`' do
       expect(Comment.attributes_to_extract).to eq [:body, :author_name]
     end
 
-    it 'builds `.collections_to_extract`, which returns the names of the collections that should be extracted when getting the "value" of the record' do
+    it 'adds the collection names to `.collections_to_extract`' do
       expect(Post.collections_to_extract).to eq [:comments]
     end
 
@@ -56,21 +56,27 @@ RSpec.describe ExtractValue do
       expect(Comment.new(value).value).to eq value
     end
 
-    it 'includes an array of the #value results for each item in the collection (when the collection option was used in `.extract_value_from`)' do
+    it 'includes an array of the #value results for each item in the collection' do
       post = Post.new(body: 'Post body')
-      Array(1..3).each { |index| post.comments << Comment.new(body: "Comment body #{index}", author_name: "Author name #{index}") }
+      Array(1..3).each do |index|
+        comment = Comment.new(
+          body: "Comment body #{index}",
+          author_name: "Author name #{index}"
+        )
+        post.comments << comment
+      end
 
-      expect(post.value).to eq({
+      expect(post.value).to eq(
         body: 'Post body',
         comments: [
-          {body: 'Comment body 1', author_name: 'Author name 1'},
-          {body: 'Comment body 2', author_name: 'Author name 2'},
-          {body: 'Comment body 3', author_name: 'Author name 3'}
+          { body: 'Comment body 1', author_name: 'Author name 1' },
+          { body: 'Comment body 2', author_name: 'Author name 2' },
+          { body: 'Comment body 3', author_name: 'Author name 3' }
         ]
-      })
+      )
     end
 
-    it "returns nil if the are no value attributes or collections defined" do
+    it 'returns nil if the are no value attributes or collections defined' do
       class Qlass
         include ExtractValue
       end
@@ -79,14 +85,14 @@ RSpec.describe ExtractValue do
 
     it "doesn't include collection keys pointing to nil values when the collection is empty" do
       post = Post.new(body: 'Post body')
-      expect(post.value).to eq({body: 'Post body'})
+      expect(post.value).to eq(body: 'Post body')
     end
 
     it "doesn't include blank values (e.g. empty strings, nil) when you specify the `reject_blanks: true` option" do
       blank_comment = Comment.new(body: '')
       expect(blank_comment.value(reject_blanks: true)).to be_nil
 
-      post = Post.new(comments: Array(1..2).map{ Comment.new } << blank_comment)
+      post = Post.new(comments: Array(1..2).map { Comment.new } << blank_comment)
       expect(post.value(reject_blanks: true)).to be_nil
     end
   end
