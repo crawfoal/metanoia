@@ -1,3 +1,11 @@
+body {
+  main {
+    @include outer-container(90%);
+
+    margin: $base-spacing auto;
+  }
+}
+
 html {
   box-sizing: border-box;
 }

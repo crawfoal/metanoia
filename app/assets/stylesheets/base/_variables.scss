@@ -21,16 +21,20 @@ $base-z-index: 0;
 
 // Colors
 $blue: #1565c0;
-$dark-gray: #333;
-$medium-gray: #999;
-$light-gray: #ddd;
+$dark-gray: #2e2e2e;
+$light-brown: #8a736b;
+$lighter-brown: lighten($light-brown, 10%);
+$cream: #fff2dc;
+$beige: #d7c3bc;
+$light-beige: #ffffee;
+$sea-green: #5ab59b;
 
 // Font Colors
 $base-font-color: $dark-gray;
-$action-color: $blue;
+$action-color: $light-brown;
 
 // Border
-$base-border-color: $light-gray;
+$base-border-color: $beige;
 $base-border: 1px solid $base-border-color;
 
 // Background Colors
