@@ -6,4 +6,4 @@ newSectionFields =
     /child_index_for_new_section/g,
     numSections.toString()
   )
-sectionFields.last().after(newSectionFields)
+$('#add_new_section').before(newSectionFields)
