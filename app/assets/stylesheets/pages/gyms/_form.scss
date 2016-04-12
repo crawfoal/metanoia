@@ -16,19 +16,19 @@
       @include calc(width, "#{$width} - #{$button-size}");
       @include clearfix;
 
-      border-top-right-radius: 0px;
-      border-bottom-right-radius: 0px;
-      float: left;
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
       display: inline-block;
+      float: left;
     }
 
     .remove-section {
       @include bitter-button;
 
       border: 1px solid $action-color;
-      border-left: 0px;
-      border-top-left-radius: 0px;
-      border-bottom-left-radius: 0px;
+      border-left: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
       float: left;
       font-size: $base-font-size;
       line-height: $base-line-height;
