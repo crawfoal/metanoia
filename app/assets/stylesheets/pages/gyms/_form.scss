@@ -2,7 +2,39 @@
   input[type="submit"] {
     margin-top: $base-spacing;
   }
+
   #add_new_section {
     @include compact-bitter-button;
+  }
+
+  .section-fields {
+    $button-size: $small-spacing * 3.5;
+
+    input {
+      $width: 100%;
+
+      @include calc(width, "#{$width} - #{$button-size}");
+      @include clearfix;
+
+      border-bottom-right-radius: 0;
+      border-top-right-radius: 0;
+      display: inline-block;
+      float: left;
+    }
+
+    .remove-section {
+      @include bitter-button;
+
+      border: 1px solid $action-color;
+      border-left: 0;
+      border-bottom-left-radius: 0;
+      border-top-left-radius: 0;
+      float: left;
+      font-size: $base-font-size;
+      line-height: $base-line-height;
+      padding: $base-spacing / 3 $small-spacing;
+      text-align: center;
+      width: $button-size;
+    }
   }
 }

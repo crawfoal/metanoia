@@ -9,7 +9,14 @@ RSpec.feature "Gyms", type: :feature, js: true do
 
     gym_form.set_gym_name_to 'Wild Walls'
     gym_form.set_first_section_name_to 'The Cave'
-    gym_form.add_fields_for_another_gym
+    gym_form.add_fields_for_another_section
+    expect(gym_form).to have_fields_for_2_sections
+
+    gym_form.set_next_section_name_to 'The Slab'
+    gym_form.add_fields_for_another_section
+    expect(gym_form).to have_fields_for_3_sections
+
+    gym_form.delete_nth_section(2)
     expect(gym_form).to have_fields_for_2_sections
 
     gym_form.set_next_section_name_to 'The Slab'
@@ -21,6 +28,7 @@ RSpec.feature "Gyms", type: :feature, js: true do
 
     ww = Gym.find_by_name('Wild Walls')
     expect(ww).to be_present
+    expect(ww.sections.size).to eq 2
     ['The Cave', 'The Slab'].each do |section_name|
       section = ww.sections.find_by_name section_name
       expect(section).to be_present

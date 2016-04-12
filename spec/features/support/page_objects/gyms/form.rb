@@ -7,8 +7,14 @@ module PageObjects
       end
 
       # ----- Action Methods -----
-      def add_fields_for_another_gym
+      def add_fields_for_another_section
         click_on 'add_new_section'
+      end
+
+      def delete_nth_section(n)
+        within "#gym_sections fieldset:nth-of-type(#{n})" do
+          find('.remove-section').click
+        end
       end
 
       def set_gym_name_to(name)
