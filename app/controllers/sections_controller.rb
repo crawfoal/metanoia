@@ -1,5 +1,5 @@
 class SectionsController < ApplicationController
   def new
-    @gym_form = Forms::Gym.new
+    @gym_form = GymForm.new
   end
 end

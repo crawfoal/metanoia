@@ -56,7 +56,7 @@ module PageObjects
 
       # ----- Finder Methods -----
       def form_element
-        find 'form#new_gym'
+        find 'form[class$="_gym"]'
       end
       alias_method :main_element, :form_element
 

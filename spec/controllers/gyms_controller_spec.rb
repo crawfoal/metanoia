@@ -4,11 +4,14 @@ RSpec.describe GymsController, type: :controller do
   it { should route(:get, '/gyms/new').to(action: :new) }
   it { should route(:post, '/gyms').to(action: :create) }
   it { should route(:get, '/gyms').to(action: :index) }
+  it { should route(:get, '/gyms/1').to(action: :show, id: 1) }
+  it { should route(:get, '/gyms/1/edit').to(action: :edit, id: 1) }
+  it { should route(:patch, '/gyms/1').to(action: :update, id: 1) }
 
   it 'uses strong parameters for #create' do
     params = {gym: attributes_for(:gym, :with_name)}
 
-    expect(subject).to permit(:name, sections_attributes: [:name]).for(:create, params: params).on(:gym)
+    expect(subject).to permit(:name, sections_attributes: [:id, :name, :_destroy]).for(:create, params: params).on(:gym)
   end
 
   describe '#create' do

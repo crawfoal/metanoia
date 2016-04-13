@@ -41,12 +41,15 @@ guard :rspec, cmd: "bundle exec rspec" do
   # View Helpers
   watch("app/views/layouts/_flash.html.haml") { "#{rspec.spec_dir}/helpers/flash_helper_spec.rb" }
 
+  # Factories
+  watch(%r(^spec/factories/.+\.rb)) { rspec.spec_dir }
+
   # ----------------------------------------------------------------------------
   # App Specific Patterns
   # ----------------------------------------------------------------------------
 
   # Gyms
-  watch("app/models/forms/gym.rb") do
+  watch("app/forms/gym_form.rb") do
     [
       "#{rspec.spec_dir}/features/gyms_spec.rb",
       "#{rspec.spec_dir}/controllers/gyms_controller_spec.rb"
