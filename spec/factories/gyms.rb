@@ -10,6 +10,12 @@ FactoryGirl.define do
       end
     end
 
+    before :create do |gym|
+      if gym.value.blank?
+        gym.name = "Gym Name"
+      end
+    end
+
     trait :with_name do
       name "Gym Name"
     end
