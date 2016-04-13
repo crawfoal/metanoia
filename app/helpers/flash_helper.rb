@@ -8,7 +8,7 @@ module FlashHelper
         locals: { type: type, message: flash[type] }
       )
     end
-    rendered_flashes.join('').html_safe
+    safe_join(rendered_flashes, '')
   end
 
   private
