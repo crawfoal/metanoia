@@ -1,1 +1,8 @@
-= link_to 'Edit', edit_gym_path(@gym)
+%header
+  %h1= @gym.name
+  = link_to 'Edit', edit_gym_path(@gym), class: 'edit-gym-link'
+
+%h2 Sections
+%ul
+  - @gym.sections.each do |section|
+    %li= section.name

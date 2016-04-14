@@ -1,0 +1,14 @@
+.gyms.show {
+  header {
+    @include display(flex);
+    @include align-content(flex-start);
+    @include align-items(flex-start);
+    @include justify-content(space-between);
+  }
+
+  .edit-gym-link {
+    @include bitter-button;
+
+    float: right;
+  }
+}

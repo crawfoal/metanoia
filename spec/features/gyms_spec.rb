@@ -36,14 +36,19 @@ RSpec.feature "Gyms", type: :feature, js: true do
   end
 
   scenario '(admin) views and edits a gym' do
+    section_names = ['Section 1', 'Section 2', 'Section 3']
     gym = create(
       :gym,
       :with_name,
-      section_names: ['Section 1', 'Section 2', 'Section 3']
+      section_names: section_names
     )
 
     visit gyms_path
     click_on gym.name
+    expect(page).to have_content gym.name
+    section_names.each do |section_name|
+      expect(page).to have_content section_name
+    end
     click_on 'Edit'
 
     gym_form = PageObjects::Gyms::Form.on_page!

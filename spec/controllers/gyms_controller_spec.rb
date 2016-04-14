@@ -18,21 +18,6 @@ RSpec.describe GymsController, type: :controller do
   end
 
   describe '#create' do
-    it "doesn't add sections that don't have names, since that is the only "\
-       "attribute for the seciton model so far" do
-      params = {
-        gym: attributes_for(
-          :gym,
-          name: nil,
-          sections_attributes: dup_and_build_nested_params(
-            attributes_for(:section, name: ''), 3
-          )
-        )
-      }
-
-      expect{post :create, params}.to_not change{Section.count}
-    end
-
     context 'when all params are blank and/or not present' do
       render_views
 
@@ -42,6 +27,25 @@ RSpec.describe GymsController, type: :controller do
       end
       it 'displays the error messages' do
         post :create, params_for_gym_with_no_data
+        expect(response.body).to include_errors
+      end
+    end
+  end
+
+  describe '#update' do
+    context 'when all params are blank and/or not present' do
+      render_views
+
+      let(:gym) { create :gym }
+
+      before :each do
+        patch :update, params_for_gym_with_no_data.merge(id: gym.id)
+      end
+
+      it 're-renders the form', focus: true do
+        expect(response).to render_template :edit
+      end
+      it 'displays the error messages' do
         expect(response.body).to include_errors
       end
     end
