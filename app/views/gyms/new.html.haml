@@ -1,15 +1,2 @@
 %h1 Create a New Gym
-= form_for @gym_form, as: :gym, url: gyms_path do |f|
-  = render partial: 'shared/error_messages', locals: {target: @gym_form}
-
-  = f.label :name
-  = f.text_field :name
-
-  = field_set_tag 'Sections', id: 'gym_sections' do
-    = f.fields_for :sections do |section_form|
-      = render partial: 'section_fields', locals: {f: section_form}
-
-    = link_to(new_section_path, id: 'add_new_section', remote: true) do
-      = icon 'plus'
-
-  = f.submit 'Save'
+= render 'form', gym_form: @gym_form
