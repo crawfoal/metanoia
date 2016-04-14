@@ -17,15 +17,15 @@ module PageObjects
         end
       end
 
-      def set_gym_name_to(name)
+      def gym_name=(name)
         form_element.fill_in 'gym_name', with: name
       end
 
-      def set_next_section_name_to(name)
+      def next_section_name=(name)
         sections_fieldset.fill_in "gym_sections_attributes_#{@num_sections_with_a_name}_name", with: name
         @num_sections_with_a_name += 1
       end
-      alias_method :set_first_section_name_to, :set_next_section_name_to
+      alias_method :first_section_name=, :next_section_name=
 
       def submit
         click_on 'Save'
