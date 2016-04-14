@@ -11,16 +11,22 @@ RSpec.describe GymsController, type: :controller do
   it 'uses strong parameters for #create' do
     params = {gym: attributes_for(:gym, :with_name)}
 
-    expect(subject).to permit(:name, sections_attributes: [:id, :name, :_destroy]).for(:create, params: params).on(:gym)
+    expect(subject).to permit(
+      :name,
+      sections_attributes: [:id, :name, :_destroy]
+    ).for(:create, params: params).on(:gym)
   end
 
   describe '#create' do
-    it "doesn't add sections that don't have names, since that is the only attribute for the seciton model so far" do
+    it "doesn't add sections that don't have names, since that is the only "\
+       "attribute for the seciton model so far" do
       params = {
         gym: attributes_for(
           :gym,
           name: nil,
-          sections_attributes: dup_and_build_nested_params(attributes_for(:section, name: ''), 3)
+          sections_attributes: dup_and_build_nested_params(
+            attributes_for(:section, name: ''), 3
+          )
         )
       }
 
@@ -46,7 +52,9 @@ RSpec.describe GymsController, type: :controller do
       gym: attributes_for(
         :gym,
         name: '',
-        sections_attributes: dup_and_build_nested_params(attributes_for(:section, name: ''), 3)
+        sections_attributes: dup_and_build_nested_params(
+          attributes_for(:section, name: ''), 3
+        )
       )
     }
   end

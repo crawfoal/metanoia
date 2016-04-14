@@ -45,7 +45,7 @@ RSpec.feature "Gyms", type: :feature, js: true do
     visit gyms_path
     click_on gym.name
     click_on 'Edit'
-    
+
     gym_form = PageObjects::Gyms::Form.on_page!
     expect(gym_form).to have_fields_for_3_sections
 

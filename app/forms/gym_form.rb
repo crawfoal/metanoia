@@ -27,7 +27,7 @@ class GymForm
         section = get_section(attributes['id'])
       else
         section = Section.new
-        self.sections << section
+        sections << section
       end
       section.mark_for_destruction if attributes.delete('_destroy') == 'true'
       section.attributes = attributes
@@ -35,7 +35,7 @@ class GymForm
   end
 
   def save
-    @gym.sections = self.sections.select do |section|
+    @gym.sections = sections.select do |section|
       section.value(reject_blanks: true).present?
     end
     @gym.save

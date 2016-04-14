@@ -43,14 +43,14 @@ RSpec.describe GymForm do
 
       gym_form.sections_attributes = {
         '1' => { 'name' => 'The Cave' },
-        '2' => { 'id' => gym.section_ids.first, 'name' => 'Updated Name'}
+        '2' => { 'id' => gym.section_ids.first, 'name' => 'Updated Name' }
       }
 
       expect(gym_form).to have_sections_named 'The Cave', 'Updated Name'
     end
 
     it "marks section for destruction if they specify 'true' for `_destroy`" do
-      gym = create :gym, section_names: ['Section Name']
+      gym = create :gym, :with_named_section
       gym_form = GymForm.new(gym)
 
       gym_form.sections_attributes = {
@@ -69,7 +69,7 @@ RSpec.describe GymForm do
       gym_form.attributes = { 'name' => 'New Gym Name' }
       gym_form.sections_attributes = {
         '1' => { 'name' => 'The Cave' },
-        '2' => { 'id' => gym.section_ids.first, 'name' => 'Updated Name'}
+        '2' => { 'id' => gym.section_ids.first, 'name' => 'Updated Name' }
       }
       gym_form.save
 

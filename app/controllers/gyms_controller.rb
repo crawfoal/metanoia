@@ -29,7 +29,8 @@ class GymsController < ApplicationController
     @gym_form = GymForm.new(Gym.find(params[:id]))
     @gym_form.attributes = gym_form_params
     if @gym_form.save
-      redirect_to gyms_path, notice: "#{@gym_form.name || 'Un-named gym'} successfully updated!"
+      gym_name = @gym_form.name || 'Un-named gym'
+      redirect_to gyms_path, notice: "#{gym_name} successfully updated!"
     else
       render :edit
     end
