@@ -1,55 +1,49 @@
 class GymForm
-  delegate :name, :sections, :errors, :save, :persisted?, :model_name, :to_key, :to_model, to: :@gym
+  delegate :name, :errors, :persisted?, :model_name, :to_key, :to_model,
+           to: :@gym
+  attr_reader :sections
 
-  def initialize(attribs_or_record = nil)
-    if quacks_like_a_gym?(attribs_or_record)
-      @gym = attribs_or_record
-    else # assume it is a hash of attributes for a new record
-      s_attribs = attribs_or_record.try(:delete, 'sections_attributes')
-      @gym = Gym.new(attribs_or_record)
-      self.sections_attributes = s_attribs if s_attribs
+  # Loading in the whole sections association could be expensive if there were
+  # a lot of records, but I'm not expecting that to be an issue in this case. If
+  # it is, we can address it later. But think about it if I make a general form
+  # object based on this one.
+  def initialize(gym = nil)
+    @gym = gym || Gym.new
+    @sections = @gym.sections.to_a
+    if @sections.empty?
+      @sections << Section.new
     end
+  end
 
-    if @gym.sections.empty?
-      @gym.sections << Section.new
-    end
+  def attributes=(attribs)
+    s_attribs = attribs.delete('sections_attributes')
+    @gym.attributes = attribs
+    self.sections_attributes = s_attribs if s_attribs
   end
 
   def sections_attributes=(set_of_attributes)
     set_of_attributes.each do |_index, attributes|
-      destroy = attributes.delete('_destroy') == 'true'
-      if destroy
-        Section.find(attributes['id']).destroy if attributes['id']
-        next
+      if attributes['id']
+        section = get_section(attributes['id'])
+      else
+        section = Section.new
+        self.sections << section
       end
-
-      unless attributes['id']
-        @gym.sections << Section.new(attributes)
-        next
-      end
-
-      section = Section.find(attributes['id'])
-      if section.gym_id.blank?
-        section.gym_id = @gym.id
-      elsif section.gym_id != @gym.id
-        raise "Cannot assign #{section} to #{@gym} because it is already "\
-              "assigned to another gym."
-      end
-      section.update(attributes)
+      section.mark_for_destruction if attributes.delete('_destroy') == 'true'
+      section.attributes = attributes
     end
   end
 
-  def update(attributes)
-    s_attribs = attributes.try(:delete, 'sections_attributes')
-    @gym.update(attributes)
-    self.sections_attributes = s_attribs if s_attribs
+  def save
+    @gym.sections = self.sections.select do |section|
+      section.value(reject_blanks: true).present?
+    end
+    @gym.save
   end
 
   private
 
-  def quacks_like_a_gym?(object)
-    [:name, :sections, :id].all? do |method_name|
-      object.respond_to? method_name
-    end
+  def get_section(id)
+    sections[sections.index { |section| section.id == id.to_i }]
   end
 end

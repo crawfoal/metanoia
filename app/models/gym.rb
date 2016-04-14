@@ -2,7 +2,7 @@ class Gym < ActiveRecord::Base
   include ExtractValue
   extract_value_from :name, collections: :sections
 
-  has_many :sections, dependent: :destroy
+  has_many :sections, dependent: :destroy, autosave: true
 
   validate :value_cannot_be_blank
 

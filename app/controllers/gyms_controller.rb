@@ -4,7 +4,8 @@ class GymsController < ApplicationController
   end
 
   def create
-    @gym_form = GymForm.new(gym_form_params)
+    @gym_form = GymForm.new
+    @gym_form.attributes = gym_form_params
     if @gym_form.save
       redirect_to gyms_path, notice: 'New gym successfully created!'
     else
@@ -26,7 +27,8 @@ class GymsController < ApplicationController
 
   def update
     @gym_form = GymForm.new(Gym.find(params[:id]))
-    if @gym_form.update(gym_form_params)
+    @gym_form.attributes = gym_form_params
+    if @gym_form.save
       redirect_to gyms_path, notice: "#{@gym_form.name || 'Un-named gym'} successfully updated!"
     else
       render :edit

@@ -6,126 +6,107 @@ RSpec.describe GymForm do
       it 'builds a new gym with one section' do
         gym_form = GymForm.new
 
-        expect(gym_form.name).to be_blank
         expect(gym_form.sections.size).to eq 1
         expect(gym_form.sections.first).to be_a_new_record
       end
     end
 
-    context 'when given a hash of attributes' do
-      it 'builds a new gym with those attributes' do
-        gym_form = GymForm.new(
-          'name' => 'Wild Walls',
-          'sections_attributes' => { '1' => { 'name' => 'The Cave' } }
-        )
-
-        expect(gym_form.name).to eq 'Wild Walls'
-        expect(gym_form.sections.first.name).to eq 'The Cave'
-      end
-    end
-
     context 'when given a gym record' do
       it "makes the record's attributes available through the form object" do
-        gym = Gym.new(
-          name: 'Wild Walls',
-          sections: [Section.new(name: 'The Cave')]
-        )
-
+        gym = build :gym, :with_name, :with_named_section
         gym_form = GymForm.new(gym)
 
-        expect(gym_form.name).to eq 'Wild Walls'
-        expect(gym_form.sections.first.name).to eq 'The Cave'
+        expect(gym_form.name).to eq gym.name
+        expect(gym_form).to have_section_named gym.sections.first.name
       end
     end
   end
 
-  describe '#sections_attributes' do
-    context 'when none of the attribute hashes contain an id' do
-      it 'creates new sections for each of the hashes' do
-        gym_form = GymForm.new
-        section_names = ['The Cave', 'The Slab']
+  describe '#attributes=' do
+    it 'sets the given attributes on the gym record' do
+      gym_form = GymForm.new
+      gym_form.attributes = {
+        'name' => 'Wild Walls',
+        'sections_attributes' => { '1' => { 'name' => 'The Cave' } }
+      }
 
-        gym_form.sections_attributes = {
-          '1' => { 'name' => section_names[0] },
-          '2' => { 'name' => section_names[1] }
-        }
-
-        gym_form.sections.each do |section|
-          expect(section).to be_a_new_record
-          section_names.delete section.name
-        end
-        expect(section_names).to be_empty
-      end
-    end
-
-    context 'when one of the hashes contains an id for a section that does not belong a gym yet' do
-      it 'updates sections that have an id and assigns them to the gym, otherwise creates a new section' do
-        gym = create :gym
-        gym_form = GymForm.new(gym)
-        section = create(:section, name: 'Original Name')
-
-        gym_form.sections_attributes = {
-          '1' => { 'name' => 'The Cave' },
-          '2' => { 'id' => section.id, 'name' => 'Updated Name'}
-        }
-
-        section.reload
-        expect(section.name).to eq 'Updated Name'
-        expect(section.gym_id).to eq gym.id
-        the_cave_is_added = gym_form.sections.any? do |section|
-          section.name == 'The Cave'
-        end
-        expect(the_cave_is_added).to be true
-      end
-    end
-
-    context 'when one of the hashes contains an id for a section that belongs to the gym attached to the form' do
-      it 'updates sections that have an id, otherwise creates a new section' do
-        gym = create :gym, section_names: ['Original Name']
-        section = gym.sections.first
-        gym_form = GymForm.new(gym)
-
-        gym_form.sections_attributes = {
-          '1' => { 'name' => 'The Cave' },
-          '2' => { 'id' => section.id, 'name' => 'Updated Name', '_destroy' => 'false'}
-        }
-
-        section.reload
-        expect(section.name).to eq 'Updated Name'
-        expect(section.gym_id).to eq gym.id
-        the_cave_is_added = gym_form.sections.any? do |section|
-          section.name == 'The Cave'
-        end
-        expect(the_cave_is_added).to be true
-      end
-    end
-
-    context 'when one of the hashes contains an id for a section that already belongs to another gym' do
-      it 'raises an error' do
-        gym = create :gym, section_names: ['Original Name']
-        section = gym.sections.first
-        gym_form = GymForm.new
-
-        expect do
-          gym_form.sections_attributes = {
-            '1' => { 'id' => section.id, 'name' => 'Updated Name'}
-          }
-        end.to raise_error /Cannot assign .* because it is already assigned to another gym./
-      end
-    end
-
-    context 'when one of the hashes specifies that the section should be destroyed' do
-      it 'destroys the section' do
-        gym = create :gym, section_names: ['Section Name']
-        section = gym.sections.first
-        gym_form = GymForm.new(gym)
-
-        expect { gym_form.sections_attributes = { '1' => { 'id' => section.id, '_destroy' => 'true' } } }.to change { Section.count }.by(-1)
-      end
+      expect(gym_form.name).to eq 'Wild Walls'
+      expect(gym_form).to have_section_named 'The Cave'
     end
   end
 
-  it 'responds to `#persisted?`, `#model_name`, `#to_key`, and `#to_model` so that the form builder sets the HTTP method and other attributes correctly' do
+  describe '#sections_attributes=' do
+    it 'updates (in memory, not the db) sections that have an id, otherwise '\
+       'builds a new section' do
+      gym = create :gym, section_names: ['Original Name']
+      gym_form = GymForm.new(gym)
+
+      gym_form.sections_attributes = {
+        '1' => { 'name' => 'The Cave' },
+        '2' => { 'id' => gym.section_ids.first, 'name' => 'Updated Name'}
+      }
+
+      expect(gym_form).to have_sections_named 'The Cave', 'Updated Name'
+    end
+
+    it "marks section for destruction if they specify 'true' for `_destroy`" do
+      gym = create :gym, section_names: ['Section Name']
+      gym_form = GymForm.new(gym)
+
+      gym_form.sections_attributes = {
+        '1' => { 'id' => gym.section_ids.first, '_destroy' => 'true' }
+      }
+
+      expect(gym_form.sections.first).to be_marked_for_destruction
+    end
+  end
+
+  describe '#save' do
+    it 'saves the gym with all of the sections' do
+      gym = create :gym, section_names: ['Original Name']
+      gym_form = GymForm.new(gym)
+
+      gym_form.attributes = { 'name' => 'New Gym Name' }
+      gym_form.sections_attributes = {
+        '1' => { 'name' => 'The Cave' },
+        '2' => { 'id' => gym.section_ids.first, 'name' => 'Updated Name'}
+      }
+      gym_form.save
+
+      gym.reload
+      expect(gym.name).to eq 'New Gym Name'
+      expect(gym).to have_sections_named 'The Cave', 'Updated Name'
+    end
+
+    it "destroys (or doesn't save) records marked for destruction" do
+      gym = create :gym, section_names: ['Section Name']
+      gym_form = GymForm.new(gym)
+
+      gym_form.sections_attributes = {
+        '1' => { 'id' => gym.section_ids.first, '_destroy' => 'true' },
+        '2' => { 'name' => 'I will not be saved.', '_destroy' => 'true' }
+      }
+      gym_form.save
+
+      gym.reload
+      expect(gym.sections).to be_empty
+    end
+
+    it "doesn't save sections that have a blank value" do
+      gym = create :gym, :with_name
+      gym_form = GymForm.new(gym)
+
+      gym_form.sections_attributes = {
+        '1' => { 'name' => '' }
+      }
+      gym_form.sections << Section.new
+      gym_form.save
+
+      expect(gym.sections).to be_empty
+    end
+  end
+
+  it 'responds to methods that the form builder needs' do
     gym_form = GymForm.new
     [:persisted?, :model_name, :to_key, :to_model].each do |method_name|
       expect(gym_form).to respond_to method_name

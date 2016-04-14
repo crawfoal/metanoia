@@ -36,13 +36,17 @@ RSpec.feature "Gyms", type: :feature, js: true do
   end
 
   scenario '(admin) views and edits a gym' do
-    gym = create(:gym, :with_name, section_names: ['Section 1', 'Section 2', 'Section 3'])
+    gym = create(
+      :gym,
+      :with_name,
+      section_names: ['Section 1', 'Section 2', 'Section 3']
+    )
 
     visit gyms_path
     click_on gym.name
     click_on 'Edit'
+    
     gym_form = PageObjects::Gyms::Form.on_page!
-
     expect(gym_form).to have_fields_for_3_sections
 
     gym_form.delete_nth_section(2)

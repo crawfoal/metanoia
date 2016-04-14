@@ -19,5 +19,9 @@ FactoryGirl.define do
     trait :with_name do
       name "Gym Name"
     end
+
+    trait :with_named_section do
+      section_names ['Section Name']
+    end
   end
 end
