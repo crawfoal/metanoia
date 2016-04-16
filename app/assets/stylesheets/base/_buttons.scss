@@ -2,7 +2,7 @@
   padding: $tiny-spacing $small-spacing;
 }
 
-@mixin bitter-button($color: $action-color, $text-color: white) {
+@mixin bitter-button($color: $action-color, $text-color: text-color-for($color)) {
   appearance: none;
   background-color: $color;
   border: 0;
@@ -23,7 +23,8 @@
   white-space: nowrap;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &.active {
     background-color: shade($color, 20%);
     color: $text-color;
   }

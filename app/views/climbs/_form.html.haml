@@ -1,0 +1,26 @@
+= form_for climb, url: climbs_path, remote: true do |f|
+  = render partial: 'shared/error_messages', locals: { target: climb }
+
+  = f.hidden_field :section_id
+
+  .climb-type
+    = f.label :type, value: 'Boulder' do
+      = f.radio_button :type, :Boulder
+      %span Boulder
+
+    = f.label :type, value: 'Route' do
+      = f.radio_button :type, :Route
+      %span Route
+
+  .grade
+    = f.label :grade
+    = f.select :grade, Route.grades.keys, { include_blank: true }, { id: 'route_grades' }
+    = f.select :grade, Boulder.grades.keys, { include_blank: true }, { id: 'boulder_grades' }
+
+  = f.label :color
+  = f.select :color do
+    = content_tag :option, nil, value: ''
+    - Climb.colors.each do |color_hex, _id|
+      = content_tag :option, Climb.color_name_for(color_hex), value: color_hex
+
+  = f.submit 'Save'
