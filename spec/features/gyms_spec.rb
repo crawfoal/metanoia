@@ -56,8 +56,9 @@ RSpec.feature "Gyms", type: :feature, js: true do
 
     gym_form.delete_nth_section(2)
     gym_form.submit
-    gym.reload
 
+    expect(page).to show_flash_with 'success'
+    gym.reload
     expect(gym.sections.size).to eq 2
   end
 end
