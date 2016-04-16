@@ -1,8 +1,16 @@
+@function text-color-for($background-color) {
+  @if (lightness($background-color) > 50) {
+    @return $dark-gray;
+  } @else {
+    @return white;
+  }
+}
+
 @mixin compact-button {
   padding: $tiny-spacing $small-spacing;
 }
 
-@mixin bitter-button($color: $action-color, $text-color: white) {
+@mixin bitter-button($color: $action-color, $text-color: text-color-for($color)) {
   appearance: none;
   background-color: $color;
   border: 0;

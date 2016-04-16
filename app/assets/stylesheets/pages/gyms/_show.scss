@@ -7,6 +7,21 @@
     @include justify-content(space-between);
   }
 
+  #climbs {
+    @include display(flex);
+    @include flex-wrap(wrap);
+    @each $color-name, $color-value in $climb-colors {
+      a.#{$color-name} {
+        @include bitter-button($color-value);
+        border-radius: 0;
+        margin: 1px;
+      }
+      a.white {
+        border: 2px solid $lightest-gray;
+      }
+    }
+  }
+
   .edit-gym-link {
     @include bitter-button;
 

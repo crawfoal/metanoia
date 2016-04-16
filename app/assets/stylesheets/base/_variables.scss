@@ -24,6 +24,9 @@ $base-z-index: 0;
 // Colors
 $blue: #1565c0;
 $dark-gray: #2e2e2e;
+$light-gray: lighten($dark-gray, 25%);
+$lighter-gray: lighten($light-gray, 25%);
+$lightest-gray: lighten($lighter-gray, 15%);
 $light-brown: #8a736b;
 $lighter-brown: lighten($light-brown, 10%);
 $cream: #fff2dc;
@@ -34,6 +37,21 @@ $brick-red: #b5433f;
 $light-brick-red: lighten($brick-red, 10%);
 $yellow: #ffd56e;
 $green: #649c43;
+
+// Climb Colors
+$climb-colors: (
+  red: #b71c1c,
+  pink: #ec407a,
+  purple: #7b1fa2,
+  blue: #0d47a1,
+  teal: #00838f,
+  green: #2e7d32,
+  yellow: #fdd835,
+  orange: #ef6c00,
+  brown: #6d4c41,
+  black: #000000,
+  white: #ffffff
+);
 
 // Font Colors
 $base-font-color: $dark-gray;
