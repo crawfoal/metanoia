@@ -33,25 +33,19 @@
 
     section {
       @include span-columns(6);
+      @include media($medium-screen) {
+        @include span-columns(8);
+      }
+      @include media($large-screen) {
+        @include span-columns(9);
+      }
     }
     ul {
       @include span-columns(6);
-    }
-
-    @include media($medium-screen) {
-      section {
-        @include span-columns(8);
-      }
-      ul {
+      @include media($medium-screen) {
         @include span-columns(4);
       }
-    }
-
-    @include media($large-screen) {
-      section {
-        @include span-columns(9);
-      }
-      ul {
+      @include media($large-screen) {
         @include span-columns(3);
       }
     }
