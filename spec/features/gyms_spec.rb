@@ -7,19 +7,19 @@ RSpec.feature "Gyms", type: :feature, js: true do
 
     expect(gym_form).to have_fields_for_one_section
 
-    gym_form.set_gym_name_to 'Wild Walls'
-    gym_form.set_first_section_name_to 'The Cave'
+    gym_form.gym_name = 'Wild Walls'
+    gym_form.first_section_name = 'The Cave'
     gym_form.add_fields_for_another_section
     expect(gym_form).to have_fields_for_2_sections
 
-    gym_form.set_next_section_name_to 'The Slab'
+    gym_form.next_section_name = 'The Slab'
     gym_form.add_fields_for_another_section
     expect(gym_form).to have_fields_for_3_sections
 
     gym_form.delete_nth_section(2)
     expect(gym_form).to have_fields_for_2_sections
 
-    gym_form.set_next_section_name_to 'The Slab'
+    gym_form.next_section_name = 'The Slab'
     gym_form.submit
 
     index_page = PageObjects::Gyms::Index.on_page!
@@ -56,8 +56,9 @@ RSpec.feature "Gyms", type: :feature, js: true do
 
     gym_form.delete_nth_section(2)
     gym_form.submit
-    gym.reload
 
+    expect(page).to show_flash_with 'success'
+    gym.reload
     expect(gym.sections.size).to eq 2
   end
 end

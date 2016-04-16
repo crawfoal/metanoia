@@ -1,4 +1,5 @@
 .gyms.show {
+
   header {
     @include display(flex);
     @include align-content(flex-start);
@@ -6,9 +7,69 @@
     @include justify-content(space-between);
   }
 
+  #climbs {
+    @include display(flex);
+    @include flex-wrap(wrap);
+    @each $color-name, $color-value in $climb-colors {
+      a.#{$color-name} {
+        @include bitter-button($color-value);
+        border-radius: 0;
+        margin: 1px;
+      }
+      a.white {
+        border: 2px solid $lightest-gray;
+      }
+    }
+  }
+
   .edit-gym-link {
     @include bitter-button;
 
     float: right;
+  }
+
+  #current_section {
+    @include span-columns(6);
+    @include media($medium-screen) {
+      @include span-columns(8);
+    }
+    @include media($large-screen) {
+      @include span-columns(9);
+    }
+  }
+
+  ul {
+    @include span-columns(6);
+    @include media($medium-screen) {
+      @include span-columns(4);
+    }
+    @include media($large-screen) {
+      @include span-columns(3);
+    }
+
+    li {
+      a {
+        @include bitter-button($lighter-brown);
+        border: 2px solid $dark-gray;
+        border-top-width: 1px;
+        border-bottom-width: 0;
+        border-radius: 0;
+        text-align: center;
+        width: 100%;
+      }
+      &:first-child a {
+        @include border-top-radius($base-border-radius);
+        border-top-width: 2px;
+      }
+      &:last-child a {
+        @include border-bottom-radius($base-border-radius);
+        border-bottom-width: 2px;
+      }
+    }
+  }
+
+  .new-climb-link {
+    @include bitter-button;
+    margin-top: $base-spacing;
   }
 }
