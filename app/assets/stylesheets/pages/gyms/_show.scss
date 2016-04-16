@@ -40,6 +40,7 @@
         @include span-columns(9);
       }
     }
+
     ul {
       @include span-columns(6);
       @include media($medium-screen) {
@@ -48,6 +49,11 @@
       @include media($large-screen) {
         @include span-columns(3);
       }
+    }
+
+    .new-climb-link {
+      @include bitter-button;
+      margin-top: $base-spacing;
     }
   }
 }
