@@ -33,6 +33,6 @@ RSpec.feature 'Climbs', type: :feature, js: true do
   end
 
   def page_should_have_climb(grade, color)
-    expect(page).to have_selector 'a.pink', text: '5.11b'
+    expect(page).to have_selector "a.#{color.downcase}", text: grade
   end
 end

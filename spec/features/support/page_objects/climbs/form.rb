@@ -1,7 +1,6 @@
 module PageObjects
   module Climbs
     class Form < Base
-
       # ----- Action Methods -----
       def choose_route
         form_element.find('input#climb_type_route + span').click

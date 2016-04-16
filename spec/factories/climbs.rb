@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :climb do
-    type ['Boulder', 'Route'].sample
+    type %w(Boulder Route).sample
     section
 
     trait :with_grade do
