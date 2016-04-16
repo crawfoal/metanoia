@@ -1,11 +1,3 @@
-@function text-color-for($background-color) {
-  @if (lightness($background-color) > 50) {
-    @return $dark-gray;
-  } @else {
-    @return white;
-  }
-}
-
 @mixin compact-button {
   padding: $tiny-spacing $small-spacing;
 }
