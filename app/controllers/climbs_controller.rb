@@ -6,7 +6,7 @@ class ClimbsController < ApplicationController
   def create
     @climb = Climb.new(climb_params)
     if @climb.save
-      flash.now[:notice] = "Climb successfully saved!"
+      flash.now[:notice] = 'Climb successfully saved!'
     else
       render :new
     end

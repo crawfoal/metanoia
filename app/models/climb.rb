@@ -11,7 +11,7 @@ class Climb < ActiveRecord::Base
     '#6d4c41' => 'Brown',
     '#000000' => 'Black',
     '#ffffff' => 'White'
-  }
+  }.freeze
 
   validates_presence_of :type
   belongs_to :section
