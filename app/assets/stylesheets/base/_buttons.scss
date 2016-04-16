@@ -56,6 +56,24 @@
   }
 }
 
+@mixin no-color-button {
+  color: $dark-gray;
+
+  @include background-stripes($lightest-gray, white);
+
+  &:hover,
+  &:focus {
+    @include background-stripes(shade($lightest-gray, 20%), shade(white, 20%));
+    color: $dark-gray;
+  }
+
+  &:disabled {
+    &:hover {
+      @include background-stripes($lightest-gray, white);
+    }
+  }
+}
+
 @mixin compact-bitter-button($color: $action-color) {
   @include bitter-button($color);
   @include compact-button;

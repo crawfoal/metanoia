@@ -3,6 +3,6 @@
 
   #climbs
     - section.climbs.each do |climb|
-      = link_to climb.grade || '?', '#', class: Climb.color_name_for(climb.color).downcase
+      = link_to climb.grade || '?', '#', class: Climb.color_name_for(climb.color)
 
-  = link_to 'Enter New Climb', new_climb_path, remote: true, class: 'new-climb-link'
+  = link_to 'Add Climb', new_climb_path, remote: true, class: 'new-climb-link'

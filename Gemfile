@@ -35,9 +35,6 @@ gem 'bourbon'
 # Neat is a grid framework built with Bourbon
 gem 'neat'
 
-# Use virtus to define attributes for form objects
-gem 'virtus'
-
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
 
@@ -52,6 +49,9 @@ group :development, :test do
 
   # Use Factory Girl to create test data
   gem 'factory_girl_rails'
+  # Use Faker when generating sample data
+  gem 'faker'
+  
   # Use RSpec for testing
   gem 'rspec-rails'
   # Use Capybara to interract with the browser during specs.

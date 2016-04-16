@@ -10,8 +10,16 @@
   #climbs {
     @include display(flex);
     @include flex-wrap(wrap);
+    a {
+      @include bitter-button;
+      @include no-color-button;
+      border: 2px solid $lighter-gray;
+      border-radius: 0;
+      margin: 1px;
+    }
     @each $color-name, $color-value in $climb-colors {
       a.#{$color-name} {
+        background: none;
         @include bitter-button($color-value);
         border-radius: 0;
         margin: 1px;
