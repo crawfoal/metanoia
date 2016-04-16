@@ -8,20 +8,20 @@ RSpec.describe GymsController, type: :controller do
   it { should route(:get, '/gyms/1/edit').to(action: :edit, id: 1) }
   it { should route(:patch, '/gyms/1').to(action: :update, id: 1) }
 
-  it 'uses strong parameters for #create' do
-    params = {gym: attributes_for(:gym, :with_name)}
-
-    expect(subject).to permit(
-      :name,
-      sections_attributes: [:id, :name, :_destroy]
-    ).for(:create, params: params).on(:gym)
-  end
-
   describe '#create' do
+    it 'uses strong parameters' do
+      params = { gym: attributes_for(:gym, :with_name) }
+
+      expect(subject).to permit(
+        :name,
+        sections_attributes: [:id, :name, :_destroy]
+      ).for(:create, params: params).on(:gym)
+    end
+
     context 'when all params are blank and/or not present' do
       render_views
 
-      it 're-renders the form', focus: true do
+      it 're-renders the form' do
         post :create, params_for_gym_with_no_data
         expect(response).to render_template :new
       end
@@ -33,6 +33,19 @@ RSpec.describe GymsController, type: :controller do
   end
 
   describe '#update' do
+    it 'uses strong parameters' do
+      gym = create :gym
+      params = {
+        id: gym.id,
+        gym: attributes_for(:gym, :with_name)
+      }
+
+      expect(subject).to permit(
+        :name,
+        sections_attributes: [:id, :name, :_destroy]
+      ).for(:update, params: params).on(:gym)
+    end
+
     context 'when all params are blank and/or not present' do
       render_views
 
