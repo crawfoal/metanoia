@@ -2,9 +2,7 @@
   %h1= @gym.name
   = link_to 'Edit', edit_gym_path(@gym), class: 'edit-gym-link'
 
-%section.sections
-  %h2 Sections
-  %ul
-    - @gym.sections.each do |section|
-      %li
-        = link_to section.name, section, remote: true
+%ul.sections
+  - @gym.sections.each do |section|
+    %li
+      = link_to section.name, section, remote: true

@@ -23,7 +23,8 @@
   white-space: nowrap;
 
   &:hover,
-  &:focus {
+  &:focus,
+  &.active {
     background-color: shade($color, 20%);
     color: $text-color;
   }
