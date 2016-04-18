@@ -49,7 +49,7 @@ RSpec.feature "Gyms", type: :feature, js: true do
     section_names.each do |section_name|
       expect(page).to have_content section_name
     end
-    click_on 'Edit'
+    click_on 'Edit Gym Info'
 
     gym_form = PageObjects::Gyms::Form.on_page!
     expect(gym_form).to have_fields_for_3_sections

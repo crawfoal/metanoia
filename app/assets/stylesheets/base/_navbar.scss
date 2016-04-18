@@ -1,8 +1,8 @@
 .navigation {
   $navbar-padding: 1em;
   $navbar-background: $dark-gray;
-  $navbar-color-hover: $cream;
-  $navbar-color: $beige;
+  $navbar-color-hover: white;
+  $navbar-color: $lightest-gray;
   $navbar-height: 60px;
   $horizontal-bar-mode: $large-screen;
 
@@ -21,6 +21,7 @@
   }
 
   .logo {
+    color: $accent-color;
     float: left;
     max-height: $navbar-height;
     padding-left: $navbar-padding;
@@ -33,7 +34,7 @@
 
       &:focus,
       &:hover {
-        color: $lighter-brown;
+        color: lighten($accent-color, 20%);
       }
     }
   }

@@ -29,7 +29,7 @@ gem 'turbolinks'
 gem 'haml'
 gem 'haml-rails'
 # Use Font Awesome for icons
-gem 'font-awesome-sass'
+gem 'font-awesome-rails'
 # Bourbon is a Sass mixin library
 gem 'bourbon'
 # Neat is a grid framework built with Bourbon
@@ -51,7 +51,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   # Use Faker when generating sample data
   gem 'faker'
-  
+
   # Use RSpec for testing
   gem 'rspec-rails'
   # Use Capybara to interract with the browser during specs.

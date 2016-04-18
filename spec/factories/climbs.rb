@@ -4,7 +4,7 @@ FactoryGirl.define do
     section
 
     trait :with_grade do
-      grade { type.constantize.grades.keys.sample }
+      grade { type.constantize.grades.values.sample }
     end
 
     trait :with_color do
