@@ -14,7 +14,7 @@ div[class^='flash'] {
   color: $text-color;
 
   button.close {
-    @include color-button(darken(shade($color, 15%), 10%));
+    @include button-color(darken(shade($color, 15%), 10%));
   }
 }
 

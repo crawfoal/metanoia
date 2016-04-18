@@ -23,7 +23,6 @@ $tiny-spacing: $small-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$blue: #1565c0;
 $dark-gray: #2e2e2e;
 $light-gray: lighten($dark-gray, 25%);
 $lighter-gray: lighten($light-gray, 25%);
@@ -31,7 +30,6 @@ $lightest-gray: lighten($lighter-gray, 15%);
 $light-brown: #8a736b;
 $lighter-brown: lighten($light-brown, 10%);
 $lightest-brown: lighten($lighter-brown, 5%);
-$cream: #fffadc;
 $brick-red: #b5433f;
 $light-brick-red: lighten($brick-red, 10%);
 $yellow: #ffd56e;
@@ -61,6 +59,7 @@ $accent-color: $light-green;
 // Border
 $base-border-color: $lighter-gray;
 $base-border: 1px solid $base-border-color;
+$dark-border: 1px solid $base-font-color;
 
 // Background Colors
 $base-background-color: #fff;
