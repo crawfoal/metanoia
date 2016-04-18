@@ -38,7 +38,9 @@
 
   &:hover,
   &:focus {
-    background-color: shade($color, 20%);
+    @if lightness($color) < 25 { background-color: tint($color, 20%) }
+    @else if lightness($color) < 75 { background-color: shade($color, 20%) }
+    @else { background-color: shade($color, 10%)};
     color: $text-color;
   }
 
@@ -73,7 +75,7 @@
   @include compact-button;
 }
 
-@mixin button-group($color: $action-color, $item-container-selector: label, $item-selector: span) {
+@mixin button-group($color: $action-color, $unselected-background-color: $base-background-color, $item-container-selector: label, $item-selector: span) {
   $border-color: darken($color, 15%);
   $border: 1px solid $border-color;
   $inner-border: 1px solid lighten($border-color, 25%);
@@ -88,7 +90,7 @@
     float: left;
 
     #{$item-selector} {
-      @include bitter-button($base-background-color, $color, 0);
+      @include bitter-button($unselected-background-color, $color, 0);
       border-left: 0;
       border-radius: 0;
       border-right: $inner-border;

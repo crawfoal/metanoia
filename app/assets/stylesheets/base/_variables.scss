@@ -35,6 +35,8 @@ $light-brick-red: lighten($brick-red, 10%);
 $yellow: #ffd56e;
 $green: #649c43;
 $light-green: lighten($green, 20%);
+$lightest-green: lighten($light-green, 20%);
+$light-mint: lighten($lightest-green, 10%);
 
 // Climb Colors
 $climb-colors: (

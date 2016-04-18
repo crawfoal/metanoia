@@ -6,6 +6,7 @@ $(document).on 'page:update', ->
     sectionsList = $(this).closest('.sections')
     sectionsList.find('a').removeClass('active')
     $(this).addClass('active')
+    $(this).blur()
     unless isMediumScreen()
       sectionsList.slideUp ->
         $('.change-section').show()
