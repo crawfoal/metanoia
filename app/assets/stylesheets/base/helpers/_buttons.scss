@@ -1,0 +1,116 @@
+@mixin compact-button {
+  padding: $tiny-spacing $small-spacing;
+}
+
+@mixin bitter-button($color: $action-color, $text-color: text-color-for($color), $border: null) {
+  appearance: none;
+  border-radius: $base-border-radius;
+  cursor: pointer;
+  display: inline-block;
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  -webkit-font-smoothing: antialiased;
+  font-weight: 600;
+  line-height: 1;
+  padding: $small-spacing $base-spacing;
+  text-decoration: none;
+  transition: background-color $base-duration $base-timing;
+  user-select: none;
+  vertical-align: middle;
+  white-space: nowrap;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  @include button-color($color, $text-color, $border);
+}
+
+@mixin button-color($color, $text-color: text-color-for($color), $border: null) {
+  background-color: $color;
+  color: $text-color;
+
+  @if (lightness($color) > 90) {
+    border: $border or (2px solid shade($color, 15%));
+  } @else {
+    border: $border or 0;
+  }
+
+  &:hover,
+  &:focus {
+    @if lightness($color) < 25 { background-color: tint($color, 20%) }
+    @else if lightness($color) < 75 { background-color: shade($color, 20%) }
+    @else { background-color: shade($color, 10%)};
+    color: $text-color;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    &:hover {
+      background-color: $color;
+    }
+  }
+}
+
+@mixin no-color-button {
+  color: $base-font-color;
+
+  @include background-stripes($lightest-gray, white);
+
+  &:hover,
+  &:focus {
+    @include background-stripes(shade($lightest-gray, 20%), shade(white, 20%));
+    color: $base-font-color;
+  }
+
+  &:disabled {
+    &:hover {
+      @include background-stripes($lightest-gray, white);
+    }
+  }
+}
+
+@mixin compact-bitter-button($color: $action-color) {
+  @include bitter-button($color);
+  @include compact-button;
+}
+
+@mixin button-group($color: $action-color, $unselected-background-color: $base-background-color, $item-container-selector: label, $item-selector: span) {
+  $border-color: darken($color, 15%);
+  $border: 1px solid $border-color;
+  $inner-border: 1px solid lighten($border-color, 25%);
+
+  @include clearfix;
+
+  input {
+    display: none;
+  }
+
+  #{$item-container-selector} {
+    float: left;
+
+    #{$item-selector} {
+      @include bitter-button($unselected-background-color, $color, 0);
+      border-left: 0;
+      border-radius: 0;
+      border-right: $inner-border;
+      border-bottom: $border;
+      border-top: $border;
+    }
+
+    &:first-child #{$item-selector} {
+      @include border-left-radius($base-border-radius);
+      border-left: $border;
+    }
+
+    &:last-child #{$item-selector} {
+      @include border-right-radius($base-border-radius);
+      border-right: $border;
+    }
+
+    input:checked + #{$item-selector} {
+      @include button-color($color, $border: $border);
+      box-shadow: inset 0 1px 2px darken($color, 10%);
+    }
+  }
+}

@@ -1,0 +1,17 @@
+@mixin background-stripes($color1, $color2) {
+  background: repeating-linear-gradient(
+    45deg,
+    $color1,
+    $color1 10px,
+    $color2 10px,
+    $color2 20px
+  );
+}
+
+@function text-color-for($background-color) {
+  @if (lightness($background-color) > 50) {
+    @return $base-font-color;
+  } @else {
+    @return white;
+  }
+}

@@ -9,6 +9,6 @@
       = render partial: 'section_fields', locals: {f: section_form}
 
     = link_to(new_section_path, id: 'add_new_section', remote: true) do
-      = icon 'plus'
+      = fa_icon 'plus'
 
   = f.submit 'Save'

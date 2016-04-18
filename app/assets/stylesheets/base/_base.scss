@@ -4,7 +4,9 @@
 // MIT License
 
 @import "variables";
-@import "functions";
+
+@import "helpers/color";
+@import "helpers/buttons";
 
 @import "buttons";
 @import "forms";
@@ -13,7 +15,3 @@
 @import "media";
 @import "tables";
 @import "typography";
-
-@import "navbar";
-@import "error_explanation";
-@import "flash";

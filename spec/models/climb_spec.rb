@@ -14,7 +14,7 @@ RSpec.describe Climb, type: :model do
 
   describe '.color_name_for' do
     it 'returns the name of the color for the given hex code' do
-      expect(Climb.color_name_for('#ec407a')).to eq 'Pink'
+      expect(Climb.color_name_for('#ec407a')).to eq 'pink'
     end
 
     it 'returns nil if the given hex code is not in the colors enum list' do

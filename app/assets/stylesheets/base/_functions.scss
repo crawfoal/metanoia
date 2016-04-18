@@ -1,7 +1,0 @@
-@function text-color-for($background-color) {
-  @if (lightness($background-color) > 50) {
-    @return $dark-gray;
-  } @else {
-    @return white;
-  }
-}

@@ -1,8 +1,12 @@
-%header
-  %h1= @gym.name
-  = link_to 'Edit', edit_gym_path(@gym), class: 'edit-gym-link'
+%h1= @gym.name
 
-%ul.sections
-  - @gym.sections.each do |section|
-    %li
-      = link_to section.name, section, remote: true
+%section.gym-info
+  .change-section
+    Change Section
+    = fa_icon 'angle-double-right', class: 'fa-lg'
+  %ul.sections
+    - @gym.sections.each do |section|
+      %li
+        = link_to section.name, section, remote: true
+
+= link_to 'Edit Gym Info', edit_gym_path(@gym), class: 'edit-gym-link'

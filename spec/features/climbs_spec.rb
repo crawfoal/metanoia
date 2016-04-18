@@ -11,24 +11,24 @@ RSpec.feature 'Climbs', type: :feature, js: true do
     visit gyms_path
     click_on gym.name
     click_on 'Section 2'
-    click_on 'Enter New Climb'
+    click_on 'Add Climb'
 
     climb_form = PageObjects::Climbs::Form.on_page!
     expect(climb_form).to be_for_section 'Section 2'
 
     climb_form.choose_route
     climb_form.grade = '5.11b'
-    climb_form.color = 'Pink'
+    climb_form.color = 'pink'
     climb_form.submit
 
     expect(page).to show_flash_with 'success'
     page_should_replace_form_with_section_overview
-    page_should_have_climb '5.11b', 'Pink'
+    page_should_have_climb '5.11b', 'pink'
   end
 
   def page_should_replace_form_with_section_overview
     expect(page).to_not have_button 'Save'
-    expect(page).to have_link 'Enter New Climb'
+    expect(page).to have_link 'Add Climb'
     expect(page).to have_selector('#current_section', count: 1)
   end
 

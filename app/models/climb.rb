@@ -28,6 +28,6 @@ class Climb < ActiveRecord::Base
   ]
 
   def self.color_name_for(hex_code)
-    COLORS[hex_code]
+    COLORS[hex_code].try(:downcase)
   end
 end

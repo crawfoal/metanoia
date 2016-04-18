@@ -33,12 +33,13 @@ FactoryGirl.define do
     name 'Movement - Boulder'
     transient do
       section_names [
-        'Front Corner',
-        'The 45',
-        'East Vert',
-        'The Cave',
-        'Back Corner',
-        'West Vert'
+        'The Gray Wall',
+        'The Gray Wall - Left',
+        'The Gray Wall - Right',
+        'The Back Wall',
+        'The Back Corner',
+        'The Slot',
+        'The Arch'
       ]
     end
   end
