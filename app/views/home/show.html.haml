@@ -1,1 +1,17 @@
 %h1 Welcome to Climbalytics!
+
+%section.overview
+  (put site description here)
+
+%section.sign-up
+  = form_for :user, url: user_registration_path do |f|
+    = f.label :email
+    = f.email_field :email
+
+    = f.label :password
+    = f.password_field :password
+
+    = f.label :password_confirmation
+    = f.password_field :password_confirmation
+
+    = f.submit 'Sign up'
