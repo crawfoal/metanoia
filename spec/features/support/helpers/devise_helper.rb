@@ -4,7 +4,14 @@ module DeviseFeatureHelper
     fill_in 'Email', with: new_user.email
     fill_in 'Password', with: new_user.password
     fill_in 'Password confirmation', with: new_user.password
-    click_on 'Sign up'
+    find('input[type="submit"]').click
+  end
+
+  def login_user
+    user = FactoryGirl.create :user
+    fill_in 'Email', with: user.email
+    fill_in 'Password', with: user.password
+    find('input[type="submit"]').click
   end
 end
 

@@ -4,8 +4,9 @@ Rails.application.routes.draw do
   devise_for :users, skip: :all
   devise_scope :user do
     post 'sign_up', to: 'devise/registrations#create', as: :user_registration
-    post 'sign_in', to: 'devise/sessions#create', as: :new_user_session
+    post 'sign_in', to: 'devise/sessions#create', as: :user_session
   end
+  get '/', to: 'home#show', as: :new_user_session
 
   resources :gyms, except: :destroy
   resources :sections, only: [:new, :show]
