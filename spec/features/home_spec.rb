@@ -12,12 +12,11 @@ RSpec.feature "Homepage", type: :feature, js: true do
     visit root_path
 
     click_on 'Sign In'
-    expect(page).to have_selector 'form[action="/sign_in"]'
     login_user
     expect(page).to be_user_default_page
 
-    # click_on 'Sign Out'
-    # expect(page).to be_user_default_page
+    sign_out
+    expect(page).to be_homepage
   end
 
   scenario "signed-in user clicks on logo" do

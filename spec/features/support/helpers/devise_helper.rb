@@ -13,6 +13,10 @@ module DeviseFeatureHelper
     fill_in 'Password', with: user.password
     find('input[type="submit"]').click
   end
+
+  def sign_out
+    click_on 'Sign Out'
+  end
 end
 
 RSpec.configure do |config|

@@ -10,7 +10,7 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
   watch(rspec.spec_files)
-  watch(%r(^spec/features/support/helpers/.*\.rb$)) do
+  watch(%r(^spec/features/support/.*\.rb$)) do
     "#{rspec.spec_dir}/features"
   end
 
@@ -96,5 +96,9 @@ guard :rspec, cmd: "bundle exec rspec" do
         rspec.spec.('features/climbs')
       ]
     end
+  end
+
+  watch("app/views/layouts/_navbar.html.haml") do
+    "#{rspec.spec_dir}/features/home_spec.rb"
   end
 end
