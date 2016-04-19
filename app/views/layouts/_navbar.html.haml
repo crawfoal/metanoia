@@ -7,5 +7,6 @@
       %ul.show#navbar-main-menu
         %li.nav-link
           = link_to 'Gyms', gyms_path
-        %li.nav-link
-          = link_to 'Sign Out', destroy_user_session_path, method: :delete
+        - if user_signed_in?
+          %li.nav-link#sign_out
+            = link_to 'Sign Out', destroy_user_session_path, method: :delete

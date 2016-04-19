@@ -10,10 +10,12 @@ RSpec.feature "Homepage", type: :feature, js: true do
 
   scenario "user signs in and out" do
     visit root_path
+    expect(page).to_not have_selector '#sign_out'
 
     click_on 'Sign In'
     login_user
     expect(page).to be_user_default_page
+    expect(page).to have_selector '#sign_out'
 
     sign_out
     expect(page).to be_homepage
