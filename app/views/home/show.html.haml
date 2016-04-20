@@ -4,26 +4,27 @@
   (put site description here)
 
 %ul.actions
-  %li.sign-up
-    = link_to 'Sign Up', '#'
-    = form_for :user, url: user_registration_path do |f|
-      = f.label :email
-      = f.email_field :email
+  - unless user_signed_in?
+    %li.sign-up
+      = link_to 'Sign Up', '#'
+      = form_for :user, url: user_registration_path do |f|
+        = f.label :email
+        = f.email_field :email
 
-      = f.label :password
-      = f.password_field :password
+        = f.label :password
+        = f.password_field :password
 
-      = f.label :password_confirmation
-      = f.password_field :password_confirmation
+        = f.label :password_confirmation
+        = f.password_field :password_confirmation
 
-      = f.submit 'Sign up'
-  %li.sign-in
-    = link_to 'Sign In', '#'
-    = form_for :user, url: user_session_path do |f|
-      = f.label :email
-      = f.email_field :email
+        = f.submit 'Sign up'
+    %li.sign-in
+      = link_to 'Sign In', '#'
+      = form_for :user, url: user_session_path do |f|
+        = f.label :email
+        = f.email_field :email
 
-      = f.label :password
-      = f.password_field :password
+        = f.label :password
+        = f.password_field :password
 
-      = f.submit 'Sign in'
+        = f.submit 'Sign in'

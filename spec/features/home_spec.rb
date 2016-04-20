@@ -17,6 +17,10 @@ RSpec.feature "Homepage", type: :feature, js: true do
     expect(page).to be_user_default_page
     expect(page).to have_selector '#sign_out'
 
+    visit root_path
+    expect(page).to_not have_selector '.sign-up'
+    expect(page).to_not have_selector '.sign-in'
+
     sign_out
     expect(page).to be_homepage
   end
