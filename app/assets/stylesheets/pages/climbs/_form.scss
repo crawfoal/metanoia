@@ -1,4 +1,9 @@
 form[id$='_climb'] {
+  background-color: $secondary-background-color;
+  border: $secondary-border;
+  border-radius: $base-border-radius;
+  padding: $small-spacing;
+
   table{
     table-layout: auto;
 

@@ -40,7 +40,8 @@
   &:focus {
     @if lightness($color) < 25 { background-color: tint($color, 20%) }
     @else if lightness($color) < 75 { background-color: shade($color, 20%) }
-    @else { background-color: shade($color, 10%)};
+    @else if lightness($color) < 97 { background-color: shade($color, 10%)}
+    @else { background-color: $secondary-background-color};
     color: $text-color;
   }
 

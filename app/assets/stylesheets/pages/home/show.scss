@@ -1,0 +1,72 @@
+.home.show {
+  h1 {
+    background-color: $subtle-accent-color;
+    color: $light-font-color;
+    padding: 1rem 0;
+    text-align: center;
+  }
+
+  .overview {
+    font-size: 2em;
+    height: 30em;
+    text-align: center;
+
+    @include background-stripes($accent-color, white, 3rem);
+
+    @include media($medium-screen) {
+      @include span-columns(6);
+    }
+  }
+
+  .actions {
+    $border-color: $secondary-border-color;
+    $background-color: $secondary-background-color;
+
+    @include clearfix;
+
+    li {
+      display: inline;
+
+      a {
+        @include border-top-radius($base-border-radius);
+        color: $base-font-color;
+        cursor: pointer;
+        display: inline-block;
+        font-weight: 600;
+        -webkit-font-smoothing: antialiased;
+        padding: $small-spacing $base-spacing;
+        vertical-align: middle;
+
+        &:hover,
+        &:focus {
+          color: $action-color-dark;
+        }
+
+        &.active {
+          background-color: $background-color;
+          border: 1px solid $border-color;
+          border-bottom: 1px solid $background-color;
+        }
+      }
+
+      form {
+        background-color: $background-color;
+        border: 1px solid $border-color;
+        border-radius: $base-border-radius;
+        display: none;
+        float: left;
+        padding: $base-spacing;
+        margin-top: -1px;
+        width: 100%;
+      }
+
+      &:first-child a.active + form {
+        border-top-left-radius: 0;
+      }
+    }
+
+    @include media($medium-screen) {
+      @include span-columns(6);
+    }
+  }
+}

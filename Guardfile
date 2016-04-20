@@ -10,6 +10,9 @@ guard :rspec, cmd: "bundle exec rspec" do
   watch(rspec.spec_helper) { rspec.spec_dir }
   watch(rspec.spec_support) { rspec.spec_dir }
   watch(rspec.spec_files)
+  watch(%r(^spec/features/support/.*\.rb$)) do
+    "#{rspec.spec_dir}/features"
+  end
 
   # Ruby files
   ruby = dsl.ruby
@@ -30,8 +33,18 @@ guard :rspec, cmd: "bundle exec rspec" do
 
   # Rails config changes
   watch(rails.spec_helper)     { rspec.spec_dir }
-  watch(rails.routes)          { "#{rspec.spec_dir}/controllers" }
-  watch(rails.app_controller)  { "#{rspec.spec_dir}/controllers" }
+  watch(rails.routes) do
+    [
+      "#{rspec.spec_dir}/controllers",
+      "#{rspec.spec_dir}/features"
+    ]
+  end
+  watch(rails.app_controller) do
+  [
+    "#{rspec.spec_dir}/controllers",
+    "#{rspec.spec_dir}/features"
+  ]
+  end
 
   # Capybara features specs
   watch(rails.view_dirs)     { |m| rspec.spec.("features/#{m[1]}") }
@@ -83,5 +96,9 @@ guard :rspec, cmd: "bundle exec rspec" do
         rspec.spec.('features/climbs')
       ]
     end
+  end
+
+  watch("app/views/layouts/_navbar.html.haml") do
+    "#{rspec.spec_dir}/features/home_spec.rb"
   end
 end
