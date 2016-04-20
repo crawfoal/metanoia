@@ -1,0 +1,22 @@
+.registrations,
+.sessions {
+  a {
+    display: none;
+  }
+
+  br {
+    display: none;
+  }
+
+  label {
+    display: inline-block;
+  }
+
+  #error_explanation {
+    h2 {
+      font-family: $base-font-family;
+      font-size: modular-scale(2);
+      margin-bottom: $tiny-spacing;
+    }
+  }
+}
