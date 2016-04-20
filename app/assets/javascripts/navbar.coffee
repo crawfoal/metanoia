@@ -1,10 +1,16 @@
-$(document).on 'page:change', ->
-  menuToggle = $('#navbar_menu_button').unbind()
-  $('#navbar-main-menu').removeClass('show')
+navbarResize = ->
+  if isMediumScreen()
+    $('#navbar_menu_button').hide()
+    $('#collapsable_content').show()
+  else
+    $('#navbar_menu_button').show()
+    $('#collapsable_content').hide()
 
-  menuToggle.on 'click', (event) ->
-    event.preventDefault()
-    navbarMainMenu = $('#navbar-main-menu')
-    navbarMainMenu.slideToggle ->
-      if navbarMainMenu.is(':hidden')
-        navbarMainMenu.removeAttr('style')
+$(document).on 'page:change', ->
+  navbarResize()
+
+  $('nav').on 'click', '#navbar_menu_button', ->
+    $('#collapsable_content').slideToggle()
+
+$(window).resize ->
+  navbarResize()
