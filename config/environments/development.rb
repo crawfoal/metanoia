@@ -38,4 +38,10 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Alert if Bullet detects a performance issue
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.alert = true
+  end
 end

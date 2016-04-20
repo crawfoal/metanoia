@@ -87,6 +87,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Use Bullet to detect N+1 query problems
+  gem 'bullet'
 end
 
 group :production do
