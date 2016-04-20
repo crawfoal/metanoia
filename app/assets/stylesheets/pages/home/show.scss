@@ -19,7 +19,7 @@
   }
 
   .actions {
-    $border-color: $base-border-color;
+    $border-color: $secondary-border-color;
     $background-color: $secondary-background-color;
 
     @include clearfix;
