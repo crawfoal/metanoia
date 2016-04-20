@@ -1,10 +1,10 @@
-@mixin background-stripes($color1, $color2) {
+@mixin background-stripes($color1, $color2, $thickness: 10px) {
   background: repeating-linear-gradient(
     45deg,
     $color1,
-    $color1 10px,
-    $color2 10px,
-    $color2 20px
+    $color1 $thickness,
+    $color2 $thickness,
+    $color2 $thickness * 2
   );
 }
 

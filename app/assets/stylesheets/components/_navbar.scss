@@ -1,135 +1,102 @@
-.navigation {
-  $navbar-padding: 1em;
-  $navbar-background: $dark-gray;
-  $navbar-color-hover: white;
-  $navbar-color: $lightest-gray;
-  $navbar-height: 60px;
-  $horizontal-bar-mode: $large-screen;
+nav {
+  $background-color: $secondary-background-color;
+  $font-color: $base-font-color;
+  $divider-border: 2px solid darken($background-color, 10%);
+  $font-size: 1rem;
+  $line-height: 2rem;
+  $padding: 1rem;
+  $interior-padding: $padding / 4;
 
-  background-color: $navbar-background;
-  border-bottom: 1px solid darken($navbar-background, 10);
-  min-height: $navbar-height;
-  width: 100%;
-  z-index: 999;
+  background-color: $background-color;
+  font-size: $font-size;
+  padding: $padding;
 
-  .navigation-wrapper {
-    @include clearfix;
-    @include outer-container(100%);
+  @include clearfix;
 
-    position: relative;
-    z-index: 9999;
+  * {
+    color: $font-color;
+    display: block;
+    padding: 0 $interior-padding;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: lighten($font-color, 30%);
+    }
+
+    @include media($medium-screen) {
+      display: inline;
+      float: none;
+    }
+  }
+
+  & > * {
+    line-height: $line-height;
+    vertical-align: middle;
+  }
+
+  #collapsable_content {
+    clear: both;
+    display: none;
+    padding: 0;
+    padding-top: $interior-padding;
+
+    @include media($medium-screen) {
+      clear: none;
+      padding: 0;
+    }
   }
 
   .logo {
     color: $accent-color;
     float: left;
-    max-height: $navbar-height;
-    padding-left: $navbar-padding;
-    padding-right: 2em;
+    font-size: 2 * $font-size;
 
-    i {
-      font-size: 200%;
-      height: $navbar-height;
-      padding: (em($navbar-height) - $base-font-size * 2) / 4 0;
-
-      &:focus,
-      &:hover {
-        color: lighten($accent-color, 20%);
-      }
-    }
-  }
-
-  // Mobile view
-
-  #navbar_menu_button {
-    color: $navbar-color;
-    display: block;
-    float: right;
-    line-height: $navbar-height;
-    margin: 0;
-    padding-right: 1em;
-    text-decoration: none;
-    text-transform: uppercase;
-
-    @include media($horizontal-bar-mode) {
-      display: none;
-    }
-
+    &:active,
     &:focus,
     &:hover {
-      color: $navbar-color-hover;
+      color: $light-font-color;
+    }
+
+    .fa {
+      color: inherit;
     }
   }
 
-  // Nav menu
+  #navbar_main_menu,
+  #navbar_tools {
+    border-top: $divider-border;
+    margin-top: $interior-padding * 2;
+    padding-top: $interior-padding;
+    width: 100%;
 
-  nav {
-    float: none;
-    min-height: $navbar-height;
-    z-index: 9999999;
+    & * {
+      text-align: right;
+    }
 
-    @include media($horizontal-bar-mode) {
+    @include media($medium-screen) {
+      border: 0;
+      margin-top: 0;
+      padding-top: 0;
+      width: auto;
+
+      & * {
+        text-align: left;
+      }
+    }
+  }
+
+  @include media($medium-screen) {
+    #navbar_main_menu {
       float: left;
     }
-  }
 
-  #navbar-main-menu {
-    clear: both;
-    display: none;
-    margin: 0 auto;
-    overflow: visible;
-    padding: 0;
-    width: 100%;
-    z-index: 9999;
-
-    &.show {
-      display: block;
-    }
-
-    @include media($horizontal-bar-mode) {
-      display: inline;
-      margin: 0;
-      padding: 0;
+    #navbar_tools {
+      float: right;
     }
   }
 
-  // The nav items
-
-  .nav-link {
-    background: $navbar-background;
-    display: block;
-    line-height: $navbar-height;
-    overflow: hidden;
-    padding-right: 0.8em;
-    text-align: right;
-    width: 100%;
-    z-index: 9999;
-
-    @include media($horizontal-bar-mode) {
-      background: transparent;
-      display: inline;
-      line-height: $navbar-height;
-      text-decoration: none;
-      width: auto;
-    }
-
-    a {
-      color: $navbar-color;
-      display: inline-block;
-      text-decoration: none;
-
-      @include media($horizontal-bar-mode) {
-        padding-right: 1em;
-      }
-
-      &:focus,
-      &:hover {
-        color: $navbar-color-hover;
-      }
-    }
-  }
-
-  .active-nav-item a {
-    color: $navbar-color-hover;
+  #navbar_menu_button {
+    float: right;
   }
 }
