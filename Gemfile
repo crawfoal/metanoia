@@ -43,6 +43,11 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 
 # Use Devise for authentication
 gem 'devise'
+# Use Rolify to define roles, e.g. "admin", "setter", "athlete", etc.
+gem 'rolify'
+
+# Use Faker when generating sample data and temporary passwords
+gem 'faker'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -52,8 +57,6 @@ group :development, :test do
 
   # Use Factory Girl to create test data
   gem 'factory_girl_rails'
-  # Use Faker when generating sample data
-  gem 'faker'
 
   # Use RSpec for testing
   gem 'rspec-rails'
@@ -77,8 +80,8 @@ group :test do
   # Report data from test suite to Code Climate
   gem 'codeclimate-test-reporter', require: nil
 
-  # Report data from test suite to Codacy
-  gem 'codacy-coverage', require: false
+  # Use SimpleCov for test coverage reporting on local machines
+  gem 'simplecov', require: false
 end
 
 group :development do
@@ -87,6 +90,9 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Use Bullet to detect N+1 query problems
+  gem 'bullet'
 end
 
 group :production do

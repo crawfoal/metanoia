@@ -1,7 +1,7 @@
 # More info at https://github.com/guard/guard#readme
 require 'active_support/inflector'
 
-guard :rspec, cmd: "bundle exec rspec" do
+guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
@@ -79,6 +79,10 @@ guard :rspec, cmd: "bundle exec rspec" do
 
   # Factories
   watch(%r(^spec/factories/.+\.rb$)) { rspec.spec_dir }
+
+  # Rake Tasks
+  watch(%r(^lib/tasks/(.+)\.rake$)) { |m| rspec.spec.("tasks/#{m[1]}") }
+  watch(%r(^lib/tasks/(.+)/.+\.rb$)) { |m| "spec/tasks/#{m[1]}" }
 
   # ----------------------------------------------------------------------------
   # App Specific Patterns
