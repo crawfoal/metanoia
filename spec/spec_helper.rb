@@ -1,8 +1,5 @@
 if ENV['NO_COVERAGE']
   # do nothing
-elsif ENV['CODACY_RUN_LOCAL']
-  require 'codacy-coverage'
-  Codacy::Reporter.start
 elsif ENV['RUN_CODECLIMATE_REPORTER']
   require 'codeclimate-test-reporter'
   CodeClimate::TestReporter.start

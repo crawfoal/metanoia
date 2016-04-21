@@ -80,9 +80,6 @@ group :test do
   # Report data from test suite to Code Climate
   gem 'codeclimate-test-reporter', require: nil
 
-  # Report data from test suite to Codacy
-  gem 'codacy-coverage', require: false
-
   # Use SimpleCov for test coverage reporting on local machines
   gem 'simplecov', require: false
 end
