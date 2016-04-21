@@ -1,0 +1,11 @@
+%h1 Your Profile
+
+%section#account_settings
+  %header
+    %h2 Account Settings
+    = link_to edit_user_registration_path do
+      = fa_icon 'pencil', id: 'edit_account_settings'
+  %table
+    %tr
+      %td Email
+      %td= @user.email

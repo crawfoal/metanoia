@@ -1,0 +1,36 @@
+.profile.show {
+  header {
+    @include display(flex);
+    @include justify-content(space-between);
+    @include align-items(baseline);
+
+    border-bottom: $base-border;
+
+    h2 {
+      margin-bottom: $tiny-spacing;
+    }
+
+    .fa-pencil {
+      font-size: 1.5em;
+    }
+  }
+
+  table {
+    margin: 0 $small-spacing;
+    table-layout: auto;
+
+    * {
+      border: 0;
+    }
+
+    td {
+      padding-left: $base-spacing;
+
+      &:first-child {
+        font-weight: bold;
+        padding-left: 0;
+        text-align: right;
+      }
+    }
+  }
+}
