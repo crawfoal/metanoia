@@ -1,10 +1,14 @@
-require "codeclimate-test-reporter"
-require 'codacy-coverage'
-
-if ENV['CODACY_RUN_LOCAL']
+if ENV['NO_COVERAGE']
+  # do nothing
+elsif ENV['CODACY_RUN_LOCAL']
+  require 'codacy-coverage'
   Codacy::Reporter.start
-else
+elsif ENV['RUN_CODECLIMATE_REPORTER']
+  require 'codeclimate-test-reporter'
   CodeClimate::TestReporter.start
+else
+  require 'simplecov'
+  SimpleCov.start 'rails'
 end
 
 RSpec.configure do |config|

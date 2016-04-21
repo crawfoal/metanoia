@@ -82,6 +82,9 @@ group :test do
 
   # Report data from test suite to Codacy
   gem 'codacy-coverage', require: false
+
+  # Use SimpleCov for test coverage reporting on local machines
+  gem 'simplecov', require: false
 end
 
 group :development do

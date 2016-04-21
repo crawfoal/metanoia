@@ -1,7 +1,7 @@
 # More info at https://github.com/guard/guard#readme
 require 'active_support/inflector'
 
-guard :rspec, cmd: "bundle exec rspec" do
+guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   require "guard/rspec/dsl"
   dsl = Guard::RSpec::Dsl.new(self)
 
