@@ -46,6 +46,9 @@ gem 'devise'
 # Use Rolify to define roles, e.g. "admin", "setter", "athlete", etc.
 gem 'rolify'
 
+# Use Faker when generating sample data and temporary passwords
+gem 'faker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
@@ -54,8 +57,6 @@ group :development, :test do
 
   # Use Factory Girl to create test data
   gem 'factory_girl_rails'
-  # Use Faker when generating sample data
-  gem 'faker'
 
   # Use RSpec for testing
   gem 'rspec-rails'

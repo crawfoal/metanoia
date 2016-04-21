@@ -80,6 +80,10 @@ guard :rspec, cmd: "bundle exec rspec" do
   # Factories
   watch(%r(^spec/factories/.+\.rb$)) { rspec.spec_dir }
 
+  # Rake Tasks
+  watch(%r(^lib/tasks/(.+)\.rake$)) { |m| rspec.spec.("tasks/#{m[1]}") }
+  watch(%r(^lib/tasks/(.+)/.+\.rb$)) { |m| "spec/tasks/#{m[1]}" }
+
   # ----------------------------------------------------------------------------
   # App Specific Patterns
   # ----------------------------------------------------------------------------
