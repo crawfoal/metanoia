@@ -1,10 +1,10 @@
 .profile.show {
   header {
-    border-bottom: $base-border;
-
     @include display(flex);
     @include justify-content(space-between);
     @include align-items(baseline);
+
+    border-bottom: $base-border;
 
     h2 {
       margin-bottom: $tiny-spacing;
