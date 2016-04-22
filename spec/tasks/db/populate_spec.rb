@@ -13,13 +13,14 @@ RSpec.describe 'db:populate' do
     Rake.application.invoke_task 'db:populate'
   end
 
-  it 'creates the four gyms we have factories for' do
-    expect(Gym.count).to eq 4
+  it 'creates the four gyms we have factories for, plus the sample gym' do
+    expect(Gym.count).to eq 5
     [
       'Wild Walls',
       'Boulders Climbing Gym',
       'Movement - Boulder',
-      'The Spot'
+      'The Spot',
+      'Gym Name'
     ].each do |name|
       expect(Gym.find_by_name name).to be_present
     end

@@ -5,25 +5,10 @@ namespace :db do
 
     Rake::Task['db:reset'].invoke
 
-    gym_factories = {
-      wild_walls: :boulder,
-      boulders_climbing_gym: :boulder,
-      movement_boulder: :route,
-      the_spot: :boulder
-    }
-    gym_factories.each do |factory_name, climb_factory|
-      gym = FactoryGirl.create(factory_name)
-      gym.sections.each do |section|
-        Faker::Number.between(5, 15).times do
-          FactoryGirl.create(climb_factory, :with_color, :with_grade, section: section)
-        end
-        Faker::Number.between(1, 3).times do
-          FactoryGirl.create(climb_factory, :with_color, section: section)
-        end
-        Faker::Number.between(1, 3).times do
-          FactoryGirl.create(climb_factory, :with_grade, section: section)
-        end
-      end
-    end
+    FactoryGirl.create(:wild_walls, climb_factory: :boulder)
+    FactoryGirl.create(:boulders_climbing_gym, climb_factory: :boulder)
+    FactoryGirl.create(:movement_boulder, climb_factory: :route)
+    FactoryGirl.create(:the_spot, climb_factory: :boulder)
+    FactoryGirl.create(:sample_gym)
   end
 end
