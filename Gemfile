@@ -45,6 +45,8 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 gem 'devise'
 # Use Rolify to define roles, e.g. "admin", "setter", "athlete", etc.
 gem 'rolify'
+# Use Pundit to enforce authorization
+gem 'pundit'
 
 # Use Faker when generating sample data and temporary passwords
 gem 'faker'
@@ -73,6 +75,8 @@ end
 group :test do
   # Provides convenient one-liners that test common Rails functionality
   gem 'shoulda-matchers'
+  # Provide matchers for testing Pundit policy classes
+  gem 'pundit-matchers'
 
   # Use webmock to enforce whitelisting of hosts that can be sent requests during testing
   gem 'webmock'

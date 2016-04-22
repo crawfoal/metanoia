@@ -8,7 +8,39 @@ RSpec.describe GymsController, type: :controller do
   it { should route(:get, '/gyms/1/edit').to(action: :edit, id: 1) }
   it { should route(:patch, '/gyms/1').to(action: :update, id: 1) }
 
+  it 'should check authorization for #new' do
+    pretend_not_authorized :new?
+    get :new
+    expect_standard_not_authorized_response
+  end
+
+  it 'should check authorization for #create' do
+    params = { gym: attributes_for(:gym, :with_name) }
+    pretend_not_authorized :create?
+    post :create, params
+    expect_standard_not_authorized_response
+  end
+
+  it 'should check authorization for #edit' do
+    gym = create :gym
+    pretend_not_authorized :edit?
+    get :edit, id: gym.id
+    expect_standard_not_authorized_response
+  end
+
+  it 'should check authorization for #update' do
+    gym = create :gym
+    params = { id: gym.id, gym: attributes_for(:gym, :with_name) }
+    pretend_not_authorized :update?
+    get :update, params
+    expect_standard_not_authorized_response
+  end
+
   describe '#create' do
+    before :each do
+      login_user :admin
+    end
+
     it 'uses strong parameters' do
       params = { gym: attributes_for(:gym, :with_name) }
 
@@ -33,6 +65,10 @@ RSpec.describe GymsController, type: :controller do
   end
 
   describe '#update' do
+    before :each do
+      login_user :admin
+    end
+
     it 'uses strong parameters' do
       gym = create :gym
       params = {

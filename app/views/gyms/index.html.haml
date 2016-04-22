@@ -8,4 +8,5 @@
       %td
         = fa_icon 'minus'
 
-= link_to 'Create a New Gym', new_gym_path, id: 'new_gym'
+- if GymPolicy.new(current_user, Gym).new?
+  = link_to 'Create a New Gym', new_gym_path, id: 'new_gym'

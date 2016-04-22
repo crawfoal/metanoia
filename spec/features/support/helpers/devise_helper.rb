@@ -10,8 +10,8 @@ module DeviseFeatureHelper
     new_user
   end
 
-  def create_and_login_user
-    user = FactoryGirl.create :user
+  def create_and_login_user(factory_name = :user)
+    user = FactoryGirl.create factory_name
     login(user.email, user.password)
     user
   end
