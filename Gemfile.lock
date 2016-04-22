@@ -169,6 +169,11 @@ GEM
       method_source (~> 0.8.1)
       slop (~> 3.4)
     puma (3.4.0)
+    pundit (1.1.0)
+      activesupport (>= 3.0.0)
+    pundit-matchers (1.0.2)
+      pundit (~> 1.0, >= 1.0.0)
+      rspec-rails (>= 3.0.0)
     rack (1.6.4)
     rack-test (0.6.3)
       rack (>= 1.0)
@@ -319,6 +324,8 @@ DEPENDENCIES
   pg (~> 0.15)
   pry
   puma
+  pundit
+  pundit-matchers
   rack-timeout
   rails (= 4.2.6)
   rails_12factor

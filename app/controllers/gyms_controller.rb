@@ -1,4 +1,6 @@
 class GymsController < ApplicationController
+  before_action :ensure_admin, only: [:new, :create, :edit, :update]
+
   def new
     @gym_form ||= GymForm.new
   end
@@ -37,6 +39,10 @@ class GymsController < ApplicationController
   end
 
   private
+
+  def ensure_admin
+    authorize Gym
+  end
 
   def gym_form_params
     params.require(:gym).permit(

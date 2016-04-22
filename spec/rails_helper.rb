@@ -7,6 +7,7 @@ abort("The Rails environment is running in production mode!") if Rails.env.produ
 require 'spec_helper'
 require 'rspec/rails'
 # Add additional requires below this line. Rails is not loaded until this point!
+require 'pundit/matchers'
 
 # Include Database Cleaner config before any other support files
 require_relative 'support/configurations/database_cleaner_config'
