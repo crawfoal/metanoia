@@ -23,13 +23,4 @@ RSpec.feature 'Homepage', type: :feature, js: true do
     sign_out
     expect(page).to be_homepage
   end
-
-  scenario 'signed-in user clicks on logo' do
-    skip
-
-    create_and_login_user
-
-    find('.logo').click
-    expect(page).to be_user_default_page
-  end
 end
