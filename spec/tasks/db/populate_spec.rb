@@ -22,7 +22,7 @@ RSpec.describe 'db:populate' do
       'The Spot',
       'Gym Name'
     ].each do |name|
-      expect(Gym.find_by_name name).to be_present
+      expect(Gym.find_by_name(name)).to be_present
     end
   end
 
