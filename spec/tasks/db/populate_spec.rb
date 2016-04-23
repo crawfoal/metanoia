@@ -40,6 +40,17 @@ RSpec.describe 'db:populate' do
     end
   end
 
+  it 'creates a few admin users' do
+    expect(User.with_role(:admin).count).to be > 0
+  end
+
+  it 'creates a some users with no role' do
+    users_with_no_role = User.includes(:users_roles).where(
+      users_roles: { role_id: nil }
+    )
+    expect(users_with_no_role.count).to be > 0
+  end
+
   after :all do
     DatabaseCleaner.clean
   end

@@ -10,5 +10,8 @@ namespace :db do
     FactoryGirl.create(:movement_boulder, climb_factory: :route)
     FactoryGirl.create(:the_spot, climb_factory: :boulder)
     FactoryGirl.create(:sample_gym)
+
+    FactoryGirl.create_list(:admin, 3)
+    FactoryGirl.create_list(:user, 3)
   end
 end
