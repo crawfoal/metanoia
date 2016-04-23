@@ -1,5 +1,36 @@
 FactoryGirl.define do
-  factory :wild_walls, parent: :gym do
+  factory :sample_gym, parent: :gym do
+    with_name
+
+    transient do
+      section_names (1..Faker::Number.between(4, 9)).map { |num| "Section #{num}" }
+      climb_factory nil
+    end
+
+    after :build do |gym, evaluator|
+      gym.sections.each do |section|
+        climb_factory = evaluator.climb_factory || [:boulder, :route].sample
+        section.climbs = build_list(
+          climb_factory,
+          Faker::Number.between(5, 15),
+          :with_grade,
+          :with_color
+        )
+        section.climbs << build_list(
+          climb_factory,
+          Faker::Number.between(0, 3),
+          :with_grade
+        )
+        section.climbs << build_list(
+          climb_factory,
+          Faker::Number.between(0, 3),
+          :with_color
+        )
+      end
+    end
+  end
+
+  factory :wild_walls, parent: :sample_gym do
     name 'Wild Walls'
     transient do
       section_names [
@@ -14,7 +45,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :boulders_climbing_gym, parent: :gym do
+  factory :boulders_climbing_gym, parent: :sample_gym do
     name 'Boulders Climbing Gym'
     transient do
       section_names [
@@ -29,7 +60,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :movement_boulder, parent: :gym do
+  factory :movement_boulder, parent: :sample_gym do
     name 'Movement - Boulder'
     transient do
       section_names [
@@ -44,7 +75,7 @@ FactoryGirl.define do
     end
   end
 
-  factory :the_spot, parent: :gym do
+  factory :the_spot, parent: :sample_gym do
     name 'The Spot'
     transient do
       section_names [
