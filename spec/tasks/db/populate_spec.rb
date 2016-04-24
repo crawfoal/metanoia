@@ -12,8 +12,11 @@ RSpec.describe 'db:populate' do
     # supported nested transactions. If we open a transaction here and then also
     # for each example, it will rollback *both* open transactions after the
     # first example is run, and then the rest of the examples will fail.
-    DatabaseCleaner.strategy = :truncation
-    DatabaseCleaner.start
+    #
+    # The strategy is set right before we clean in the `after :all` hook
+    # because DatabaseCleaner only holds the current strategy, and the examples
+    # below are still using the transaction strategy to go back to the state
+    # right after the data was populated.
     Rake.application.invoke_task 'db:populate'
   end
 
@@ -56,6 +59,7 @@ RSpec.describe 'db:populate' do
   end
 
   after :all do
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
   end
 end
