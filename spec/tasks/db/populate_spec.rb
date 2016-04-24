@@ -8,8 +8,15 @@ RSpec.describe 'db:populate' do
     Rake::Task.define_task(:protected)
     Rake::Task.define_task('db:reset') # don't actually reset the db during test
 
-    DatabaseCleaner.strategy = :transaction
-    DatabaseCleaner.start
+    # We have to use truncation to clean up because DatabaseCleaner doesn't
+    # supported nested transactions. If we open a transaction here and then also
+    # for each example, it will rollback *both* open transactions after the
+    # first example is run, and then the rest of the examples will fail.
+    #
+    # The strategy is set right before we clean in the `after :all` hook
+    # because DatabaseCleaner only holds the current strategy, and the examples
+    # below are still using the transaction strategy to go back to the state
+    # right after the data was populated.
     Rake.application.invoke_task 'db:populate'
   end
 
@@ -40,7 +47,19 @@ RSpec.describe 'db:populate' do
     end
   end
 
+  it 'creates a few admin users' do
+    expect(User.with_role(:admin).count).to be > 0
+  end
+
+  it 'creates some users with no role' do
+    users_with_no_role = User.includes(:users_roles).where(
+      users_roles: { role_id: nil }
+    )
+    expect(users_with_no_role.count).to be > 0
+  end
+
   after :all do
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.clean
   end
 end

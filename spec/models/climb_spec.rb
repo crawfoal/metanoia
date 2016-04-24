@@ -21,4 +21,14 @@ RSpec.describe Climb, type: :model do
       expect(Climb.color_name_for('#abcdef')).to be_nil
     end
   end
+
+  describe 'the climb factory' do
+    it 'should not create an extra section when we build a climb and add it to'\
+       'an existing section' do
+       section = build :section
+       section.climbs << build(:climb)
+       section.save!
+       expect(Section.count).to eq 1
+     end
+  end
 end

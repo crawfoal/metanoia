@@ -1,7 +1,12 @@
 FactoryGirl.define do
   factory :climb do
     type %w(Boulder Route).sample
-    section
+
+    before :create do |climb|
+      unless climb.section
+        climb.section = create :section
+      end
+    end
 
     trait :with_grade do
       grade { type.constantize.grades.values.sample }
