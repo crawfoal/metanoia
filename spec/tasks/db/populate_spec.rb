@@ -8,7 +8,11 @@ RSpec.describe 'db:populate' do
     Rake::Task.define_task(:protected)
     Rake::Task.define_task('db:reset') # don't actually reset the db during test
 
-    DatabaseCleaner.strategy = :transaction
+    # We have to use truncation to clean up because DatabaseCleaner doesn't
+    # supported nested transactions. If we open a transaction here and then also
+    # for each example, it will rollback *both* open transactions after the
+    # first example is run, and then the rest of the examples will fail.
+    DatabaseCleaner.strategy = :truncation
     DatabaseCleaner.start
     Rake.application.invoke_task 'db:populate'
   end
