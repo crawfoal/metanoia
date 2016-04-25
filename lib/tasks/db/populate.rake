@@ -3,7 +3,7 @@ namespace :db do
   task :populate => [:protected, :environment] do
     Dir[Rails.root.join('db/sample_data/**/*.rb')].each { |f| require f }
     if ENV['HEROKU_APP_NAME']
-      unless system('heroku pg:reset')
+      unless system('heroku pg:reset ENV["DATABASE_URL"]')
         raise 'heroku pg:reset failed... aborting'
       end
       Rake::Task['db:schema:load'].invoke

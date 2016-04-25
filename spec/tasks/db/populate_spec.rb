@@ -80,7 +80,8 @@ RSpec.describe 'db:populate' do
     before :each do
       allow(ENV).to receive('[]').with('HEROKU_APP_NAME').and_return('app_name')
       allow(Tasks::DB::Populate).to receive(:fill_database)
-      allow(top_level).to receive(:system).with('heroku pg:reset').and_return(true)
+      allow(top_level).to receive(:system).with(
+        'heroku pg:reset ENV["DATABASE_URL"]').and_return(true)
     end
 
     it 'does not invoke db:reset' do
@@ -89,14 +90,16 @@ RSpec.describe 'db:populate' do
     end
 
     it 'executes `heroku pg:reset` and invokes db:schema:load and db:seed' do
-      expect(top_level).to receive(:system).with('heroku pg:reset').and_return(true)
+      expect(top_level).to receive(:system).with(
+        'heroku pg:reset ENV["DATABASE_URL"]').and_return(true)
       expect(Rake::Task['db:schema:load']).to receive(:invoke)
       expect(Rake::Task['db:seed']).to receive(:invoke)
       run_rake_task
     end
 
     it 'raises an error if `heroku pg:reset` fails' do
-      expect(top_level).to receive(:system).with('heroku pg:reset').and_return(false)
+      expect(top_level).to receive(:system).with(
+        'heroku pg:reset ENV["DATABASE_URL"]').and_return(false)
       expect { run_rake_task }.to raise_error 'heroku pg:reset failed... aborting'
     end
   end
