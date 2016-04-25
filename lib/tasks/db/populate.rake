@@ -5,10 +5,11 @@ namespace :db do
     if ENV['HEROKU_APP_NAME']
       result = nil
       Bundler.with_clean_env do
-        result = system('heroku pg:reset ENV["DATABASE_URL"]')
-      end
-      unless result
-        raise 'heroku pg:reset failed... aborting'
+        sh 'heroku pg:reset ENV["DATABASE_URL"]' do |ok, _res|
+          unless ok
+            raise 'heroku pg:reset failed... aborting'
+          end
+        end
       end
       Rake::Task['db:schema:load'].invoke
       Rake::Task['db:seed'].invoke
