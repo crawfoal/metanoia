@@ -78,6 +78,7 @@ RSpec.describe 'db:populate' do
 
   context 'in a Heroku environment' do
     before :each do
+      allow(ENV).to receive('[]').and_call_original
       allow(ENV).to receive('[]').with('HEROKU_APP_NAME').and_return('app_name')
       allow(Tasks::DB::Populate).to receive(:fill_database)
       allow(top_level).to receive(:system).with(
