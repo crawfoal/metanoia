@@ -8,8 +8,6 @@ RSpec.describe 'db:populate' do
     Rake.application.rake_require 'tasks/db/populate'
     Rake::Task.define_task(:environment)
     Rake::Task.define_task(:protected)
-    Rake::Task.define_task('db:schema:load')
-    Rake::Task.define_task('db:seed')
     Rake::Task.define_task('db:reset') # don't actually reset the db during test
   end
 
@@ -73,35 +71,6 @@ RSpec.describe 'db:populate' do
     after :all do
       DatabaseCleaner.strategy = :truncation
       DatabaseCleaner.clean
-    end
-  end
-
-  context 'in a Heroku environment' do
-    before :each do
-      allow(ENV).to receive('[]').and_call_original
-      allow(ENV).to receive('[]').with('HEROKU_APP_NAME').and_return('app_name')
-      allow(Tasks::DB::Populate).to receive(:fill_database)
-      allow(top_level).to receive(:sh).with(
-        'heroku pg:reset ENV["DATABASE_URL"]').and_yield(true, nil)
-    end
-
-    it 'does not invoke db:reset' do
-      expect(Rake::Task['db:reset']).to_not receive(:invoke)
-      run_rake_task
-    end
-
-    it 'executes `heroku pg:reset` and invokes db:schema:load and db:seed' do
-      expect(top_level).to receive(:sh).with(
-        'heroku pg:reset ENV["DATABASE_URL"]').and_yield(true, nil)
-      expect(Rake::Task['db:schema:load']).to receive(:invoke)
-      expect(Rake::Task['db:seed']).to receive(:invoke)
-      run_rake_task
-    end
-
-    it 'raises an error if `heroku pg:reset` fails' do
-      expect(top_level).to receive(:sh).with(
-        'heroku pg:reset ENV["DATABASE_URL"]').and_yield(false, nil)
-      expect { run_rake_task }.to raise_error 'heroku pg:reset failed... aborting'
     end
   end
 end
