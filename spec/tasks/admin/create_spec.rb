@@ -8,7 +8,7 @@ RSpec.describe 'admin rake tasks' do
   end
 
   describe 'admin:create' do
-    before do
+    before :each do
       allow(Tasks::Admin::Communicator).to receive(
         :get_email).and_return('amanda@example.com')
       allow(Tasks::Admin::Communicator).to receive(:display_temporary_password)

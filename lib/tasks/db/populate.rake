@@ -1,6 +1,6 @@
 namespace :db do
   desc "Fills database with sample data"
-  task :populate => :protected do
+  task :populate => [:protected, :environment] do
     Dir[Rails.root.join('db/sample_data/**/*.rb')].each { |f| require f }
 
     Rake::Task['db:reset'].invoke

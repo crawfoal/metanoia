@@ -1,6 +1,8 @@
+require_relative '../communicator'
+
 module Tasks
   module Admin
-    class Communicator
+    class Communicator < Tasks::Communicator
       class << self
         def get_email
           print 'Please enter the email to be used: '
@@ -10,18 +12,6 @@ module Tasks
         def display_temporary_password(password)
           puts 'Temporary password is...'
           puts "  #{password}"
-        end
-
-        def print(string)
-          STDOUT.print string
-        end
-
-        def puts(string)
-          STDOUT.puts string
-        end
-
-        def gets
-          STDIN.gets
         end
       end
     end
