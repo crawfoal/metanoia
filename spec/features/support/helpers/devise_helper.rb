@@ -7,7 +7,7 @@ module DeviseFeatureHelper
     fill_in 'Password', with: new_user.password
     fill_in 'Password confirmation', with: new_user.password
     find('input[type="submit"]').click
-    new_user
+    User.find_by_email new_user.email
   end
 
   def create_and_login_user(factory_name = :user)

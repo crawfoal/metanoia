@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Devise::RegistrationsController, type: :controller do
+RSpec.describe Users::RegistrationsController, type: :controller do
   describe '#create' do
     context 'invalid params' do
       render_views
