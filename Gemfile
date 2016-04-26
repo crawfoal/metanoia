@@ -50,15 +50,14 @@ gem 'pundit'
 
 # Use Faker when generating sample data and temporary passwords
 gem 'faker'
+# Use Factory Girl to create test data (and sample data)
+gem 'factory_girl_rails'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   # Use guard to automatically run specs as files are saved
   gem 'guard-rspec', require: false
-
-  # Use Factory Girl to create test data
-  gem 'factory_girl_rails'
 
   # Use RSpec for testing
   gem 'rspec-rails'
