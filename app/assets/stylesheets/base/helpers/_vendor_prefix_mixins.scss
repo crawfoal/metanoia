@@ -1,0 +1,5 @@
+@mixin box-shadow($property-list) {
+  -moz-box-shadow: $property-list;
+  -webkit-box-shaddow: $property-list;
+  box-shadow: $property-list;
+}

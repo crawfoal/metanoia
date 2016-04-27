@@ -4,8 +4,9 @@ RSpec.feature 'Homepage', type: :feature, js: true do
   scenario 'guest visits homepage and creates an account' do
     visit root_path
 
-    sign_up_user
+    user = sign_up_user
     expect(page).to be_user_default_page
+    expect(user.current_role).to eq 'athlete'
   end
 
   scenario 'user signs in and out' do
