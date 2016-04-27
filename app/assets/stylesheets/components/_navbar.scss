@@ -3,20 +3,18 @@ nav {
   $font-color: $base-font-color;
   $divider-border: 2px solid darken($background-color, 10%);
   $font-size: 1rem;
-  $line-height: 2rem;
+  $line-height: 4rem;
   $padding: 1rem;
-  $interior-padding: $padding / 4;
 
   background-color: $background-color;
   font-size: $font-size;
-  padding: $padding;
 
   @include clearfix;
 
-  * {
+  li {
     color: $font-color;
     display: block;
-    padding: 0 $interior-padding;
+    padding: 0 $padding;
 
     &:active,
     &:focus,
@@ -25,12 +23,14 @@ nav {
     }
 
     @include media($medium-screen) {
-      display: inline;
+      display: inline-block;
       float: none;
+      padding-left: 0;
     }
   }
 
-  & > * {
+  a {
+    display: inline-block;
     line-height: $line-height;
     vertical-align: middle;
   }
@@ -38,12 +38,9 @@ nav {
   #collapsable_content {
     clear: both;
     display: none;
-    padding: 0;
-    padding-top: $interior-padding;
 
     @include media($medium-screen) {
       clear: none;
-      padding: 0;
     }
   }
 
@@ -51,6 +48,7 @@ nav {
     color: $accent-color;
     float: left;
     font-size: 2 * $font-size;
+    padding: 0 $padding;
 
     &:active,
     &:focus,
@@ -66,18 +64,14 @@ nav {
   #navbar_main_menu,
   #navbar_tools {
     border-top: $divider-border;
-    margin-top: $interior-padding * 2;
-    padding-top: $interior-padding;
     width: 100%;
 
-    & * {
+    > * {
       text-align: right;
     }
 
     @include media($medium-screen) {
       border: 0;
-      margin-top: 0;
-      padding-top: 0;
       width: auto;
 
       & * {
@@ -98,5 +92,42 @@ nav {
 
   #navbar_menu_button {
     float: right;
+    padding-right: $padding;
+  }
+
+  #switch_roles{
+    position: relative;
+
+    form {
+      background-color: darken($background-color, 5%);
+      @include box-shadow(inset 0 0 10px darken($background-color, 10%));
+      display: none;
+      margin-bottom: $padding;
+      min-width: 100%;
+      padding: $padding;
+
+      @include media($medium-screen) {
+        background-color: $background-color;
+        @include box-shadow(none);
+        position: absolute;
+        right: 0;
+      }
+
+      @include clearfix;
+
+      select {
+        margin: 0;
+        float: right;
+      }
+    }
+
+    &:focus,
+    &:hover {
+      form {
+        @include media($medium-screen) {
+          display: block;
+        }
+      }
+    }
   }
 }

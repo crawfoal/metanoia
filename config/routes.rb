@@ -13,6 +13,10 @@ Rails.application.routes.draw do
              end
   end
 
+  namespace :users do
+    resource :current_role, only: :update
+  end
+
   resources :gyms, except: :destroy
   resources :sections, only: [:new, :show]
   resources :climbs, only: [:new, :create]

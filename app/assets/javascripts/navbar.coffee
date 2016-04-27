@@ -12,5 +12,13 @@ $(document).on 'page:change', ->
   $('nav').on 'click', '#navbar_menu_button', ->
     $('#collapsable_content').slideToggle()
 
+  $('select#user_current_role').on 'change', ->
+    $(this).closest('form').submit()
+
+  $('#switch_roles').on 'click', 'a', (event)->
+    event.preventDefault()
+    unless isMediumScreen()
+      $(this).closest('#switch_roles').find('form').slideToggle()
+
 $(window).resize ->
   navbarResize()
