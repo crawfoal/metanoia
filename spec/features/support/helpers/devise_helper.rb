@@ -3,10 +3,12 @@ module DeviseFeatureHelper
     new_user = FactoryGirl.build :user
     visit root_path
     click_on 'Sign Up'
-    fill_in 'Email', with: new_user.email
-    fill_in 'Password', with: new_user.password
-    fill_in 'Password confirmation', with: new_user.password
-    find('input[type="submit"]').click
+    within '.sign-up' do
+      fill_in 'Email', with: new_user.email
+      fill_in 'Password', with: new_user.password
+      fill_in 'Password confirmation', with: new_user.password
+      find('input[type="submit"]').click
+    end
     User.find_by_email new_user.email
   end
 
@@ -19,9 +21,11 @@ module DeviseFeatureHelper
   def login(email, password)
     visit root_path
     click_on 'Sign In'
-    fill_in 'Email', with: email
-    fill_in 'Password', with: password
-    find('input[type="submit"]').click
+    within '.sign-in' do
+      fill_in 'Email', with: email
+      fill_in 'Password', with: password
+      find('input[type="submit"]').click
+    end
   end
 
   def sign_out
