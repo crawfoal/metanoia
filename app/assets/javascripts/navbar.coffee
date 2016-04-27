@@ -15,7 +15,7 @@ $(document).on 'page:change', ->
   $('select#user_current_role').on 'change', ->
     $(this).closest('form').submit()
 
-  $('#switch_roles').on 'click', 'a', (event)->
+  $('#switch_roles').on 'click', 'a', (event) ->
     event.preventDefault()
     unless isMediumScreen()
       $(this).closest('#switch_roles').find('form').slideToggle()
