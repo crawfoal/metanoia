@@ -14,9 +14,17 @@ FactoryGirl.define do
 
     factory :admin do
       email { generate :admin_email }
-      
+
       after :build do |user|
         user.add_role :admin
+      end
+    end
+
+    factory :athlete do
+      email { generate :email }
+
+      after :build do |user|
+        user.add_role :athlete
       end
     end
   end
