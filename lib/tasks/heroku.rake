@@ -4,7 +4,7 @@ require_relative 'db/populate'
 namespace :heroku do
   namespace :db do
     desc "reset the database, seed it, and then fill it with sample data"
-    task :populate, [:app_name] => [:protected] do |t, args|
+    task :populate, [:app_name] => [:protected] do |_t, args|
       app_commander = Tasks::Heroku::AppCommander.new(args[:app_name])
       unless app_commander.run_command('pg:reset DATABASE_URL')
         raise 'pg:reset failed... aborting'

@@ -25,4 +25,13 @@ RSpec.describe GymPolicy do
     it { should permit_new_and_create_actions }
     it { should permit_edit_and_update_actions }
   end
+
+  context "for an admin who's current role isn't admin" do
+    let(:user) do
+      user = create :athlete
+      user.add_role :admin
+      user
+    end
+    it_behaves_like 'a gym policy for a non-admin user'
+  end
 end

@@ -5,4 +5,5 @@
     - section.climbs.each do |climb|
       = link_to climb.grade || '?', '#', class: Climb.color_name_for(climb.color)
 
-  = link_to 'Add Climb', new_climb_path, remote: true, class: 'new-climb-link'
+  - if policy(Section).new?
+    = link_to 'Add Climb', new_climb_path, remote: true, class: 'new-climb-link'
