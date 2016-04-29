@@ -2,7 +2,7 @@ require "feature_helper"
 
 RSpec.feature "Gyms", type: :feature, js: true do
   scenario "(admin) creates a gym" do
-    sign_in create(:admin)
+    stubbed_sign_in create(:admin)
     visit new_gym_path
     gym_form = PageObjects::Gyms::Form.on_page!
 
@@ -43,7 +43,7 @@ RSpec.feature "Gyms", type: :feature, js: true do
       :with_name,
       section_names: section_names
     )
-    sign_in create(:admin)
+    stubbed_sign_in create(:admin)
 
     visit gyms_path
     click_on gym.name

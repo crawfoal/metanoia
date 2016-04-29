@@ -1,4 +1,15 @@
 module DeviseFeatureHelper
+  # Use the stubbed out methods unless you're testing something related to
+  # sessions and registration. It saves about half a second per feature spec.
+  # The `login_as` and `logout` methods are from Warden::Test::Helpers.
+  def stubbed_sign_in(user)
+    login_as(user, scope: :user)
+  end
+
+  def stubbed_sign_out
+    logout(:user)
+  end
+
   def sign_up
     attributes = FactoryGirl.attributes_for :user
     visit root_path
@@ -28,5 +39,9 @@ module DeviseFeatureHelper
 end
 
 RSpec.configure do |config|
+  config.include Warden::Test::Helpers, type: :feature
+  Warden.test_mode!
+  config.after(:each, type: :feature) { Warden.test_reset! }
+
   config.include DeviseFeatureHelper, type: :feature
 end

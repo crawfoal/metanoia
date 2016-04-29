@@ -3,7 +3,8 @@ require 'feature_helper'
 RSpec.feature 'Profile', type: :feature, js: true do
   scenario 'user edits profile' do
     user = create :user
-    sign_in user
+    stubbed_sign_in user
+    visit root_path
 
     click_on 'Profile'
     within '#account_settings' do
@@ -18,7 +19,7 @@ RSpec.feature 'Profile', type: :feature, js: true do
 
     expect(page).to show_flash_with 'success'
 
-    sign_out
+    stubbed_sign_out
     sign_in(user, password: 'new_password')
     expect(page).to show_flash_with 'Signed in successfully.'
   end

@@ -20,7 +20,7 @@ RSpec.feature 'Homepage', type: :feature do
     expect(page).to_not have_selector '.sign-up'
     expect(page).to_not have_selector '.sign-in'
 
-    sign_out
+    stubbed_sign_out
     expect(page).to be_homepage
   end
 end
