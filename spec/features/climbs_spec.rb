@@ -5,17 +5,17 @@ RSpec.feature 'Climbs', type: :feature, js: true do
     gym = create(
       :gym,
       :with_name,
-      section_names: ['Section 1', 'Section 2', 'Section 3']
+      section_names: ['Section 1']
     )
-    create_and_login_user(:admin)
+    stubbed_sign_in create(:admin)
 
     visit gyms_path
     click_on gym.name
-    click_on 'Section 2'
+    click_on 'Section 1'
     click_on 'Add Climb'
 
     climb_form = PageObjects::Climbs::Form.on_page!
-    expect(climb_form).to be_for_section 'Section 2'
+    expect(climb_form).to be_for_section 'Section 1'
 
     climb_form.choose_route
     climb_form.grade = '5.11b'
