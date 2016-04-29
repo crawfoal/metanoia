@@ -6,7 +6,9 @@ module AuthorizationHelper
 
   def pretend_not_authorized(authorization_method_name)
     policy = double(authorization_method_name => false)
-    allow(GymPolicy).to receive(:new).and_return(policy)
+    policy_class_name =
+      described_class.to_s.match(/(.+)Controller$/)[1].singularize + 'Policy'
+    allow(policy_class_name.constantize).to receive(:new).and_return(policy)
   end
 end
 
