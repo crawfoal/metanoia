@@ -85,6 +85,9 @@ group :test do
 
   # Use SimpleCov for test coverage reporting on local machines
   gem 'simplecov', require: false
+
+  # Use launchy to automatically open page snapshots taken during feaure specs
+  gem 'launchy'
 end
 
 group :development do

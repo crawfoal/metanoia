@@ -1,6 +1,6 @@
 require 'feature_helper'
 
-RSpec.feature 'Homepage', type: :feature, js: true do
+RSpec.feature 'Homepage', type: :feature do
   scenario 'guest visits homepage and creates an account' do
     visit root_path
 
