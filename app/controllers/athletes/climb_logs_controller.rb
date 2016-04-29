@@ -2,7 +2,7 @@ class Athletes::ClimbLogsController < ApplicationController
   def create
     climb_log = ClimbLog.new(climb_log_params)
     climb_log.athlete_story = current_user.athlete_story
-    if climb_log.save!
+    if climb_log.save
       flash[:notice] = 'Climb successfully logged!'
     else
       flash[:alert] = 'Failed to log climb!'
