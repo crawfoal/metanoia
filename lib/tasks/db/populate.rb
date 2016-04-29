@@ -11,6 +11,9 @@ module Tasks
         end
 
         def create_users
+          user = FactoryGirl.create(:admin)
+          user.add_role :athlete
+          
           FactoryGirl.create_list(:admin, 3)
           FactoryGirl.create_list(:user, 3)
         end
