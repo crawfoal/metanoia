@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
+  it { should have_one :athlete_story }
+
   describe '#add_role' do
     it 'assigns the role to the user (smoke test for Rolify)' do
       user = create :user
@@ -21,6 +23,13 @@ RSpec.describe User, type: :model do
       user.add_role :athlete
       user.reload
       expect(user.current_role).to eq 'admin'
+    end
+
+    context 'the role is :athlete' do
+      it 'creates and associated athlete_story record' do
+        user = create :athlete
+        expect(user.athlete_story).to be_present
+      end
     end
   end
 end
