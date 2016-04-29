@@ -1,9 +1,9 @@
 class GymPolicy < ApplicationPolicy
   def create?
-    user.is_admin?
+    user.current_role == 'admin'
   end
 
   def update?
-    user.is_admin?
+    user.current_role == 'admin'
   end
 end

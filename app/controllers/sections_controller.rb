@@ -1,5 +1,6 @@
 class SectionsController < ApplicationController
   def new
+    authorize Section
     @gym_form = GymForm.new
   end
 
