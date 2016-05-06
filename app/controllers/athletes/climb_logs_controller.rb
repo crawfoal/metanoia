@@ -1,12 +1,14 @@
 class Athletes::ClimbLogsController < ApplicationController
   def create
-    climb_log = ClimbLog.new(climb_log_params)
-    climb_log.athlete_story = current_user.athlete_story
-    if climb_log.save
+    if ClimbLogger.new(climb_log_params, current_user).log
       flash[:notice] = 'Climb successfully logged!'
     else
       flash[:alert] = 'Failed to log climb!'
     end
+  end
+
+  def index
+    @climb_logs_tree = ClimbLogsTree.new(current_user.athlete_story)
   end
 
   private

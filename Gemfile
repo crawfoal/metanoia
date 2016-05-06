@@ -59,6 +59,9 @@ group :development, :test do
   # Use guard to automatically run specs as files are saved
   gem 'guard-rspec', require: false
 
+  # Use Bullet to detect N+1 query problems
+  gem 'bullet'
+
   # Use RSpec for testing
   gem 'rspec-rails'
   # Use Capybara to interract with the browser during specs.
@@ -97,8 +100,8 @@ group :development do
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
 
-  # Use Bullet to detect N+1 query problems
-  gem 'bullet'
+  # Use rails-erd to make entity-relationship diagrams of our models
+  gem 'rails-erd'
 end
 
 group :production do

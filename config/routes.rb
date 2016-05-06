@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   namespace :athletes do
-    resource :climb_logs, only: :create
+    resources :climb_logs, only: [:create, :index]
   end
 
   resources :gyms, except: :destroy

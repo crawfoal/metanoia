@@ -1,0 +1,17 @@
+%h1 Your Logged Climbs
+- @climb_logs_tree.each do |gym, sections|
+  %section.gym
+    %h2
+      = fa_icon 'caret-left'
+      = gym.name
+      = fa_icon 'caret-right'
+    - sections.each do |section, climb_logs|
+      %section.section
+        %h3
+          = fa_icon 'caret-left'
+          = section.name
+          = fa_icon 'caret-right'
+        - climb_logs.each do |climb_log|
+          = content_tag :span,
+                        climb_log.grade || '?',
+                        class: Climb.color_name_for(climb_log.color)

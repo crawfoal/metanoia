@@ -39,4 +39,13 @@ Rails.application.configure do
 
   # Raises error for missing translations
   # config.action_view.raise_on_missing_translations = true
+
+  # Print message to console if Bullet detects a performance issue
+  config.after_initialize do
+    Bullet.enable = true
+    Bullet.raise = true
+
+    # Whitelist false positives
+    Bullet.add_whitelist type: :n_plus_one_query, class_name: 'ClimbLog', association: :climb
+  end
 end

@@ -13,5 +13,7 @@
 //= require jquery
 //= require jquery_ujs
 //= require turbolinks
+//= require init
 //= require screen_query
+//= require paginator
 //= require_tree .

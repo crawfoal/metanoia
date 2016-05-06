@@ -1,3 +1,18 @@
+@mixin fa-button($color: $base-font-color) {
+  @include bitter-button(transparent, $color, none);
+
+  font-family: 'FontAwesome';
+  padding: 0;
+
+  &:hover,
+  &:focus {
+    @if lightness($color) < 25 { color: tint($color, 20%) }
+    @else if lightness($color) < 75 { color: shade($color, 20%) }
+    @else if lightness($color) < 97 { color: shade($color, 10%)}
+    @else { color: $secondary-background-color};
+  }
+}
+
 @mixin compact-button {
   padding: $tiny-spacing $small-spacing;
 }

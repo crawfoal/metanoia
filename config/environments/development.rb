@@ -43,5 +43,8 @@ Rails.application.configure do
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true
+
+    # Whitelist false positives
+    Bullet.add_whitelist type: :n_plus_one_query, class_name: 'ClimbLog', association: :climb
   end
 end

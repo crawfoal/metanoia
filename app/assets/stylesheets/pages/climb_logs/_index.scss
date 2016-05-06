@@ -1,0 +1,40 @@
+.climb_logs.index {
+  text-align: center;
+
+  span {
+    @include background-stripes($lightest-gray, white);
+
+    display: inline-block;
+    padding: $tiny-spacing;
+    width: 4em;
+  }
+
+  @each $color-name, $color-value in $climb-colors {
+    span.#{$color-name} {
+      background: none;
+      background-color: $color-value;
+      color: text-color-for($color-value);
+
+      @if (lightness($color-value) > 90) {
+        border: 2px solid shade($color-value, 15%);
+      }
+    }
+  }
+
+  .gym,
+  .section {
+    display: none;
+
+    .fa {
+      @include fa-button;
+    }
+
+    .fa-caret-left {
+      float: left;
+    }
+
+    .fa-caret-right {
+      float: right;
+    }
+  }
+}
