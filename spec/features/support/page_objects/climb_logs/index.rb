@@ -1,7 +1,6 @@
 module PageObjects
   module ClimbLogs
     class Index < Base
-
       def current_gym_name
         find('.gym h2').text
       end

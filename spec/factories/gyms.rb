@@ -1,6 +1,6 @@
 module GymFactoryHelper
   def self.build_sections_if_empty(gym, evaluator)
-    return unless gym.sections.size == 0
+    return unless gym.sections.empty?
     evaluator.section_names.each do |section_name|
       gym.sections << FactoryGirl.build(:section, name: section_name)
     end

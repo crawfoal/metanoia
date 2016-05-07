@@ -15,8 +15,8 @@ RSpec.describe ClimbLog, type: :model do
       climb2 = create :climb, section: section
 
       athlete = create :athlete
-      ClimbLogger.new({climb_id: climb1.id}, athlete).log
-      ClimbLogger.new({climb_id: climb2.id}, athlete).log
+      ClimbLogger.new({ climb_id: climb1.id }, athlete).log
+      ClimbLogger.new({ climb_id: climb2.id }, athlete).log
 
       expect(athlete.athlete_story.climb_logs.in_section(section).size).to eq 2
     end

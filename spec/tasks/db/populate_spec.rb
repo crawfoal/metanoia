@@ -67,7 +67,7 @@ RSpec.describe 'db:populate' do
 
   it 'creates some athlete users' do
     expect(User.with_role(:athlete).count).to be >
-      ((User.with_role(:admin) & User.with_role(:athlete)).count)
+      (User.with_role(:admin) & User.with_role(:athlete)).count
   end
 
   it 'creates an athlete_story record for each athlete' do

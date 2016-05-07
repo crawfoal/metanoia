@@ -11,11 +11,13 @@ RSpec.describe ClimbLogger do
   describe '#log' do
     context 'with valid parameters for the climb_log' do
       it 'creates a new climb log' do
-        expect { ClimbLogger.new(valid_params, athlete).log }.to change { ClimbLog.count }.by(1)
+        expect { ClimbLogger.new(valid_params, athlete).log }.to \
+          change { ClimbLog.count }.by(1)
       end
 
       it "creates a membership for the user and gym if one doesn't exist" do
-        expect { ClimbLogger.new(valid_params, athlete).log }.to change { Membership.count }.by(1)
+        expect { ClimbLogger.new(valid_params, athlete).log }.to \
+          change { Membership.count }.by(1)
       end
 
       it 'returns a truthy value' do
@@ -25,11 +27,13 @@ RSpec.describe ClimbLogger do
 
     context 'with invalid parameters for the climb log' do
       it "doesn't create a new climb log" do
-        expect { ClimbLogger.new({}, athlete).log }.to_not change { ClimbLog.count }
+        expect { ClimbLogger.new({}, athlete).log }.to_not \
+          change { ClimbLog.count }
       end
 
       it "creates a membership for the user and gym if one doesn't exist" do
-        expect { ClimbLogger.new({}, athlete).log }.to_not change { Membership.count }
+        expect { ClimbLogger.new({}, athlete).log }.to_not \
+          change { Membership.count }
       end
 
       it 'returns a falsey value' do
@@ -46,10 +50,11 @@ RSpec.describe ClimbLogger do
       end
 
       it "doesn't create another membership record" do
-        expect { ClimbLogger.new(valid_params, athlete).log }.to_not change { Membership.count }
+        expect { ClimbLogger.new(valid_params, athlete).log }.to_not \
+          change { Membership.count }
       end
 
-      it "returns a truthy value" do
+      it 'returns a truthy value' do
         expect(ClimbLogger.new(valid_params, athlete).log).to be_truthy
       end
     end

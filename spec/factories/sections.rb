@@ -1,6 +1,5 @@
 FactoryGirl.define do
   factory :section do
-
     before :create do |section|
       unless section.gym
         section.gym = create :gym
