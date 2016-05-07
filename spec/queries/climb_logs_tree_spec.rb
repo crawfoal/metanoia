@@ -4,19 +4,11 @@ RSpec.describe ClimbLogsTree do
   describe 'each' do
     it 'yields each gym, along with the "section branches" - i.e. a hash of '\
        'the sections pointing to an array of climbs logged in that section' do
-      gym1 = create :gym, :realistic
       athlete = create :athlete
-      gym1.sections.each do |section|
-        section.climbs.each do |climb|
-          ClimbLogger.new({climb_id: climb.id}, athlete).log
-        end
-      end
-
-      gym2 = create :gym, :with_name, :with_named_section
-      climb = build :climb
-      gym2.sections.first.climbs << climb
-      gym2.save!
-      ClimbLogger.new({climb_id: climb.id}, athlete).log
+      boulder_gym = create :tiny_boulder_gym
+      log_all_climbs(boulder_gym, athlete)
+      route_gym = create :tiny_route_gym
+      log_all_climbs(route_gym, athlete)
 
       climb_logs_tree = ClimbLogsTree.new(athlete.athlete_story)
 

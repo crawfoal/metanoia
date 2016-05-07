@@ -5,7 +5,7 @@ module PageObjects
     def self.on_page!
       obj = new
       unless obj.on_page?
-        raise "#{self.name} couldn't be instantiated because the form couldn't be found on the page."
+        raise "#{self.name} couldn't be instantiated because the main element couldn't be found on the page."
       end
       return obj # test should interract with page object, not actual form element
     end

@@ -14,7 +14,7 @@ FactoryGirl.define do
     end
 
     after :build do |gym, evaluator|
-      GymFactoryHelper.build_sections_if_empty gym, evaluator
+      GymFactoryHelper.build_sections_if_empty(gym, evaluator)
     end
 
     before :create do |gym|
@@ -35,19 +35,37 @@ FactoryGirl.define do
       section_names ['Section 1', 'Section 2', 'Section 3']
     end
 
-    trait :realistic do
-      with_named_sections
+    factory :tiny_boulder_gym do
+      name 'Tiny Boulder Gym'
+      section_names ['The Slab', 'The Cave', 'The 45']
 
       after :build do |gym, evaluator|
-        GymFactoryHelper.build_sections_if_empty gym, evaluator
+        GymFactoryHelper.build_sections_if_empty(gym, evaluator)
         gym.sections.each do |section|
-          type = ['Boulder', 'Route'].sample
           section.climbs = create_list(
             :climb,
             3,
             :with_grade,
             :with_color,
-            type: type
+            type: 'Boulder'
+          )
+        end
+      end
+    end
+
+    factory :tiny_route_gym do
+      name 'Tiny Route Gym'
+      section_names ['The Steep', 'The Dihedral', 'The Vert']
+
+      after :build do |gym, evaluator|
+        GymFactoryHelper.build_sections_if_empty(gym, evaluator)
+        gym.sections.each do |section|
+          section.climbs = create_list(
+            :climb,
+            3,
+            :with_grade,
+            :with_color,
+            type: 'Route'
           )
         end
       end
