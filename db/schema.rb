@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160429074951) do
+ActiveRecord::Schema.define(version: 20160502050057) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,16 @@ ActiveRecord::Schema.define(version: 20160429074951) do
   end
 
   add_index "athlete_stories", ["user_id"], name: "index_athlete_stories_on_user_id", using: :btree
+
+  create_table "climb_logs", force: :cascade do |t|
+    t.integer  "athlete_story_id", null: false
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+    t.integer  "climb_id",         null: false
+  end
+
+  add_index "climb_logs", ["athlete_story_id"], name: "index_climb_logs_on_athlete_story_id", using: :btree
+  add_index "climb_logs", ["climb_id"], name: "index_climb_logs_on_climb_id", using: :btree
 
   create_table "climbs", force: :cascade do |t|
     t.integer  "color"
@@ -41,6 +51,16 @@ ActiveRecord::Schema.define(version: 20160429074951) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.integer  "athlete_story_id"
+    t.integer  "gym_id"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  add_index "memberships", ["athlete_story_id"], name: "index_memberships_on_athlete_story_id", using: :btree
+  add_index "memberships", ["gym_id"], name: "index_memberships_on_gym_id", using: :btree
+
   create_table "roles", force: :cascade do |t|
     t.string   "name"
     t.integer  "resource_id"
@@ -54,7 +74,7 @@ ActiveRecord::Schema.define(version: 20160429074951) do
 
   create_table "sections", force: :cascade do |t|
     t.string   "name"
-    t.integer  "gym_id"
+    t.integer  "gym_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -88,6 +108,10 @@ ActiveRecord::Schema.define(version: 20160429074951) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "athlete_stories", "users"
+  add_foreign_key "climb_logs", "athlete_stories"
+  add_foreign_key "climb_logs", "climbs"
   add_foreign_key "climbs", "sections"
+  add_foreign_key "memberships", "athlete_stories"
+  add_foreign_key "memberships", "gyms"
   add_foreign_key "sections", "gyms"
 end

@@ -18,9 +18,11 @@ module Tasks
     class Communicator < Tasks::Communicator
       class << self
         def get_app_name
+          # :nocov:
           print 'This is a potentially dangerous task. Please confirm the '\
                 'application name: '
           gets.chomp
+          # :nocov:
         end
       end
     end

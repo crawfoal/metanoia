@@ -4,6 +4,7 @@ RSpec.describe Climb, type: :model do
   it { should validate_presence_of :type }
   it { should belong_to :section }
   it { should validate_presence_of :section }
+  it { should have_one :gym }
 
   it do
     should define_enum_for(:color).with([
@@ -24,8 +25,8 @@ RSpec.describe Climb, type: :model do
 
   describe 'the climb factory' do
     it 'should not create an extra section when we build a climb and add it to'\
-       'an existing section' do
-       section = build :section
+       ' an existing section' do
+       section = create :section
        section.climbs << build(:climb)
        section.save!
        expect(Section.count).to eq 1
