@@ -17,6 +17,10 @@ Rails.application.routes.draw do
     resource :current_role, only: :update
   end
 
+  namespace :athletes do
+    resources :climb_logs, only: [:create, :index]
+  end
+
   resources :gyms, except: :destroy
   resources :sections, only: [:new, :show]
   resources :climbs, only: [:new, :create]

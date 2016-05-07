@@ -65,11 +65,15 @@ RSpec.describe 'db:populate' do
     expect((User.with_role(:admin) & User.with_role(:athlete)).count).to be > 0
   end
 
-  it 'creates some users with no role' do
-    users_with_no_role = User.includes(:users_roles).where(
-      users_roles: { role_id: nil }
-    )
-    expect(users_with_no_role.count).to be > 0
+  it 'creates some athlete users' do
+    expect(User.with_role(:athlete).count).to be >
+      (User.with_role(:admin) & User.with_role(:athlete)).count
+  end
+
+  it 'creates an athlete_story record for each athlete' do
+    User.with_role(:athlete).each do |user|
+      expect(user.athlete_story).to be_present
+    end
   end
 
   after :all do

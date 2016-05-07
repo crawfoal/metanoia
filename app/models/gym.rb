@@ -5,7 +5,6 @@ class Gym < ActiveRecord::Base
   has_many :sections, dependent: :destroy, autosave: true
 
   validate :value_cannot_be_blank
-
   def value_cannot_be_blank
     unless value(reject_blanks: true).present?
       errors.add(:base, 'Cannot create a empty record for a gym. '\
@@ -13,4 +12,7 @@ class Gym < ActiveRecord::Base
                         'or create some sections for the gym.')
     end
   end
+
+  has_many :memberships
+  has_many :athlete_stories, through: :memberships
 end

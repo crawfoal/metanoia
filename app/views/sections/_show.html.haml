@@ -3,7 +3,12 @@
 
   #climbs
     - section.climbs.each do |climb|
-      = link_to climb.grade || '?', '#', class: Climb.color_name_for(climb.color)
+      = link_to climb.grade || '?',
+                  athletes_climb_logs_path,
+                  class: Climb.color_name_for(climb.color),
+                  remote: true,
+                  method: :post,
+                  data: { params: { climb_log: { climb_id: climb.id } } }
 
   - if policy(Section).new?
     = link_to 'Add Climb', new_climb_path, remote: true, class: 'new-climb-link'
