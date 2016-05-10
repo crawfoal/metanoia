@@ -1,18 +1,11 @@
 require 'rails_helper'
 
 RSpec.describe 'db:seed' do
-  it 'destroys all existing records from the seeded tables' do
-    grade_system = GradeSystem.create name: 'I should be deleted'
-    grade = Grade.create(
-      name: 'I should be deleted',
-      order: 1,
-      grade_system: grade_system
-    )
-
+  before :all do
+    Metanoia::SEEDED_MODELS.each do |model_class|
+      model_class.destroy_all
+    end
     Rails.application.load_seed
-
-    expect(GradeSystem.find_by_name 'I should be deleted').to_not be_present
-    expect(Grade.find_by_name 'I should be deleted').to_not be_present
   end
 
   describe 'Hueco Scale' do
