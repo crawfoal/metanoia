@@ -86,6 +86,13 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   # Rake Tasks
   watch(%r(^lib/tasks/(.+)\.rake$)) { |m| rspec.spec.("tasks/#{m[1]}") }
   watch(%r(^lib/tasks/(.+)/.+\.rb$)) { |m| "spec/tasks/#{m[1]}" }
+  db_seed_files_to_watch = [
+    'db/seeds.rb',
+    %r(^db/seed_data/.+)
+  ]
+  db_seed_files_to_watch.each do |thing_to_watch|
+    watch(thing_to_watch) { rspec.spec.('tasks/db/seed') }
+  end
 
   # ----------------------------------------------------------------------------
   # App Specific Patterns
