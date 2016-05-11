@@ -87,6 +87,11 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   watch(%r(^lib/tasks/(.+)\.rake$)) { |m| rspec.spec.("tasks/#{m[1]}") }
   watch(%r(^lib/tasks/(.+)/.+\.rb$)) { |m| "spec/tasks/#{m[1]}" }
 
+  # Generators
+  watch(%r(^lib/generators/([^/]+)/.+)) do |m|
+    rspec.spec.("generators/#{m[1]}_generator")
+  end
+
   # ----------------------------------------------------------------------------
   # App Specific Patterns
   # ----------------------------------------------------------------------------
