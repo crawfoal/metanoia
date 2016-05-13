@@ -15,4 +15,6 @@ RSpec.describe SeedMigrationGenerator, type: :generator do
   it { should contain /class AddUsers/ }
   it { should contain /def up/ }
   it { should contain /def down/ }
+
+  after(:all) { delete_temporary_files }
 end

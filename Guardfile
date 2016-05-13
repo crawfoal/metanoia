@@ -92,6 +92,10 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
     rspec.spec.("generators/#{m[1]}_generator")
   end
 
+  # Non-shared support files (assumes they are grouped in a folder within the
+  # folder that has the specs)
+  watch(%r(^spec/((?!support).+)/.+/.+(?<!spec)\.rb$)) { |m| "spec/#{m[1]}" }
+
   # ----------------------------------------------------------------------------
   # App Specific Patterns
   # ----------------------------------------------------------------------------
