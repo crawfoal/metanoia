@@ -4,10 +4,16 @@ require 'fileutils'
 
 RSpec.describe 'seed:migrate' do
   include SeedMigrateHelper
-  
+
   before :all do
     Rake.application.rake_require 'tasks/seed/migrate'
     Rake::Task.define_task(:environment)
+  end
+
+  before :each do
+    SeedMigrations.configure {}
+    allow(SeedMigrations.configuration).to \
+      receive(:seeded_tables).and_return([:users])
   end
 
   def run_rake_task
@@ -32,6 +38,14 @@ RSpec.describe 'seed:migrate' do
     it 'runs the migrations in order, according to the timestamp' do
       run_rake_task
       expect(User.find_by_email 'sam@example.com').to_not be_present
+    end
+
+    it 'creates yaml files for the tables that are populated with seeds' do
+      run_rake_task
+      base_file_names = Dir["#{Rails.root}/db/seeds/data/*.yml"].map do |f_name|
+        File.basename(f_name)
+      end
+      expect(base_file_names).to include 'users.yml'
     end
 
     after :each do

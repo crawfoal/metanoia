@@ -4,6 +4,7 @@ module SeedMigrateHelper
     @sample_migrations_folder =
       "#{Rails.root}/spec/tasks/seed/sample_migrations"
     @sample_migration_files = []
+
     Dir[@sample_migrations_folder + '/*.rb'].each do |file_name|
       destination = @seeds_migrate_folder + '/' + File.basename(file_name)
       FileUtils.cp( file_name, destination)
@@ -14,6 +15,9 @@ module SeedMigrateHelper
   def cleanup_migrations
     @sample_migration_files.each do |file_name|
       FileUtils.rm(@seeds_migrate_folder + '/' + File.basename(file_name))
+    end
+    Dir["#{Rails.root}/db/seeds/data/*.yml"].each do |file_name|
+      FileUtils.rm(file_name)
     end
   end
 end

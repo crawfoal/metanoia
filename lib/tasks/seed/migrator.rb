@@ -1,6 +1,7 @@
 require_relative 'seed_migration'
+require_relative 'configuration'
 
-class Migrator
+class SeedMigrations::Migrator
   def initialize
     @migration_directory = "#{Rails.root}/db/seeds/migrate"
     @queue = {}
@@ -11,6 +12,13 @@ class Migrator
     @queue.sort.each do |file_name, migration|
       migration.up
       SeedMigration.create!(filename: file_name)
+    end
+  end
+
+  def regenerate_yaml_seed_files
+    SeedMigrations.configuration.seeded_tables.each do |table_name|
+      File.open("#{Rails.root}/db/seeds/data/#{table_name}.yml", 'w') do |file|
+      end
     end
   end
 
