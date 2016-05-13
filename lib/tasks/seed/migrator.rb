@@ -1,5 +1,6 @@
 require_relative 'seed_migration'
 require 'fileutils'
+require_relative 'fixturizer'
 
 module SeedMigrations
   class Migrator
@@ -16,12 +17,10 @@ module SeedMigrations
     end
 
     def regenerate_yaml_seed_files
-      unless File.directory?(fixture_directory)
-        FileUtils.mkdir_p(fixture_directory)
-      end
       SeedMigrations.configuration.seeded_tables.each do |table_name|
-        File.open("#{fixture_directory}/#{table_name}.yml", 'w') do |file|
-        end
+        klass = table_name.to_s.singularize.classify.constantize
+        klass.include Fixturizer
+        klass.export_fixtures into: fixture_directory
       end
     end
 

@@ -37,12 +37,24 @@ RSpec.describe 'seed:migrate' do
       expect(User.find_by_email 'sam@example.com').to_not be_present
     end
 
-    it 'creates yaml files for the tables that are populated with seeds' do
-      run_rake_task
-      base_file_names = Dir[@fixture_folder + '/*.yml'].map do |f_name|
-        File.basename(f_name)
+    describe 'the yaml files created for the seeded tables' do
+      it 'are created' do
+        run_rake_task
+        base_file_names = Dir[@fixture_folder + '/*.yml'].map do |file_name|
+          File.basename(file_name)
+        end
+        expect(base_file_names).to include 'users.yml'
       end
-      expect(base_file_names).to include 'users.yml'
+
+      it 'include the yaml representation of each model in the table' do
+        run_rake_task
+        Dir[@fixture_folder + '/*.yml'].each do |file_name|
+          file_contents = File.read(file_name)
+          table_name = File.basename(file_name, '.yml')
+          model_name = table_name.singularize.classify
+          expect(file_contents).to eq model_name.constantize.to_fixtures
+        end
+      end
     end
 
     after :each do
