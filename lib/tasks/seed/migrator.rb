@@ -28,7 +28,9 @@ module SeedMigrations
     private
 
     def root_directory
+      # :nocov:
       Rails.root
+      # :nocov:
     end
 
     def migration_directory
