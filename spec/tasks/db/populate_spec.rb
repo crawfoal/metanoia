@@ -3,18 +3,12 @@ require 'rake'
 
 top_level = self
 
-RSpec.describe 'db:populate' do
+RSpec.describe 'db:populate', type: :task do
   before :all do
     Rake.application.rake_require 'tasks/db/populate'
     Rake::Task.define_task(:environment)
     Rake::Task.define_task(:protected)
     Rake::Task.define_task('db:reset') # don't actually reset the db during test
-  end
-
-  def run_rake_task
-    Rake::Task['db:populate'].reenable
-    Rake::Task['db:fill'].reenable
-    Rake.application.invoke_task 'db:populate'
   end
 
   before :all do
@@ -27,7 +21,9 @@ RSpec.describe 'db:populate' do
     # because DatabaseCleaner only holds the current strategy, and the
     # examples below are still using the transaction strategy to go back to
     # the state right after the data was populated.
-    run_rake_task
+    Rake::Task['db:populate'].reenable
+    Rake::Task['db:fill'].reenable
+    Rake.application.invoke_task 'db:populate'
   end
 
   it 'creates the four gyms we have factories for, plus the sample gym' do

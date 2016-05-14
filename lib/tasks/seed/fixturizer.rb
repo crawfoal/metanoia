@@ -3,13 +3,19 @@ require "#{Rails.root}/lib/file_utils_supplement"
 module Fixturizer
   extend ActiveSupport::Concern
 
+  def fixture_key
+    "#{self.class.table_name.singularize}_#{id}"
+  end
+
+  def fixture_value
+    attributes.except('created_at', 'updated_at')
+  end
+
   module ClassMethods
     def to_fixtures
       h = {}
-      singular_table_name = table_name.singularize
       find_each do |record|
-        h["#{singular_table_name}_#{record.id}"] =
-          record.attributes.except('created_at', 'updated_at')
+        h[record.fixture_key] = record.fixture_value
       end
       h.to_yaml
     end

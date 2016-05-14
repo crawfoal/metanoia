@@ -18,6 +18,10 @@ module SeedMigrations
       migrator.run_outstanding_migrations
     end
 
+    def rollback_one_migration
+      migrator.rollback_one_migration
+    end
+
     def regenerate_yaml_seed_files
       migrator.regenerate_yaml_seed_files
     end

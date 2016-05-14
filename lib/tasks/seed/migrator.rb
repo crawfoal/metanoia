@@ -16,6 +16,13 @@ module SeedMigrations
       end
     end
 
+    def rollback_one_migration
+      last_migration_filename = SeedMigration.order(:filename).last.filename
+      last_migration = instantiate_migration(last_migration_filename)
+      last_migration.down
+      SeedMigration.find_by_filename(last_migration_filename).destroy
+    end
+
     def regenerate_yaml_seed_files
       SeedMigrations.configuration.seeded_tables.each do |table_name|
         klass = table_name.to_s.singularize.classify.constantize
@@ -43,14 +50,14 @@ module SeedMigrations
     def queue_up_migrations
       migration_files.each do |file_name|
         next unless SeedMigration.find_by_filename(file_name).blank?
-        add_migration_to_queue(file_name)
+        @queue[file_name] = instantiate_migration(file_name)
       end
     end
 
-    def add_migration_to_queue(file_name)
+    def instantiate_migration(file_name)
       require file_name
       version, class_name = parse_file_name(file_name)
-      @queue[file_name] = class_name.constantize.new
+      class_name.constantize.new
     end
 
     def parse_file_name(file_name)
