@@ -1,4 +1,5 @@
 require 'database_cleaner'
+require "#{Rails.root}/db/seed_data/seed_data"
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
@@ -28,7 +29,7 @@ RSpec.configure do |config|
     driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
 
     unless driver_shares_db_connection_with_specs
-      DatabaseCleaner.strategy = :truncation, {except: Metanoia::SEEDED_TABLES + ['seed_migration_data_migrations']}
+      DatabaseCleaner.strategy = :truncation, {except: SeedData::SEEDED_TABLES}
     end
   end
 

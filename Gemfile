@@ -53,9 +53,6 @@ gem 'faker'
 # Use Factory Girl to create test data (and sample data)
 gem 'factory_girl_rails'
 
-# Use SeedMigration to migrate seed data and generate a seeds.rb file
-gem 'seed_migration'
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
