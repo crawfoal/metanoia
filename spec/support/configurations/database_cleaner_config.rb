@@ -1,5 +1,4 @@
 require 'database_cleaner'
-require "#{Rails.root}/db/seed_data/seed_data"
 
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
@@ -18,7 +17,6 @@ RSpec.configure do |config|
       MSG
     end
     DatabaseCleaner.clean_with(:truncation)
-    Rails.application.load_seed
   end
 
   config.before(:each) do
@@ -29,7 +27,7 @@ RSpec.configure do |config|
     driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
 
     unless driver_shares_db_connection_with_specs
-      DatabaseCleaner.strategy = :truncation, {except: SeedData::SEEDED_TABLES}
+      DatabaseCleaner.strategy = :truncation
     end
   end
 
