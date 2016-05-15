@@ -73,7 +73,7 @@ RSpec.describe 'db:populate', type: :task do
   end
 
   after :all do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = DatabaseCleanerHelper.truncation_except_seeded_tables
     DatabaseCleaner.clean
   end
 end

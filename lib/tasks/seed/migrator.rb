@@ -31,20 +31,20 @@ module SeedMigrations
       end
     end
 
+    def fixture_directory
+      root_directory + '/db/seeds/data'
+    end
+
     private
 
     def root_directory
       # :nocov:
-      Rails.root
+      Rails.root.to_s
       # :nocov:
     end
 
     def migration_directory
       root_directory + '/db/seeds/migrate'
-    end
-
-    def fixture_directory
-      root_directory + '/db/seeds/data'
     end
 
     def queue_up_migrations

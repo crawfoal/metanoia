@@ -1,0 +1,91 @@
+---
+grade_19:
+  id: 19
+  name: VB
+  grade_system_id: 2
+  sequence_number: 0
+grade_20:
+  id: 20
+  name: V0
+  grade_system_id: 2
+  sequence_number: 1
+grade_21:
+  id: 21
+  name: V1
+  grade_system_id: 2
+  sequence_number: 2
+grade_22:
+  id: 22
+  name: V2
+  grade_system_id: 2
+  sequence_number: 3
+grade_23:
+  id: 23
+  name: V3
+  grade_system_id: 2
+  sequence_number: 4
+grade_24:
+  id: 24
+  name: V4
+  grade_system_id: 2
+  sequence_number: 5
+grade_25:
+  id: 25
+  name: V5
+  grade_system_id: 2
+  sequence_number: 6
+grade_26:
+  id: 26
+  name: V6
+  grade_system_id: 2
+  sequence_number: 7
+grade_27:
+  id: 27
+  name: V7
+  grade_system_id: 2
+  sequence_number: 8
+grade_28:
+  id: 28
+  name: V8
+  grade_system_id: 2
+  sequence_number: 9
+grade_29:
+  id: 29
+  name: V9
+  grade_system_id: 2
+  sequence_number: 10
+grade_30:
+  id: 30
+  name: V10
+  grade_system_id: 2
+  sequence_number: 11
+grade_31:
+  id: 31
+  name: V11
+  grade_system_id: 2
+  sequence_number: 12
+grade_32:
+  id: 32
+  name: V12
+  grade_system_id: 2
+  sequence_number: 13
+grade_33:
+  id: 33
+  name: V13
+  grade_system_id: 2
+  sequence_number: 14
+grade_34:
+  id: 34
+  name: V14
+  grade_system_id: 2
+  sequence_number: 15
+grade_35:
+  id: 35
+  name: V15
+  grade_system_id: 2
+  sequence_number: 16
+grade_36:
+  id: 36
+  name: V16
+  grade_system_id: 2
+  sequence_number: 17
