@@ -91,6 +91,9 @@ group :test do
 
   # Use launchy to automatically open page snapshots taken during feaure specs
   gem 'launchy'
+
+  # Use ammeter to provide helpers for testing generators
+  gem 'ammeter'
 end
 
 group :development do
