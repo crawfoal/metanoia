@@ -89,3 +89,143 @@ grade_36:
   name: V16
   grade_system_id: 2
   sequence_number: 17
+grade_37:
+  id: 37
+  name: '5.5'
+  grade_system_id: 4
+  sequence_number: 0
+grade_38:
+  id: 38
+  name: '5.6'
+  grade_system_id: 4
+  sequence_number: 1
+grade_39:
+  id: 39
+  name: '5.7'
+  grade_system_id: 4
+  sequence_number: 2
+grade_40:
+  id: 40
+  name: '5.8'
+  grade_system_id: 4
+  sequence_number: 3
+grade_41:
+  id: 41
+  name: '5.9'
+  grade_system_id: 4
+  sequence_number: 4
+grade_42:
+  id: 42
+  name: 5.10a
+  grade_system_id: 4
+  sequence_number: 5
+grade_43:
+  id: 43
+  name: 5.10b
+  grade_system_id: 4
+  sequence_number: 6
+grade_44:
+  id: 44
+  name: 5.10c
+  grade_system_id: 4
+  sequence_number: 7
+grade_45:
+  id: 45
+  name: 5.10d
+  grade_system_id: 4
+  sequence_number: 8
+grade_46:
+  id: 46
+  name: 5.11a
+  grade_system_id: 4
+  sequence_number: 9
+grade_47:
+  id: 47
+  name: 5.11b
+  grade_system_id: 4
+  sequence_number: 10
+grade_48:
+  id: 48
+  name: 5.11c
+  grade_system_id: 4
+  sequence_number: 11
+grade_49:
+  id: 49
+  name: 5.11d
+  grade_system_id: 4
+  sequence_number: 12
+grade_50:
+  id: 50
+  name: 5.12a
+  grade_system_id: 4
+  sequence_number: 13
+grade_51:
+  id: 51
+  name: 5.12b
+  grade_system_id: 4
+  sequence_number: 14
+grade_52:
+  id: 52
+  name: 5.12c
+  grade_system_id: 4
+  sequence_number: 15
+grade_53:
+  id: 53
+  name: 5.12d
+  grade_system_id: 4
+  sequence_number: 16
+grade_54:
+  id: 54
+  name: 5.13a
+  grade_system_id: 4
+  sequence_number: 17
+grade_55:
+  id: 55
+  name: 5.13b
+  grade_system_id: 4
+  sequence_number: 18
+grade_56:
+  id: 56
+  name: 5.13c
+  grade_system_id: 4
+  sequence_number: 19
+grade_57:
+  id: 57
+  name: 5.13d
+  grade_system_id: 4
+  sequence_number: 20
+grade_58:
+  id: 58
+  name: 5.14a
+  grade_system_id: 4
+  sequence_number: 21
+grade_59:
+  id: 59
+  name: 5.14b
+  grade_system_id: 4
+  sequence_number: 22
+grade_60:
+  id: 60
+  name: 5.14c
+  grade_system_id: 4
+  sequence_number: 23
+grade_61:
+  id: 61
+  name: 5.14d
+  grade_system_id: 4
+  sequence_number: 24
+grade_62:
+  id: 62
+  name: 5.15a
+  grade_system_id: 4
+  sequence_number: 25
+grade_63:
+  id: 63
+  name: 5.15b
+  grade_system_id: 4
+  sequence_number: 26
+grade_64:
+  id: 64
+  name: 5.15c
+  grade_system_id: 4
+  sequence_number: 27
