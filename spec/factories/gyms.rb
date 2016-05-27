@@ -14,6 +14,8 @@ FactoryGirl.define do
     end
 
     after :build do |gym, evaluator|
+      gym.route_grade_system = GradeSystem.find_by_name! 'Yosemite'
+      gym.boulder_grade_system = GradeSystem.find_by_name! 'Hueco'
       GymFactoryHelper.build_sections_if_empty(gym, evaluator)
     end
 

@@ -9,7 +9,11 @@ FactoryGirl.define do
     end
 
     trait :with_grade do
-      grade { type.constantize.grades.values.sample }
+      after :create do |climb|
+        climb_type = climb.type.downcase
+        climb.grade = climb.gym.send("#{climb_type}_grade_system").grades.sample
+        climb.save!
+      end
     end
 
     trait :with_color do

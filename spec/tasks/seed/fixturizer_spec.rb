@@ -9,12 +9,12 @@ RSpec.describe Fixturizer, type: :concern do
        "records in the model's table" do
       section = create :section
       the_pearl = Climb.create!(
-        grade: 'V5',
+        grade: Grade.find_by_name!('V5'),
         type: 'Boulder',
         section: section
       )
       midnight_lightning = Climb.create!(
-        grade: 'V8',
+        grade: Grade.find_by_name!('V8'),
         type: 'Boulder',
         section: section
       )
@@ -25,14 +25,14 @@ climb_#{the_pearl.id}:
   id: #{the_pearl.id}
   color:\s
   type: Boulder
-  grade: #{the_pearl.attributes['grade']}
   section_id: #{section.id}
+  grade_id: #{the_pearl.grade_id}
 climb_#{midnight_lightning.id}:
   id: #{midnight_lightning.id}
   color:\s
   type: Boulder
-  grade: #{midnight_lightning.attributes['grade']}
   section_id: #{section.id}
+  grade_id: #{midnight_lightning.grade_id}
 )
     end
   end

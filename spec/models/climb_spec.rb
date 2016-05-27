@@ -5,6 +5,7 @@ RSpec.describe Climb, type: :model do
   it { should belong_to :section }
   it { should validate_presence_of :section }
   it { should have_one :gym }
+  it { should belong_to :grade }
 
   it do
     should define_enum_for(:color).with([

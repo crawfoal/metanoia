@@ -19,8 +19,8 @@
     %tr.grade
       %td= f.label :grade
       %td
-        = f.select :grade, Route.grades.keys, { include_blank: true }, { id: 'route_grades' }
-        = f.select :grade, Boulder.grades.keys, { include_blank: true }, { id: 'boulder_grades' }
+        =# f.select :grade, gym.route_grades, { include_blank: true }, { id: 'route_grades' }
+        =# f.select :grade, gym.boulder_grades, { include_blank: true }, { id: 'boulder_grades' }
     %tr
       %td= f.label :color
       %td

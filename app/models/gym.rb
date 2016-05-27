@@ -4,6 +4,17 @@ class Gym < ActiveRecord::Base
 
   has_many :sections, dependent: :destroy, autosave: true
 
+  belongs_to :route_grade_system, class_name: 'GradeSystem'
+  belongs_to :boulder_grade_system, class_name: 'GradeSystem'
+
+  def route_grades
+    route_grade_system.grades.map(&:name)
+  end
+
+  def boulder_grades
+    boulder_grade_system.grades.map(&:name)
+  end
+
   validate :value_cannot_be_blank
   def value_cannot_be_blank
     unless value(reject_blanks: true).present?
