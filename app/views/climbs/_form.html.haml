@@ -1,4 +1,4 @@
-= form_for climb, url: climbs_path, remote: true do |f|
+= form_for climb, url: section_climbs_path, remote: true do |f|
   %h3 New climb details:
   = render partial: 'shared/error_messages', locals: { target: climb }
 
@@ -19,8 +19,8 @@
     %tr.grade
       %td= f.label :grade
       %td
-        =# f.select :grade, gym.route_grades, { include_blank: true }, { id: 'route_grades' }
-        =# f.select :grade, gym.boulder_grades, { include_blank: true }, { id: 'boulder_grades' }
+        = f.select :grade_id, climb.gym.route_grades.map { |grade| [grade.name, grade.id] }, { include_blank: true }, { id: 'route_grades' }
+        = f.select :grade_id, climb.gym.boulder_grades.map { |grade| [grade.name, grade.id] }, { include_blank: true }, { id: 'boulder_grades' }
     %tr
       %td= f.label :color
       %td

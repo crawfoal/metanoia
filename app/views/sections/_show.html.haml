@@ -3,7 +3,8 @@
 
   #climbs
     - section.climbs.each do |climb|
-      = link_to climb.grade || '?',
+      -# TODO: implement null object pattern for grades
+      = link_to climb.grade.try(:name) || '?',
                 athletes_climb_logs_path,
                 class: Climb.color_name_for(climb.color),
                 remote: true,
@@ -12,6 +13,6 @@
 
   - if policy(Section).new?
     = link_to 'Add Climb',
-              new_climb_path,
+              new_section_climb_path(section),
               remote: true,
               class: 'new-climb-link'

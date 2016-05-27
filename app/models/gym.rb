@@ -6,14 +6,8 @@ class Gym < ActiveRecord::Base
 
   belongs_to :route_grade_system, class_name: 'GradeSystem'
   belongs_to :boulder_grade_system, class_name: 'GradeSystem'
-
-  def route_grades
-    route_grade_system.grades.map(&:name)
-  end
-
-  def boulder_grades
-    boulder_grade_system.grades.map(&:name)
-  end
+  delegate :grades, to: :route_grade_system, prefix: :route
+  delegate :grades, to: :boulder_grade_system, prefix: :boulder
 
   validate :value_cannot_be_blank
   def value_cannot_be_blank
