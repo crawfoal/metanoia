@@ -1,3 +1,5 @@
+require_relative '../bullet_config'
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 
@@ -43,27 +45,6 @@ Rails.application.configure do
   config.after_initialize do
     Bullet.enable = true
     Bullet.alert = true
-
-    # Whitelist false positives
-    Bullet.add_whitelist(
-      type: :n_plus_one_query,
-      class_name: 'ClimbLog',
-      association: :climb
-    )
-    Bullet.add_whitelist(
-      type: :n_plus_one_query,
-      class_name: 'Gym',
-      association: :route_grade_system
-    )
-    Bullet.add_whitelist(
-      type: :n_plus_one_query,
-      class_name: 'Gym',
-      association: :boulder_grade_system
-    )
-    Bullet.add_whitelist(
-      type: :n_plus_one_query,
-      class_name: 'GradeSystem',
-      association: :grades
-    )
+    BulletConfig.whitelist_false_positives
   end
 end
