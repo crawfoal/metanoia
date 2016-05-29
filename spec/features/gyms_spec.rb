@@ -9,6 +9,9 @@ RSpec.feature "Gyms", type: :feature, js: true do
     expect(gym_form).to have_fields_for_one_section
 
     gym_form.gym_name = 'Wild Walls'
+    gym_form.route_grade_system = 'Yosemite'
+    gym_form.boulder_grade_system = 'Hueco'
+
     gym_form.first_section_name = 'The Cave'
     gym_form.add_fields_for_another_section
     expect(gym_form).to have_fields_for_2_sections
