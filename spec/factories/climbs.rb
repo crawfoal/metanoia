@@ -2,6 +2,10 @@ FactoryGirl.define do
   factory :climb do
     type %w(Boulder Route).sample
 
+    after :build do |climb|
+      climb.grade = Grade.null_object
+    end
+
     before :create do |climb|
       unless climb.section
         climb.section = create :section

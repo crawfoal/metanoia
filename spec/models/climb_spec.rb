@@ -33,4 +33,12 @@ RSpec.describe Climb, type: :model do
        expect(Section.count).to eq 1
      end
   end
+
+  context 'no grade is specified for the climb' do
+    it 'is assigned the null grade object' do
+      section = create :section
+      climb = Boulder.create(section: section)
+      expect(climb.grade).to eq Grade.null_object
+    end
+  end
 end

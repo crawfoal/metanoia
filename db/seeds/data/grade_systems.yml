@@ -5,3 +5,6 @@ grade_system_2:
 grade_system_4:
   id: 4
   name: Yosemite
+grade_system_7:
+  id: 7
+  name: Null Grade System

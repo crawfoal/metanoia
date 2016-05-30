@@ -55,10 +55,10 @@ RSpec.describe 'db:populate', type: :task do
 
   it 'some climbs have a grade' do
     expect(
-      Climb.find_each.any? do |climb|
-        climb.grade.try(:name).present?
+      Climb.find_each.all? do |climb|
+        climb.grade.name == '?'
       end
-    ).to be_truthy
+    ).to be_falsey
   end
 
   it 'creates a few admin users' do

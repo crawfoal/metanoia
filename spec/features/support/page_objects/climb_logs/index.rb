@@ -44,7 +44,7 @@ module PageObjects
         logs_expected_for_section(user, current_section).all? do |climb_log|
           page.has_selector?(
             ".#{Climb.color_name_for(climb_log.climb.color)}",
-            text: climb_log.grade.try(:name) || '?'
+            text: climb_log.grade.name
           )
         end
       end

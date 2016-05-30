@@ -229,3 +229,8 @@ grade_64:
   name: 5.15c
   grade_system_id: 4
   sequence_number: 27
+grade_111:
+  id: 111
+  name: "?"
+  grade_system_id: 7
+  sequence_number: -1
