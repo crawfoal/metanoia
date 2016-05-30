@@ -8,11 +8,21 @@ FactoryGirl.define do
       end
     end
 
+    transient do
+      grade_system nil
+    end
+
     trait :with_grade do
-      after :create do |climb|
-        climb_type = climb.type.downcase
-        climb.grade = climb.gym.send("#{climb_type}_grade_system").grades.sample
-        climb.save!
+      after :build do |climb, evaluator|
+        if evaluator.grade_system
+          climb.grade = evaluator.grade_system.grades.sample
+        elsif climb.gym
+          climb_type = climb.type.downcase
+          climb.grade = climb.gym.send("#{climb_type}_grade_system").grades.sample
+        else
+          raise "Whoops... we can't set a grade if the climb isn't assigned to"\
+                " a gym and you don't specify the grade system to be used."
+        end
       end
     end
 

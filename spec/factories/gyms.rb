@@ -49,7 +49,8 @@ FactoryGirl.define do
             3,
             :with_grade,
             :with_color,
-            type: 'Boulder'
+            type: 'Boulder',
+            grade_system: gym.boulder_grade_system
           )
         end
       end
@@ -67,7 +68,8 @@ FactoryGirl.define do
             3,
             :with_grade,
             :with_color,
-            type: 'Route'
+            type: 'Route',
+            grade_system: gym.route_grade_system
           )
         end
       end

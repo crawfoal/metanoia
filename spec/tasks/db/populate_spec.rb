@@ -53,6 +53,14 @@ RSpec.describe 'db:populate', type: :task do
     end
   end
 
+  it 'some climbs have a grade' do
+    expect(
+      Climb.find_each.any? do |climb|
+        climb.grade.try(:name).present?
+      end
+    ).to be_truthy
+  end
+
   it 'creates a few admin users' do
     expect(User.with_role(:admin).count).to be > 0
   end
