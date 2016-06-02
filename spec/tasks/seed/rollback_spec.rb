@@ -35,7 +35,7 @@ RSpec.describe 'seed:rollback', type: :task do
 
     it 'regenerates the yaml seed files' do
       amanda = User.find_by_email 'amanda@example.com'
-      amanda_yaml = {amanda.fixture_key => amanda.fixture_value}.to_yaml
+      amanda_yaml = { amanda.fixture_key => amanda.fixture_value }.to_yaml
       run_rake_task('seed:rollback')
       file_contents = File.read(@fixture_folder + '/users.yml')
       expect(file_contents).to_not include amanda_yaml

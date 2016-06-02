@@ -8,7 +8,8 @@ module SeedMigrationsHelper
 
   def set_folder_paths
     @migration_folder = "#{Rails.root}/tmp/db/seeds/migrate"
-    @sample_migrations_folder = "#{Rails.root}/spec/tasks/seed/sample_migrations"
+    @sample_migrations_folder =
+      "#{Rails.root}/spec/tasks/seed/sample_migrations"
     @fixture_folder = "#{Rails.root}/tmp/db/seeds/data"
   end
 

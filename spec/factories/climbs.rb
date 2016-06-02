@@ -22,7 +22,7 @@ FactoryGirl.define do
           climb.grade = evaluator.grade_system.grades.sample
         elsif climb.gym
           climb_type = climb.type.downcase
-          climb.grade = climb.gym.send("#{climb_type}_grade_system").grades.sample
+          climb.grade = climb.gym.send("#{climb_type}_grades").sample
         else
           raise "Whoops... we can't set a grade if the climb isn't assigned to"\
                 " a gym and you don't specify the grade system to be used."

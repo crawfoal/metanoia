@@ -10,11 +10,11 @@ module FileHelper
     FileUtils.rm_rf(Dir.glob(folder_path + '/*'))
   end
 
-  def copy_all_files(from: , to: )
+  def copy_all_files(from:, to:)
     FileUtilsSupplement.find_or_create_directory(to)
     Dir[from + '/*'].each do |original_file_name|
       new_file_name = to + '/' + File.basename(original_file_name)
-      FileUtils.cp( original_file_name, new_file_name)
+      FileUtils.cp(original_file_name, new_file_name)
     end
   end
 end

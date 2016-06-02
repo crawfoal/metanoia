@@ -27,12 +27,13 @@ RSpec.describe 'seed:migrate', type: :task do
     end
 
     it 'stores the file name in the table' do
-      expect { run_rake_task('seed:migrate') }.to change { SeedMigration.count }.by(2)
+      expect { run_rake_task('seed:migrate') }.to \
+        change { SeedMigration.count }.by(2)
     end
 
     it 'runs the migrations in order, according to the timestamp' do
       run_rake_task('seed:migrate')
-      expect(User.find_by_email 'sam@example.com').to_not be_present
+      expect(User.find_by_email('sam@example.com')).to_not be_present
     end
 
     describe 'the yaml files created for the seeded tables' do
