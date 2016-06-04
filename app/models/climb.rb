@@ -37,7 +37,6 @@ class Climb < ActiveRecord::Base
   protected
 
   def set_grade_default_if_blank
-    self.grade = Grade.null_object unless self.grade.present?
+    self.grade = Grade.null_object unless grade.present?
   end
-
 end

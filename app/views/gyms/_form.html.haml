@@ -5,10 +5,10 @@
   = f.text_field :name
 
   = f.label :route_grade_system_id, 'Route grade system'
-  = f.select :route_grade_system_id, GradeSystem.all.map { |grade_system| [grade_system.name, grade_system.id] }
+  = f.select :route_grade_system_id, GradeSystem.pluck(:name, :id)
 
   = f.label :boulder_grade_system_id, 'Boulder grade system'
-  = f.select :boulder_grade_system_id, GradeSystem.all.map { |grade_system| [grade_system.name, grade_system.id] }
+  = f.select :boulder_grade_system_id, GradeSystem.pluck(:name, :id)
 
   = field_set_tag 'Sections', id: 'gym_sections' do
     = f.fields_for :sections do |section_form|

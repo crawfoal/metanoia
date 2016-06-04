@@ -56,13 +56,13 @@ module SeedMigrations
 
     def instantiate_migration(file_name)
       require file_name
-      version, class_name = parse_file_name(file_name)
+      _version, class_name = parse_file_name(file_name)
       class_name.constantize.new
     end
 
     def parse_file_name(file_name)
       base_file_name = File.basename(file_name, '.rb')
-      version, underscore, class_name = base_file_name.partition('_')
+      version, _underscore, class_name = base_file_name.partition('_')
       [version, class_name.classify]
     end
 
