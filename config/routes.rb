@@ -22,7 +22,9 @@ Rails.application.routes.draw do
   end
 
   resources :gyms, except: :destroy
-  resources :sections, only: [:new, :show]
-  resources :climbs, only: [:new, :create]
+  resources :sections, only: [:new, :show] do
+    resources :climbs, only: [:new, :create]
+  end
+
   resource :profile, only: [:show], controller: :profile
 end

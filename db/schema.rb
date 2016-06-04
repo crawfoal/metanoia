@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160502050057) do
+ActiveRecord::Schema.define(version: 20160530202928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -36,20 +36,42 @@ ActiveRecord::Schema.define(version: 20160502050057) do
 
   create_table "climbs", force: :cascade do |t|
     t.integer  "color"
-    t.string   "type",       null: false
-    t.integer  "grade"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.integer  "section_id", null: false
+    t.string   "type",                     null: false
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "section_id",               null: false
+    t.integer  "grade_id",   default: 111, null: false
   end
 
+  add_index "climbs", ["grade_id"], name: "index_climbs_on_grade_id", using: :btree
   add_index "climbs", ["section_id"], name: "index_climbs_on_section_id", using: :btree
+
+  create_table "grade_systems", force: :cascade do |t|
+    t.string   "name",       null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "grades", force: :cascade do |t|
+    t.string   "name",            null: false
+    t.integer  "grade_system_id", null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+    t.integer  "sequence_number", null: false
+  end
+
+  add_index "grades", ["grade_system_id"], name: "index_grades_on_grade_system_id", using: :btree
 
   create_table "gyms", force: :cascade do |t|
     t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.integer  "route_grade_system_id",   null: false
+    t.integer  "boulder_grade_system_id", null: false
   end
+
+  add_index "gyms", ["boulder_grade_system_id"], name: "index_gyms_on_boulder_grade_system_id", using: :btree
+  add_index "gyms", ["route_grade_system_id"], name: "index_gyms_on_route_grade_system_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "athlete_story_id"
@@ -81,6 +103,12 @@ ActiveRecord::Schema.define(version: 20160502050057) do
 
   add_index "sections", ["gym_id"], name: "index_sections_on_gym_id", using: :btree
 
+  create_table "seed_migrations", force: :cascade do |t|
+    t.string   "filename",   null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -110,7 +138,11 @@ ActiveRecord::Schema.define(version: 20160502050057) do
   add_foreign_key "athlete_stories", "users"
   add_foreign_key "climb_logs", "athlete_stories"
   add_foreign_key "climb_logs", "climbs"
+  add_foreign_key "climbs", "grades"
   add_foreign_key "climbs", "sections"
+  add_foreign_key "grades", "grade_systems"
+  add_foreign_key "gyms", "grade_systems", column: "boulder_grade_system_id"
+  add_foreign_key "gyms", "grade_systems", column: "route_grade_system_id"
   add_foreign_key "memberships", "athlete_stories"
   add_foreign_key "memberships", "gyms"
   add_foreign_key "sections", "gyms"

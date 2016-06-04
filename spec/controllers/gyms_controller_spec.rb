@@ -42,10 +42,12 @@ RSpec.describe GymsController, type: :controller do
     end
 
     it 'uses strong parameters' do
-      params = { gym: attributes_for(:gym, :with_name) }
+      params = { gym: build(:gym).attributes }
 
       expect(subject).to permit(
         :name,
+        :route_grade_system_id,
+        :boulder_grade_system_id,
         sections_attributes: [:id, :name, :_destroy]
       ).for(:create, params: params).on(:gym)
     end

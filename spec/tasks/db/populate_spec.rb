@@ -3,18 +3,12 @@ require 'rake'
 
 top_level = self
 
-RSpec.describe 'db:populate' do
+RSpec.describe 'db:populate', type: :task do
   before :all do
     Rake.application.rake_require 'tasks/db/populate'
     Rake::Task.define_task(:environment)
     Rake::Task.define_task(:protected)
     Rake::Task.define_task('db:reset') # don't actually reset the db during test
-  end
-
-  def run_rake_task
-    Rake::Task['db:populate'].reenable
-    Rake::Task['db:fill'].reenable
-    Rake.application.invoke_task 'db:populate'
   end
 
   before :all do
@@ -27,7 +21,9 @@ RSpec.describe 'db:populate' do
     # because DatabaseCleaner only holds the current strategy, and the
     # examples below are still using the transaction strategy to go back to
     # the state right after the data was populated.
-    run_rake_task
+    Rake::Task['db:populate'].reenable
+    Rake::Task['db:fill'].reenable
+    Rake.application.invoke_task 'db:populate'
   end
 
   it 'creates the four gyms we have factories for, plus the sample gym' do
@@ -57,6 +53,14 @@ RSpec.describe 'db:populate' do
     end
   end
 
+  it 'some climbs have a grade' do
+    expect(
+      Climb.find_each.all? do |climb|
+        climb.grade.name == '?'
+      end
+    ).to be_falsey
+  end
+
   it 'creates a few admin users' do
     expect(User.with_role(:admin).count).to be > 0
   end
@@ -77,7 +81,7 @@ RSpec.describe 'db:populate' do
   end
 
   after :all do
-    DatabaseCleaner.strategy = :truncation
+    DatabaseCleaner.strategy = DatabaseCleanerHelper.truncation_except_seeded_tables
     DatabaseCleaner.clean
   end
 end

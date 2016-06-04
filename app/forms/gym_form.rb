@@ -1,6 +1,6 @@
 class GymForm
   delegate :name, :errors, :persisted?, :model_name, :to_key, :to_model,
-           to: :@gym
+           :route_grade_system_id, :boulder_grade_system_id, to: :@gym
   attr_reader :sections
 
   # Loading in the whole sections association could be expensive if there were

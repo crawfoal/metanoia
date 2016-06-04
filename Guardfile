@@ -87,6 +87,15 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   watch(%r(^lib/tasks/(.+)\.rake$)) { |m| rspec.spec.("tasks/#{m[1]}") }
   watch(%r(^lib/tasks/(.+)/.+\.rb$)) { |m| "spec/tasks/#{m[1]}" }
 
+  # Generators
+  watch(%r(^lib/generators/([^/]+)/.+)) do |m|
+    rspec.spec.("generators/#{m[1]}_generator")
+  end
+
+  # Non-shared support files (assumes they are grouped in a folder within the
+  # folder that has the specs)
+  watch(%r(^spec/((?!support).+)/.+/.+(?<!spec)\.rb$)) { |m| "spec/#{m[1]}" }
+
   # ----------------------------------------------------------------------------
   # App Specific Patterns
   # ----------------------------------------------------------------------------

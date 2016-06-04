@@ -17,6 +17,8 @@ class Climb < ActiveRecord::Base
   belongs_to :section
   validates_presence_of :section
   has_one :gym, through: :section
+  belongs_to :grade
+  before_save :set_grade_default_if_blank
 
   # The list of colors is duplicated here in order to ensure that the order used
   # in the enum declaration doesn't change. Once data has been entered in a
@@ -30,5 +32,11 @@ class Climb < ActiveRecord::Base
 
   def self.color_name_for(hex_code)
     COLORS[hex_code].try(:downcase)
+  end
+
+  protected
+
+  def set_grade_default_if_blank
+    self.grade = Grade.null_object unless grade.present?
   end
 end

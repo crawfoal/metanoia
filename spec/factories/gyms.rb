@@ -14,6 +14,8 @@ FactoryGirl.define do
     end
 
     after :build do |gym, evaluator|
+      gym.route_grade_system = GradeSystem.find_by_name! 'Yosemite'
+      gym.boulder_grade_system = GradeSystem.find_by_name! 'Hueco'
       GymFactoryHelper.build_sections_if_empty(gym, evaluator)
     end
 
@@ -47,7 +49,8 @@ FactoryGirl.define do
             3,
             :with_grade,
             :with_color,
-            type: 'Boulder'
+            type: 'Boulder',
+            grade_system: gym.boulder_grade_system
           )
         end
       end
@@ -65,7 +68,8 @@ FactoryGirl.define do
             3,
             :with_grade,
             :with_color,
-            type: 'Route'
+            type: 'Route',
+            grade_system: gym.route_grade_system
           )
         end
       end
