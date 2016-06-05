@@ -7,6 +7,14 @@ module PageObjects
       end
 
       # ----- Action Methods -----
+      def route_grade_system=(grade_system_name)
+        select grade_system_name, from: 'Route grade system'
+      end
+
+      def boulder_grade_system=(grade_system_name)
+        select grade_system_name, from: 'Boulder grade system'
+      end
+
       def add_fields_for_another_section
         click_on 'add_new_section'
       end

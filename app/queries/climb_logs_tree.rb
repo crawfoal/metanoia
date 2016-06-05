@@ -14,6 +14,6 @@ class ClimbLogsTree
   def section_branches(gym)
     gym.sections.each_with_object({}) do |section, hash|
       hash[section] = @athlete_story.climb_logs.in_section(section)
-    end.delete_if { |section, climb_logs| climb_logs.blank? }
+    end.delete_if { |_section, climb_logs| climb_logs.blank? }
   end
 end

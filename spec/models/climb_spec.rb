@@ -5,6 +5,7 @@ RSpec.describe Climb, type: :model do
   it { should belong_to :section }
   it { should validate_presence_of :section }
   it { should have_one :gym }
+  it { should belong_to :grade }
 
   it do
     should define_enum_for(:color).with([
@@ -31,5 +32,13 @@ RSpec.describe Climb, type: :model do
        section.save!
        expect(Section.count).to eq 1
      end
+  end
+
+  context 'no grade is specified for the climb' do
+    it 'is assigned the null grade object' do
+      section = create :section
+      climb = Boulder.create(section: section)
+      expect(climb.grade).to eq Grade.null_object
+    end
   end
 end

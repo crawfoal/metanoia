@@ -1,0 +1,8 @@
+Description:
+    Generates a migration file for the seed data.
+
+Example:
+    rails generate seed_migration MigrationName
+
+    This will create:
+        db/seeds/migrate/20160510060939_migration_name.rb

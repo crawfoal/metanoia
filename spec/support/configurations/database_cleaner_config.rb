@@ -1,5 +1,14 @@
 require 'database_cleaner'
 
+module DatabaseCleanerHelper
+  def self.truncation_except_seeded_tables
+    [
+      :truncation,
+      { except: SeedMigrations.configuration.seeded_tables.map(&:to_s) }
+    ]
+  end
+end
+
 RSpec.configure do |config|
   config.use_transactional_fixtures = false
 
@@ -17,6 +26,7 @@ RSpec.configure do |config|
       MSG
     end
     DatabaseCleaner.clean_with(:truncation)
+    Rails.application.load_seed
   end
 
   config.before(:each) do
@@ -24,10 +34,12 @@ RSpec.configure do |config|
   end
 
   config.before(:each, type: :feature) do
-    driver_shares_db_connection_with_specs = Capybara.current_driver == :rack_test
+    driver_shares_db_connection_with_specs =
+      Capybara.current_driver == :rack_test
 
     unless driver_shares_db_connection_with_specs
-      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.strategy =
+        DatabaseCleanerHelper.truncation_except_seeded_tables
     end
   end
 

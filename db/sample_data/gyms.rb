@@ -10,16 +10,19 @@ FactoryGirl.define do
     after :build do |gym, evaluator|
       gym.sections.each do |section|
         climb_factory = evaluator.climb_factory || [:boulder, :route].sample
+
         section.climbs = build_list(
           climb_factory,
           Faker::Number.between(5, 15),
           :with_grade,
-          :with_color
+          :with_color,
+          grade_system: gym.send("#{climb_factory}_grade_system")
         )
         section.climbs << build_list(
           climb_factory,
           Faker::Number.between(0, 3),
-          :with_grade
+          :with_grade,
+          grade_system: gym.send("#{climb_factory}_grade_system")
         )
         section.climbs << build_list(
           climb_factory,
