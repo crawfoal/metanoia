@@ -1,13 +1,5 @@
 .gyms.show {
 
-  h1 {
-    background-color: $emphasis-background-color;
-    color: white;
-    margin: 0;
-    padding: 1rem;
-    text-align: center;
-  }
-
   #climbs {
     max-width: 30em;
 
@@ -44,6 +36,16 @@
     margin-top: $small-spacing;
 
     @include bitter-button(white, $border: $dark-border);
+  }
+
+  .gym-details {
+    border-radius: 0;
+    display: block;
+    width: 100%;
+
+    h1 {
+      margin: 0;
+    }
   }
 
   .gym-info {
