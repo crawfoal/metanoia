@@ -1,11 +1,11 @@
 require 'rails_helper'
 
-RSpec.describe RouteHistogram do
+RSpec.describe ClimbHistogram do
   describe '#data' do
     it 'returns an array of grade name and route count pairs' do
       trg = create :tiny_route_gym
 
-      rh = RouteHistogram.new(trg.routes)
+      rh = ClimbHistogram.new(trg.routes)
       rh_data = rh.data
 
       expect(rh_data.size).to be > 0
@@ -20,13 +20,13 @@ RSpec.describe RouteHistogram do
   describe '#has_data?' do
     it 'returns a falsey value if there are no routes in the given relation' do
       tbg = create :tiny_boulder_gym
-      rh = RouteHistogram.new(tbg.routes)
+      rh = ClimbHistogram.new(tbg.routes)
       expect(rh.has_data?).to be_falsey
     end
 
     it 'returns a truthy value if there are routes in the given relation' do
       trg = create :tiny_route_gym
-      rh = RouteHistogram.new(trg.routes)
+      rh = ClimbHistogram.new(trg.routes)
       expect(rh.has_data?).to be_truthy
     end
   end

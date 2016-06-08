@@ -27,4 +27,13 @@ RSpec.describe Gym, type: :model do
       expect(trg.routes.first).to be_a Climb
     end
   end
+
+  describe '#boulders' do
+    it 'returns all the boulders for each section in the gym' do
+      tbg = create :tiny_boulder_gym
+      expect(tbg.boulders.count).to eq \
+        tbg.sections.map(&:climbs).map(&:count).reduce(&:+)
+      expect(tbg.boulders.first).to be_a Climb
+    end
+  end
 end

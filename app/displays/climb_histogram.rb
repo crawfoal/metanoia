@@ -1,6 +1,6 @@
-class RouteHistogram
-  def initialize(routes)
-    @routes = routes
+class ClimbHistogram
+  def initialize(climbs)
+    @climbs = climbs
   end
 
   def data
@@ -11,13 +11,13 @@ class RouteHistogram
   end
 
   def has_data?
-    @routes.exists?
+    @climbs.exists?
   end
 
   private
 
   def counts_by_grade_id
-    @_cbg ||= @routes.joins(:grade).group(:grade_id).count
+    @_cbg ||= @climbs.joins(:grade).group(:grade_id).count
   end
 
   def grade_ids_and_names

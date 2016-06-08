@@ -24,4 +24,8 @@ class Gym < ActiveRecord::Base
   def routes
     Climb.where(type: 'Route').where(section_id: section_ids)
   end
+
+  def boulders
+    Climb.where(type: 'Boulder').where(section_id: section_ids)
+  end
 end

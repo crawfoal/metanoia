@@ -6,21 +6,24 @@ RSpec.describe 'gyms/show.html.haml', type: :view do
       allow(view).to receive(:current_user).and_return(Visitor.new)
       gym = create(:gym)
       assign(:gym, gym)
-      assign(:route_histogram, RouteHistogram.new(gym.routes))
+      assign(:route_histogram, ClimbHistogram.new(gym.routes))
+      assign(:boulder_histogram, ClimbHistogram.new(gym.boulders))
       render
       expect(rendered).to_not have_selector '.edit-gym-link'
     end
   end
 
-  context "when the gym doesn't have any routes" do
-    it "doesn't include the .route-histogram div" do
+  context "when the gym doesn't have any climbs" do
+    it "doesn't include the .route-histogram or .boulder-histogram divs" do
       athlete = create :athlete
       allow(view).to receive(:current_user).and_return(athlete)
       gym = create :gym
       assign(:gym, gym)
-      assign(:route_histogram, RouteHistogram.new(gym.routes))
+      assign(:route_histogram, ClimbHistogram.new(gym.routes))
+      assign(:boulder_histogram, ClimbHistogram.new(gym.boulders))
       render
       expect(rendered).to_not have_selector '.route-histogram'
+      expect(rendered).to_not have_selector '.boulder-histogram'
     end
   end
 end
