@@ -10,7 +10,7 @@
         = link_to section.name, section, remote: true
   - if @route_histogram.has_data?
     .route-histogram
-      = column_chart @route_histogram.data, xtitle: 'Grade', ytitle: 'Number of Climbs'
+      = column_chart @route_histogram.data, xtitle: 'Grade', ytitle: 'Number of Climbs', library: { title: 'Route Breakdown' }
 
 - if GymPolicy.new(current_user, Gym).edit?
   = link_to 'Edit Gym Info', edit_gym_path(@gym), class: 'edit-gym-link'
