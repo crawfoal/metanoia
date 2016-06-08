@@ -1,31 +1,6 @@
 {<img src="https://codeclimate.com/github/crawfoal/metanoia/badges/gpa.svg" />}[https://codeclimate.com/github/crawfoal/metanoia]
 {<img src="https://codeclimate.com/github/crawfoal/metanoia/badges/coverage.svg" />}[https://codeclimate.com/github/crawfoal/metanoia/coverage]
 
-== README
-
-This README would normally document whatever steps are necessary to get the
-application up and running.
-
-Things you may want to cover:
-
-* Ruby version
-
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
-
-
-Please feel free to use a different markup language if you do not plan to run
-<tt>rake doc:app</tt>.
+[Semaphore CI](https://semaphoreci.com/crawfoal/metanoia)
+[Live Demo (data is regularly purged, so don't put anything you'll miss in there!)](https://metanoia.herokuapp.com/)
+[Staging App](https://metanoia-staging.herokuapp.com/)
