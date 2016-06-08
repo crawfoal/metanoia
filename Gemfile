@@ -34,6 +34,10 @@ gem 'font-awesome-rails'
 gem 'bourbon'
 # Neat is a grid framework built with Bourbon
 gem 'neat'
+# Use chartkick to interface with GoogleCharts so that we can make HTML5/SVG
+# graphs to visualize data (e.g. how many climbs of each grade does this gym
+# have?)
+gem "chartkick"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'

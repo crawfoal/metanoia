@@ -20,4 +20,12 @@ class Gym < ActiveRecord::Base
 
   has_many :memberships
   has_many :athlete_stories, through: :memberships
+
+  def routes
+    Climb.where(type: 'Route').where(section_id: section_ids)
+  end
+
+  def boulders
+    Climb.where(type: 'Boulder').where(section_id: section_ids)
+  end
 end
