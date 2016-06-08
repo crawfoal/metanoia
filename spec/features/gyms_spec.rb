@@ -54,6 +54,10 @@ RSpec.feature "Gyms", type: :feature, js: true do
     section_names.each do |section_name|
       expect(page).to have_content section_name
     end
+
+    click_on section_names.first
+    expect(page).to_not have_selector '.histograms'
+
     click_on 'Edit Gym Info'
 
     gym_form = PageObjects::Gyms::Form.on_page!
