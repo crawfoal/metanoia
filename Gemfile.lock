@@ -63,6 +63,7 @@ GEM
       rack (>= 1.0.0)
       rack-test (>= 0.5.4)
       xpath (~> 2.0)
+    chartkick (2.0.0)
     childprocess (0.5.9)
       ffi (~> 1.0, >= 1.0.11)
     choice (0.2.0)
@@ -321,6 +322,7 @@ DEPENDENCIES
   bullet
   byebug
   capybara
+  chartkick
   chromedriver-helper
   codeclimate-test-reporter
   coffee-rails (~> 4.1.0)

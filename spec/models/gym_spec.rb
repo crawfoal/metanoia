@@ -18,4 +18,13 @@ RSpec.describe Gym, type: :model do
   it 'is invalid if `#value` is blank' do
     expect(Gym.new).to_not be_valid
   end
+
+  describe '#routes' do
+    it 'returns all the routes for each section in the gym' do
+      trg = create :tiny_route_gym
+      expect(trg.routes.count).to eq \
+        trg.sections.map(&:climbs).map(&:count).reduce(&:+)
+      expect(trg.routes.first).to be_a Climb
+    end
+  end
 end

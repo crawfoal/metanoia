@@ -52,6 +52,14 @@
     @include media($medium-screen) {
       @include flex-direction(row);
     }
+
+    > * {
+      margin-top: $base-spacing;
+    }
+
+    .route-histogram {
+      @include flex-grow(1);
+    }
   }
 
   .change-section {
@@ -69,7 +77,6 @@
     background-color: $emphasis-background-color;
     padding: $small-spacing;
     padding-bottom: 0;
-    margin-top: $base-spacing;
 
     li {
       a {

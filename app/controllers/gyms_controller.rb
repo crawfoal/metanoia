@@ -21,6 +21,7 @@ class GymsController < ApplicationController
 
   def show
     @gym = Gym.find(params[:id])
+    @route_histogram = RouteHistogram.new(@gym.routes)
   end
 
   def edit
