@@ -54,6 +54,12 @@ FactoryGirl.define do
           )
         end
       end
+
+      factory :rainbow_gym do
+        after :build do |gym, evaluator|
+          gym.boulder_grade_system = GradeSystem.find_by_name! 'Rainbow Scale'
+        end
+      end
     end
 
     factory :tiny_route_gym do

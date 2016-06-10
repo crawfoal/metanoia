@@ -234,3 +234,38 @@ grade_111:
   name: "?"
   grade_system_id: 7
   sequence_number: -1
+grade_180:
+  id: 180
+  name: purple
+  grade_system_id: 14
+  sequence_number: 0
+grade_181:
+  id: 181
+  name: blue
+  grade_system_id: 14
+  sequence_number: 1
+grade_182:
+  id: 182
+  name: green
+  grade_system_id: 14
+  sequence_number: 2
+grade_183:
+  id: 183
+  name: yellow
+  grade_system_id: 14
+  sequence_number: 3
+grade_184:
+  id: 184
+  name: orange
+  grade_system_id: 14
+  sequence_number: 4
+grade_185:
+  id: 185
+  name: red
+  grade_system_id: 14
+  sequence_number: 5
+grade_186:
+  id: 186
+  name: black
+  grade_system_id: 14
+  sequence_number: 6
