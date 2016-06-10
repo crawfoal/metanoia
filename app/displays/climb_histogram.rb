@@ -1,12 +1,13 @@
 class ClimbHistogram
-  def initialize(climbs)
+  def initialize(climbs, grade_system)
     @climbs = climbs
+    @grade_system = grade_system
   end
 
   def data
     grade_ids_and_names.map do |grade_id_and_name|
       grade_id, *name = grade_id_and_name
-      name.push(counts_by_grade_id[grade_id])
+      name.push(counts_by_grade_id[grade_id] || 0)
     end
   end
 
@@ -21,6 +22,6 @@ class ClimbHistogram
   end
 
   def grade_ids_and_names
-    @_gin ||= Grade.ordered.where(id: counts_by_grade_id.keys).pluck(:id, :name)
+    @_gin ||= Grade.where(grade_system_id: @grade_system.id).ordered.pluck(:id, :name) + Grade.null_object.pluck(:id, :name)
   end
 end
