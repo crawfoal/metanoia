@@ -10,6 +10,14 @@ RSpec.describe 'GradeSystem seed data' do
       expect(hueco_scale.grades.ordered.map(&:name)).to \
         eq %w(VB V0 V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16)
     end
+
+    it 'has the correct buckets' do
+      expect(hueco_scale.buckets.ordered.map(&:name)).to eq \
+        [
+          'V1 & ↓', 'V2 - V3', 'V4 - V5', 'V6 - V7', 'V8 - V9', 'V10 - V11',
+          'V12 & ↑'
+        ]
+    end
   end
 
   describe 'YDS' do
@@ -26,6 +34,11 @@ RSpec.describe 'GradeSystem seed data' do
           5.15a 5.15b 5.15c
         )
     end
+
+    it 'has the correct buckets' do
+      expect(yds.buckets.ordered.map(&:name)).to eq \
+        ['5.7 & ↓'] + %w(5.8 5.9 5.10 5.11 5.12 5.13) + ['5.14 & ↑']
+    end
   end
 
   describe 'Rainbow Scale' do
@@ -36,6 +49,10 @@ RSpec.describe 'GradeSystem seed data' do
     it 'has all of the grades defined, in the correct order' do
       expect(rainbow_scale.grades.ordered.map(&:name)).to eq \
         %w(purple blue green yellow orange red black)
+    end
+
+    it 'has no buckets' do
+      expect(rainbow_scale.has_buckets?).to eq false
     end
   end
 end
