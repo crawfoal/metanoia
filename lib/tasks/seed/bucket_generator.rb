@@ -14,7 +14,8 @@ class BucketGenerator
         name: bucket_name,
         grade_system: @grade_system,
         lower_bound_grade: grades_in_this_bucket.first,
-        upper_bound_grade: grades_in_this_bucket.last
+        upper_bound_grade: grades_in_this_bucket.last,
+        grades: grades_in_this_bucket
       )
     end
   end
