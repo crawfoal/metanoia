@@ -4,268 +4,322 @@ grade_19:
   name: VB
   grade_system_id: 2
   sequence_number: 0
+  bucket_id: 1
 grade_20:
   id: 20
   name: V0
   grade_system_id: 2
   sequence_number: 1
+  bucket_id: 1
 grade_21:
   id: 21
   name: V1
   grade_system_id: 2
   sequence_number: 2
+  bucket_id: 1
 grade_22:
   id: 22
   name: V2
   grade_system_id: 2
   sequence_number: 3
+  bucket_id: 2
 grade_23:
   id: 23
   name: V3
   grade_system_id: 2
   sequence_number: 4
+  bucket_id: 2
 grade_24:
   id: 24
   name: V4
   grade_system_id: 2
   sequence_number: 5
+  bucket_id: 3
 grade_25:
   id: 25
   name: V5
   grade_system_id: 2
   sequence_number: 6
+  bucket_id: 3
 grade_26:
   id: 26
   name: V6
   grade_system_id: 2
   sequence_number: 7
+  bucket_id: 4
 grade_27:
   id: 27
   name: V7
   grade_system_id: 2
   sequence_number: 8
+  bucket_id: 4
 grade_28:
   id: 28
   name: V8
   grade_system_id: 2
   sequence_number: 9
+  bucket_id: 5
 grade_29:
   id: 29
   name: V9
   grade_system_id: 2
   sequence_number: 10
+  bucket_id: 5
 grade_30:
   id: 30
   name: V10
   grade_system_id: 2
   sequence_number: 11
+  bucket_id: 6
 grade_31:
   id: 31
   name: V11
   grade_system_id: 2
   sequence_number: 12
+  bucket_id: 6
 grade_32:
   id: 32
   name: V12
   grade_system_id: 2
   sequence_number: 13
+  bucket_id: 7
 grade_33:
   id: 33
   name: V13
   grade_system_id: 2
   sequence_number: 14
+  bucket_id: 7
 grade_34:
   id: 34
   name: V14
   grade_system_id: 2
   sequence_number: 15
+  bucket_id: 7
 grade_35:
   id: 35
   name: V15
   grade_system_id: 2
   sequence_number: 16
+  bucket_id: 7
 grade_36:
   id: 36
   name: V16
   grade_system_id: 2
   sequence_number: 17
+  bucket_id: 7
 grade_37:
   id: 37
   name: '5.5'
   grade_system_id: 4
   sequence_number: 0
+  bucket_id: 8
 grade_38:
   id: 38
   name: '5.6'
   grade_system_id: 4
   sequence_number: 1
+  bucket_id: 8
 grade_39:
   id: 39
   name: '5.7'
   grade_system_id: 4
   sequence_number: 2
+  bucket_id: 8
 grade_40:
   id: 40
   name: '5.8'
   grade_system_id: 4
   sequence_number: 3
+  bucket_id: 9
 grade_41:
   id: 41
   name: '5.9'
   grade_system_id: 4
   sequence_number: 4
+  bucket_id: 10
 grade_42:
   id: 42
   name: 5.10a
   grade_system_id: 4
   sequence_number: 5
+  bucket_id: 11
 grade_43:
   id: 43
   name: 5.10b
   grade_system_id: 4
   sequence_number: 6
+  bucket_id: 11
 grade_44:
   id: 44
   name: 5.10c
   grade_system_id: 4
   sequence_number: 7
+  bucket_id: 11
 grade_45:
   id: 45
   name: 5.10d
   grade_system_id: 4
   sequence_number: 8
+  bucket_id: 11
 grade_46:
   id: 46
   name: 5.11a
   grade_system_id: 4
   sequence_number: 9
+  bucket_id: 12
 grade_47:
   id: 47
   name: 5.11b
   grade_system_id: 4
   sequence_number: 10
+  bucket_id: 12
 grade_48:
   id: 48
   name: 5.11c
   grade_system_id: 4
   sequence_number: 11
+  bucket_id: 12
 grade_49:
   id: 49
   name: 5.11d
   grade_system_id: 4
   sequence_number: 12
+  bucket_id: 12
 grade_50:
   id: 50
   name: 5.12a
   grade_system_id: 4
   sequence_number: 13
+  bucket_id: 13
 grade_51:
   id: 51
   name: 5.12b
   grade_system_id: 4
   sequence_number: 14
+  bucket_id: 13
 grade_52:
   id: 52
   name: 5.12c
   grade_system_id: 4
   sequence_number: 15
+  bucket_id: 13
 grade_53:
   id: 53
   name: 5.12d
   grade_system_id: 4
   sequence_number: 16
+  bucket_id: 13
 grade_54:
   id: 54
   name: 5.13a
   grade_system_id: 4
   sequence_number: 17
+  bucket_id: 14
 grade_55:
   id: 55
   name: 5.13b
   grade_system_id: 4
   sequence_number: 18
+  bucket_id: 14
 grade_56:
   id: 56
   name: 5.13c
   grade_system_id: 4
   sequence_number: 19
+  bucket_id: 14
 grade_57:
   id: 57
   name: 5.13d
   grade_system_id: 4
   sequence_number: 20
+  bucket_id: 14
 grade_58:
   id: 58
   name: 5.14a
   grade_system_id: 4
   sequence_number: 21
+  bucket_id: 15
 grade_59:
   id: 59
   name: 5.14b
   grade_system_id: 4
   sequence_number: 22
+  bucket_id: 15
 grade_60:
   id: 60
   name: 5.14c
   grade_system_id: 4
   sequence_number: 23
+  bucket_id: 15
 grade_61:
   id: 61
   name: 5.14d
   grade_system_id: 4
   sequence_number: 24
+  bucket_id: 15
 grade_62:
   id: 62
   name: 5.15a
   grade_system_id: 4
   sequence_number: 25
+  bucket_id: 15
 grade_63:
   id: 63
   name: 5.15b
   grade_system_id: 4
   sequence_number: 26
+  bucket_id: 15
 grade_64:
   id: 64
   name: 5.15c
   grade_system_id: 4
   sequence_number: 27
+  bucket_id: 15
 grade_111:
   id: 111
   name: "?"
   grade_system_id: 7
   sequence_number: -1
+  bucket_id: 
 grade_180:
   id: 180
   name: purple
   grade_system_id: 14
   sequence_number: 0
+  bucket_id: 
 grade_181:
   id: 181
   name: blue
   grade_system_id: 14
   sequence_number: 1
+  bucket_id: 
 grade_182:
   id: 182
   name: green
   grade_system_id: 14
   sequence_number: 2
+  bucket_id: 
 grade_183:
   id: 183
   name: yellow
   grade_system_id: 14
   sequence_number: 3
+  bucket_id: 
 grade_184:
   id: 184
   name: orange
   grade_system_id: 14
   sequence_number: 4
+  bucket_id: 
 grade_185:
   id: 185
   name: red
   grade_system_id: 14
   sequence_number: 5
+  bucket_id: 
 grade_186:
   id: 186
   name: black
   grade_system_id: 14
   sequence_number: 6
+  bucket_id: 

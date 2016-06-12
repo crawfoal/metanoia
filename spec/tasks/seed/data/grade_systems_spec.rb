@@ -10,14 +10,6 @@ RSpec.describe 'GradeSystem seed data' do
       expect(hueco_scale.grades.ordered.map(&:name)).to \
         eq %w(VB V0 V1 V2 V3 V4 V5 V6 V7 V8 V9 V10 V11 V12 V13 V14 V15 V16)
     end
-
-    it 'has the correct buckets' do
-      expect(hueco_scale.buckets.ordered.map(&:name)).to eq \
-        [
-          'V1 & ↓', 'V2 - V3', 'V4 - V5', 'V6 - V7', 'V8 - V9', 'V10 - V11',
-          'V12 & ↑'
-        ]
-    end
   end
 
   describe 'YDS' do
@@ -33,11 +25,6 @@ RSpec.describe 'GradeSystem seed data' do
           5.13a 5.13b 5.13c 5.13d 5.14a 5.14b 5.14c 5.14d
           5.15a 5.15b 5.15c
         )
-    end
-
-    it 'has the correct buckets' do
-      expect(yds.buckets.ordered.map(&:name)).to eq \
-        ['5.7 & ↓'] + %w(5.8 5.9 5.10 5.11 5.12 5.13) + ['5.14 & ↑']
     end
   end
 
