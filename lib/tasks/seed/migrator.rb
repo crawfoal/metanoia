@@ -63,7 +63,7 @@ module SeedMigrations
     def parse_file_name(file_name)
       base_file_name = File.basename(file_name, '.rb')
       version, _underscore, class_name = base_file_name.partition('_')
-      [version, class_name.classify]
+      [version, class_name.camelize]
     end
 
     def migration_files

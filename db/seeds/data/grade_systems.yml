@@ -8,3 +8,6 @@ grade_system_4:
 grade_system_7:
   id: 7
   name: Null Grade System
+grade_system_14:
+  id: 14
+  name: Rainbow Scale

@@ -57,6 +57,10 @@ gem 'faker'
 # Use Factory Girl to create test data (and sample data)
 gem 'factory_girl_rails'
 
+# Use table_print to easily print data in the Rails console, formated like a
+# table
+gem 'table_print'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

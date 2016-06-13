@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160530202928) do
+ActiveRecord::Schema.define(version: 20160612234537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -23,6 +23,15 @@ ActiveRecord::Schema.define(version: 20160530202928) do
   end
 
   add_index "athlete_stories", ["user_id"], name: "index_athlete_stories_on_user_id", using: :btree
+
+  create_table "buckets", force: :cascade do |t|
+    t.integer  "grade_system_id", null: false
+    t.string   "name",            null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "buckets", ["grade_system_id"], name: "index_buckets_on_grade_system_id", using: :btree
 
   create_table "climb_logs", force: :cascade do |t|
     t.integer  "athlete_story_id", null: false
@@ -58,8 +67,10 @@ ActiveRecord::Schema.define(version: 20160530202928) do
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
     t.integer  "sequence_number", null: false
+    t.integer  "bucket_id"
   end
 
+  add_index "grades", ["bucket_id"], name: "index_grades_on_bucket_id", using: :btree
   add_index "grades", ["grade_system_id"], name: "index_grades_on_grade_system_id", using: :btree
 
   create_table "gyms", force: :cascade do |t|
@@ -136,10 +147,12 @@ ActiveRecord::Schema.define(version: 20160530202928) do
   add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "athlete_stories", "users"
+  add_foreign_key "buckets", "grade_systems"
   add_foreign_key "climb_logs", "athlete_stories"
   add_foreign_key "climb_logs", "climbs"
   add_foreign_key "climbs", "grades"
   add_foreign_key "climbs", "sections"
+  add_foreign_key "grades", "buckets"
   add_foreign_key "grades", "grade_systems"
   add_foreign_key "gyms", "grade_systems", column: "boulder_grade_system_id"
   add_foreign_key "gyms", "grade_systems", column: "route_grade_system_id"

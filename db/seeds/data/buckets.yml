@@ -1,0 +1,61 @@
+---
+bucket_1:
+  id: 1
+  grade_system_id: 2
+  name: V1 & ↓
+bucket_2:
+  id: 2
+  grade_system_id: 2
+  name: V2 - V3
+bucket_3:
+  id: 3
+  grade_system_id: 2
+  name: V4 - V5
+bucket_4:
+  id: 4
+  grade_system_id: 2
+  name: V6 - V7
+bucket_5:
+  id: 5
+  grade_system_id: 2
+  name: V8 - V9
+bucket_6:
+  id: 6
+  grade_system_id: 2
+  name: V10 - V11
+bucket_7:
+  id: 7
+  grade_system_id: 2
+  name: V12 & ↑
+bucket_8:
+  id: 8
+  grade_system_id: 4
+  name: 5.7 & ↓
+bucket_9:
+  id: 9
+  grade_system_id: 4
+  name: '5.8'
+bucket_10:
+  id: 10
+  grade_system_id: 4
+  name: '5.9'
+bucket_11:
+  id: 11
+  grade_system_id: 4
+  name: '5.10'
+bucket_12:
+  id: 12
+  grade_system_id: 4
+  name: '5.11'
+bucket_13:
+  id: 13
+  grade_system_id: 4
+  name: '5.12'
+bucket_14:
+  id: 14
+  grade_system_id: 4
+  name: '5.13'
+bucket_15:
+  id: 15
+  grade_system_id: 4
+  name: 5.14 & ↑

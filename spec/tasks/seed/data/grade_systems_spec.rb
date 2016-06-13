@@ -27,4 +27,19 @@ RSpec.describe 'GradeSystem seed data' do
         )
     end
   end
+
+  describe 'Rainbow Scale' do
+    subject(:rainbow_scale) { GradeSystem.find_by_name 'Rainbow Scale' }
+
+    it { should be_present }
+
+    it 'has all of the grades defined, in the correct order' do
+      expect(rainbow_scale.grades.ordered.map(&:name)).to eq \
+        %w(purple blue green yellow orange red black)
+    end
+
+    it 'has no buckets' do
+      expect(rainbow_scale.has_buckets?).to eq false
+    end
+  end
 end
