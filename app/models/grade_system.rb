@@ -4,6 +4,6 @@ class GradeSystem < ActiveRecord::Base
   has_many :buckets
 
   def has_buckets?
-    buckets.size > 0
+    !buckets.empty?
   end
 end

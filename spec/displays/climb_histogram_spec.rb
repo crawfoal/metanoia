@@ -11,7 +11,7 @@ RSpec.describe ClimbHistogram do
       end
 
       it 'returns an array of bucket name and climb count pairs' do
-        histogram.data.each do |bucket_name, count|
+        histogram.data.each do |bucket_name, _count|
           expect(Bucket.find_by_name(bucket_name)).to be_present
         end
       end
@@ -24,7 +24,9 @@ RSpec.describe ClimbHistogram do
 
     context "for a gym who's grade system doesn't specify buckets" do
       let(:gym) { create :rainbow_gym }
-      let(:histogram) { ClimbHistogram.new(gym.boulders, gym.boulder_grade_system) }
+      let(:histogram) do
+        ClimbHistogram.new(gym.boulders, gym.boulder_grade_system)
+      end
 
       it "has data (the other tests aren't valid unless this passes)" do
         expect(gym.boulders.size).to be > 0
@@ -32,7 +34,8 @@ RSpec.describe ClimbHistogram do
 
       it 'has the correct number of buckets (number of associated grades, plus'\
          ' one for unspecified grades)' do
-        expect(histogram.data.size).to eq gym.boulder_grade_system.grades.count + 1
+        expect(histogram.data.size).to eq \
+          gym.boulder_grade_system.grades.count + 1
       end
 
       it 'returns an array of grade name and route count pairs' do

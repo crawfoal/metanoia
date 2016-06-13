@@ -6,8 +6,14 @@ RSpec.describe 'gyms/show.html.haml', type: :view do
       allow(view).to receive(:current_user).and_return(Visitor.new)
       gym = create(:gym)
       assign(:gym, gym)
-      assign(:route_histogram, ClimbHistogram.new(gym.routes, gym.route_grade_system))
-      assign(:boulder_histogram, ClimbHistogram.new(gym.boulders, gym.boulder_grade_system))
+      assign(
+        :route_histogram,
+        ClimbHistogram.new(gym.routes, gym.route_grade_system)
+      )
+      assign(
+        :boulder_histogram,
+        ClimbHistogram.new(gym.boulders, gym.boulder_grade_system)
+      )
       render
       expect(rendered).to_not have_selector '.edit-gym-link'
     end
@@ -19,8 +25,14 @@ RSpec.describe 'gyms/show.html.haml', type: :view do
       allow(view).to receive(:current_user).and_return(athlete)
       gym = create :gym
       assign(:gym, gym)
-      assign(:route_histogram, ClimbHistogram.new(gym.routes, gym.route_grade_system))
-      assign(:boulder_histogram, ClimbHistogram.new(gym.boulders, gym.boulder_grade_system))
+      assign(
+        :route_histogram,
+        ClimbHistogram.new(gym.routes, gym.route_grade_system)
+      )
+      assign(
+        :boulder_histogram,
+        ClimbHistogram.new(gym.boulders, gym.boulder_grade_system)
+      )
       render
       expect(rendered).to_not have_selector '.route-histogram'
       expect(rendered).to_not have_selector '.boulder-histogram'
