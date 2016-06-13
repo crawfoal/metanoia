@@ -1,7 +1,5 @@
 class Bucket < ActiveRecord::Base
   belongs_to :grade_system
-  belongs_to :lower_bound_grade, class_name: 'Grade'
-  belongs_to :upper_bound_grade, class_name: 'Grade'
-  scope :ordered, -> { joins(:lower_bound_grade).order('grades.sequence_number') }
+  scope :ordered, -> { joins(:grades).group('buckets.id').select('buckets.*', 'min(grades.sequence_number) as sn').order('sn') }
   has_many :grades
 end

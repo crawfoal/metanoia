@@ -34,22 +34,9 @@ class ClimbHistogram
   end
 
   def bucket_names_and_grades
-    bucket_names_and_bounds.map do |name, lb_grade_id, ub_grade_id|
-      lb_grade_sn = Grade.find(lb_grade_id).sequence_number
-      ub_grade_sn = Grade.find(ub_grade_id).sequence_number
-      [
-        name,
-        @grade_system.grades.where(sequence_number: lb_grade_sn..ub_grade_sn)
-      ]
+    @grade_system.buckets.includes(:grades).map do |bucket|
+      [bucket.name, bucket.grades]
     end
-  end
-
-  def bucket_names_and_bounds
-    @grade_system.buckets.pluck(
-      :name,
-      :lower_bound_grade_id,
-      :upper_bound_grade_id
-    )
   end
 
   def counts_by_grade_id

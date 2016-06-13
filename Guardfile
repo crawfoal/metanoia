@@ -117,4 +117,11 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   watch("app/views/layouts/_navbar.html.haml") do
     "#{rspec.spec_dir}/features/home_spec.rb"
   end
+
+  watch("app/models/bucket.rb") do
+    [
+      "#{rspec.spec_dir}/tasks/seed/bucket_generator_spec.rb",
+      "#{rspec.spec_dir}/tasks/seed/data/buckets_spec.rb"
+    ]
+  end
 end

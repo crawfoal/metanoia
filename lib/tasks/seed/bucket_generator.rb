@@ -9,13 +9,10 @@ class BucketGenerator
 
   def generate
     @bucket_names.each do |bucket_name|
-      grades_in_this_bucket = @grades.shift(@bucket_sizes[bucket_name.to_sym])
       Bucket.create!(
         name: bucket_name,
         grade_system: @grade_system,
-        lower_bound_grade: grades_in_this_bucket.first,
-        upper_bound_grade: grades_in_this_bucket.last,
-        grades: grades_in_this_bucket
+        grades: @grades.shift(@bucket_sizes[bucket_name.to_sym])
       )
     end
   end

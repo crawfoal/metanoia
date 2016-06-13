@@ -5,7 +5,7 @@ RSpec.describe 'Bucket seed data' do
     gym.buckets.ordered.map { |bucket| bucket.grades.ordered.pluck(:name) }
   end
 
-  let(:bucket_names) { gym.buckets.ordered.pluck(:name) }
+  let(:bucket_names) { gym.buckets.ordered.map(&:name) }
 
   describe 'Hueco Buckets' do
     let(:gym) { GradeSystem.find_by_name('Hueco') }

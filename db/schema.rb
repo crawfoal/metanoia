@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160612121358) do
+ActiveRecord::Schema.define(version: 20160612234537) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,17 +25,13 @@ ActiveRecord::Schema.define(version: 20160612121358) do
   add_index "athlete_stories", ["user_id"], name: "index_athlete_stories_on_user_id", using: :btree
 
   create_table "buckets", force: :cascade do |t|
-    t.integer  "grade_system_id",      null: false
-    t.string   "name",                 null: false
-    t.integer  "lower_bound_grade_id"
-    t.integer  "upper_bound_grade_id"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "grade_system_id", null: false
+    t.string   "name",            null: false
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
   end
 
   add_index "buckets", ["grade_system_id"], name: "index_buckets_on_grade_system_id", using: :btree
-  add_index "buckets", ["lower_bound_grade_id"], name: "index_buckets_on_lower_bound_grade_id", using: :btree
-  add_index "buckets", ["upper_bound_grade_id"], name: "index_buckets_on_upper_bound_grade_id", using: :btree
 
   create_table "climb_logs", force: :cascade do |t|
     t.integer  "athlete_story_id", null: false
