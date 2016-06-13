@@ -71,7 +71,7 @@ FactoryGirl.define do
 
     factory :rainbow_gym do
       name 'Rainbow Gym'
-      boulder_grade_system GradeSystem.find_by_name('Rainbow Scale')
+      boulder_grade_system { GradeSystem.find_by_name('Rainbow Scale') }
       section_names ['Bouldering Area']
       with_detailed_boulders
     end
