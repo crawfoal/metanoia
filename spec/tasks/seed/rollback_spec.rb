@@ -1,15 +1,10 @@
-require 'rails_helper'
-require 'rake'
+require 'task_helper'
 require_relative 'seed_migrations_helper'
 
 RSpec.describe 'seed:rollback', type: :task do
   include SeedMigrationsHelper
 
   before :all do
-    Rake.application.rake_require 'tasks/seed/rollback'
-    Rake.application.rake_require 'tasks/seed/migrate'
-    Rake::Task.define_task(:environment)
-
     intialize_seed_migrations_library
     set_folder_paths
     delete_temporary_files
