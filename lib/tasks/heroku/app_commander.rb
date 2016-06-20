@@ -7,7 +7,8 @@ module Tasks
 
       def run_heroku_reset
         run_command('pg:reset DATABASE_URL')
-        run_task('db:setup')
+        run_task('db:schema:load')
+        run_task('db:seed')
         run_command('restart')
         run_task('db:fill')
       end
