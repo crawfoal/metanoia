@@ -22,4 +22,4 @@
 /coverage
 
 # Ignore captured console output
-# /spec/console.log
+/spec/console.log
