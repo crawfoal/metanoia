@@ -4,7 +4,7 @@ require 'rake'
 module TaskHelper
   def run_rake_task(task_name, *args)
     Rake::Task[task_name].reenable
-    Rake::Task[task_name].invoke(*args)
+    capture_stdeo { Rake::Task[task_name].invoke(*args) }
   end
 end
 
