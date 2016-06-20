@@ -2,9 +2,9 @@ require 'rails_helper'
 require 'rake'
 
 module TaskHelper
-  def run_rake_task(task_name)
+  def run_rake_task(task_name, *args)
     Rake::Task[task_name].reenable
-    Rake.application.invoke_task task_name
+    Rake::Task[task_name].invoke(*args)
   end
 end
 
