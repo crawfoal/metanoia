@@ -1,12 +1,6 @@
-require 'rails_helper'
-require 'rake'
+require 'task_helper'
 
 RSpec.describe 'admin rake tasks', type: :task do
-  before :all do
-    Rake.application.rake_require 'tasks/admin/create'
-    Rake::Task.define_task(:environment)
-  end
-
   describe 'admin:create' do
     before :each do
       allow(Tasks::Admin::Communicator).to receive(

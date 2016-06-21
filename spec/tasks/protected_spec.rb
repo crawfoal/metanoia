@@ -1,9 +1,6 @@
-require 'rails_helper'
-require 'rake'
+require 'task_helper'
 
 RSpec.describe 'protected rake task', type: :task do
-  before(:all) { Rake.application.rake_require 'tasks/protected' }
-
   it 'raises an error in an environment that does not allow protected tasks' do
     expect(ENV).to receive('[]').with('STOP_PROTECTED_TASKS').and_return('true')
 

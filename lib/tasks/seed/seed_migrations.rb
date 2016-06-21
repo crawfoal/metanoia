@@ -1,4 +1,5 @@
 require_relative 'migrator'
+require "#{Rails.root}/lib/table_dependency_graph"
 
 module SeedMigrations
   class << self
@@ -28,10 +29,14 @@ module SeedMigrations
   end
 
   class Configuration
-    attr_accessor :seeded_tables
+    attr_writer :seeded_tables
 
     def initialize
       @seeded_tables = []
+    end
+
+    def seeded_tables
+      TableDependencyGraph.new(*@seeded_tables).tsort
     end
   end
 end
