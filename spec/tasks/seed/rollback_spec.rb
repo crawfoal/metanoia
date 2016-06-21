@@ -20,7 +20,7 @@ RSpec.describe 'seed:rollback', type: :task do
 
     it 'runs the code defined in the `down` method of the last migration' do
       expect { run_rake_task('seed:rollback') }.to \
-        change { User.find_by_email 'amanda@example.com' }.to(nil)
+        change { User.find_by_email 'tj@example.com' }.to(nil)
     end
 
     it 'removes the migration record from the table' do
@@ -29,11 +29,11 @@ RSpec.describe 'seed:rollback', type: :task do
     end
 
     it 'regenerates the yaml seed files' do
-      amanda = User.find_by_email 'amanda@example.com'
-      amanda_yaml = { amanda.fixture_key => amanda.fixture_value }.to_yaml
+      tj = User.find_by_email 'tj@example.com'
+      tj_yaml = { tj.fixture_key => tj.fixture_value }.to_yaml
       run_rake_task('seed:rollback')
       file_contents = File.read(@fixture_folder + '/users.yml')
-      expect(file_contents).to_not include amanda_yaml
+      expect(file_contents).to_not include tj_yaml
     end
   end
 

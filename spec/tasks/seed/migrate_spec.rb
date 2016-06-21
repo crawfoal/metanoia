@@ -19,12 +19,12 @@ RSpec.describe 'seed:migrate', type: :task do
     end
 
     it 'it runs the code defined in the `up` method' do
-      expect { run_rake_task('seed:migrate') }.to change { User.count }.by(1)
+      expect { run_rake_task('seed:migrate') }.to change { User.count }.by(2)
     end
 
     it 'stores the file name in the table' do
       expect { run_rake_task('seed:migrate') }.to \
-        change { SeedMigration.count }.by(2)
+        change { SeedMigration.count }.by(3)
     end
 
     it 'runs the migrations in order, according to the timestamp' do
@@ -49,6 +49,26 @@ RSpec.describe 'seed:migrate', type: :task do
           model_name = table_name.singularize.classify
           expect(file_contents).to eq model_name.constantize.to_fixtures
         end
+      end
+    end
+
+    context 'when the seed_migrations table has been dropped' do
+      before :each do
+        File.write(
+          "#{Rails.root}/tmp/db/seeds/seeds_version.rb",
+          "20170511115239"
+        )
+        if SeedMigration.any?
+          raise "Whoops, some records are in the seed_migrations table, and "\
+                "this means the specs in this group aren't valid!"
+        end
+      end
+
+      it 'refills the table based on the seeds_version.rb file, and then runs as normal' do
+        run_rake_task('seed:migrate')
+        expect(SeedMigration.any?).to be_truthy
+        expect(User.find_by_email('amanda@example.com')).to_not be_present
+        expect(User.find_by_email('tj@example.com')).to be_present
       end
     end
 

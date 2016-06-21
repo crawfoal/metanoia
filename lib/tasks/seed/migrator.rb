@@ -9,6 +9,7 @@ module SeedMigrations
     end
 
     def run_outstanding_migrations
+      check_seeds_version
       queue_up_migrations
       @queue.sort.each do |file_name, migration|
         migration.up
@@ -35,12 +36,32 @@ module SeedMigrations
       root_directory + '/db/seeds/data'
     end
 
-    private
-
     def root_directory
       # :nocov:
       Rails.root.to_s
       # :nocov:
+    end
+
+    private
+
+    def version_file_name
+      root_directory + '/db/seeds/seeds_version.rb'
+    end
+
+    def seed_migration_table_current_version
+      last_migration = SeedMigration.order(:created_at).last
+      return unless last_migration
+      parse_file_name(last_migration.filename).first
+    end
+
+    def check_seeds_version
+      return unless File.file? version_file_name
+      current_version = File.read(version_file_name)
+      return if seed_migration_table_current_version == current_version
+      migration_files.each do |file_name|
+        SeedMigration.find_or_create_by!(filename: file_name)
+        break if parse_file_name(file_name).first == current_version
+      end
     end
 
     def migration_directory
@@ -48,6 +69,7 @@ module SeedMigrations
     end
 
     def queue_up_migrations
+      @queue = {}
       migration_files.each do |file_name|
         next unless SeedMigration.find_by_filename(file_name).blank?
         @queue[file_name] = instantiate_migration(file_name)
