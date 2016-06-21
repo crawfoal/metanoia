@@ -2,6 +2,7 @@ require 'open3'
 require_relative '../db/populate'
 require_relative 'app_commander'
 
+# :nocov:
 namespace :heroku do
   namespace :db do
     desc "reset the database, seed it, and then fill it with sample data"
@@ -14,3 +15,4 @@ namespace :heroku do
     end
   end
 end
+# :nocov:

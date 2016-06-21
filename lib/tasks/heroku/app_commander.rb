@@ -1,3 +1,4 @@
+# :nocov:
 module Tasks
   module Heroku
     class AppCommander
@@ -39,3 +40,4 @@ module Tasks
     end
   end
 end
+# :nocov:
