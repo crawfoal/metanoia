@@ -30,10 +30,6 @@ module Seedster
     def initialize
     end
 
-    def version
-      ''
-    end
-
     def instantiate_migration
       NullMigration.new
     end
