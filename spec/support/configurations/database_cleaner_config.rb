@@ -2,10 +2,7 @@ require 'database_cleaner'
 
 module DatabaseCleanerHelper
   def self.truncation_except_seeded_tables
-    [
-      :truncation,
-      { except: SeedMigrations.configuration.seeded_tables.map(&:to_s) }
-    ]
+    [:truncation, { except: Seedster.tables }]
   end
 end
 

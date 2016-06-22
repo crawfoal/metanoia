@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "#{Rails.root}/lib/tasks/seed/fixturizer"
+require "#{Rails.root}/lib/fixturizer"
 
 RSpec.describe Fixturizer, type: :concern do
   Climb.include Fixturizer
