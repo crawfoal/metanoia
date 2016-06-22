@@ -11,7 +11,7 @@ module Seedster
     end
 
     delegate :fixture_directory, :root_directory, :migration_directory,
-             to: :@configuration
+             :version_filename, to: :@configuration
 
     def tables
       TableDependencyGraph.new(*@configuration.tables).tsort

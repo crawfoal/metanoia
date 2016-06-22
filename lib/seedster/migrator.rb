@@ -3,6 +3,7 @@ module Seedster
     def initialize(config)
       @root_directory = config.root_directory
       @migration_directory = config.migration_directory
+      @version_filename = config.version_filename
     end
 
     def run_outstanding_migrations
@@ -22,12 +23,8 @@ module Seedster
 
     private
 
-    def version_filename
-      @root_directory + '/db/seeds/seeds_version.rb'
-    end
-
     def current_version
-      @_cv ||= File.file?(version_filename) ? File.read(version_filename) : ''
+      @_cv ||= File.file?(@version_filename) ? File.read(@version_filename) : ''
     end
 
     def migration_files
@@ -42,7 +39,7 @@ module Seedster
     end
 
     def record_version(version)
-      File.write(version_filename, version)
+      File.write(@version_filename, version)
     end
   end
 end

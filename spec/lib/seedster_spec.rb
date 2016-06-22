@@ -6,14 +6,14 @@ RSpec.describe Seedster do
     delete_temporary_files
     Seedster.configure do |config|
       config.tables = [:users]
-      config.root_directory = "#{Rails.root}/tmp"
+      config.root_directory = "#{Rails.root}/tmp/db/seeds"
     end
     copy_all_files from: "#{Rails.root}/spec/tasks/seed/sample_migrations",
                    to: Seedster.migration_directory
   end
 
   let(:version_filename) do
-    Seedster.root_directory + '/db/seeds/seeds_version.rb'
+    Seedster.version_filename
   end
 
   let(:fixture_filename) do
@@ -40,7 +40,7 @@ RSpec.describe Seedster do
     before :each do
       Seedster.configure do |config|
         config.tables = [:grade_systems, :grades, :buckets]
-        config.root_directory = Rails.root.to_s
+        config.root_directory = Rails.root.to_s + '/db/seeds'
       end
     end
 
