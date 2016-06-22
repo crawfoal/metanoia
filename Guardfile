@@ -120,8 +120,8 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
 
   watch("app/models/bucket.rb") do
     [
-      "#{rspec.spec_dir}/tasks/seed/bucket_generator_spec.rb",
-      "#{rspec.spec_dir}/tasks/seed/data/buckets_spec.rb"
+      "#{rspec.spec_dir}/db/seeds/generators/bucket_generator_spec.rb",
+      "#{rspec.spec_dir}/db/seeds/data/buckets_spec.rb"
     ]
   end
 
