@@ -124,4 +124,6 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
       "#{rspec.spec_dir}/tasks/seed/data/buckets_spec.rb"
     ]
   end
+
+  watch(%r(^lib/seedster/.+\.rb$)) { rspec.spec.('lib/seedster') }
 end
