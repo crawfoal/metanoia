@@ -1,5 +1,5 @@
 require 'rails_helper'
-require "#{Rails.root}/lib/tasks/seed/bucket_generator"
+require "#{Rails.root}/db/seeds/generators/bucket_generator"
 
 RSpec.describe BucketGenerator do
   describe '#generate' do

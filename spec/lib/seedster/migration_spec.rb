@@ -4,7 +4,7 @@ require "#{Rails.root}/lib/seedster"
 RSpec.describe Seedster::MigrationFile do
   let(:migration) do
     Seedster::MigrationFile.new(
-      "#{Rails.root}/spec/tasks/seed/sample_migrations/"\
+      "#{Rails.root}/spec/lib/seedster/sample_migrations/"\
       "20160511115239_create_sam.rb"
     )
   end

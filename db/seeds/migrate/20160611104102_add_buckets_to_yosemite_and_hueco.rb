@@ -1,4 +1,4 @@
-require "#{Rails.root}/lib/tasks/seed/bucket_generator"
+require "#{Rails.root}/db/seeds/generators/bucket_generator"
 
 class AddBucketsToYosemiteAndHueco
   def up

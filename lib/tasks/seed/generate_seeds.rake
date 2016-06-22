@@ -1,9 +1,9 @@
-require_relative 'seed_migrations'
+require "#{Rails.root}/lib/seedster"
 
 namespace :seed do
   desc 'generates the yaml seed files based on the current state of the '\
        'seeded tables in the database'
-  task generate_seed_files: :environment do
-    SeedMigrations.regenerate_yaml_seed_files
+  task generate_seeds: :environment do
+    Seedster.generate_seeds
   end
 end

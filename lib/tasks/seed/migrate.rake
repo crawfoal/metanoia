@@ -1,9 +1,8 @@
-require_relative 'seed_migrations'
+require "#{Rails.root}/lib/seedster"
 
 namespace :seed do
   desc 'run outstanding migrations, and regenerate the seed data files'
   task migrate: :environment do
-    SeedMigrations.run_outstanding_migrations
-    SeedMigrations.regenerate_yaml_seed_files
+    Seedster.migrate
   end
 end

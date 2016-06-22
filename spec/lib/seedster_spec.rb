@@ -5,10 +5,11 @@ RSpec.describe Seedster do
   before :each do
     delete_temporary_files
     Seedster.configure do |config|
-      config.tables = [:users]
-      config.root_directory = "#{Rails.root}/tmp/db/seeds"
+      allow(config).to receive(:tables).and_return([:users])
+      allow(config).to receive(:root_directory).and_return(
+        "#{Rails.root}/tmp/db/seeds")
     end
-    copy_all_files from: "#{Rails.root}/spec/tasks/seed/sample_migrations",
+    copy_all_files from: "#{Rails.root}/spec/lib/seedster/sample_migrations",
                    to: Seedster.migration_directory
   end
 
@@ -23,7 +24,7 @@ RSpec.describe Seedster do
   describe '.tables' do
     before :each do
       Seedster.configure do |config|
-        config.tables = [:grade_systems, :grades, :buckets]
+        allow(config).to receive(:tables).and_call_original
       end
     end
 
@@ -39,8 +40,8 @@ RSpec.describe Seedster do
   describe '.fill_tables' do
     before :each do
       Seedster.configure do |config|
-        config.tables = [:grade_systems, :grades, :buckets]
-        config.root_directory = Rails.root.to_s + '/db/seeds'
+        allow(config).to receive(:tables).and_call_original
+        allow(config).to receive(:root_directory).and_call_original
       end
     end
 
