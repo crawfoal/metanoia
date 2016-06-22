@@ -21,12 +21,22 @@ module Seedster
       ActiveRecord::FixtureSet.create_fixtures(fixture_directory, tables)
     end
 
-    def run_outstanding_migrations
+    def migrate
       Migrator.new(@configuration).run_outstanding_migrations
+      generate_seeds
     end
 
-    def rollback_one_migration
+    def rollback
       Migrator.new(@configuration).rollback_one_migration
+      generate_seeds
+    end
+
+    def generate_seeds
+      tables.each do |table_name|
+        klass = table_name.to_s.singularize.classify.constantize
+        klass.include Fixturizer
+        klass.export_fixtures into: fixture_directory
+      end
     end
   end
 end

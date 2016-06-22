@@ -16,6 +16,10 @@ RSpec.describe Seedster do
     Seedster.root_directory + '/db/seeds/seeds_version.rb'
   end
 
+  let(:fixture_filename) do
+    Seedster.fixture_directory + '/users.yml'
+  end
+
   describe '.tables' do
     before :each do
       Seedster.configure do |config|
@@ -48,28 +52,38 @@ RSpec.describe Seedster do
     end
   end
 
-  describe '.rollback_one_migration' do
+  describe '.rollback' do
     it 'reverts the most recent migration if there is a version file' do
-      Seedster.run_outstanding_migrations
-      Seedster.rollback_one_migration
+      Seedster.migrate
+      Seedster.rollback
       expect(User.find_by_email('sam@example.com')).to_not be_present
       expect(User.find_by_email('amanda@example.com')).to be_present
       expect(User.find_by_email('tj@example.com')).to_not be_present
     end
 
     it 'does nothing if there is no version file' do
-      expect { Seedster.rollback_one_migration }.to_not \
+      expect { Seedster.rollback }.to_not \
         change { User.count }.from(0)
+    end
+
+    it 'updates the seeds' do
+      Seedster.migrate
+      expect { Seedster.rollback }.to change { File.read(fixture_filename) }
     end
   end
 
-  describe '.regenerate_yaml_seed_files' do
-    it 'rebuilds the yaml seed files using the data currently in the tables'
+  describe '.generate_seeds' do
+    it 'builds the yaml seed files using the data currently in the tables' do
+      user = create :user
+      expect { Seedster.generate_seeds }.to \
+        change { File.file? fixture_filename }
+      expect(File.read(fixture_filename)).to eq User.to_fixtures
+    end
   end
 
-  describe '.run_outstanding_migrations' do
+  describe '.migrate' do
     it 'runs all migrations when there is no version file' do
-      Seedster.run_outstanding_migrations
+      Seedster.migrate
       expect(User.find_by_email('sam@example.com')).to_not be_present
       expect(User.find_by_email('amanda@example.com')).to be_present
       expect(User.find_by_email('tj@example.com')).to be_present
@@ -77,21 +91,26 @@ RSpec.describe Seedster do
 
     it 'runs only outstanding migrations when there is a version file' do
       File.write(version_filename, '20170511115239')
-      Seedster.run_outstanding_migrations
+      Seedster.migrate
       expect(User.find_by_email('sam@example.com')).to_not be_present
       expect(User.find_by_email('amanda@example.com')).to_not be_present
       expect(User.find_by_email('tj@example.com')).to be_present
     end
 
     it 'saves the current version to a file' do
-      Seedster.run_outstanding_migrations
+      Seedster.migrate
       expect(File.read(version_filename)).to eq '20180511115239'
     end
 
     it 'does not modify the current version if no migrations were run' do
       File.write(version_filename, '20180511115239')
-      Seedster.run_outstanding_migrations
+      Seedster.migrate
       expect(File.read(version_filename)).to eq '20180511115239'
+    end
+
+    it 'saves the seeded tables to YAML files' do
+      expect { Seedster.migrate }.to \
+        change { File.file? fixture_filename }.to(true)
     end
   end
 end
