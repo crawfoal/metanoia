@@ -1,5 +1,5 @@
 module Seedster
-  class Migration
+  class MigrationFile
     def initialize(filename)
       @filename = filename
     end
@@ -8,7 +8,7 @@ module Seedster
       parse_file_name.first
     end
 
-    def instantiate
+    def instantiate_migration
       require @filename
       class_name.constantize.new
     end
@@ -23,6 +23,27 @@ module Seedster
 
     def class_name
       parse_file_name.last
+    end
+  end
+
+  class NullMigrationFile
+    def initialize
+    end
+
+    def version
+      ''
+    end
+
+    def instantiate_migration
+      NullMigration.new
+    end
+  end
+
+  class NullMigration
+    def up
+    end
+
+    def down
     end
   end
 end

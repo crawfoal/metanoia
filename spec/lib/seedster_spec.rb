@@ -12,6 +12,10 @@ RSpec.describe Seedster do
                    to: Seedster.migration_directory
   end
 
+  let(:version_filename) do
+    Seedster.root_directory + '/db/seeds/seeds_version.rb'
+  end
+
   describe '.tables' do
     before :each do
       Seedster.configure do |config|
@@ -45,7 +49,18 @@ RSpec.describe Seedster do
   end
 
   describe '.rollback_one_migration' do
-    it 'reverts the most recent migration'
+    it 'reverts the most recent migration if there is a version file' do
+      Seedster.run_outstanding_migrations
+      Seedster.rollback_one_migration
+      expect(User.find_by_email('sam@example.com')).to_not be_present
+      expect(User.find_by_email('amanda@example.com')).to be_present
+      expect(User.find_by_email('tj@example.com')).to_not be_present
+    end
+
+    it 'does nothing if there is no version file' do
+      expect { Seedster.rollback_one_migration }.to_not \
+        change { User.count }.from(0)
+    end
   end
 
   describe '.regenerate_yaml_seed_files' do
@@ -61,12 +76,22 @@ RSpec.describe Seedster do
     end
 
     it 'runs only outstanding migrations when there is a version file' do
-      version_filename = Seedster.root_directory + '/db/seeds/seeds_version.rb'
       File.write(version_filename, '20170511115239')
       Seedster.run_outstanding_migrations
       expect(User.find_by_email('sam@example.com')).to_not be_present
       expect(User.find_by_email('amanda@example.com')).to_not be_present
       expect(User.find_by_email('tj@example.com')).to be_present
+    end
+
+    it 'saves the current version to a file' do
+      Seedster.run_outstanding_migrations
+      expect(File.read(version_filename)).to eq '20180511115239'
+    end
+
+    it 'does not modify the current version if no migrations were run' do
+      File.write(version_filename, '20180511115239')
+      Seedster.run_outstanding_migrations
+      expect(File.read(version_filename)).to eq '20180511115239'
     end
   end
 end

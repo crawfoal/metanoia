@@ -1,6 +1,6 @@
 require_relative "seedster/configuration"
 require_relative "seedster/migrator"
-require_relative "seedster/migration"
+require_relative "seedster/migration_file"
 require "#{Rails.root}/lib/table_dependency_graph"
 
 module Seedster
@@ -23,6 +23,10 @@ module Seedster
 
     def run_outstanding_migrations
       Migrator.new(@configuration).run_outstanding_migrations
+    end
+
+    def rollback_one_migration
+      Migrator.new(@configuration).rollback_one_migration
     end
   end
 end
