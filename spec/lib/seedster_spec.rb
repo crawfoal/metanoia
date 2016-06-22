@@ -75,7 +75,7 @@ RSpec.describe Seedster do
 
   describe '.generate_seeds' do
     it 'builds the yaml seed files using the data currently in the tables' do
-      user = create :user
+      create :user
       expect { Seedster.generate_seeds }.to \
         change { File.file? fixture_filename }
       expect(File.read(fixture_filename)).to eq User.to_fixtures

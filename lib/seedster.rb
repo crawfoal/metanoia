@@ -1,6 +1,6 @@
-require_relative "seedster/configuration"
-require_relative "seedster/migrator"
-require_relative "seedster/migration_file"
+require_relative 'seedster/configuration'
+require_relative 'seedster/migrator'
+require_relative 'seedster/migration_file'
 require "#{Rails.root}/lib/table_dependency_graph"
 require "#{Rails.root}/lib/fixturizer"
 require 'active_record/fixtures'
