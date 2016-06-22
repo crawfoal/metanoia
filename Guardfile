@@ -117,4 +117,13 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   watch("app/views/layouts/_navbar.html.haml") do
     "#{rspec.spec_dir}/features/home_spec.rb"
   end
+
+  watch("app/models/bucket.rb") do
+    [
+      "#{rspec.spec_dir}/db/seeds/generators/bucket_generator_spec.rb",
+      "#{rspec.spec_dir}/db/seeds/data/buckets_spec.rb"
+    ]
+  end
+
+  watch(%r(^lib/seedster/.+\.rb$)) { rspec.spec.('lib/seedster') }
 end

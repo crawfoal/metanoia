@@ -34,6 +34,10 @@ gem 'font-awesome-rails'
 gem 'bourbon'
 # Neat is a grid framework built with Bourbon
 gem 'neat'
+# Use chartkick to interface with GoogleCharts so that we can make HTML5/SVG
+# graphs to visualize data (e.g. how many climbs of each grade does this gym
+# have?)
+gem "chartkick"
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -52,6 +56,10 @@ gem 'pundit'
 gem 'faker'
 # Use Factory Girl to create test data (and sample data)
 gem 'factory_girl_rails'
+
+# Use table_print to easily print data in the Rails console, formated like a
+# table
+gem 'table_print'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

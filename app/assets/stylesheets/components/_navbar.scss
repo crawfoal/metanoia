@@ -1,9 +1,12 @@
 nav {
   $background-color: $secondary-background-color;
-  $font-color: $base-font-color;
   $divider-border: 2px solid darken($background-color, 10%);
+  $font-color: $base-font-color;
+  $font-hover-color: tint($font-color, 25%);
   $font-size: 1rem;
   $line-height: 4rem;
+  $logo-color: $accent-color;
+  $logo-hover-color: $accent-color-light;
   $padding: 1rem;
 
   background-color: $background-color;
@@ -12,7 +15,6 @@ nav {
   @include clearfix;
 
   li {
-    color: $font-color;
     display: block;
     padding: 0 $padding;
 
@@ -30,9 +32,16 @@ nav {
   }
 
   a {
+    color: $font-color;
     display: inline-block;
     line-height: $line-height;
     vertical-align: middle;
+
+    &:active,
+    &:focus,
+    &:hover {
+      color: $font-hover-color;
+    }
   }
 
   #collapsable_content {
@@ -45,7 +54,7 @@ nav {
   }
 
   .logo {
-    color: $accent-color;
+    color: $logo-color;
     float: left;
     font-size: 2 * $font-size;
     padding: 0 $padding;
@@ -53,7 +62,7 @@ nav {
     &:active,
     &:focus,
     &:hover {
-      color: $light-font-color;
+      color: $logo-hover-color;
     }
 
     .fa {

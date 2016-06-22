@@ -1,29 +1,9 @@
-require 'rails_helper'
-require 'rake'
-
-top_level = self
+require 'task_helper'
 
 RSpec.describe 'db:populate', type: :task do
   before :all do
-    Rake.application.rake_require 'tasks/db/populate'
-    Rake::Task.define_task(:environment)
-    Rake::Task.define_task(:protected)
-    Rake::Task.define_task('db:reset') # don't actually reset the db during test
-  end
-
-  before :all do
-    # We have to use truncation to clean up because DatabaseCleaner doesn't
-    # supported nested transactions. If we open a transaction here and then
-    # also for each example, it will rollback *both* open transactions after
-    # the first example is run, and then the rest of the examples will fail.
-    #
-    # The strategy is set right before we clean in the `after :all` hook
-    # because DatabaseCleaner only holds the current strategy, and the
-    # examples below are still using the transaction strategy to go back to
-    # the state right after the data was populated.
-    Rake::Task['db:populate'].reenable
-    Rake::Task['db:fill'].reenable
-    Rake.application.invoke_task 'db:populate'
+    Rake::Task['db:fill'].reenable # prerequisite for db:populate
+    run_rake_task 'db:populate'
   end
 
   it 'creates the four gyms we have factories for, plus the sample gym' do

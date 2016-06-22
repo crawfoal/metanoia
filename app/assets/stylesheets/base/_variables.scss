@@ -60,7 +60,7 @@ $base-font-color: $dark-gray;
 $light-font-color: white;
 $action-color: $pewter;
 $action-color-dark: darken($action-color, 13%);
-$action-color-light: lighten($pewter, 10%);
+$action-color-light: lighten($action-color, 10%);
 $accent-color: $lemon-tea;
 $accent-color-light: lighten($accent-color, 20%);
 $subtle-accent-color: $oyster;
