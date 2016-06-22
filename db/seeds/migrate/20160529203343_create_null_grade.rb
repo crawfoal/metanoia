@@ -3,7 +3,7 @@ class CreateNullGrade
     null_grade_system = GradeSystem.create!(
       name: 'Null Grade System'
     )
-    null_grade = Grade.create!(
+    Grade.create!(
       name: '?',
       grade_system: null_grade_system,
       sequence_number: -1

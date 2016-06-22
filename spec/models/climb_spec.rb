@@ -31,7 +31,7 @@ RSpec.describe Climb, type: :model do
        section.climbs << build(:climb)
        section.save!
        expect(Section.count).to eq 1
-     end
+    end
   end
 
   context 'no grade is specified for the climb' do

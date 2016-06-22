@@ -3,7 +3,7 @@ FactoryGirl.define do
     with_name
 
     transient do
-      section_names (1..Faker::Number.between(4, 9)).map { |num| "Section #{num}" }
+      section_names((1..Faker::Number.between(4, 9)).map { |num| "Section #{num}" })
       climb_factory nil
     end
 
