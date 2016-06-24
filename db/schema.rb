@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160622142238) do
+ActiveRecord::Schema.define(version: 20160624115102) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -45,11 +45,12 @@ ActiveRecord::Schema.define(version: 20160622142238) do
 
   create_table "climbs", force: :cascade do |t|
     t.integer  "color"
-    t.string   "type",                     null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.integer  "section_id",               null: false
-    t.integer  "grade_id",   default: 111, null: false
+    t.string   "type",                        null: false
+    t.datetime "created_at",                  null: false
+    t.datetime "updated_at",                  null: false
+    t.integer  "section_id",                  null: false
+    t.integer  "grade_id",      default: 111, null: false
+    t.datetime "teardown_date"
   end
 
   add_index "climbs", ["grade_id"], name: "index_climbs_on_grade_id", using: :btree

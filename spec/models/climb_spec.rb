@@ -14,6 +14,15 @@ RSpec.describe Climb, type: :model do
     ])
   end
 
+  describe '.active' do
+    it 'returns only climbs that have no teardown date, or have one in the future' do
+      climb = create :climb
+      old_climb = create :climb, :not_active
+      expect(Climb.active.ids).to include climb.id
+      expect(Climb.active.ids).to_not include old_climb.id
+    end
+  end
+
   describe '.color_name_for' do
     it 'returns the name of the color for the given hex code' do
       expect(Climb.color_name_for('#ec407a')).to eq 'pink'

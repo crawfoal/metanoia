@@ -96,6 +96,14 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   # folder that has the specs)
   watch(%r(^spec/((?!support).+)/.+/.+(?<!spec)\.rb$)) { |m| "spec/#{m[1]}" }
 
+  # Javascript Files
+  watch(%r(^app/assets/javascripts/[^/]+\.(coffee|js)$)) do
+    "#{rspec.spec_dir}/features"
+  end
+  watch("app/assets/javascripts/pages/sections/show.coffee") do
+    rspec.spec.('features/setters/reset')
+  end
+
   # ----------------------------------------------------------------------------
   # App Specific Patterns
   # ----------------------------------------------------------------------------
@@ -112,6 +120,14 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
         rspec.spec.('features/climbs')
       ]
     end
+  end
+
+  section_reset_files = [
+    'app/views/sections/_show.html.haml',
+    'app/controllers/climbs_controller.rb',
+    'app/views/climbs/update.js.coffee'
+  ].each do |file_to_watch|
+    rspec.spec.('features/setters/reset')
   end
 
   watch("app/views/layouts/_navbar.html.haml") do

@@ -45,6 +45,10 @@ RSpec.describe 'db:populate', type: :task do
     expect(User.with_role(:admin).count).to be > 0
   end
 
+  it 'creates a few setters' do
+    expect(User.with_role(:setter).count).to be > 0
+  end
+
   it 'creates a user with both admin and athlete roles' do
     expect((User.with_role(:admin) & User.with_role(:athlete)).count).to be > 0
   end

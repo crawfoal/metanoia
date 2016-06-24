@@ -7,6 +7,10 @@ FactoryGirl.define do
     "admin#{n}@example.com"
   end
 
+  sequence :setter_email do |n|
+    "setter#{n}@example.com"
+  end
+
   factory :user do
     email { generate :email }
     password 'password'
@@ -25,6 +29,14 @@ FactoryGirl.define do
 
       after :build do |user|
         user.add_role :athlete
+      end
+    end
+
+    factory :setter do
+      email { generate :setter_email }
+
+      after :build do |user|
+        user.add_role :setter
       end
     end
   end

@@ -4,7 +4,7 @@ RSpec.describe User, type: :model do
   it { should have_one :athlete_story }
 
   describe '#add_role' do
-    it 'assigns the role to the user (smoke test for Rolify)' do
+    it 'assigns the role to the user' do
       user = create :user
       user.add_role :admin
       user.reload

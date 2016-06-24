@@ -7,7 +7,7 @@ RSpec.feature 'Climbs', type: :feature, js: true do
       :with_name,
       section_names: ['Section 1']
     )
-    stubbed_sign_in create(:admin)
+    stubbed_sign_in create(:setter)
 
     visit gyms_path
     click_on gym.name

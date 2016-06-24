@@ -16,5 +16,6 @@
 //= require init
 //= require screen_query
 //= require paginator
+//= require section_stripper
 //= require chartkick
 //= require_tree .

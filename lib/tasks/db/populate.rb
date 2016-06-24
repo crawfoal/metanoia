@@ -16,6 +16,7 @@ module Tasks
 
           FactoryGirl.create_list(:admin, 3)
           FactoryGirl.create_list(:athlete, 3)
+          FactoryGirl.create_list(:setter, 3)
         end
 
         def fill_database
