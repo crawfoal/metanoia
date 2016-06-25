@@ -126,7 +126,8 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
     'app/views/sections/_show.html.haml',
     'app/controllers/climbs_controller.rb',
     'app/views/climbs/update.js.coffee'
-  ].each do |file_to_watch|
+  ]
+  section_reset_files.each do
     rspec.spec.('features/setters/reset')
   end
 
