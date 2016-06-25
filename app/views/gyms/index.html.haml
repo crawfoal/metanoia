@@ -6,7 +6,8 @@
       %td
         = link_to gym.name, gym
       %td
-        = fa_icon 'minus'
+        -# TODO: only show for admins and managers
+        = link_to 'Employee List', gym_employees_path(gym)
 
 - if GymPolicy.new(current_user, Gym).new?
   = link_to 'Create a New Gym', new_gym_path, id: 'new_gym'
