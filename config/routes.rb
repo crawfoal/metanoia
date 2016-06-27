@@ -23,6 +23,7 @@ Rails.application.routes.draw do
 
   resources :gyms, except: :destroy do
     resources :employees, only: [:index]
+    resources :employments, only: [:create]
   end
   resources :sections, only: [:new, :show] do
     resources :climbs, only: [:new, :create, :update]
