@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe GymForm do
+  it { should implement_form_interface }
+
   describe '#initialize' do
     context 'when given no arguments' do
       it 'builds a new gym with one section' do
