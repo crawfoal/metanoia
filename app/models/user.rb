@@ -5,6 +5,8 @@ class User < ActiveRecord::Base
     set_current_role_if_not_defined(role)
     if role.name == 'athlete'
       persisted? ? create_athlete_story : build_athlete_story
+    elsif role.name == 'setter'
+      persisted? ? create_setter_story : build_setter_story
     end
   end
 
@@ -22,4 +24,5 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable
 
   has_one :athlete_story
+  has_one :setter_story
 end

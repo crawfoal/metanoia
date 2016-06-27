@@ -3,3 +3,8 @@
 %table
   %tr
     %th Email
+    %th Role
+  - @gym.employments.each do |employment|
+    %tr
+      %td= employment.user.email
+      %td= employment.role_story_type.underscore.split('_').first

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160624115102) do
+ActiveRecord::Schema.define(version: 20160626024837) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -55,6 +55,17 @@ ActiveRecord::Schema.define(version: 20160624115102) do
 
   add_index "climbs", ["grade_id"], name: "index_climbs_on_grade_id", using: :btree
   add_index "climbs", ["section_id"], name: "index_climbs_on_section_id", using: :btree
+
+  create_table "employments", force: :cascade do |t|
+    t.integer  "gym_id"
+    t.integer  "role_story_id"
+    t.string   "role_story_type"
+    t.datetime "created_at",      null: false
+    t.datetime "updated_at",      null: false
+  end
+
+  add_index "employments", ["gym_id"], name: "index_employments_on_gym_id", using: :btree
+  add_index "employments", ["role_story_type", "role_story_id"], name: "index_employments_on_role_story_type_and_role_story_id", using: :btree
 
   create_table "grade_systems", force: :cascade do |t|
     t.string   "name",       null: false
@@ -115,6 +126,14 @@ ActiveRecord::Schema.define(version: 20160624115102) do
 
   add_index "sections", ["gym_id"], name: "index_sections_on_gym_id", using: :btree
 
+  create_table "setter_stories", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "setter_stories", ["user_id"], name: "index_setter_stories_on_user_id", using: :btree
+
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
     t.string   "encrypted_password",     default: "", null: false
@@ -147,6 +166,7 @@ ActiveRecord::Schema.define(version: 20160624115102) do
   add_foreign_key "climb_logs", "climbs"
   add_foreign_key "climbs", "grades"
   add_foreign_key "climbs", "sections"
+  add_foreign_key "employments", "gyms"
   add_foreign_key "grades", "buckets"
   add_foreign_key "grades", "grade_systems"
   add_foreign_key "gyms", "grade_systems", column: "boulder_grade_system_id"
@@ -154,4 +174,5 @@ ActiveRecord::Schema.define(version: 20160624115102) do
   add_foreign_key "memberships", "athlete_stories"
   add_foreign_key "memberships", "gyms"
   add_foreign_key "sections", "gyms"
+  add_foreign_key "setter_stories", "users"
 end
