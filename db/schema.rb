@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160626024837) do
+ActiveRecord::Schema.define(version: 20160628174114) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -96,6 +96,14 @@ ActiveRecord::Schema.define(version: 20160626024837) do
   add_index "gyms", ["boulder_grade_system_id"], name: "index_gyms_on_boulder_grade_system_id", using: :btree
   add_index "gyms", ["route_grade_system_id"], name: "index_gyms_on_route_grade_system_id", using: :btree
 
+  create_table "manager_stories", force: :cascade do |t|
+    t.integer  "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "manager_stories", ["user_id"], name: "index_manager_stories_on_user_id", using: :btree
+
   create_table "memberships", force: :cascade do |t|
     t.integer  "athlete_story_id"
     t.integer  "gym_id"
@@ -171,6 +179,7 @@ ActiveRecord::Schema.define(version: 20160626024837) do
   add_foreign_key "grades", "grade_systems"
   add_foreign_key "gyms", "grade_systems", column: "boulder_grade_system_id"
   add_foreign_key "gyms", "grade_systems", column: "route_grade_system_id"
+  add_foreign_key "manager_stories", "users"
   add_foreign_key "memberships", "athlete_stories"
   add_foreign_key "memberships", "gyms"
   add_foreign_key "sections", "gyms"

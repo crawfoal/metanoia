@@ -6,7 +6,7 @@ RSpec.describe Employment, type: :model do
 
   describe '::ROLES' do
     it 'includes all roles that can be chosen for the employment' do
-      expect(Employment::ROLES).to include :setter
+      expect(Employment::ROLES).to include :setter, :manager
     end
   end
 

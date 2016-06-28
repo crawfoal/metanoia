@@ -3,19 +3,7 @@ class User < ActiveRecord::Base
 
   def rolify_after_add(role)
     set_current_role_if_not_defined(role)
-    if role.name == 'athlete'
-      persisted? ? create_athlete_story : build_athlete_story
-    elsif role.name == 'setter'
-      persisted? ? create_setter_story : build_setter_story
-    end
-  end
-
-  def set_current_role_if_not_defined(role)
-    unless current_role
-      self.current_role = role.name
-      save
-    end
-    self.current_role ||= role.name
+    build_or_create_story(role.name)
   end
 
   # Include default devise modules. Others available are:
@@ -25,4 +13,23 @@ class User < ActiveRecord::Base
 
   has_one :athlete_story
   has_one :setter_story
+  has_one :manager_story
+
+  private
+
+  def set_current_role_if_not_defined(role)
+    unless current_role
+      self.current_role = role.name
+      save
+    end
+    self.current_role ||= role.name
+  end
+
+  def build_or_create_story(role_name)
+    if persisted?
+      try("create_#{role_name}_story")
+    else
+      try("build_#{role_name}_story")
+    end
+  end
 end

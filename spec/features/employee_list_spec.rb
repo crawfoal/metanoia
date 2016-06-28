@@ -5,11 +5,15 @@ RSpec.feature 'Employee List', type: :feature, js: true do
     expect(page).to have_selector 'tr', text: /#{employee.email}(.*)#{with_role}/
   end
 
-  scenario 'admin or manager views employee list and adds a new one' do
-    gym = create :tiny_route_gym
+  before :each do
+    stubbed_sign_in create(:admin)
+  end
+
+  let(:gym) { create :tiny_route_gym }
+
+  scenario 'admin or manager views employee list and adds a new setter' do
     setter = create :setter
     gym.employments.create(role_story: setter.setter_story)
-    stubbed_sign_in create(:admin)
 
     visit gyms_path
     click_on 'Employee List'
@@ -26,5 +30,15 @@ RSpec.feature 'Employee List', type: :feature, js: true do
     page_should_show new_setter, with_role: :setter
     expect(page).to_not have_field "Employee's Email", with: new_setter.email
     expect(page).to_not have_select 'Role', selected: 'setter'
+  end
+
+  scenario 'admin or manager adds a new manager' do
+    visit gym_employments_path(gym)
+    new_manager = create :manager
+    fill_in "Employee's Email", with: new_manager.email
+    select 'manager', from: 'Role'
+    click_on 'Add'
+
+    page_should_show new_manager, with_role: :manager
   end
 end

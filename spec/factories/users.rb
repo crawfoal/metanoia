@@ -1,14 +1,14 @@
 FactoryGirl.define do
+  ROLE_NAMES = [:admin, :athlete, :setter, :manager]
+
   sequence :email do |n|
     "user#{n}@example.com"
   end
 
-  sequence :admin_email do |n|
-    "admin#{n}@example.com"
-  end
-
-  sequence :setter_email do |n|
-    "setter#{n}@example.com"
+  ROLE_NAMES.each do |role_name|
+    sequence "#{role_name}_email".to_sym do |n|
+      "#{role_name}#{n}@example.com"
+    end
   end
 
   factory :user do
@@ -16,27 +16,13 @@ FactoryGirl.define do
     password 'password'
     password_confirmation { password }
 
-    factory :admin do
-      email { generate :admin_email }
+    ROLE_NAMES.each do |role_name|
+      factory role_name do
+        email { generate "#{role_name}_email".to_sym }
 
-      after :build do |user|
-        user.add_role :admin
-      end
-    end
-
-    factory :athlete do
-      email { generate :email }
-
-      after :build do |user|
-        user.add_role :athlete
-      end
-    end
-
-    factory :setter do
-      email { generate :setter_email }
-
-      after :build do |user|
-        user.add_role :setter
+        after :build do |user|
+          user.add_role role_name
+        end
       end
     end
   end

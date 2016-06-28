@@ -4,5 +4,5 @@ class Employment < ActiveRecord::Base
 
   delegate :user, to: :role_story, allow_nil: true
 
-  ROLES = [:setter]
+  ROLES = [:setter, :manager]
 end

@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe User, type: :model do
   it { should have_one :athlete_story }
   it { should have_one :setter_story }
+  it { should have_one :manager_story }
 
   describe '#add_role' do
     it 'assigns the role to the user' do
@@ -26,18 +27,9 @@ RSpec.describe User, type: :model do
       expect(user.current_role).to eq 'admin'
     end
 
-    context 'the role is :athlete' do
-      it 'creates an associated athlete_story record' do
-        user = create :athlete
-        expect(user.athlete_story).to be_present
-      end
-    end
-
-    context 'the role is :setter' do
-      it 'creates an associated setter_story record' do
-        user = create :setter
-        expect(user.setter_story).to be_present
-      end
+    it 'creates an associated story record' do
+      user = create :athlete
+      expect(user.athlete_story).to be_present
     end
   end
 end
