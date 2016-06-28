@@ -1,5 +1,5 @@
-= form_for [:gym, employment], remote: true do |f|
-  = render partial: 'shared/error_messages', locals: {target: employment}
+= form_for [:gym, employment_form], remote: true do |f|
+  = render partial: 'shared/error_messages', locals: {target: employment_form}
 
   = f.label :email, "Employee's Email"
   = f.email_field :email
