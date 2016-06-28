@@ -1,0 +1,10 @@
+= form_for [:gym, employment], remote: true do |f|
+  = render partial: 'shared/error_messages', locals: {target: employment}
+
+  = f.label :email, "Employee's Email"
+  = f.email_field :email
+
+  = f.label :role_name, 'Role'
+  = f.select :role_name, Employment::ROLES, include_blank: true
+
+  = f.submit 'Add'
