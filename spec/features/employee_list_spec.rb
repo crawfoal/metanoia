@@ -18,11 +18,13 @@ RSpec.feature 'Employee List', type: :feature, js: true do
     page_should_show setter, with_role: :setter
 
     new_setter = build :setter
-    fill_in 'Email', with: new_setter.email
-    select 'setter', from: 'employment_role_name'
+    fill_in "Employee's Email", with: new_setter.email
+    select 'setter', from: 'Role'
     click_on 'Add'
 
     expect(page).to show_flash_with 'New setter successfully added!'
     page_should_show new_setter, with_role: :setter
+    expect(page).to_not have_field "Employee's Email", with: new_setter.email
+    expect(page).to_not have_select 'Role', selected: 'setter'
   end
 end

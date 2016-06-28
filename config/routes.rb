@@ -22,8 +22,7 @@ Rails.application.routes.draw do
   end
 
   resources :gyms, except: :destroy do
-    resources :employees, only: [:index]
-    resources :employments, only: [:create]
+    resources :employments, path: 'employees', only: [:index, :create]
   end
   resources :sections, only: [:new, :show] do
     resources :climbs, only: [:new, :create, :update]

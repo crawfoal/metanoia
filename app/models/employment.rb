@@ -22,7 +22,7 @@ class Employment < ActiveRecord::Base
 
   def associate_user
     return unless email.present? && role_name.present?
-    return unless email_changed? || role_name_changed?
+    return unless role_story.blank? || (email_changed? || role_name_changed?)
     self.role_story = User.find_by_email(email).send("#{role_name}_story")
   end
 
