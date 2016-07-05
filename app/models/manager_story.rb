@@ -1,4 +1,4 @@
 class ManagerStory < ActiveRecord::Base
+  include Employable
   belongs_to :user
-  has_many :employments, as: :role_story
 end

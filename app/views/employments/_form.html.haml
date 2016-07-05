@@ -5,6 +5,6 @@
   = f.email_field :email
 
   = f.label :role_name, 'Role'
-  = f.select :role_name, Employment::ROLES, include_blank: true
+  = f.select :role_name, Employment.roles, include_blank: true
 
   = f.submit 'Add'

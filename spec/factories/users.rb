@@ -20,7 +20,7 @@ FactoryGirl.define do
       employed_at nil # only supports one place of employment for now
       employment_role_stories do
         roles.pluck(:name).keep_if do |role_name|
-          Employment::ROLES.include? role_name.to_sym
+          Employment.roles.include? role_name.to_sym
         end.map do |role_name|
           send("#{role_name.underscore}_story")
         end

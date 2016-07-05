@@ -4,9 +4,9 @@ RSpec.describe Employment, type: :model do
   it { should belong_to :gym }
   it { should belong_to :role_story }
 
-  describe '::ROLES' do
+  describe '.roles' do
     it 'includes all roles that can be chosen for the employment' do
-      expect(Employment::ROLES).to include :setter, :manager
+      expect(Employment.roles).to include :setter, :manager
     end
   end
 
