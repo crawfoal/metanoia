@@ -17,7 +17,7 @@ RSpec.feature 'Employee List', type: :feature, js: true do
     stubbed_sign_in create(:admin)
   end
 
-  let(:gym) { create :tiny_route_gym }
+  let(:gym) { create :gym }
 
   scenario 'admin or manager views employee list and adds a new setter' do
     setter = create :setter

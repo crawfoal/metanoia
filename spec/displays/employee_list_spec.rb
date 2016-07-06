@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe EmployeeList do
-  let(:gym) { create :tiny_route_gym }
+  let(:gym) { create :gym }
   let(:employee_list) { EmployeeList.new(gym) }
 
   describe '#gym_name' do
