@@ -18,4 +18,13 @@ RSpec.describe Employment, type: :model do
       expect(employment.user).to eq setter
     end
   end
+
+  describe '#role_name' do
+    it 'returns the name of the role that is associated to the employment record' do
+      setter = create :setter
+      gym = create :tiny_route_gym
+      employment = gym.employments.create(role_story: setter.setter_story)
+      expect(employment.role_name).to eq 'setter'
+    end
+  end
 end

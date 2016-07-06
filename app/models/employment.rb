@@ -5,4 +5,7 @@ class Employment < ActiveRecord::Base
   delegate :user, to: :role_story, allow_nil: true
   class << self; attr_accessor :roles; end
   @roles = []
+  def role_name
+    role_story_type.underscore.split('_story').first
+  end
 end

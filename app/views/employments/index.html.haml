@@ -1,10 +1,10 @@
-%h1= "#{@gym.name} Employees"
+%h1= "#{@employee_list.gym_name} Employees"
 
 %table
   %tr
     %th Email
     %th Role
-  = render partial: 'table_row', collection: @gym.employments, as: :employment
+  = render partial: 'employee', collection: @employee_list.employees
 
 %h2 Add New Employee
 = render partial: 'form', locals: { employment_form: @employment_form }
