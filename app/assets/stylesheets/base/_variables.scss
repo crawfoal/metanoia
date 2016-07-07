@@ -71,15 +71,17 @@ $secondary-background-color: $linen;
 $emphasis-background-color: $oyster;
 
 // Border
+$base-border-width: 1px;
 $base-border-color: $action-color-light;
-$base-border: 1px solid $base-border-color;
+$base-border: $base-border-width solid $base-border-color;
 $secondary-border-color: darken($secondary-background-color, 15%);
-$secondary-border: 1px solid $secondary-border-color;
-$dark-border: 1px solid $base-font-color;
+$secondary-border: $base-border-width solid $secondary-border-color;
+$dark-border: $base-border-width solid $base-font-color;
 
 // Forms
 $form-box-shadow: inset 0 1px 3px rgba(#000, 0.06);
 $form-box-shadow-focus: $form-box-shadow, 0 0 5px adjust-color($action-color, $lightness: -5%, $alpha: -0.3);
+$base-input-height: $base-line-height + 2 * ( $base-border-width / $absolute-base-font-size + $small-spacing );
 
 // Animations
 $base-duration: 150ms;

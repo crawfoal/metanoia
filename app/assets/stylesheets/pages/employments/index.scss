@@ -60,11 +60,6 @@ form.new_employment {
     width: 100%;
   }
 
-  select {
-    height: $base-font-size;
-    line-height: $base-font-size;
-  }
-
   @include media($medium-screen) {
     @include display(flex);
     @include flex-wrap(wrap);
