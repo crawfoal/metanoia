@@ -2,13 +2,13 @@ require 'feature_helper'
 
 RSpec.feature 'Employee List', type: :feature, js: true do
   def page_should_show(employee, with_role: nil)
-    expect(page).to have_selector 'tr', text: /#{employee.email}#{role_regex(with_role)}/
+    expect(page).to have_content /#{employee.email}#{role_regex(with_role)}/
   end
 
   def role_regex(role_names)
     _role_names = Array(role_names)
     regex = _role_names.reduce('(') do |regex, role_name|
-      regex += ".*#{role_name}|"
+      regex += "[^@]*#{role_name}|"
     end
     regex = regex[0..-2] + "){#{_role_names.size}}"
   end

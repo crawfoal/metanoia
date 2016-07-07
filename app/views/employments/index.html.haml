@@ -1,9 +1,8 @@
 %h1= "#{@employee_list.gym_name} Employees"
 
-%table
-  %tr
-    %th Email
-    %th Role
+#employee_list
+  .header.email Email
+  .header.role Role
   = render partial: 'employee', collection: @employee_list.employees
 
 %h2 Add New Employee

@@ -1,0 +1,108 @@
+#employee_list {
+  @include display(flex);
+  @include flex-wrap(wrap);
+
+  margin-bottom: $base-spacing * 2;
+  width: 100%;
+
+  > * {
+    overflow: hidden;
+    padding: $tiny-spacing;
+    text-overflow: ellipsis;
+    width: 100%;
+  }
+
+  .header {
+    background-color: $linen;
+    border: $base-border;
+
+    &.email {
+      border-bottom: none;
+    }
+
+    &.role {
+      border-top: none;
+    }
+  }
+
+  .role {
+    border-bottom: $base-border;
+    text-align: right;
+  }
+
+  @include media($medium-screen) {
+    .header {
+      &.email {
+        border-bottom: $base-border;
+        border-right: none;
+      }
+
+      &.role {
+        border-left: none;
+        border-top: $base-border;
+      }
+    }
+
+    .email {
+      border-bottom: $base-border;
+      width: 60%;
+    }
+
+    .role {
+      text-align: left;
+      width: 40%;
+    }
+  }
+}
+
+form.new_employment {
+  input[type='submit'] {
+    width: 100%;
+  }
+
+  select {
+    height: $base-font-size;
+    line-height: $base-font-size;
+  }
+
+  @include media($medium-screen) {
+    @include display(flex);
+    @include flex-wrap(wrap);
+    @include justify-content(space-around);
+
+    width: 100%;
+
+    > * {
+      width: 100%;
+    }
+
+    label[for='employment_email'] {
+      order: 1;
+    }
+
+    label[for='employment_role_name'] {
+      order: 2;
+    }
+
+    #employment_email {
+      order: 3;
+    }
+
+    #employment_role_name {
+      order: 4;
+    }
+
+    label[for='employment_email'], #employment_email {
+      width: 59%;
+    }
+
+    label[for='employment_role_name'], #employment_role_name {
+      width: 39%;
+    }
+
+    input[type='submit'] {
+      order: 5;
+      width: 50%;
+    }
+  }
+}
