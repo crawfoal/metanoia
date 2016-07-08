@@ -151,7 +151,8 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
     'app/forms/employment_form.rb',
     'app/controllers/employments_controller.rb',
     'app/views/employments/create.js.coffee',
-    'app/views/employments/_form.html.haml'
+    'app/views/employments/_form.html.haml',
+    'app/views/employments/new.js.coffee'
   ].each do |filename|
     watch(filename) do
       rspec.spec.('features/employee_list')

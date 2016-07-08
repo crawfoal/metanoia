@@ -11,6 +11,8 @@ class EmploymentsController < ApplicationController
     if @employment_form.save
       @employee = Employee.new(@employment_form)
       flash.now[:notice] = "New #{@employment_form.role_name} successfully added!"
+    else
+      render :new
     end
   end
 
@@ -18,7 +20,7 @@ class EmploymentsController < ApplicationController
 
   def employment_form_params
     params.
-      require(:employment).
+      require(:employment_form).
       permit(:email, :role_name).
       merge(gym_id: params[:gym_id])
   end

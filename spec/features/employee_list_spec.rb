@@ -51,4 +51,15 @@ RSpec.feature 'Employee List', type: :feature, js: true do
 
     page_should_show new_manager, with_role: :manager
   end
+
+  scenario "manager tries to add a new employee, but the user isn't registered" do
+    visit gym_employments_path(gym)
+    fill_in "Employee's Email", with: 'not_a_real_email@example.com'
+    select 'manager', from: 'Role'
+    click_on 'Add'
+
+    expect(page).to include_errors
+    expect(page).to have_field "Employee's Email", with: 'not_a_real_email@example.com'
+    expect(page).to have_select 'Role', selected: 'manager'
+  end
 end

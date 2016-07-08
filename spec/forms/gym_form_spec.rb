@@ -1,8 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe GymForm do
-  it { should implement_form_interface }
-
   describe '#initialize' do
     context 'when given no arguments' do
       it 'builds a new gym with one section' do
@@ -105,13 +103,6 @@ RSpec.describe GymForm do
       gym_form.save
 
       expect(gym.sections).to be_empty
-    end
-  end
-
-  it 'responds to methods that the form builder needs' do
-    gym_form = GymForm.new
-    [:persisted?, :model_name, :to_key, :to_model].each do |method_name|
-      expect(gym_form).to respond_to method_name
     end
   end
 end

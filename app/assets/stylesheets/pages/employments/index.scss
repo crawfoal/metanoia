@@ -14,14 +14,9 @@
 
   .header {
     background-color: $linen;
-    border: $base-border;
 
     &.email {
-      border-bottom: none;
-    }
-
-    &.role {
-      border-top: none;
+      border-top: $base-border;
     }
   }
 
@@ -31,16 +26,8 @@
   }
 
   @include media($medium-screen) {
-    .header {
-      &.email {
-        border-bottom: $base-border;
-        border-right: none;
-      }
-
-      &.role {
-        border-left: none;
-        border-top: $base-border;
-      }
+    .header.role {
+      border-top: $base-border;
     }
 
     .email {
@@ -55,7 +42,7 @@
   }
 }
 
-form.new_employment {
+form.new_employment_form {
   input[type='submit'] {
     width: 100%;
   }
@@ -71,27 +58,27 @@ form.new_employment {
       width: 100%;
     }
 
-    label[for='employment_email'] {
+    label[for='employment_form_email'] {
       order: 1;
     }
 
-    label[for='employment_role_name'] {
+    label[for='employment_form_role_name'] {
       order: 2;
     }
 
-    #employment_email {
+    #employment_form_email {
       order: 3;
     }
 
-    #employment_role_name {
+    #employment_form_role_name {
       order: 4;
     }
 
-    label[for='employment_email'], #employment_email {
+    label[for='employment_form_email'], #employment_form_email {
       width: 59%;
     }
 
-    label[for='employment_role_name'], #employment_role_name {
+    label[for='employment_form_role_name'], #employment_form_role_name {
       width: 39%;
     }
 

@@ -1,13 +1,37 @@
 require 'rails_helper'
 
 class SomeForm < BaseForm
-  delegate_basic_form_interface_methods to: :@object
+  def persist!
+    true
+  end
 end
 
 RSpec.describe BaseForm do
-  describe '.delegate_basic_form_interface_methods' do
-    it 'should make the basic form interface methods available on the form object' do
-      expect(SomeForm.new).to implement_form_interface
+  let(:form) { SomeForm.new }
+
+  describe '#save' do
+    it 'calls `persist!` if the record is valid' do
+      allow(form).to receive(:valid?).and_return(true)
+      expect(form).to receive(:persist!)
+      form.save
+    end
+
+    it 'returns a falsey value if the record is not valid' do
+      allow(form).to receive(:valid?).and_return(false)
+      expect(form.save).to be_falsey
+    end
+  end
+
+  describe '#save!' do
+    it 'calls `persist!` if the record is valid' do
+      allow(form).to receive(:valid?).and_return(true)
+      expect(form).to receive(:persist!)
+      form.save!
+    end
+
+    it 'raises an error if the record is not valid' do
+      allow(form).to receive(:valid?).and_return(false)
+      expect { form.save! }.to raise_error /.*not valid.*/
     end
   end
 end

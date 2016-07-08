@@ -1,85 +1,60 @@
 require 'rails_helper'
 
-RSpec.describe EmploymentForm do
-  it { should implement_form_interface }
+RSpec.describe EmploymentForm, type: :model do
+  let(:role_story_for_valid_ef) do
+    user = valid_ef.send(:user)
+    user.send("#{user.current_role}_story")
+  end
+  let(:valid_ef) { build :employment_form }
+
+  it { should validate_presence_of :email }
+  it { should validate_presence_of :role_name }
+
+  it 'is invalid if the employment record is invalid' do
+    allow(valid_ef.to_model).to receive(:valid?).and_return(false)
+    expect(valid_ef).to_not be_valid
+  end
+
+  it 'is invalid if a user cannot be found with the given email' do
+    expect(build(:employment_form, :with_unregistered_email)).to_not be_valid
+  end
 
   describe '#initialize' do
     it 'instantiates an employment object' do
-      expect(EmploymentForm.new.to_model).to be_a Employment
+      expect(EmploymentForm.new.employment).to be_a Employment
     end
 
     it 'gives left over attributes to Employment.new' do
-      expect(EmploymentForm.new(gym_id: 1).to_model.gym_id).to eq 1
+      expect(EmploymentForm.new(gym_id: 1).employment.gym_id).to eq 1
     end
   end
 
-  describe '#email' do
-    it 'returns the email attribute if it exists' do
-      employment_form = EmploymentForm.new(email: 'foo@example.com')
-      expect(employment_form.email).to eq 'foo@example.com'
+  describe '#persist!' do
+    it 'determines which role_story shoud be associated with the employment' do
+      expect { valid_ef.persist! }.to change { valid_ef.employment.role_story }.
+        from(nil).to(role_story_for_valid_ef)
+    end
+
+    it 'actually saves the employment record in the database' do
+      valid_ef.persist!
+      db_record = role_story_for_valid_ef.employments.first
+      in_memory = valid_ef.employment
+      expect(db_record).to be_present
+      expect(db_record.attributes).to eq in_memory.attributes
     end
   end
 
-  describe '#role_name' do
-    it 'returns the role name attribute if it exists' do
-      employment_form = EmploymentForm.new(role_name: 'setter')
-      expect(employment_form.role_name).to eq 'setter'
-    end
-  end
-
-  describe '#save' do
-    context 'the email and role name are both provided' do
-      let(:user) { create :setter }
-      let(:employment_form) do
-        EmploymentForm.new(email: user.email, role_name: 'setter')
-      end
-
-      it 'determines which role_story shoud be associated with the employment' do
-        expect { employment_form.save }.to change { employment_form.to_model.role_story }.from(nil).to(user.setter_story)
-      end
-
-      it 'returns a truthy value' do
-        expect(employment_form.save).to be_truthy
-      end
-
-      it 'actually saves the employment record in the database' do
-        employment_form.save
-        db_record = user.reload.setter_story.employments.first
-        in_memory = employment_form.to_model
-        expect(db_record).to be_present
-        expect(db_record.attributes).to eq in_memory.attributes
-      end
+  describe '#errors' do
+    it 'are present when no user can be found with the given email' do
+      ef = build :employment_form, :with_unregistered_email
+      ef.valid?
+      expect(ef.errors).to be_present
     end
 
-    context "email and role name aren't both provided" do
-      let(:employment_form) { EmploymentForm.new() }
-
-      it 'it returns a falsey value' do
-        expect(employment_form.save).to be_falsey
-      end
-    end
-  end
-
-  describe 'valid?' do
-    it "returns false if email and role name aren't both provided" do
-      expect(EmploymentForm.new()).to_not be_valid
-    end
-
-    it 'returns true if email and role name are both provided' do
-      employment_form = EmploymentForm.new(
-        email: 'foo@example.com',
-        role_name: 'setter'
-      )
-      expect(employment_form).to be_valid
-    end
-
-    it 'returns false if the employment record is invalid' do
-      employment_form = EmploymentForm.new(
-        email: 'foo@example.com',
-        role_name: 'setter'
-      )
-      allow(employment_form.to_model).to receive(:valid?).and_return(false)
-      expect(employment_form).to_not be_valid
+    it 'are present when no email or role name are provided' do
+      ef = EmploymentForm.new
+      ef.valid?
+      expect(ef.errors).to be_present
     end
   end
 end

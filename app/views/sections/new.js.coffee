@@ -1,4 +1,4 @@
-gymSections = $('form#new_gym fieldset#gym_sections')
+gymSections = $('form#new_gym_form fieldset#gym_sections')
 sectionFields = gymSections.find('fieldset.section-fields')
 numSections = sectionFields.length
 newSectionFields =
