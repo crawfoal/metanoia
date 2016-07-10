@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160628174114) do
+ActiveRecord::Schema.define(version: 20160709150754) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -57,9 +57,9 @@ ActiveRecord::Schema.define(version: 20160628174114) do
   add_index "climbs", ["section_id"], name: "index_climbs_on_section_id", using: :btree
 
   create_table "employments", force: :cascade do |t|
-    t.integer  "gym_id"
-    t.integer  "role_story_id"
-    t.string   "role_story_type"
+    t.integer  "gym_id",          null: false
+    t.integer  "role_story_id",   null: false
+    t.string   "role_story_type", null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
   end

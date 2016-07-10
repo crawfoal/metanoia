@@ -13,16 +13,29 @@ class EmploymentForm < BaseForm
     @employment = Employment.new(attribs)
   end
 
+  alias_method :form_attributes_valid?, :valid?
   def valid?
-    super && @employment.valid?
+    apply_form_attributes_to_models
+    form_attributes_valid? && @employment.valid?
   end
 
   def persist!
-    @employment.role_story = find_role_story
+    apply_form_attributes_to_models
     @employment.save!
   end
 
+  alias_method :form_errors, :errors
+  def errors
+    form_errors.messages[:employment] = employment.errors.full_messages
+    return form_errors
+  end
+
   private
+
+  def apply_form_attributes_to_models
+    return unless form_attributes_valid?
+    @employment.role_story = find_role_story
+  end
 
   def user
     @user ||= User.find_by_email @email

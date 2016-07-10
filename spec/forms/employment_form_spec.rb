@@ -56,5 +56,26 @@ RSpec.describe EmploymentForm, type: :model do
       ef.valid?
       expect(ef.errors).to be_present
     end
+
+    it 'are present when the employment record is not valid' do
+      ef = EmploymentForm.new(
+        role_name: 'setter',
+        email: create(:setter).email
+      )
+      ef.valid?
+      expect(ef.errors).to be_present
+    end
+  end
+
+  describe 'valid?' do
+    it 'returns true if the object was initialized with valid data, even if '\
+       'persist! has not been called yet' do
+      ef = EmploymentForm.new(
+        gym_id: create(:gym).id,
+        role_name: 'setter',
+        email: create(:setter).email
+      )
+      expect(ef).to be_valid
+    end
   end
 end
