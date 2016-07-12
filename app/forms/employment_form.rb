@@ -26,7 +26,7 @@ class EmploymentForm < BaseForm
 
   alias_method :form_errors, :errors
   def errors
-    form_errors.messages[:employment] = employment.errors.full_messages
+    pull_in_employment_errors
     return form_errors
   end
 
@@ -34,15 +34,21 @@ class EmploymentForm < BaseForm
 
   def apply_form_attributes_to_models
     return unless form_attributes_valid?
-    @employment.role_story = find_role_story
+    associate_or_create_role_story
+  end
+
+  def pull_in_employment_errors
+    form_errors.messages[:employment] = \
+      employment.errors.full_messages.map { |error| error[0].downcase }
   end
 
   def user
     @user ||= User.find_by_email @email
   end
 
-  def find_role_story
-    user.send(role_story_type.underscore)
+  def associate_or_create_role_story
+    user.add_role @role_name unless user.has_role? @role_name
+    @employment.role_story = user.send(role_story_type.underscore)
   end
 
   def role_story_type

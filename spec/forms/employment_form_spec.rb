@@ -35,6 +35,12 @@ RSpec.describe EmploymentForm, type: :model do
         from(nil).to(role_story_for_valid_ef)
     end
 
+    it "creates a role story for the user if they don't have the role yet" do
+      setter = create(:setter)
+      ef = build :employment_form, user: setter, role_name: 'manager'
+      expect { ef.persist! }.to change { setter.reload.manager_story }.from(nil)
+    end
+
     it 'actually saves the employment record in the database' do
       valid_ef.persist!
       db_record = role_story_for_valid_ef.employments.first

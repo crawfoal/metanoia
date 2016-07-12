@@ -10,8 +10,15 @@ class BaseForm
     valid? ? persist! : false
   end
 
-  # TODO: use errors instead of generic message
   def save!
-    valid? ? persist! : raise('Form not valid!')
+    if valid?
+      persist!
+    else
+      opening = "The form is invalid due to the following errors:\n"
+      error_message = errors.full_messages.reduce(opening) do |result, message|
+        result += "\t#{message}\n"
+      end
+      raise(error_message)
+    end
   end
 end

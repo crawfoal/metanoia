@@ -26,7 +26,10 @@ class EmployeeList
     if @employees[user.id].present?
       @employees[user.id].roles += ", #{role_name}"
     else
-      @employees[user.id] = Employee.new(email: user.email, roles: role_name.to_s)
+      @employees[user.id] = OpenStruct.new(
+        email: user.email,
+        roles: role_name.to_s
+      )
     end
   end
 

@@ -9,7 +9,7 @@ class EmploymentsController < ApplicationController
   def create
     @employment_form = EmploymentForm.new(employment_form_params)
     if @employment_form.save
-      @employee = Employee.new(@employment_form)
+      @employee = Employee.new(email: @employment_form.email, gym_id: params[:gym_id])
       flash.now[:notice] = "New #{@employment_form.role_name} successfully added!"
     else
       render :new
