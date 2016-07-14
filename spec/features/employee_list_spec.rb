@@ -29,11 +29,17 @@ RSpec.feature 'Employee List', type: :feature, js: true do
     expect(employee_form.role).to be_blank
   end
 
-  scenario 'admin or manager adds a new manager' do
+  scenario 'admin or manager adds a new manager (gets the email wrong on the '\
+           'first try)' do
     visit gym_employments_path(gym)
     new_manager = create :manager
+    employee_form.submit_with email: 'fake_email@example.com', role: 'manager'
+    expect(page).to include_errors
+    expect(employee_form.email).to eq 'fake_email@example.com'
+    expect(employee_form.role).to eq 'manager'
     employee_form.submit_with new_manager.attributes.merge(role: 'manager')
     wait_for_ajax
+    expect(page).to_not include_errors
     expect(employee_table).to list_employee new_manager, with_roles: :manager
   end
 
@@ -45,13 +51,5 @@ RSpec.feature 'Employee List', type: :feature, js: true do
     wait_for_ajax
     expect(employee_table).to \
       list_employee setter, with_roles: [:manager, :setter]
-  end
-
-  scenario "manager tries to add a new employee, but the user isn't registered" do
-    visit gym_employments_path(gym)
-    employee_form.submit_with email: 'fake_email@example.com', role: 'manager'
-    expect(page).to include_errors
-    expect(employee_form.email).to eq 'fake_email@example.com'
-    expect(employee_form.role).to eq 'manager'
   end
 end

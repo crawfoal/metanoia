@@ -8,5 +8,6 @@ else
     "<%= j render(partial: 'employee', locals: { employee: @employee }) %>"
   )
 
-$('#employment_form_email').val('')
-$('#employment_form_role_name').val('')
+$('#new_employment_form').replaceWith(
+  "<%= escape_javascript(render(partial: 'form', locals: {employment_form: EmploymentForm.new})) %>"
+)
