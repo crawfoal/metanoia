@@ -9,4 +9,12 @@ RSpec::Matchers.define :show_flash_with do |expected_message, expected_style = n
   match do |actual|
     actual.has_selector?(flash_selector, text: expected_message)
   end
+
+  failure_message do |actual|
+    "expected \"#{actual.text}\" to include \"#{expected_message}\""
+  end
+
+  failure_message_when_negated do |actual|
+    "expected \"#{actual.text}\" to not include \"#{expected_message}\""
+  end
 end
