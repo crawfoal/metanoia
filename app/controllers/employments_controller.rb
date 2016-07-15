@@ -1,6 +1,4 @@
 class EmploymentsController < ApplicationController
-  # TODO: check authorization
-
   def index
     @employee_list = EmployeeList.new(Gym.find(params[:gym_id]))
     @employment_form = EmploymentForm.new
@@ -8,8 +6,12 @@ class EmploymentsController < ApplicationController
 
   def create
     @employment_form = EmploymentForm.new(employment_form_params)
+    authorize @employment_form.employment
     if @employment_form.save
-      @employee = Employee.new(email: @employment_form.email, gym_id: params[:gym_id])
+      @employee = Employee.new(
+        email: @employment_form.email,
+        gym_id: params[:gym_id]
+      )
       flash.now[:notice] = "New #{@employment_form.role_name} successfully added!"
     else
       render :new

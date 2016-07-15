@@ -28,7 +28,12 @@ FactoryGirl.define do
     end
 
     after :create do |user, evaluator|
-      if evaluator.employed_at.present? && (gym = Gym.where(evaluator.employed_at).first)
+      gym = if evaluator.employed_at.respond_to? :employments
+        evaluator.employed_at
+      else
+        Gym.where(evaluator.employed_at).first
+      end
+      if evaluator.employed_at.present? && gym.present?
         evaluator.employment_role_stories.each do |role_story|
           if user.persisted?
             gym.employments.create(role_story: role_story)
