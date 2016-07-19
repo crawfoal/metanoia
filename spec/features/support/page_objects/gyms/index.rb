@@ -8,6 +8,10 @@ module PageObjects
         gyms_table.has_content? name
       end
 
+      def has_employee_list_link_for?(gym)
+        row_for(gym).has_link? 'Employee List'
+      end
+
       private
 
       # ----- Finder Methods -----
@@ -15,6 +19,10 @@ module PageObjects
         find 'table#gyms'
       end
       alias_method :main_element, :gyms_table
+
+      def row_for(gym)
+        find '#gyms tr', text: /.*#{gym.name}.*/
+      end
     end
   end
 end

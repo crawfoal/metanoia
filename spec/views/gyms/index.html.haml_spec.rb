@@ -1,19 +1,4 @@
-require 'rails_helper'
-
-RSpec::Matchers.define :link_to_employee_list_for do |gym|
-  match do |page|
-    matched_row = page.find '#gyms tr', text: /.*#{gym.name}.*/
-    matched_row.has_link? 'Employee List'
-  end
-
-  failure_message do |page|
-    "expected \"#{page.native}\" to have link for #{gym.name}'s employee list"
-  end
-
-  failure_message_when_negated do |page|
-    "expected \"#{page.native}\" to not have link for #{gym.name}'s employee list"
-  end
-end
+require 'feature_helper'
 
 RSpec.describe 'gyms/index.html.haml', type: :view do
   context "when the user's current role isn't admin" do
@@ -38,10 +23,10 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
       assign(:gyms, [employer_gym, other_gym])
 
       render
-      page = Capybara.string(rendered)
+      index_page = PageObjects::Gyms::Index.from_string!(rendered)
 
-      expect(page).to link_to_employee_list_for employer_gym
-      expect(page).to_not link_to_employee_list_for other_gym
+      expect(index_page).to have_employee_list_link_for employer_gym
+      expect(index_page).to_not have_employee_list_link_for other_gym
     end
   end
 end
