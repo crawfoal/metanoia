@@ -13,6 +13,17 @@ RSpec.describe EmploymentPolicy do
     it { should permit_action :index }
   end
 
+  context 'for a manager who has a different current role' do
+    let(:user) do
+      user = create :manager, employed_at: gym
+      user.current_role = ''
+      user
+    end
+
+    it { should forbid_new_and_create_actions }
+    it { should permit_action :index }
+  end
+
   context 'for a non-manager employee' do
     let(:user) { create :setter, employed_at: gym }
 
