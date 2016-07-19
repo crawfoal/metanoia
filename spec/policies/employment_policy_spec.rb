@@ -26,4 +26,11 @@ RSpec.describe EmploymentPolicy do
     it { should forbid_new_and_create_actions }
     it { should forbid_action :index }
   end
+
+  context 'for a user who is a manager, at another gym' do
+    let(:user) { create :manager, employed_at: create(:gym) }
+
+    it { should forbid_new_and_create_actions }
+    it { should forbid_action :index }
+  end
 end
