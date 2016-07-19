@@ -1,4 +1,4 @@
-require 'feature_helper'
+require 'view_helper'
 
 RSpec.describe 'gyms/index.html.haml', type: :view do
   context "when the user's current role isn't admin" do
