@@ -23,7 +23,7 @@ RSpec.describe EmploymentsController, type: :controller do
 
   it 'should check authorization for #index' do
     gym = create :gym
-    pretend_not_authorized :index?
+    pretend_not_authorized :index?, 'EmployeeListPolicy'
     get :index, { gym_id: gym.id }
     expect_standard_not_authorized_response
   end

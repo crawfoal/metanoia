@@ -1,8 +1,8 @@
 class EmploymentsController < ApplicationController
   def index
     @employment_form = EmploymentForm.new(gym_id: params[:gym_id])
-    authorize @employment_form.employment
     @employee_list = EmployeeList.new(Gym.find(params[:gym_id]))
+    authorize @employee_list
   end
 
   def create

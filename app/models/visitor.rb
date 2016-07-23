@@ -3,6 +3,10 @@ class Visitor
     false
   end
 
+  def email
+    ''
+  end
+
   def current_role
     ''
   end

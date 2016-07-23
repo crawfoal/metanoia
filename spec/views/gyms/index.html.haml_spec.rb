@@ -5,7 +5,7 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
     it "doesn't show the link to create a new gym" do
       user = create :athlete
       user.add_role :admin
-      allow(view).to receive(:current_user).and_return(user)
+      allow(controller).to receive(:current_user).and_return(user)
       assign(:gyms, create_list(:gym, 2))
 
       render
@@ -19,7 +19,7 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
       employer_gym = create :gym, name: 'Employer Gym'
       other_gym = create :gym, name: 'Other Gym'
       user = create :manager, employed_at: employer_gym
-      allow(view).to receive(:current_user).and_return(user)
+      allow(controller).to receive(:current_user).and_return(user)
       assign(:gyms, [employer_gym, other_gym])
 
       render

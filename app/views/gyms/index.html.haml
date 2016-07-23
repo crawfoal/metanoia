@@ -6,14 +6,8 @@
       %td
         = link_to gym.name, gym
       %td
-        -# TODO: probably want to use something other than OpenStruct below,
-        -# but I'm not sure what to use yet. One idea is to have a helper method
-        -# that either find an employment record for the current user and gym,
-        -# or returns a null employment object. But that doesn't really feel
-        -# right. We could maybe do Employment.new(gym_id: gym.id) but that
-        -# feels wrong too, because we would never want to persist this object.
-        - if EmploymentPolicy.new(current_user, OpenStruct.new(gym_id: gym.id)).index?
+        - if policy(EmployeeList.new(gym)).index?
           = link_to 'Employee List', gym_employments_path(gym)
 
-- if GymPolicy.new(current_user, Gym).new?
+- if policy(Gym).new?
   = link_to 'Create a New Gym', new_gym_path, id: 'new_gym'
