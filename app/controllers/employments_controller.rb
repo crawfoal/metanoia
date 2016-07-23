@@ -14,6 +14,7 @@ class EmploymentsController < ApplicationController
         gym_id: params[:gym_id]
       )
       flash.now[:notice] = "New #{@employment_form.role_name} successfully added!"
+      @employment_form = EmploymentForm.new(gym_id: params[:gym_id])
     else
       render :new
     end

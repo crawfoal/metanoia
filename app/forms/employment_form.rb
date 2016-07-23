@@ -2,6 +2,7 @@ class EmploymentForm < BaseForm
   attr_accessor :email, :role_name
   attr_reader :employment
   delegate :persisted?, to: :employment
+  delegate :gym, to: :employment
 
   validates :email, presence: true
   validates :role_name, presence: true
