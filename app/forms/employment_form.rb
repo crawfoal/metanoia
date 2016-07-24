@@ -31,6 +31,10 @@ class EmploymentForm < BaseForm
     return form_errors
   end
 
+  def to_partial_path
+    'employments/form'
+  end
+
   private
 
   def apply_form_attributes_to_models

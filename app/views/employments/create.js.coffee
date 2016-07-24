@@ -5,9 +5,9 @@ if emailNode.length > 0
   emailNode.next().text("<%= j @employee.roles %>")
 else
   $('#employee_list').append(
-    "<%= j render(partial: 'employee', locals: { employee: @employee }) %>"
+    "<%= j render_as_local :employee %>"
   )
 
 $('#new_employment_form').replaceWith(
-  "<%= escape_javascript(render(partial: 'form', locals: {employment_form: @employment_form})) %>"
+  "<%= j render_as_local :employment_form %>"
 )

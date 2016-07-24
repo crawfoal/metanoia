@@ -17,6 +17,10 @@ class Employee
     end.to_sentence(two_words_connector: ', ', last_word_connector: ', ')
   end
 
+  def to_partial_path
+    'employments/employee'
+  end
+
   private
 
   def user

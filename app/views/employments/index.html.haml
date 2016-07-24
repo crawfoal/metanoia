@@ -7,4 +7,4 @@
 
 - if policy(@employment_form.employment).new?
   %h2 Add New Employee
-  = render partial: 'form', locals: { employment_form: @employment_form }
+  = render_as_local :employment_form

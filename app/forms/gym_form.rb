@@ -43,6 +43,10 @@ class GymForm < BaseForm
     end
   end
 
+  def to_partial_path
+    'gyms/form'
+  end
+
   private
 
   def associate_non_blank_sections_with_gym
