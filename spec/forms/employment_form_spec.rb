@@ -46,7 +46,7 @@ RSpec.describe EmploymentForm, type: :model do
       db_record = role_story_for_valid_ef.employments.first
       in_memory = valid_ef.employment
       expect(db_record).to be_present
-      expect(db_record.attributes).to eq in_memory.attributes
+      expect(db_record.id).to eq in_memory.id
     end
   end
 
