@@ -38,7 +38,7 @@ module PageObjects
     end
 
     def role_node_for(employee)
-      table.find(:xpath, "//div[@class='email'][contains(text(), '#{employee.email}')]/following-sibling::div[@class='role']")
+      table.find(:xpath, ".//div[@class='email'][contains(text(), '#{employee.email}')]/following-sibling::div[@class='role'][1]")
     end
   end
 end
