@@ -16,7 +16,7 @@ class BaseForm
     else
       opening = "The form is invalid due to the following errors:\n"
       error_message = errors.full_messages.reduce(opening) do |result, message|
-        result += "\t#{message}\n"
+        result + "\t#{message}\n"
       end
       raise(error_message)
     end

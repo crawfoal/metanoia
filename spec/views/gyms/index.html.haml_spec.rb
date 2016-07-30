@@ -15,7 +15,7 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
   end
 
   context 'when the current user is a manager' do
-    it "only links to the employee list for the gym the user works at" do
+    it 'only links to the employee list for the gym the user works at' do
       employer_gym = create :gym, name: 'Employer Gym'
       other_gym = create :gym, name: 'Other Gym'
       user = create :manager, employed_at: employer_gym

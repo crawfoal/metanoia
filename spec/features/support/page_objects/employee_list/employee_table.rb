@@ -9,8 +9,11 @@ module PageObjects
     # ----- Expectation Methods -----
     def has_employee?(employee, with_roles:)
       match_data = table.text.match(/#{employee.email}#{role_regex(with_roles)}/)
-      Array(with_roles).size == \
-        match_data.present? ? match_data.to_a[1..-1].compact.size : 0
+      Array(with_roles).size == if match_data.present?
+        match_data.to_a[1..-1].compact.size
+      else
+        0
+      end
     end
 
     def listed_more_than_once?(employee)
@@ -20,11 +23,11 @@ module PageObjects
     private
 
     def role_regex(role_names)
-      _role_names = Array(role_names)
-      regex = _role_names.reduce('.*(?:') do |regex, role_name|
-        regex += "[, ]+(#{role_name})|"
+      role_names_i = Array(role_names)
+      regex = role_names_i.reduce('.*(?:') do |regex, role_name|
+        regex + "[, ]+(#{role_name})|"
       end
-      regex = regex[0..-2] + "){#{_role_names.size}}"
+      return regex[0..-2] + "){#{role_names_i.size}}"
     end
 
     # ----- Finder Methods -----
@@ -38,7 +41,9 @@ module PageObjects
     end
 
     def role_node_for(employee)
-      table.find(:xpath, ".//div[@class='email'][contains(text(), '#{employee.email}')]/following-sibling::div[@class='role'][1]")
+      xpath = ".//div[@class='email'][contains(text(), '#{employee.email}')]"\
+              "/following-sibling::div[@class='role'][1]"
+      table.find(:xpath, xpath)
     end
   end
 end

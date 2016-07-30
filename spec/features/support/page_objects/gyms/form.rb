@@ -3,7 +3,8 @@ module PageObjects
     class Form < Base
 
       def initialize
-        @num_sections_with_a_name = sections_fieldset.all("input[placeholder='name'][value]").size
+        @num_sections_with_a_name =
+          sections_fieldset.all("input[placeholder='name'][value]").size
       end
 
       # ----- Action Methods -----
@@ -30,7 +31,9 @@ module PageObjects
       end
 
       def next_section_name=(name)
-        sections_fieldset.fill_in "gym_form_sections_attributes_#{@num_sections_with_a_name}_name", with: name
+        sections_fieldset.fill_in \
+          "gym_form_sections_attributes_#{@num_sections_with_a_name}_name",
+          with: name
         @num_sections_with_a_name += 1
       end
       alias_method :first_section_name=, :next_section_name=

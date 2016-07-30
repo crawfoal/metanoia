@@ -1,4 +1,4 @@
-= form_for employment_form, url: gym_employments_path(employment_form.gym), remote: true do |f|
+= form_for employment_form, url: employment_form.submit_path, remote: true do |f|
   = render partial: 'shared/error_messages', locals: {target: employment_form}
 
   = f.label :email, "Employee's Email"

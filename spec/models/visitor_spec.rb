@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Visitor do
-  let(:visitor) { visitor = Visitor.new }
+  let(:visitor) { Visitor.new }
 
   describe '#is_admin?' do
     it 'returns false' do

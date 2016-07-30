@@ -5,6 +5,6 @@ module ApplicationHelper
       raise "Error: #{object} doesn't implement `to_partial_path`"
     end
     render partial: object.to_partial_path,
-      locals: { instance_variable_name.to_sym => object }
+           locals: { instance_variable_name.to_sym => object }
   end
 end

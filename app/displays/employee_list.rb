@@ -38,7 +38,7 @@ class EmployeeList
       [
         role_name,
         User.joins("#{role_name}_story": :employments).
-          where(employments: {gym_id: @gym.id})
+          where(employments: { gym_id: @gym.id })
       ]
     end
   end

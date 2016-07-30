@@ -35,6 +35,14 @@ class EmploymentForm < BaseForm
     'employments/form'
   end
 
+  def to_employee
+    Employee.new(email: email, gym_id: gym.id)
+  end
+
+  def submit_path
+    url_helpers.gym_employments_path(gym)
+  end
+
   private
 
   def apply_form_attributes_to_models

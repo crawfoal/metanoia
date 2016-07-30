@@ -54,8 +54,8 @@ RSpec.describe 'db:populate', type: :task do
   end
 
   it 'creates some athlete users' do
-    expect(User.with_role(:athlete).count).to be >
-      users_with_roles(:admin, :athlete).count
+    expect(User.with_role(:athlete).count).to \
+      be > users_with_roles(:admin, :athlete).count
   end
 
   it 'creates an athlete_story record for each athlete' do
@@ -69,8 +69,8 @@ RSpec.describe 'db:populate', type: :task do
   end
 
   it 'creates some users that are just managers' do
-    expect(User.with_role(:manager).count).to be >
-      users_with_roles(:manager, :setter).count
+    expect(User.with_role(:manager).count).to \
+      be > users_with_roles(:manager, :setter).count
   end
 
   describe 'managers' do

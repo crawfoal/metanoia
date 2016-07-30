@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
   has_one :setter_story
   has_one :manager_story
 
+  def employed_at?(gym, with_role:)
+    has_role?(with_role) && send("#{with_role}_story").employed_at?(gym)
+  end
+
   private
 
   def set_current_role_if_not_defined(role)

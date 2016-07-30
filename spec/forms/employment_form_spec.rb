@@ -73,7 +73,7 @@ RSpec.describe EmploymentForm, type: :model do
     end
   end
 
-  describe 'valid?' do
+  describe '#valid?' do
     it 'returns true if the object was initialized with valid data, even if '\
        'persist! has not been called yet' do
       ef = EmploymentForm.new(
@@ -82,6 +82,14 @@ RSpec.describe EmploymentForm, type: :model do
         email: create(:setter).email
       )
       expect(ef).to be_valid
+    end
+  end
+
+  describe '#to_employee' do
+    it 'returns an Employee object that is initialized using the form info' do
+      ef = create :employment_form
+      employee = ef.to_employee
+      expect(employee.email).to eq ef.email
     end
   end
 end

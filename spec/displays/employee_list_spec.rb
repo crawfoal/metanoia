@@ -12,14 +12,14 @@ RSpec.describe EmployeeList do
 
   describe '#employees' do
     before :each do
-      create_list :setter, 3, employed_at: {name: gym.name}
+      create_list :setter, 3, employed_at: gym
     end
 
     it "includes of all of the gym's employees" do
       expect(employee_list.employees.size).to eq 3
     end
 
-    it "is enumerable and each item responds to :email and :roles" do
+    it 'is enumerable and each item responds to :email and :roles' do
       employee_list.employees.each do |employee|
         expect(employee).to respond_to :email
         expect(employee).to respond_to :roles

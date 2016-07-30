@@ -11,17 +11,17 @@ module Tasks
         end
 
         def create_users
+          wild_walls = Gym.find_by_name('Wild Walls')
           user = FactoryGirl.create(:admin)
           user.add_role :athlete
-          user = FactoryGirl.create(:manager, employed_at: {name: 'Wild Walls'})
+          user = FactoryGirl.create(:manager, employed_at: wild_walls)
           user.add_role :setter
-          ww = Gym.find_by_name('Wild Walls')
-          ww.employments.create(role_story: user.setter_story)
+          wild_walls.employments.create(role_story: user.setter_story)
 
           FactoryGirl.create_list(:admin, 3)
           FactoryGirl.create_list(:athlete, 3)
-          FactoryGirl.create_list(:setter, 3, employed_at: {name: 'Wild Walls'})
-          FactoryGirl.create_list(:manager, 3, employed_at: {name: 'Wild Walls'})
+          FactoryGirl.create_list(:setter, 3, employed_at: wild_walls)
+          FactoryGirl.create_list(:manager, 3, employed_at: wild_walls)
         end
 
         def fill_database

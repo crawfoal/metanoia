@@ -1,3 +1,3 @@
 $('#new_employment_form').replaceWith(
-  "<%= escape_javascript(render(partial: 'form', locals: {employment_form: @employment_form})) %>"
+  "<%= j render_as_local :employment_form %>"
 )
