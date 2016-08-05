@@ -6,7 +6,8 @@
       %td
         = link_to gym.name, gym
       %td
-        = fa_icon 'minus'
+        - if policy(EmployeeList.new(gym)).index?
+          = link_to 'Employee List', gym_employments_path(gym)
 
-- if GymPolicy.new(current_user, Gym).new?
+- if policy(Gym).new?
   = link_to 'Create a New Gym', new_gym_path, id: 'new_gym'

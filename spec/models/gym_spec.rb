@@ -7,9 +7,12 @@ RSpec.describe Gym, type: :model do
   it { should have_many :athlete_stories }
   it { should belong_to :route_grade_system }
   it { should belong_to :boulder_grade_system }
+  it { should have_many :employments }
+
   it do
     should delegate_method(:grades).to(:route_grade_system).with_prefix(:route)
   end
+
   it do
     should delegate_method(:grades).to(
       :boulder_grade_system).with_prefix(:boulder)

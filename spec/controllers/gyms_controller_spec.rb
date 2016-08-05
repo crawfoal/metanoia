@@ -15,7 +15,7 @@ RSpec.describe GymsController, type: :controller do
   end
 
   it 'should check authorization for #create' do
-    params = { gym: attributes_for(:gym, :with_name) }
+    params = { gym_form: attributes_for(:gym, :with_name) }
     pretend_not_authorized :create?
     post :create, params
     expect_standard_not_authorized_response
@@ -30,7 +30,7 @@ RSpec.describe GymsController, type: :controller do
 
   it 'should check authorization for #update' do
     gym = create :gym
-    params = { id: gym.id, gym: attributes_for(:gym, :with_name) }
+    params = { id: gym.id, gym_form: attributes_for(:gym, :with_name) }
     pretend_not_authorized :update?
     get :update, params
     expect_standard_not_authorized_response
@@ -42,14 +42,14 @@ RSpec.describe GymsController, type: :controller do
     end
 
     it 'uses strong parameters' do
-      params = { gym: build(:gym).attributes }
+      params = { gym_form: build(:gym).attributes }
 
       expect(subject).to permit(
         :name,
         :route_grade_system_id,
         :boulder_grade_system_id,
         sections_attributes: [:id, :name, :_destroy]
-      ).for(:create, params: params).on(:gym)
+      ).for(:create, params: params).on(:gym_form)
     end
 
     context 'when all params are blank and/or not present' do
@@ -75,13 +75,13 @@ RSpec.describe GymsController, type: :controller do
       gym = create :gym
       params = {
         id: gym.id,
-        gym: attributes_for(:gym, :with_name)
+        gym_form: attributes_for(:gym, :with_name)
       }
 
       expect(subject).to permit(
         :name,
         sections_attributes: [:id, :name, :_destroy]
-      ).for(:update, params: params).on(:gym)
+      ).for(:update, params: params).on(:gym_form)
     end
 
     context 'when all params are blank and/or not present' do
@@ -124,7 +124,7 @@ RSpec.describe GymsController, type: :controller do
 
   def params_for_gym_with_no_data
     {
-      gym: attributes_for(
+      gym_form: attributes_for(
         :gym,
         name: '',
         sections_attributes: dup_and_build_nested_params(

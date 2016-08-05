@@ -45,7 +45,7 @@ class GymsController < ApplicationController
   private
 
   def gym_form_params
-    params.require(:gym).permit(
+    params.require(:gym_form).permit(
       :name,
       :route_grade_system_id,
       :boulder_grade_system_id,

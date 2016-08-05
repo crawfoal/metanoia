@@ -1,4 +1,4 @@
 %h1
   Editing
   %em= @gym_form.name || 'an un-named climbing gym'
-= render 'form', gym_form: @gym_form
+= render_as_local :gym_form

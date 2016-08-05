@@ -28,4 +28,6 @@ class Gym < ActiveRecord::Base
   def boulders
     Climb.where(type: 'Boulder').where(section_id: section_ids)
   end
+
+  has_many :employments
 end

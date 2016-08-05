@@ -143,4 +143,23 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   end
 
   watch(%r(^lib/seedster/.+\.rb$)) { rspec.spec.('lib/seedster') }
+
+  [
+    'app/controllers/employments_controller.rb',
+    'app/views/employments/index.html.haml',
+    'app/views/employments/_table_row.html.haml',
+    'app/forms/employment_form.rb',
+    'app/controllers/employments_controller.rb',
+    'app/views/employments/create.js.coffee',
+    'app/views/employments/_form.html.haml',
+    'app/views/employments/new.js.coffee'
+  ].each do |filename|
+    watch(filename) do
+      rspec.spec.('features/employee_list')
+    end
+  end
+
+  watch('app/forms/employment_form.rb') do
+    rspec.spec.('features/employee_list')
+  end
 end

@@ -1,0 +1,10 @@
+%h1= @employee_list.gym_name + ' Employees'
+
+#employee_list
+  .header.email Email
+  .header.role Role
+  = render partial: 'employee', collection: @employee_list.employees
+
+- if policy(@employment_form.employment).new?
+  %h2 Add New Employee
+  = render_as_local :employment_form

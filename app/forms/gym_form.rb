@@ -1,12 +1,8 @@
-class GymForm
-  delegate :name, :errors, :persisted?, :model_name, :to_key, :to_model,
-           :route_grade_system_id, :boulder_grade_system_id, to: :@gym
+class GymForm < BaseForm
+  delegate :route_grade_system_id, :boulder_grade_system_id, :name, to: :@gym
+  delegate :persisted?, :valid?, :errors, to: :@gym
   attr_reader :sections
 
-  # Loading in the whole sections association could be expensive if there were
-  # a lot of records, but I'm not expecting that to be an issue in this case. If
-  # it is, we can address it later. But think about it if I make a general form
-  # object based on this one.
   def initialize(gym = nil)
     @gym = gym || Gym.new
     @sections = @gym.sections.to_a
@@ -34,14 +30,30 @@ class GymForm
     end
   end
 
-  def save
-    @gym.sections = sections.select do |section|
-      section.value(reject_blanks: true).present?
+  def persist!
+    associate_non_blank_sections_with_gym
+    @gym.save!
+  end
+
+  def url
+    if persisted?
+      url_helpers.gym_path(@gym)
+    else
+      url_helpers.gyms_path
     end
-    @gym.save
+  end
+
+  def to_partial_path
+    'gyms/form'
   end
 
   private
+
+  def associate_non_blank_sections_with_gym
+    @gym.sections = sections.select do |section|
+      section.value(reject_blanks: true).present?
+    end
+  end
 
   def get_section(id)
     sections[sections.index { |section| section.id == id.to_i }]
