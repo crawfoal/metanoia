@@ -1,5 +1,5 @@
 class GymsController < ApplicationController
-  before_action :ensure_admin, only: [:new, :create, :edit, :update]
+  before_action(only: [:new, :create, :edit, :update]) { authorize Gym }
 
   def new
     @gym_form ||= GymForm.new
@@ -21,9 +21,10 @@ class GymsController < ApplicationController
 
   def show
     @gym = Gym.find(params[:id])
-    @route_histogram = ClimbHistogram.new(@gym.routes, @gym.route_grade_system)
+    @route_histogram =
+      ClimbHistogram.new(@gym.routes.active, @gym.route_grade_system)
     @boulder_histogram =
-      ClimbHistogram.new(@gym.boulders, @gym.boulder_grade_system)
+      ClimbHistogram.new(@gym.boulders.active, @gym.boulder_grade_system)
   end
 
   def edit
@@ -43,12 +44,8 @@ class GymsController < ApplicationController
 
   private
 
-  def ensure_admin
-    authorize Gym
-  end
-
   def gym_form_params
-    params.require(:gym).permit(
+    params.require(:gym_form).permit(
       :name,
       :route_grade_system_id,
       :boulder_grade_system_id,

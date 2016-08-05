@@ -105,11 +105,4 @@ RSpec.describe GymForm do
       expect(gym.sections).to be_empty
     end
   end
-
-  it 'responds to methods that the form builder needs' do
-    gym_form = GymForm.new
-    [:persisted?, :model_name, :to_key, :to_model].each do |method_name|
-      expect(gym_form).to respond_to method_name
-    end
-  end
 end

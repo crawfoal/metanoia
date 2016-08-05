@@ -1,10 +1,14 @@
 FactoryGirl.define do
+  ROLE_NAMES = [:admin, :athlete, :setter, :manager].freeze
+
   sequence :email do |n|
     "user#{n}@example.com"
   end
 
-  sequence :admin_email do |n|
-    "admin#{n}@example.com"
+  ROLE_NAMES.each do |role_name|
+    sequence "#{role_name}_email".to_sym do |n|
+      "#{role_name}#{n}@example.com"
+    end
   end
 
   factory :user do
@@ -12,19 +16,42 @@ FactoryGirl.define do
     password 'password'
     password_confirmation { password }
 
-    factory :admin do
-      email { generate :admin_email }
-
-      after :build do |user|
-        user.add_role :admin
+    transient do
+      employed_at nil # only supports one place of employment for now
+      employment_role_stories do
+        valid_roles = roles.pluck(:name).keep_if do |role_name|
+          Employment.roles.include? role_name.to_sym
+        end
+        valid_roles.map do |role_name|
+          send("#{role_name.underscore}_story")
+        end
       end
     end
 
-    factory :athlete do
-      email { generate :email }
+    after :create do |user, evaluator|
+      gym = if evaluator.employed_at.respond_to? :employments
+              evaluator.employed_at
+            else
+              Gym.where(evaluator.employed_at).first
+            end
+      if evaluator.employed_at.present? && gym.present?
+        evaluator.employment_role_stories.each do |role_story|
+          if user.persisted?
+            gym.employments.create(role_story: role_story)
+          else
+            gym.employments.build(role_story: role_story)
+          end
+        end
+      end
+    end
 
-      after :build do |user|
-        user.add_role :athlete
+    ROLE_NAMES.each do |role_name|
+      factory role_name do
+        email { generate "#{role_name}_email".to_sym }
+
+        after :build do |user|
+          user.add_role role_name
+        end
       end
     end
   end

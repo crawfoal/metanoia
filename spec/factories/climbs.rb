@@ -16,6 +16,10 @@ FactoryGirl.define do
       grade_system nil
     end
 
+    trait :not_active do
+      teardown_date { Faker::Date.backward(1) }
+    end
+
     trait :with_grade do
       after :build do |climb, evaluator|
         if evaluator.grade_system

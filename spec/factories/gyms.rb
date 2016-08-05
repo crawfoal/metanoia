@@ -37,7 +37,7 @@ FactoryGirl.define do
       after :build do |gym, evaluator|
         GymFactoryHelper.build_sections_if_empty(gym, evaluator)
         gym.sections.each do |section|
-          section.climbs = create_list(
+          section.climbs = build_list(
             :boulder,
             3,
             :with_grade,
@@ -52,7 +52,7 @@ FactoryGirl.define do
       after :build do |gym, evaluator|
         GymFactoryHelper.build_sections_if_empty(gym, evaluator)
         gym.sections.each do |section|
-          section.climbs = create_list(
+          section.climbs = build_list(
             :route,
             3,
             :with_grade,

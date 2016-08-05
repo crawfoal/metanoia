@@ -2,8 +2,7 @@
   %h2= section.name
 
   #climbs
-    - section.climbs.includes(:grade).each do |climb|
-      -# TODO: implement null object pattern for grades
+    - section.climbs.active.includes(:grade).each do |climb|
       = link_to climb.grade.name,
                 athletes_climb_logs_path,
                 class: Climb.color_name_for(climb.color),
@@ -11,8 +10,14 @@
                 method: :post,
                 data: { params: { climb_log: { climb_id: climb.id } } }
 
-  - if policy(Section).new?
+  - if policy(Climb).new?
     = link_to 'Add Climb',
               new_section_climb_path(section),
               remote: true,
               class: 'new-climb-link'
+
+  - if policy(Climb).update?
+    = button_tag 'Reset Section',
+                 type: 'button',
+                 id: 'reset',
+                 data: { link_template: section_climb_path(section.id, ':climb_id') }

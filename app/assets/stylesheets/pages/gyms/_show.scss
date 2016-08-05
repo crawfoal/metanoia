@@ -22,6 +22,8 @@
   }
 
   #current_section {
+    @include flex-grow(1);
+    
     margin-top: $base-spacing;
     margin-bottom: $base-spacing;
 
@@ -102,6 +104,11 @@
 
   .new-climb-link {
     @include bitter-button;
+    margin-top: $base-spacing;
+  }
+
+  #reset {
+    float: right;
     margin-top: $base-spacing;
   }
 }

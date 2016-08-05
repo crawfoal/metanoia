@@ -45,18 +45,53 @@ RSpec.describe 'db:populate', type: :task do
     expect(User.with_role(:admin).count).to be > 0
   end
 
+  it 'creates a few setters' do
+    expect(User.with_role(:setter).count).to be > 0
+  end
+
   it 'creates a user with both admin and athlete roles' do
-    expect((User.with_role(:admin) & User.with_role(:athlete)).count).to be > 0
+    expect(users_with_roles(:admin, :athlete).count).to be > 0
   end
 
   it 'creates some athlete users' do
-    expect(User.with_role(:athlete).count).to be >
-      (User.with_role(:admin) & User.with_role(:athlete)).count
+    expect(User.with_role(:athlete).count).to \
+      be > users_with_roles(:admin, :athlete).count
   end
 
   it 'creates an athlete_story record for each athlete' do
     User.with_role(:athlete).each do |user|
       expect(user.athlete_story).to be_present
+    end
+  end
+
+  it 'creates a user that is both a manager and setter' do
+    expect(users_with_roles(:manager, :setter).count).to be > 0
+  end
+
+  it 'creates some users that are just managers' do
+    expect(User.with_role(:manager).count).to \
+      be > users_with_roles(:manager, :setter).count
+  end
+
+  describe 'managers' do
+    it 'have an associated employment record' do
+      User.with_role(:manager).find_each do |user|
+        expect(user.manager_story.employments).to_not be_blank
+      end
+    end
+  end
+
+  describe 'setters' do
+    it 'have an associated employment record' do
+      User.with_role(:setter).find_each do |user|
+        expect(user.setter_story.employments).to_not be_blank
+      end
+    end
+  end
+
+  def users_with_roles(*role_names)
+    role_names.reduce(User.with_role(role_names.shift)) do |result, role_name|
+      result & User.with_role(role_name)
     end
   end
 

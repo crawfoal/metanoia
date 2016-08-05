@@ -1,0 +1,10 @@
+= form_for employment_form, url: employment_form.submit_path, remote: true do |f|
+  = render partial: 'shared/error_messages', locals: {target: employment_form}
+
+  = f.label :email, "Employee's Email"
+  = f.email_field :email
+
+  = f.label :role_name, 'Role'
+  = f.select :role_name, Employment.roles, include_blank: true
+
+  = f.submit 'Add'

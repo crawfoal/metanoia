@@ -96,6 +96,14 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   # folder that has the specs)
   watch(%r(^spec/((?!support).+)/.+/.+(?<!spec)\.rb$)) { |m| "spec/#{m[1]}" }
 
+  # Javascript Files
+  watch(%r(^app/assets/javascripts/[^/]+\.(coffee|js)$)) do
+    "#{rspec.spec_dir}/features"
+  end
+  watch("app/assets/javascripts/pages/sections/show.coffee") do
+    rspec.spec.('features/setters/reset')
+  end
+
   # ----------------------------------------------------------------------------
   # App Specific Patterns
   # ----------------------------------------------------------------------------
@@ -114,6 +122,15 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
     end
   end
 
+  section_reset_files = [
+    'app/views/sections/_show.html.haml',
+    'app/controllers/climbs_controller.rb',
+    'app/views/climbs/update.js.coffee'
+  ]
+  section_reset_files.each do
+    rspec.spec.('features/setters/reset')
+  end
+
   watch("app/views/layouts/_navbar.html.haml") do
     "#{rspec.spec_dir}/features/home_spec.rb"
   end
@@ -126,4 +143,23 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   end
 
   watch(%r(^lib/seedster/.+\.rb$)) { rspec.spec.('lib/seedster') }
+
+  [
+    'app/controllers/employments_controller.rb',
+    'app/views/employments/index.html.haml',
+    'app/views/employments/_table_row.html.haml',
+    'app/forms/employment_form.rb',
+    'app/controllers/employments_controller.rb',
+    'app/views/employments/create.js.coffee',
+    'app/views/employments/_form.html.haml',
+    'app/views/employments/new.js.coffee'
+  ].each do |filename|
+    watch(filename) do
+      rspec.spec.('features/employee_list')
+    end
+  end
+
+  watch('app/forms/employment_form.rb') do
+    rspec.spec.('features/employee_list')
+  end
 end

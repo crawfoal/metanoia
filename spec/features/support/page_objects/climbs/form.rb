@@ -6,11 +6,22 @@ module PageObjects
         form_element.find('input#climb_type_route + span').click
       end
 
+      def choose_boulder
+        form_element.find('input#climb_type_boulder + span').click
+      end
+
       def select(item)
         form_element.select item
       end
       alias_method :grade=, :select
       alias_method :color=, :select
+
+      def fill_with(attributes = {})
+        choose_route if attributes[:type] == 'Route'
+        choose_boulder if attributes[:type] == 'Boulder'
+        grade = attributes[:grade] if attributes[:grade].present?
+        grade = attributes[:color] if attributes[:color].present?
+      end
 
       def submit
         form_element.click_on 'Save'

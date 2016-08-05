@@ -30,6 +30,10 @@ class Climb < ActiveRecord::Base
     '#fdd835', '#ef6c00', '#6d4c41', '#000000', '#ffffff'
   ]
 
+  def self.active
+    where('teardown_date > ? OR teardown_date IS NULL', DateTime.now)
+  end
+
   def self.color_name_for(hex_code)
     COLORS[hex_code].try(:downcase)
   end

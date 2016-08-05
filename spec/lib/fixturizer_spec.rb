@@ -27,12 +27,14 @@ climb_#{the_pearl.id}:
   type: Boulder
   section_id: #{section.id}
   grade_id: #{the_pearl.grade_id}
+  teardown_date:\s
 climb_#{midnight_lightning.id}:
   id: #{midnight_lightning.id}
   color:\s
   type: Boulder
   section_id: #{section.id}
   grade_id: #{midnight_lightning.grade_id}
+  teardown_date:\s
 )
     end
   end
