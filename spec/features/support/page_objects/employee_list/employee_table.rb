@@ -24,10 +24,10 @@ module PageObjects
 
     def role_regex(role_names)
       role_names_i = Array(role_names)
-      regex = role_names_i.reduce('.*(?:') do |regex, role_name|
-        regex + "[, ]+(#{role_name})|"
+      regex = role_names_i.reduce('.*(?:') do |reduction, role_name|
+        reduction + "[, ]+(#{role_name})|"
       end
-      return regex[0..-2] + "){#{role_names_i.size}}"
+      regex[0..-2] + "){#{role_names_i.size}}"
     end
 
     # ----- Finder Methods -----

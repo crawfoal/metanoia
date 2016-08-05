@@ -1,7 +1,7 @@
 RSpec::Matchers.define :list_employee do |employee, with_roles:|
   match do |employee_table|
     if employee_table.listed_more_than_once?(employee)
-      raise "Error: employee #{employee} was listed more than once in the table."
+      raise "Error: #{employee} was listed more than once in the table."
     else
       roles_list = employee_table.roles_for employee
       Array(with_roles).all? { |role_name| roles_list.include? role_name.to_s }

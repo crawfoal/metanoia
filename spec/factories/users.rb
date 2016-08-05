@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  ROLE_NAMES = [:admin, :athlete, :setter, :manager]
+  ROLE_NAMES = [:admin, :athlete, :setter, :manager].freeze
 
   sequence :email do |n|
     "user#{n}@example.com"
@@ -19,9 +19,10 @@ FactoryGirl.define do
     transient do
       employed_at nil # only supports one place of employment for now
       employment_role_stories do
-        roles.pluck(:name).keep_if do |role_name|
+        valid_roles = roles.pluck(:name).keep_if do |role_name|
           Employment.roles.include? role_name.to_sym
-        end.map do |role_name|
+        end
+        valid_roles.map do |role_name|
           send("#{role_name.underscore}_story")
         end
       end
@@ -29,10 +30,10 @@ FactoryGirl.define do
 
     after :create do |user, evaluator|
       gym = if evaluator.employed_at.respond_to? :employments
-        evaluator.employed_at
-      else
-        Gym.where(evaluator.employed_at).first
-      end
+              evaluator.employed_at
+            else
+              Gym.where(evaluator.employed_at).first
+            end
       if evaluator.employed_at.present? && gym.present?
         evaluator.employment_role_stories.each do |role_story|
           if user.persisted?

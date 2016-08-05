@@ -1,6 +1,5 @@
 module PageObjects
   class EmployeeForm < Base
-
     def submit_with(attributes)
       self.email = attributes.delete(:email) || attributes.delete('email')
       self.role = attributes.delete(:role) || attributes.delete('role')

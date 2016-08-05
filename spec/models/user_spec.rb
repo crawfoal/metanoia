@@ -38,11 +38,11 @@ RSpec.describe User, type: :model do
     let(:setter) { create :setter, employed_at: gym }
 
     it 'returns true if the user is employed at that gym with that role' do
-      expect(setter.employed_at? gym, with_role: 'setter').to be true
+      expect(setter.employed_at?(gym, with_role: 'setter')).to be true
     end
 
     it 'returns false if the user is not employed at that gym with that role' do
-      expect(setter.employed_at? gym, with_role: 'manager').to be false
+      expect(setter.employed_at?(gym, with_role: 'manager')).to be false
     end
   end
 end

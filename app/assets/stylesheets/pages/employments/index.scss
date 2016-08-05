@@ -74,11 +74,13 @@ form.new_employment_form {
       order: 4;
     }
 
-    label[for='employment_form_email'], #employment_form_email {
+    label[for='employment_form_email'],
+    #employment_form_email {
       width: 59%;
     }
 
-    label[for='employment_form_role_name'], #employment_form_role_name {
+    label[for='employment_form_role_name'],
+    #employment_form_role_name {
       width: 39%;
     }
 
