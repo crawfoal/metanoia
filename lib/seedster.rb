@@ -4,16 +4,20 @@ require_relative 'seedster/migration_file'
 require "#{Rails.root}/lib/table_dependency_graph"
 require "#{Rails.root}/lib/fixturizer"
 require 'active_record/fixtures'
+require_relative 'seedster/active_record_helpers'
 
 module Seedster
   class << self
     def configure
       @configuration ||= Configuration.new
       yield(@configuration)
+      reset
     end
 
     delegate :fixture_directory, :root_directory, :migration_directory,
              :version_filename, to: :@configuration
+
+    delegate :migrating?, :current_version, to: :migrator
 
     def tables
       TableDependencyGraph.new(*@configuration.tables).tsort
@@ -24,12 +28,12 @@ module Seedster
     end
 
     def migrate
-      Migrator.new(@configuration).run_outstanding_migrations
+      migrator.run_outstanding_migrations
       generate_seeds
     end
 
     def rollback
-      Migrator.new(@configuration).rollback_one_migration
+      migrator.rollback_one_migration
       generate_seeds
     end
 
@@ -39,6 +43,14 @@ module Seedster
         klass.include Fixturizer
         klass.export_fixtures into: fixture_directory
       end
+    end
+
+    def migrator
+      @migrator ||= Migrator.new(@configuration)
+    end
+
+    def reset
+      @migrator = nil
     end
   end
 end

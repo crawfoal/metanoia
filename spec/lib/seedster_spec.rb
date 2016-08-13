@@ -24,16 +24,14 @@ RSpec.describe Seedster do
   describe '.tables' do
     before :each do
       Seedster.configure do |config|
-        allow(config).to receive(:tables).and_call_original
+        allow(config).to receive(:tables).
+          and_return([:employments, :setter_stories])
       end
     end
 
-    it 'includes all tables listed in the configuration' do
-      expect(Seedster.tables).to include('grade_systems', 'grades', 'buckets')
-    end
-
-    it 'lists parent tables before child tables' do
-      expect(Seedster.tables.last).to eq 'grades'
+    it 'includes all tables listed in the configuration, with parents listed '\
+       'before children' do
+      expect(Seedster.tables).to eq %w(setter_stories employments)
     end
   end
 
@@ -70,6 +68,12 @@ RSpec.describe Seedster do
     it 'updates the seeds' do
       Seedster.migrate
       expect { Seedster.rollback }.to change { File.read(fixture_filename) }
+    end
+
+    it 'updates the current version' do
+      Seedster.migrate
+      expect { Seedster.rollback }.to \
+        change { Seedster.current_version }.to('20170511115239')
     end
   end
 
