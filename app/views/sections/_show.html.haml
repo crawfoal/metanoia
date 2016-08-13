@@ -5,7 +5,7 @@
     - section.climbs.active.includes(:grade).each do |climb|
       = link_to climb.grade.name,
                 athletes_climb_logs_path,
-                class: Climb.color_name_for(climb.color),
+                class: climb.color_name,
                 remote: true,
                 method: :post,
                 data: { params: { climb_log: { climb_id: climb.id } } }
