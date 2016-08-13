@@ -31,7 +31,7 @@ RSpec.describe Seedster do
 
     it 'includes all tables listed in the configuration, with parents listed '\
        'before children' do
-      expect(Seedster.tables).to eq ['setter_stories', 'employments']
+      expect(Seedster.tables).to eq %w(setter_stories employments)
     end
   end
 

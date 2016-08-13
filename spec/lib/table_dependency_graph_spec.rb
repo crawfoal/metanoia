@@ -16,7 +16,7 @@ RSpec.describe TableDependencyGraph do
     it 'works properly when there is a polymorphic association' do
       tdg = TableDependencyGraph.new(:employments, :setter_stories)
 
-      expect(tdg.tsort).to eq ['setter_stories', 'employments']
+      expect(tdg.tsort).to eq %w(setter_stories employments)
     end
   end
 end

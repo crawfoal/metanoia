@@ -79,7 +79,7 @@ module Seedster
     end
 
     def file_index_for_current_version
-      current_index = migration_base_filenames.index do |filename|
+      migration_base_filenames.index do |filename|
         filename.match(/^#{current_version}_.+$/)
       end
     end

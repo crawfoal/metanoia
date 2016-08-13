@@ -38,7 +38,8 @@ RSpec.describe ExtractValue do
       expect(m::Post.collections_to_extract).to eq [:comments]
     end
 
-    it 'appends new entries when called multiple times (does not overwrite previous values)' do
+    it 'appends new entries when called multiple times (does not overwrite '\
+       'previous values)' do
       class m::Klass
         include ExtractValue
         extract_value_from :attrib_1, collections: :collection_1
@@ -51,7 +52,8 @@ RSpec.describe ExtractValue do
   end
 
   describe '#value' do
-    it 'builds a hash of the values for the attributes specified via "extract_value_from"' do
+    it 'builds a hash of the values for the attributes specified via '\
+       '"extract_value_from"' do
       value = {
         body: 'I finally understand method resolution in Ruby!',
         author_name: 'Amanda Dolan'
@@ -59,7 +61,8 @@ RSpec.describe ExtractValue do
       expect(m::Comment.new(value).value).to eq value
     end
 
-    it 'includes an array of the #value results for each item in the collection' do
+    it 'includes an array of the #value results for each item in the '\
+       'collection' do
       post = m::Post.new(body: 'Post body')
       Array(1..3).each do |index|
         comment = m::Comment.new(
@@ -86,16 +89,19 @@ RSpec.describe ExtractValue do
       expect(m::Qlass.new.value).to be_nil
     end
 
-    it "doesn't include collection keys pointing to nil values when the collection is empty" do
+    it "doesn't include collection keys pointing to nil values when the "\
+       'collection is empty' do
       post = m::Post.new(body: 'Post body')
       expect(post.value).to eq(body: 'Post body')
     end
 
-    it "doesn't include blank values (e.g. empty strings, nil) when you specify the `reject_blanks: true` option" do
+    it "doesn't include blank values (e.g. empty strings, nil) when you "\
+       "specify the `reject_blanks: true` option" do
       blank_comment = m::Comment.new(body: '')
       expect(blank_comment.value(reject_blanks: true)).to be_nil
 
-      post = m::Post.new(comments: Array(1..2).map { m::Comment.new } << blank_comment)
+      comments = Array(1..2).map { m::Comment.new } << blank_comment
+      post = m::Post.new(comments: comments)
       expect(post.value(reject_blanks: true)).to be_nil
     end
   end

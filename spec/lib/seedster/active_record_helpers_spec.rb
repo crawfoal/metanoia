@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Seedster::ActiveRecordHelpers do
   m = Module.new
-  
+
   class m::Post < ActiveRecord::Base
     include Seedster::ActiveRecordHelpers
 

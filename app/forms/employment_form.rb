@@ -6,7 +6,7 @@ class EmploymentForm < BaseForm
 
   validates :email, presence: true
   validates :role_name, presence: true
-  validates :role_name, inclusion: { in: Employment.roles.map(&:to_s)}
+  validates :role_name, inclusion: { in: Employment.roles.map(&:to_s) }
   validates :user, presence: true
 
   def initialize(attribs = {})
