@@ -8,23 +8,26 @@ module Seedster
     end
 
     def run_outstanding_migrations
+      new_current_version = ''
+
       with_migration_flag do
-        new_current_version = ''
         migration_files.each do |migration_file|
           if migration_file.version > current_version
             migration_file.instantiate_migration.up
             new_current_version = migration_file.version
           end
         end
-        record_version(new_current_version) unless new_current_version.blank?
       end
+
+      record_version(new_current_version) unless new_current_version.blank?
     end
 
     def rollback_one_migration
       with_migration_flag do
         current_version_migration_file.instantiate_migration.down
-        record_version(previous_version)
       end
+      
+      record_version(previous_version)
     end
 
     def migrating?
