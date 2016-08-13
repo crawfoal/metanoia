@@ -1,5 +1,7 @@
 require 'tsort'
 
+# Does not yet support non default table or association names (i.e. those that
+# don't come from the class name).
 class TableDependencyGraph
   include TSort
 
@@ -7,35 +9,57 @@ class TableDependencyGraph
     @table_names = table_names.map(&:to_s)
   end
 
+  # This method is called by TSort to iterate over each node in the graph
   def tsort_each_node(&block)
     @table_names.each(&block)
   end
 
+  # This method is called by TSort for each child, and should iterate over each
+  # of the child's parent nodes.
   def tsort_each_child(table_name, &block)
-    model_class = table_name.classify.constantize
-    parent_associations = model_class.reflect_on_all_associations(:belongs_to)
-    table_names_for(parent_associations).each(&block)
+    TableInspector.new(table_name).
+      select_parents_from(@table_names).each(&block)
   end
 
-  private
+  class TableInspector
+    def initialize(table_name)
+      @model_klass = table_name.classify.constantize
+    end
 
-  def table_names_for(associations)
-    associations.map do |association|
-      if association.polymorphic?
-        polymorphic_associtated_klasses(association)
-      else
-        association.klass
+    def select_parents_from(table_names)
+      table_names.select do |table_name|
+        TableInspector.new(table_name).parent_to? self
       end
-    end.flatten.map(&:table_name).select { |table_name| @table_names.include? table_name }
-  end
+    end
 
-  # https://www.viget.com/articles/identifying-foreign-key-dependencies-from-activerecordbase-classes
-  def polymorphic_associtated_klasses(association)
-    ActiveRecord::Base.descendants.select do |model|
-      model.reflect_on_all_associations.any? do |parent_association|
-        next if parent_association.belongs_to? # not really a parent
-        parent_association.options[:as] == association.name
+    def parent_to?(other_table)
+      other_table.child_associations.any? do |association|
+        if association.polymorphic?
+          polymorphic_parent_as? association.name
+        else
+          association.name == singular_association_name
+        end
       end
+    end
+
+    def child_associations
+      @model_klass.reflect_on_all_associations(:belongs_to)
+    end
+
+    def parent_associations
+      @model_klass.reflect_on_all_associations.select do |association|
+        [:has_one, :has_many].include? association.macro
+      end
+    end
+
+    def polymorphic_parent_as?(association_name)
+      parent_associations.any? do |association|
+        association.options[:as] == association_name
+      end
+    end
+
+    def singular_association_name
+      @model_klass.model_name.singular.to_sym
     end
   end
 end
