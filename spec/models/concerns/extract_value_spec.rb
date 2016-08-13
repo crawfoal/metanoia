@@ -1,7 +1,9 @@
 require 'rails_helper'
 
 RSpec.describe ExtractValue do
-  class Comment
+  m = Module.new
+
+  class m::Comment
     include ExtractValue
     extract_value_from :body, :author_name
 
@@ -13,7 +15,7 @@ RSpec.describe ExtractValue do
     end
   end
 
-  class Post
+  class m::Post
     include ExtractValue
     extract_value_from :body, collections: :comments
 
@@ -29,22 +31,22 @@ RSpec.describe ExtractValue do
 
   describe '.extract_value_from' do
     it 'adds the attribute names to `.attributes_to_extract`' do
-      expect(Comment.attributes_to_extract).to eq [:body, :author_name]
+      expect(m::Comment.attributes_to_extract).to eq [:body, :author_name]
     end
 
     it 'adds the collection names to `.collections_to_extract`' do
-      expect(Post.collections_to_extract).to eq [:comments]
+      expect(m::Post.collections_to_extract).to eq [:comments]
     end
 
     it 'appends new entries when called multiple times (does not overwrite previous values)' do
-      class Klass
+      class m::Klass
         include ExtractValue
         extract_value_from :attrib_1, collections: :collection_1
         extract_value_from :attrib_2, collections: :collection_2
       end
 
-      expect(Klass.attributes_to_extract).to eq [:attrib_1, :attrib_2]
-      expect(Klass.collections_to_extract).to eq [:collection_1, :collection_2]
+      expect(m::Klass.attributes_to_extract).to eq [:attrib_1, :attrib_2]
+      expect(m::Klass.collections_to_extract).to eq [:collection_1, :collection_2]
     end
   end
 
@@ -54,13 +56,13 @@ RSpec.describe ExtractValue do
         body: 'I finally understand method resolution in Ruby!',
         author_name: 'Amanda Dolan'
       }
-      expect(Comment.new(value).value).to eq value
+      expect(m::Comment.new(value).value).to eq value
     end
 
     it 'includes an array of the #value results for each item in the collection' do
-      post = Post.new(body: 'Post body')
+      post = m::Post.new(body: 'Post body')
       Array(1..3).each do |index|
-        comment = Comment.new(
+        comment = m::Comment.new(
           body: "Comment body #{index}",
           author_name: "Author name #{index}"
         )
@@ -78,22 +80,22 @@ RSpec.describe ExtractValue do
     end
 
     it 'returns nil if the are no value attributes or collections defined' do
-      class Qlass
+      class m::Qlass
         include ExtractValue
       end
-      expect(Qlass.new.value).to be_nil
+      expect(m::Qlass.new.value).to be_nil
     end
 
     it "doesn't include collection keys pointing to nil values when the collection is empty" do
-      post = Post.new(body: 'Post body')
+      post = m::Post.new(body: 'Post body')
       expect(post.value).to eq(body: 'Post body')
     end
 
     it "doesn't include blank values (e.g. empty strings, nil) when you specify the `reject_blanks: true` option" do
-      blank_comment = Comment.new(body: '')
+      blank_comment = m::Comment.new(body: '')
       expect(blank_comment.value(reject_blanks: true)).to be_nil
 
-      post = Post.new(comments: Array(1..2).map { Comment.new } << blank_comment)
+      post = m::Post.new(comments: Array(1..2).map { m::Comment.new } << blank_comment)
       expect(post.value(reject_blanks: true)).to be_nil
     end
   end
