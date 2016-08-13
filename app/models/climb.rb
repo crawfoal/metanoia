@@ -38,6 +38,10 @@ class Climb < ActiveRecord::Base
     COLORS[hex_code].try(:downcase)
   end
 
+  def color_name
+    self.class.color_name_for(color)
+  end
+
   protected
 
   def set_grade_default_if_blank

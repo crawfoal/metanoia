@@ -14,4 +14,4 @@
         - climb_logs.each do |climb_log|
           = content_tag :span,
                         climb_log.grade.name,
-                        class: Climb.color_name_for(climb_log.color)
+                        class: climb_log.color_name
