@@ -26,7 +26,7 @@ module Seedster
       with_migration_flag do
         current_version_migration_file.instantiate_migration.down
       end
-      
+
       record_version(previous_version)
     end
 
@@ -35,7 +35,7 @@ module Seedster
     end
 
     def current_version
-      @_cv = File.file?(@version_filename) ? File.read(@version_filename) : ''
+      File.file?(@version_filename) ? File.read(@version_filename) : ''
     end
 
     private
