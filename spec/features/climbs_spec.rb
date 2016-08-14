@@ -24,7 +24,7 @@ RSpec.feature 'Climbs', type: :feature, js: true do
 
     expect(page).to show_flash_with 'success'
     page_should_replace_form_with_section_overview
-    page_should_have_climb '5.11b', 'pink'
+    expect(page).to have_climb '5.11b', 'pink'
   end
 
   def page_should_replace_form_with_section_overview
@@ -33,7 +33,7 @@ RSpec.feature 'Climbs', type: :feature, js: true do
     expect(page).to have_selector('#current_section', count: 1)
   end
 
-  def page_should_have_climb(grade, color)
-    expect(page).to have_selector "a.#{color.downcase}", text: grade
+  def have_climb(grade, color)
+    have_selector ".button_to .#{color.downcase}[value='#{grade}']"
   end
 end
