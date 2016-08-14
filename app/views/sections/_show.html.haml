@@ -17,7 +17,7 @@
               class: 'new-climb-link'
 
   - if policy(Climb).update?
-    = button_tag 'Reset Section',
-                 type: 'button',
-                 id: 'reset',
-                 data: { link_template: section_climb_path(section.id, ':climb_id') }
+    = button_to 'Reset Section',
+                section_reset_path(section),
+                id: 'reset',
+                remote: 'true'
