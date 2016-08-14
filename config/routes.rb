@@ -25,7 +25,8 @@ Rails.application.routes.draw do
     resources :employments, path: 'employees', only: [:index, :create]
   end
   resources :sections, only: [:new, :show] do
-    resources :climbs, only: [:new, :create, :update]
+    resources :climbs, only: [:new, :create]
+    resource :reset, only: [:create]
   end
 
   resource :profile, only: [:show], controller: :profile

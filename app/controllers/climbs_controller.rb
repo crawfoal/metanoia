@@ -16,15 +16,6 @@ class ClimbsController < ApplicationController
     end
   end
 
-  # TODO: Handle a failure to update. Should flash something, and make sure that
-  # the climb isn't removed from the page. Right now, it silently fails. The
-  # climb will be removed from the page, but the next time the section is
-  # loaded, the climb will show up again.
-  def update
-    @climb = Climb.find(params[:id])
-    @climb.update(climb_params)
-  end
-
   private
 
   def climb_params

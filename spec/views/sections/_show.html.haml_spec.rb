@@ -13,7 +13,7 @@ RSpec.describe 'sections/_show.html.haml', type: :view do
     end
 
     it "doesn't show a link to reset the section" do
-      expect(rendered).to_not have_selector 'button#reset'
+      expect(rendered).to_not have_selector '#reset'
     end
   end
 end

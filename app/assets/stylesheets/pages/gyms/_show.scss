@@ -34,6 +34,15 @@
       margin-left: $base-spacing;
       margin-right: $base-spacing;
     }
+
+    .button_to {
+      display: inline-block;
+      float: right;
+
+      #reset {
+        margin-top: $base-spacing;
+      }
+    }
   }
 
   .edit-gym-link {
@@ -108,11 +117,6 @@
 
   .new-climb-link {
     @include bitter-button;
-    margin-top: $base-spacing;
-  }
-
-  #reset {
-    float: right;
     margin-top: $base-spacing;
   }
 }
