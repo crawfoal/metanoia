@@ -13,7 +13,7 @@ RSpec.feature 'Athlete Climb Logs', type: :feature, js: true do
       visit gym_path(gym)
       click_on gym.sections.first.name
       expect do
-        first('#climbs a').click
+        first('#climbs .button_to').click
         wait_for_ajax
       end.to change { user.athlete_story.climb_logs.count }.by(1)
       expect(page).to show_flash_with 'successfully logged'
