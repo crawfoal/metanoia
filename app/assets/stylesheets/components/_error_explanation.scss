@@ -1,12 +1,12 @@
 #error_explanation {
   color: white;
   background-color: $brick-red;
-  margin: 0 $small-spacing $base-spacing $small-spacing;
+  margin: 0 $small-spacing $base-spacing;
   margin-bottom: $base-spacing;
   padding: $small-spacing;
 
   header {
-    font-size: modular-scale(2);
+    font-size: modular-scale(1);
     margin-bottom: $tiny-spacing;
   }
 
