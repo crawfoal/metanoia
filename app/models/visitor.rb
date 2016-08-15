@@ -11,7 +11,7 @@ class Visitor
     ''
   end
 
-  def employed_at?(*args)
+  def employed_at?(*_args)
     false
   end
 end
