@@ -10,13 +10,13 @@
                   method: :post,
                   params: { 'climb_log[climb_id]': climb.id }
 
-  - if policy(Climb).new?
+  - if policy(Climb.new(section: section)).create?
     = link_to 'Add Climb',
               new_section_climb_path(section),
               remote: true,
               class: 'new-climb-link'
 
-  - if policy(Climb).update?
+  - if policy(section).reset?
     = button_to 'Reset Section',
                 section_reset_path(section),
                 id: 'reset',

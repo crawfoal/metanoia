@@ -42,6 +42,12 @@ class Climb < ActiveRecord::Base
     self.class.color_name_for(color)
   end
 
+  # This is the default, however it makes the `Route` and `Boulder` classes use
+  # the correct policy class through inheritance.
+  def self.policy_class
+    ClimbPolicy
+  end
+
   protected
 
   def set_grade_default_if_blank

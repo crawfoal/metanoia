@@ -10,4 +10,8 @@ class Visitor
   def current_role
     ''
   end
+
+  def employed_at?(*args)
+    false
+  end
 end
