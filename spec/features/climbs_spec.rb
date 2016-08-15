@@ -7,7 +7,7 @@ RSpec.feature 'Climbs', type: :feature, js: true do
       :with_name,
       section_names: ['Section 1']
     )
-    stubbed_sign_in create(:setter)
+    stubbed_sign_in create(:setter, employed_at: gym)
 
     visit gyms_path
     click_on gym.name
@@ -25,6 +25,24 @@ RSpec.feature 'Climbs', type: :feature, js: true do
     expect(page).to show_flash_with 'success'
     page_should_replace_form_with_section_overview
     expect(page).to have_climb '5.11b', 'pink'
+  end
+
+  scenario 'setter creates invalid climb' do
+    gym = create(
+      :gym,
+      :with_name,
+      section_names: ['Section 1']
+    )
+    stubbed_sign_in create(:setter, employed_at: gym)
+
+    visit gym_path(gym)
+    click_on 'Section 1'
+    click_on 'Add Climb'
+
+    climb_form = PageObjects::Climbs::Form.on_page!
+    climb_form.submit
+
+    expect(page).to include_errors
   end
 
   def page_should_replace_form_with_section_overview

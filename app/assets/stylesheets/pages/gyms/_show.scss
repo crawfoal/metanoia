@@ -1,6 +1,7 @@
 .gyms.show {
 
   #climbs {
+    margin-bottom: $base-spacing;
     max-width: 30em;
 
     @include display(flex);
@@ -72,6 +73,9 @@
 
     > * {
       margin-top: $base-spacing;
+    }
+
+    .histograms {
       min-width: 0;
     }
   }
@@ -117,6 +121,5 @@
 
   .new-climb-link {
     @include bitter-button;
-    margin-top: $base-spacing;
   }
 }

@@ -2,8 +2,8 @@ require 'feature_helper'
 
 RSpec.feature 'Section Reset', type: :feature, js: true do
   scenario 'setter marks that they are resetting a section' do
-    setter = create :setter
     gym = create :tiny_boulder_gym
+    setter = create :setter, employed_at: gym
     section = gym.sections.first
     stubbed_sign_in setter
 
