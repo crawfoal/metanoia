@@ -31,9 +31,21 @@ RSpec.describe User, type: :model do
       user = create :athlete
       expect(user.athlete_story).to be_present
     end
+
+    context "the role isn't already defined" do
+      it "doesn't change the user's current role" do
+        user = create :user
+        expect { user.add_role :fake }.to_not change { user.current_role }
+      end
+
+      it "doesn't define a new role record" do
+        user = create :user
+        expect { user.add_role :fake }.to_not change { Role.count }
+      end
+    end
   end
 
-  describe '#add_role' do
+  describe '#employed_at?' do
     let(:gym) { create :gym }
     let(:setter) { create :setter, employed_at: gym }
 

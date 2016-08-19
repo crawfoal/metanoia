@@ -3,21 +3,21 @@
 
   #climbs
     - section.climbs.active.includes(:grade).each do |climb|
-      = link_to climb.grade.name,
-                athletes_climb_logs_path,
-                class: Climb.color_name_for(climb.color),
-                remote: true,
-                method: :post,
-                data: { params: { climb_log: { climb_id: climb.id } } }
+      = button_to climb.grade.name,
+                  athletes_climb_logs_path,
+                  class: climb.color_name,
+                  remote: true,
+                  method: :post,
+                  params: { 'climb_log[climb_id]': climb.id }
 
-  - if policy(Climb).new?
+  - if policy(Climb.new(section: section)).create?
     = link_to 'Add Climb',
               new_section_climb_path(section),
               remote: true,
               class: 'new-climb-link'
 
-  - if policy(Climb).update?
-    = button_tag 'Reset Section',
-                 type: 'button',
-                 id: 'reset',
-                 data: { link_template: section_climb_path(section.id, ':climb_id') }
+  - if policy(section).reset?
+    = button_to 'Reset Section',
+                section_reset_path(section),
+                id: 'reset',
+                remote: 'true'

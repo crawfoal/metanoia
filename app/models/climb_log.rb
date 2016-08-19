@@ -6,5 +6,5 @@ class ClimbLog < ActiveRecord::Base
   scope :in_section, ->(section) do
     joins(:climb).where(climbs: { section_id: section.id })
   end
-  delegate :grade, :color, to: :climb
+  delegate :grade, :color, :color_name, to: :climb
 end

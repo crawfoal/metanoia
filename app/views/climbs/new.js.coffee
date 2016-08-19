@@ -1,4 +1,8 @@
 $('.flash-notice').remove()
 $('.new-climb-link').hide()
-newClimbForm = "<%= escape_javascript(render 'form', climb: @climb) %>"
+$('#reset').hide()
+newClimbForm = $("<%= j render 'form', climb: @climb %>")
+newClimbForm.hide()
+$('form#new_climb').remove()
 $('#current_section').append(newClimbForm)
+newClimbForm.slideDown()

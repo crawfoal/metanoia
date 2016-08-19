@@ -27,4 +27,17 @@ RSpec.describe EmploymentsController, type: :controller do
     get :index, gym_id: gym.id
     expect_standard_not_authorized_response
   end
+
+  describe '#create' do
+    it 'cannot create new roles' do
+      athlete = create :athlete
+      gym = create :gym
+      params = {
+        employment_form: { email: athlete.email, role_name: 'faker' },
+        gym_id: gym.id
+      }
+      pretend_authorized :create?
+      expect { xhr :post, :create, params }.to_not change { Role.count }
+    end
+  end
 end

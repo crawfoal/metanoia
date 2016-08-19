@@ -102,6 +102,9 @@ group :test do
 
   # Use ammeter to provide helpers for testing generators
   gem 'ammeter'
+
+  # Allows us to create pretend models in the specs
+  gem 'activerecord-tableless'
 end
 
 group :development do

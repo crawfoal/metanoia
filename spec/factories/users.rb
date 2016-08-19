@@ -18,28 +18,31 @@ FactoryGirl.define do
 
     transient do
       employed_at nil # only supports one place of employment for now
+
       employment_role_stories do
-        valid_roles = roles.pluck(:name).keep_if do |role_name|
-          Employment.roles.include? role_name.to_sym
-        end
-        valid_roles.map do |role_name|
+        roles.pluck(:name).map do |role_name|
           send("#{role_name.underscore}_story")
+        end
+      end
+
+      employer_gym do
+        if !employed_at.present?
+          nil
+        elsif employed_at.respond_to? :employments
+          employed_at
+        else
+          Gym.where(employed_at).first
         end
       end
     end
 
     after :create do |user, evaluator|
-      gym = if evaluator.employed_at.respond_to? :employments
-              evaluator.employed_at
-            else
-              Gym.where(evaluator.employed_at).first
-            end
-      if evaluator.employed_at.present? && gym.present?
+      if evaluator.employer_gym.present?
         evaluator.employment_role_stories.each do |role_story|
           if user.persisted?
-            gym.employments.create(role_story: role_story)
+            evaluator.employer_gym.employments.create(role_story: role_story)
           else
-            gym.employments.build(role_story: role_story)
+            evaluator.employer_gym.employments.build(role_story: role_story)
           end
         end
       end

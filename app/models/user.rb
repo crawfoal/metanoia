@@ -30,10 +30,11 @@ class User < ActiveRecord::Base
   end
 
   def build_or_create_story(role_name)
+    return unless self.respond_to? "#{role_name}_story"
     if persisted?
-      try("create_#{role_name}_story")
+      send("create_#{role_name}_story")
     else
-      try("build_#{role_name}_story")
+      send("build_#{role_name}_story")
     end
   end
 end
