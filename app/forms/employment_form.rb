@@ -54,7 +54,7 @@ class EmploymentForm < BaseForm
         two_words_connector: ' or ',
         last_word_connector: ', or '
       )
-      errors.add(:role_name, "must be one of \"#{}\"")
+      errors.add(:role_name, "must be one of \"#{role_names_to_sentence}\"")
     end
   end
 
