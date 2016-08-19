@@ -6,7 +6,7 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
 
   describe '#create' do
     it 'uses strong parameters' do
-      login_user :athlete
+      create_and_login_user :athlete
       params = { climb_log: { climb_id: create(:climb).id }, format: 'js' }
 
       expect(subject).to permit(:climb_id).for(
@@ -14,9 +14,10 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
     end
 
     it 'sets a flash alert message when no climb is specified' do
-      login_user :athlete
+      athlete = create :athlete
+      login athlete
       params = {
-        climb_log: { athlete_story_id: User.first.athlete_story.id },
+        climb_log: { athlete_story_id: athlete.athlete_story.id },
         format: 'js'
       }
 
@@ -27,7 +28,7 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
 
     it "sets a flash alert message and redirects back when the user isn't an "\
        'athlete' do
-      login_user :setter
+      create_and_login_user :setter
       params = { climb_log: { climb_id: create(:climb).id }, format: 'js' }
       request.env["HTTP_REFERER"] = 'starting_page'
 
