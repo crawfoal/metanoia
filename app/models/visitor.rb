@@ -14,4 +14,8 @@ class Visitor
   def employed_at?(*_args)
     false
   end
+
+  def athlete_story
+    nil
+  end
 end
