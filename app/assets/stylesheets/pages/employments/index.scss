@@ -90,3 +90,13 @@ form.new_employment_form {
     }
   }
 }
+
+#new_employee {
+  h2 {
+    margin-bottom: $small-spacing/1em * 1rem;
+  }
+
+  p {
+    margin-bottom: (modular-scale(3)/1em * $small-spacing/1em) * 1em;
+  }
+}
