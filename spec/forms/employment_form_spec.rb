@@ -11,12 +11,20 @@ RSpec.describe EmploymentForm, type: :model do
   it { should validate_presence_of :role_name }
 
   it 'is invalid if the employment record is invalid' do
-    allow(valid_ef.to_model).to receive(:valid?).and_return(false)
+    allow(valid_ef.employment).to receive(:valid?).and_return(false)
     expect(valid_ef).to_not be_valid
   end
 
   it 'is invalid if a user cannot be found with the given email' do
     expect(build(:employment_form, :with_unregistered_email)).to_not be_valid
+  end
+
+  it 'is invalid if the role name is not in `Employment.list`' do
+    expect(build(:employment_form, role_name: 'fake')).to_not be_valid
+  end
+
+  it 'is invalid without a role name' do
+    expect(build(:employment_form, role_name: nil)).to_not be_valid
   end
 
   describe '#initialize' do

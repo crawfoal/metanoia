@@ -6,7 +6,7 @@ class EmploymentForm < BaseForm
 
   validates :email, presence: true
   validates :role_name, presence: true
-  validates :role_name, inclusion: { in: Employment.roles.map(&:to_s) }
+  validate :role_name_must_be_whitelisted
   validates :user, presence: true
 
   def initialize(attribs = {})
@@ -42,6 +42,20 @@ class EmploymentForm < BaseForm
 
   def submit_path
     url_helpers.gym_employments_path(gym)
+  end
+
+  # This allows us to have the `Employment.roles` list change while the
+  # application is running (that is why I didn't use the built in inclusion
+  # matcher). It allows means that it doesn't matter if this file is loaded
+  # before the role story models (during eager loading).
+  def role_name_must_be_whitelisted
+    unless role_name.present? && Employment.roles.include?(role_name.to_sym)
+      role_names_to_sentence = Employment.roles.to_sentence(
+        two_words_connector: ' or ',
+        last_word_connector: ', or '
+      )
+      errors.add(:role_name, "must be one of \"#{role_names_to_sentence}\"")
+    end
   end
 
   private
