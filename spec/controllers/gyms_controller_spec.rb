@@ -38,7 +38,7 @@ RSpec.describe GymsController, type: :controller do
 
   describe '#create' do
     before :each do
-      login_user :admin
+      create_and_login_user :admin
     end
 
     it 'uses strong parameters' do
@@ -68,7 +68,7 @@ RSpec.describe GymsController, type: :controller do
 
   describe '#update' do
     before :each do
-      login_user :admin
+      create_and_login_user :admin
     end
 
     it 'uses strong parameters' do

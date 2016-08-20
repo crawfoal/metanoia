@@ -58,4 +58,8 @@ FactoryGirl.define do
       end
     end
   end
+
+  factory :visitor do
+    skip_create
+  end
 end

@@ -25,9 +25,8 @@ RSpec.describe ClimbsController, type: :controller do
   end
 
   describe '#create' do
-    before(:each) { login_user :setter }
-
     it 'uses strong parameters' do
+      create_and_login_user :setter
       params = {
         section_id: 1,
         climb: attributes_for(:climb, :with_grade, :with_color),
