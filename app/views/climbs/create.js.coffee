@@ -1,4 +1,3 @@
-$('main').before("<%= escape_javascript(render_flash) %>")
 $('form#new_climb').remove()
 sectionId = $('#current_section').data('section-id')
 if sectionId

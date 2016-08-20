@@ -1,2 +1,1 @@
-$('body > [class*="flash-"]').slideUp()
-$('main').before("<%= escape_javascript(render_flash) %>")
+# nothing to do - only need to render the flash, which is done in the js layout
