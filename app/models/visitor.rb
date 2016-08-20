@@ -18,4 +18,12 @@ class Visitor
   def athlete_story
     nil
   end
+
+  def roles
+    []
+  end
+
+  def has_role?(*_args)
+    false
+  end
 end
