@@ -21,8 +21,16 @@ class Athletes::ClimbLogsController < ApplicationController
 
   def verify_current_user_is_athlete
     unless current_user.has_role? :athlete
-      flash[:alert] = 'Sorry, only athletes have a climb log.'
-      redirect_to :back
+      respond_to do |format|
+        format.html do
+          flash[:alert] = 'Sorry, only athletes have a climb log.'
+          redirect_to :back
+        end
+
+        format.js do
+          flash.now[:alert] = 'Sorry, only athletes have a climb log.'
+        end
+      end
     end
   end
 end
