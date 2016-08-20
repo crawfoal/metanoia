@@ -10,7 +10,7 @@
         = link_to 'Gyms', gyms_path
       %li.nav-link
         = link_to 'Ipsum', '#'
-      - if user_signed_in? && current_user.has_role?(:athlete)
+      - if user_signed_in? && (current_user.current_role == 'athlete')
         %li.nav-link
           = link_to 'My Log', athletes_climb_logs_path
     - if user_signed_in?
