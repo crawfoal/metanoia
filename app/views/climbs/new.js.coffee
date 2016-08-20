@@ -1,4 +1,3 @@
-$('.flash-notice').remove()
 $('.new-climb-link').hide()
 $('#reset').hide()
 newClimbForm = $("<%= j render 'form', climb: @climb %>")

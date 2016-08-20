@@ -1,0 +1,5 @@
+$('body > [class*="flash-"]').slideUp();
+$('body > [class*="flash-"]').remove();
+$('main').before("<%= j render_flash %>");
+
+<%= yield %>
