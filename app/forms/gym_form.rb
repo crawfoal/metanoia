@@ -6,9 +6,6 @@ class GymForm < BaseForm
   def initialize(gym = nil)
     @gym = gym || Gym.new
     @sections = @gym.sections.to_a
-    if @sections.empty?
-      @sections << Section.new
-    end
   end
 
   def attributes=(attribs)
@@ -45,6 +42,10 @@ class GymForm < BaseForm
 
   def to_partial_path
     'gyms/form'
+  end
+
+  def add_section
+    sections << Section.new
   end
 
   private
