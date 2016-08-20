@@ -29,6 +29,7 @@ class Athletes::ClimbLogsController < ApplicationController
 
         format.js do
           flash.now[:alert] = 'Sorry, only athletes have a climb log.'
+          render
         end
       end
     end

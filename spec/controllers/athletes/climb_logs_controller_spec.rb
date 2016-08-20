@@ -34,6 +34,19 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
 
       xhr :post, :create, params
 
+      expect(flash[:alert]).to eq 'Sorry, only athletes have a climb log.'
+    end
+  end
+
+  describe '#index' do
+    it "sets a flash alert message and redirects back when the user isn't an "\
+       'athlete' do
+      create_and_login_user :setter
+      params = { climb_log: { climb_id: create(:climb).id }, format: 'js' }
+      request.env['HTTP_REFERER'] = 'starting_page'
+
+      get :index
+
       expect(response).to redirect_to 'starting_page'
       expect(flash[:alert]).to eq 'Sorry, only athletes have a climb log.'
     end
