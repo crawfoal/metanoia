@@ -30,7 +30,7 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
        'athlete' do
       create_and_login_user :setter
       params = { climb_log: { climb_id: create(:climb).id }, format: 'js' }
-      request.env["HTTP_REFERER"] = 'starting_page'
+      request.env['HTTP_REFERER'] = 'starting_page'
 
       xhr :post, :create, params
 
