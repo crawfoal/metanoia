@@ -3,10 +3,11 @@ class GymsController < ApplicationController
 
   def new
     @gym_form ||= GymForm.new
+    @gym_form.add_section
   end
 
   def create
-    @gym_form = GymForm.new
+    @gym_form ||= GymForm.new
     @gym_form.attributes = gym_form_params
     if @gym_form.save
       redirect_to gyms_path, notice: 'New gym successfully created!'
