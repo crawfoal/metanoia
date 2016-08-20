@@ -3,9 +3,9 @@ class Athletes::ClimbLogsController < ApplicationController
 
   def create
     if ClimbLogger.new(climb_log_params, current_user).log
-      flash[:notice] = 'Climb successfully logged!'
+      flash.now[:notice] = 'Climb successfully logged!'
     else
-      flash[:alert] = 'Failed to log climb!'
+      flash.now[:alert] = 'Failed to log climb!'
     end
   end
 
