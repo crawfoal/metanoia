@@ -10,21 +10,24 @@ RSpec.describe EmploymentsController, type: :controller do
   end
 
   it 'should check authorization for #create' do
-    user = create :manager
-    gym = create :gym
     params = {
-      employment_form: { email: user.email, role_name: 'manager' },
-      gym_id: gym.id
+      employment_form: { email: 'email@example.com', role_name: 'manager' },
+      gym_id: 1
     }
     pretend_not_authorized :create?
+
     xhr :post, :create, params
+
     expect_standard_not_authorized_response
   end
 
   it 'should check authorization for #index' do
-    gym = create :gym
+    gym = build_stubbed :gym
+    allow(Gym).to receive(:find).with(gym.id.to_s).and_return(gym)
     pretend_not_authorized :index?, 'EmployeeListPolicy'
+
     get :index, gym_id: gym.id
+
     expect_standard_not_authorized_response
   end
 
@@ -37,6 +40,7 @@ RSpec.describe EmploymentsController, type: :controller do
         gym_id: gym.id
       }
       pretend_authorized :create?
+
       expect { xhr :post, :create, params }.to_not change { Role.count }
     end
   end
