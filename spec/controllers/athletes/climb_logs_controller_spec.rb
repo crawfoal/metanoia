@@ -26,8 +26,7 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
       expect(flash[:alert]).to be_present
     end
 
-    it "sets a flash alert message and redirects back when the user isn't an "\
-       'athlete' do
+    it "sets a flash alert message and when the user isn't an athlete" do
       create_and_login_user :setter
       params = { climb_log: { climb_id: create(:climb).id }, format: 'js' }
       request.env['HTTP_REFERER'] = 'starting_page'
