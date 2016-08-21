@@ -1,9 +1,10 @@
 FactoryGirl.define do
   factory :employment_form do
-    initialize_with { new(attributes.merge(gym_id: create(:gym).id)) }
+    initialize_with { new(attributes.merge(gym_id: gym.id)) }
 
     transient do
       user { create :setter }
+      gym { create :gym }
     end
 
     email { user.email }
