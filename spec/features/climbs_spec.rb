@@ -39,6 +39,7 @@ RSpec.feature 'Climbs', type: :feature, js: true do
     click_on 'Section 1'
     click_on 'Add Climb'
 
+    wait_for_ajax
     climb_form = PageObjects::Climbs::Form.on_page!
     climb_form.submit
 
