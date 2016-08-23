@@ -1,5 +1,4 @@
 require 'generator_helper'
-require "#{Rails.root}/lib/generators/seed_migration/seed_migration_generator"
 
 RSpec.describe SeedMigrationGenerator, type: :generator do
   before :each do
