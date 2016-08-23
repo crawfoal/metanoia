@@ -58,6 +58,7 @@ RSpec.describe ExtractValue do
         body: 'I finally understand method resolution in Ruby!',
         author_name: 'Amanda Dolan'
       }
+
       expect(m::Comment.new(value).value).to eq value
     end
 
@@ -86,12 +87,14 @@ RSpec.describe ExtractValue do
       class m::Qlass
         include ExtractValue
       end
+
       expect(m::Qlass.new.value).to be_nil
     end
 
     it "doesn't include collection keys pointing to nil values when the "\
        'collection is empty' do
       post = m::Post.new(body: 'Post body')
+      
       expect(post.value).to eq(body: 'Post body')
     end
 
