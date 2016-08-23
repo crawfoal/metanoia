@@ -9,8 +9,7 @@ RSpec.describe TableDependencyGraph do
 
       sorted_table_names = tdg.tsort
 
-      expect(sorted_table_names.last).to eq 'grades'
-      expect(sorted_table_names.length).to eq 3
+      expect(sorted_table_names).to eq %w(grade_systems buckets grades)
     end
 
     it 'works properly when there is a polymorphic association' do
