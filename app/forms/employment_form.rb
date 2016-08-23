@@ -67,7 +67,7 @@ class EmploymentForm < BaseForm
 
   def pull_in_employment_errors
     form_errors.messages[:employment] = \
-      employment.errors.full_messages.map { |error| error[0].downcase }
+      employment.errors.full_messages.map { |error| error.downcase }
   end
 
   def user
