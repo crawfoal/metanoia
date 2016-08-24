@@ -6,6 +6,12 @@ RSpec.describe 'db:populate', type: :task do
     run_rake_task 'db:populate'
   end
 
+  after :all do
+    DatabaseCleaner.strategy =
+      DatabaseCleanerHelper.truncation_except_seeded_tables
+    DatabaseCleaner.clean
+  end
+
   it 'creates the four gyms we have factories for, plus the sample gym' do
     expect(Gym.count).to eq 5
     [
@@ -93,10 +99,5 @@ RSpec.describe 'db:populate', type: :task do
     role_names.reduce(User.with_role(role_names.shift)) do |result, role_name|
       result & User.with_role(role_name)
     end
-  end
-
-  after :all do
-    DatabaseCleaner.strategy = DatabaseCleanerHelper.truncation_except_seeded_tables
-    DatabaseCleaner.clean
   end
 end
