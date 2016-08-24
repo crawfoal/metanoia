@@ -23,8 +23,8 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
       assign(:gyms, [employer_gym, other_gym])
 
       render
-      index_page = PageObjects::Gyms::Index.from_string!(rendered)
 
+      index_page = PageObjects::Gyms::Index.from_string!(rendered)
       expect(index_page).to have_employee_list_link_for employer_gym
       expect(index_page).to_not have_employee_list_link_for other_gym
     end
