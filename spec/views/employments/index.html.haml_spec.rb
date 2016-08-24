@@ -8,7 +8,9 @@ RSpec.describe 'employments/index.html.haml', type: :view do
       allow(controller).to receive(:current_user).and_return(setter)
       assign(:employee_list, EmployeeList.new(gym))
       assign(:employment_form, EmploymentForm.new(gym_id: gym.id))
+
       render
+
       expect(rendered).to include gym.name
       expect(rendered).to_not have_content 'Add New Employee'
       expect(rendered).to_not have_selector '#new_employment_form'

@@ -33,32 +33,52 @@ class TableDependencyGraph
     end
 
     def parent_to?(other_table)
-      other_table.child_associations.any? do |association|
-        if association.polymorphic?
-          polymorphic_parent_as? association.name
+      other_table.associations_where_i_am_a_child.any? do |child_association|
+        if child_association.polymorphic?
+          am_i_a_polymorphic_parent_for? child_association.name
         else
-          association.name == singular_association_name
+          child_association.name == my_derived_singular_association_name
         end
       end
     end
 
-    def child_associations
+    def associations_where_i_am_a_child
       @model_klass.reflect_on_all_associations(:belongs_to)
     end
 
-    def parent_associations
+    def associations_where_i_am_a_parent
       @model_klass.reflect_on_all_associations.select do |association|
         [:has_one, :has_many].include? association.macro
       end
     end
 
-    def polymorphic_parent_as?(association_name)
-      parent_associations.any? do |association|
+    # For example, suppose:
+    # ```ruby
+    # class Comment < ActiveRecord::Base
+    #   belongs_to :commentable, polymorphic: true
+    # end
+    #
+    # class Article
+    #   has_many :comments, as: :commentable
+    # end
+    #
+    # class Photo
+    #   has_many :comments, as: :commentable
+    # end
+    # ```
+    #
+    # Then
+    # ```ruby
+    # articles_ti = TableInspector.new(:articles)
+    # articles_ti.am_i_a_polymorphic_parent_for? :commentable # => true
+    # ```
+    def am_i_a_polymorphic_parent_for?(association_name)
+      associations_where_i_am_a_parent.any? do |association|
         association.options[:as] == association_name
       end
     end
 
-    def singular_association_name
+    def my_derived_singular_association_name
       @model_klass.model_name.singular.to_sym
     end
   end

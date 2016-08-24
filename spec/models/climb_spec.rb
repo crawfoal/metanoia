@@ -18,6 +18,7 @@ RSpec.describe Climb, type: :model do
     it 'returns only climbs that have no teardown date, or have one in the future' do
       climb = create :climb
       old_climb = create :climb, :not_active
+
       expect(Climb.active.ids).to include climb.id
       expect(Climb.active.ids).to_not include old_climb.id
     end
@@ -39,14 +40,16 @@ RSpec.describe Climb, type: :model do
        section = create :section
        section.climbs << build(:climb)
        section.save!
+
        expect(Section.count).to eq 1
     end
   end
 
-  context 'no grade is specified for the climb' do
-    it 'is assigned the null grade object' do
-      section = create :section
-      climb = Boulder.create(section: section)
+  describe '#set_grade_default_if_blank' do
+    it 'when no grade is specified for the climb, it is assigned the null '\
+       'grade object' do
+      climb = create :climb, grade: nil
+
       expect(climb.grade).to eq Grade.null_object
     end
   end

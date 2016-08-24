@@ -7,5 +7,11 @@ FactoryGirl.define do
         employment.role_story = build(:setter).setter_story
       end
     end
+
+    trait :without_role_story do
+      after :build do |employment|
+        employment.role_story = nil
+      end
+    end
   end
 end

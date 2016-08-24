@@ -9,7 +9,6 @@ RSpec.describe ClimbLogsTree do
       log_all_climbs(boulder_gym, athlete)
       route_gym = create :tiny_route_gym
       log_all_climbs(route_gym, athlete)
-
       climb_logs_tree = ClimbLogsTree.new(athlete.athlete_story)
 
       expect { |b| climb_logs_tree.each(&b) }.to yield_control.twice

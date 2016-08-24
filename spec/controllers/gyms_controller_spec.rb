@@ -10,38 +10,39 @@ RSpec.describe GymsController, type: :controller do
 
   it 'should check authorization for #new' do
     pretend_not_authorized :new?
+
     get :new
+
     expect_standard_not_authorized_response
   end
 
   it 'should check authorization for #create' do
-    params = { gym_form: attributes_for(:gym, :with_name) }
     pretend_not_authorized :create?
-    post :create, params
+
+    post :create, gym_form: attributes_for(:gym, :with_name)
+
     expect_standard_not_authorized_response
   end
 
   it 'should check authorization for #edit' do
-    gym = create :gym
     pretend_not_authorized :edit?
-    get :edit, id: gym.id
+
+    get :edit, id: 1
+
     expect_standard_not_authorized_response
   end
 
   it 'should check authorization for #update' do
-    gym = create :gym
-    params = { id: gym.id, gym_form: attributes_for(:gym, :with_name) }
     pretend_not_authorized :update?
-    get :update, params
+
+    get :update, id: 1, gym_form: attributes_for(:gym, :with_name)
+
     expect_standard_not_authorized_response
   end
 
   describe '#create' do
-    before :each do
-      create_and_login_user :admin
-    end
-
     it 'uses strong parameters' do
+      create_and_login_user :admin
       params = { gym_form: build(:gym).attributes }
 
       expect(subject).to permit(
@@ -56,23 +57,27 @@ RSpec.describe GymsController, type: :controller do
       render_views
 
       it 're-renders the form' do
+        create_and_login_user :admin
+
         post :create, params_for_gym_with_no_data
+
         expect(response).to render_template :new
       end
       it 'displays the error messages' do
+        create_and_login_user :admin
+
         post :create, params_for_gym_with_no_data
+
         expect(response.body).to include_errors
       end
     end
   end
 
   describe '#update' do
-    before :each do
-      create_and_login_user :admin
-    end
-
     it 'uses strong parameters' do
-      gym = create :gym
+      create_and_login_user :admin
+      gym = build_stubbed :gym
+      allow(Gym).to receive(:find).with(gym.id.to_s).and_return(gym)
       params = {
         id: gym.id,
         gym_form: attributes_for(:gym, :with_name)
@@ -87,16 +92,22 @@ RSpec.describe GymsController, type: :controller do
     context 'when all params are blank and/or not present' do
       render_views
 
-      let(:gym) { create :gym }
-
-      before :each do
-        patch :update, params_for_gym_with_no_data.merge(id: gym.id)
-      end
-
       it 're-renders the form', focus: true do
+        create_and_login_user :admin
+        gym = build_stubbed :gym
+        allow(Gym).to receive(:find).with(gym.id.to_s).and_return(gym)
+
+        patch :update, params_for_gym_with_no_data.merge(id: gym.id)
+
         expect(response).to render_template :edit
       end
       it 'displays the error messages' do
+        create_and_login_user :admin
+        gym = build_stubbed :gym
+        allow(Gym).to receive(:find).with(gym.id.to_s).and_return(gym)
+
+        patch :update, params_for_gym_with_no_data.merge(id: gym.id)
+
         expect(response.body).to include_errors
       end
     end
@@ -107,7 +118,9 @@ RSpec.describe GymsController, type: :controller do
       gym = create :gym, :with_named_section
       inactive_route = create :route, :with_grade, :not_active,
                               section: gym.sections.first
+
       get :show, id: inactive_route.gym.id
+
       rh_data_hash = Hash[assigns(:route_histogram).data]
       expect(rh_data_hash[inactive_route.grade.bucket.name]).to eq 0
     end
@@ -116,7 +129,9 @@ RSpec.describe GymsController, type: :controller do
       gym = create :gym, :with_named_section
       inactive_boulder = create :boulder, :with_grade, :not_active,
                                 section: gym.sections.first
+
       get :show, id: inactive_boulder.gym.id
+
       rh_data_hash = Hash[assigns(:boulder_histogram).data]
       expect(rh_data_hash[inactive_boulder.grade.bucket.name]).to eq 0
     end
