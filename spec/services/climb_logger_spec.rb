@@ -1,61 +1,52 @@
 require 'rails_helper'
 
 RSpec.describe ClimbLogger do
-  let(:valid_params) do
-    climb = create :climb
-    { climb_id: climb.id }
-  end
-
-  let(:athlete) { create :athlete }
-
   describe '#log' do
     context 'with valid parameters for the climb_log' do
       it 'creates a new climb log' do
-        expect { ClimbLogger.new(valid_params, athlete).log }.to \
-          change { ClimbLog.count }.by(1)
+        expect { build(:climb_logger).log }.to change { ClimbLog.count }.by(1)
       end
 
       it "creates a membership for the user and gym if one doesn't exist" do
-        expect { ClimbLogger.new(valid_params, athlete).log }.to \
-          change { Membership.count }.by(1)
+        expect { build(:climb_logger).log }.to change { Membership.count }.by(1)
       end
 
       it 'returns a truthy value' do
-        expect(ClimbLogger.new(valid_params, athlete).log).to be_truthy
+        expect(build(:climb_logger).log).to be_truthy
       end
     end
 
     context 'with invalid parameters for the climb log' do
       it "doesn't create a new climb log" do
-        expect { ClimbLogger.new({}, athlete).log }.to_not \
-          change { ClimbLog.count }
+        climb_logger = build :climb_logger, :with_invalid_climb_log_params
+
+        expect { climb_logger.log }.to_not change { ClimbLog.count }
       end
 
-      it "creates a membership for the user and gym if one doesn't exist" do
-        expect { ClimbLogger.new({}, athlete).log }.to_not \
-          change { Membership.count }
+      it "doesn't create a membership for the user and gym" do
+        climb_logger = build :climb_logger, :with_invalid_climb_log_params
+
+        expect { climb_logger.log }.to_not change { Membership.count }
       end
 
       it 'returns a falsey value' do
-        expect(ClimbLogger.new({}, athlete).log).to be_falsey
+        climb_logger = build :climb_logger, :with_invalid_climb_log_params
+
+        expect(climb_logger.log).to be_falsey
       end
     end
 
-    context 'when the user has already logged a climb at that gym' do
-      before :each do
-        ClimbLogger.new(valid_params, athlete).log
-        previous_climb = Climb.find(valid_params[:climb_id])
-        another_climb = create :climb, section: previous_climb.section
-        valid_params[:climb_id] = another_climb.id
-      end
-
+    context 'when the user is already a member at that gym' do
       it "doesn't create another membership record" do
-        expect { ClimbLogger.new(valid_params, athlete).log }.to_not \
-          change { Membership.count }
+        climb_logger = build :climb_logger, :user_is_already_a_member_at_gym
+
+        expect { climb_logger.log }.to_not change { Membership.count }
       end
 
       it 'returns a truthy value' do
-        expect(ClimbLogger.new(valid_params, athlete).log).to be_truthy
+        climb_logger = build :climb_logger, :user_is_already_a_member_at_gym
+
+        expect(climb_logger.log).to be_truthy
       end
     end
   end
