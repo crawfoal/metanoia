@@ -76,7 +76,7 @@ guard :rspec, cmd: "NO_COVERAGE=true bundle exec rspec" do
   watch("app/policies/application_policy.rb") { "#{rspec.spec_dir}/policies" }
 
   # View Helpers
-  watch("app/views/layouts/_flash.html.haml") do
+  watch("app/views/shared/_flash.html.haml") do
     "#{rspec.spec_dir}/helpers/flash_helper_spec.rb"
   end
 

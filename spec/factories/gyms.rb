@@ -5,12 +5,19 @@ module GymFactoryHelper
       gym.sections << FactoryGirl.build(:section, name: section_name)
     end
   end
+
+  def self.create_employees(gym, evaluator)
+    evaluator.num_employees.times do
+      FactoryGirl.create Employment.roles.sample, employed_at: gym
+    end
+  end
 end
 
 FactoryGirl.define do
   factory :gym do
     transient do
       section_names []
+      num_employees 0
     end
 
     after :build do |gym, evaluator|
@@ -23,6 +30,10 @@ FactoryGirl.define do
       if gym.value.blank?
         gym.name = 'Gym Name'
       end
+    end
+
+    after :create do |gym, evaluator|
+      GymFactoryHelper.create_employees(gym, evaluator)
     end
 
     trait :with_name do

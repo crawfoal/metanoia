@@ -2,15 +2,6 @@ require 'rails_helper'
 
 RSpec.describe GymForm do
   describe '#initialize' do
-    context 'when given no arguments' do
-      it 'builds a new gym with one section' do
-        gym_form = GymForm.new
-
-        expect(gym_form.sections.size).to eq 1
-        expect(gym_form.sections.first).to be_a_new_record
-      end
-    end
-
     context 'when given a gym record' do
       it "makes the record's attributes available through the form object" do
         gym = build :gym, :with_name, :with_named_section
@@ -103,6 +94,16 @@ RSpec.describe GymForm do
       gym_form.save
 
       expect(gym.sections).to be_empty
+    end
+  end
+
+  describe '#add_section' do
+    it 'adds a new section' do
+      gym = create :gym
+      gym_form = GymForm.new(gym)
+
+      expect { gym_form.add_section }.to \
+        change { gym_form.sections.count }.by(1)
     end
   end
 end

@@ -10,9 +10,8 @@ RSpec.feature 'Employee List', type: :feature, js: true do
   end
 
   scenario 'admin or manager views employee list and adds a new setter' do
-    setter = create :setter
+    setter = create :setter, other_roles: :manager
     create :employment, gym: gym, role_story: setter.setter_story
-    setter.add_role :manager
     create :employment, gym: gym, role_story: setter.manager_story
 
     visit gyms_path

@@ -1,0 +1,8 @@
+oldFlashes = $('body > [class*="flash-"]')
+oldFlashes.slideUp();
+oldFlashes.promise().done( function() {
+  oldFlashes.remove();
+  $('main').before("<%= j render_flash %>");
+});
+
+<%= yield %>

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe EmployeeListPolicy do
   let(:employee_list) { create :employee_list }
+
   subject { EmployeeListPolicy.new(user, employee_list) }
 
   context 'for an employee of the gym' do

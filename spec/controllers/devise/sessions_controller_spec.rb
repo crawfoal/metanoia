@@ -6,9 +6,10 @@ RSpec.describe Devise::SessionsController, type: :controller do
       render_views
 
       it 'displays a flash message' do
-        params = { email: 'amanda@example.com' }
         set_devise_mapping
-        post :create, params
+
+        post :create, email: 'amanda@example.com'
+
         expect(response.body).to include 'Invalid email or password.'
       end
     end

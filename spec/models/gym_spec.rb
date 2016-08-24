@@ -8,15 +8,8 @@ RSpec.describe Gym, type: :model do
   it { should belong_to :route_grade_system }
   it { should belong_to :boulder_grade_system }
   it { should have_many :employments }
-
-  it do
-    should delegate_method(:grades).to(:route_grade_system).with_prefix(:route)
-  end
-
-  it do
-    should delegate_method(:grades).to(
-      :boulder_grade_system).with_prefix(:boulder)
-  end
+  it { should respond_to :route_grades }
+  it { should respond_to :boulder_grades }
 
   it 'is invalid if `#value` is blank' do
     expect(Gym.new).to_not be_valid
@@ -25,6 +18,7 @@ RSpec.describe Gym, type: :model do
   describe '#routes' do
     it 'returns all the routes for each section in the gym' do
       trg = create :tiny_route_gym
+
       expect(trg.routes.count).to eq \
         trg.sections.map(&:climbs).map(&:count).reduce(&:+)
       expect(trg.routes.first).to be_a Climb
@@ -34,6 +28,7 @@ RSpec.describe Gym, type: :model do
   describe '#boulders' do
     it 'returns all the boulders for each section in the gym' do
       tbg = create :tiny_boulder_gym
+
       expect(tbg.boulders.count).to eq \
         tbg.sections.map(&:climbs).map(&:count).reduce(&:+)
       expect(tbg.boulders.first).to be_a Climb

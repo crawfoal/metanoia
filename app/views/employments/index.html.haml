@@ -6,5 +6,9 @@
   = render partial: 'employee', collection: @employee_list.employees
 
 - if policy(@employment_form.employment).new?
-  %h2 Add New Employee
-  = render_as_local :employment_form
+  #new_employee
+    %h2 Add New Employee
+    %p
+      To give an existing employee another role, simply enter their email and
+      select the desired role.
+    = render_as_local :employment_form

@@ -19,7 +19,7 @@ h6 {
 
 @for $i from 1 through $max-header-to-increase-font-size {
   h#{$i} {
-    font-size: modular-scale($increment: $max-header-to-increase-font-size + 1 - $i, $ratio: $major-third);
+    font-size: modular-scale($max-header-to-increase-font-size + 1 - $i);
   }
 }
 

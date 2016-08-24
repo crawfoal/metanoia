@@ -3,9 +3,13 @@ module DeviseHelper
     @request.env['devise.mapping'] = Devise.mappings[:user]
   end
 
-  def login_user(factory_name = :user)
-    @request.env['devise.mapping'] = Devise.mappings[:user]
+  def create_and_login_user(factory_name = :user)
     user = create(factory_name)
+    login user
+  end
+
+  def login(user)
+    @request.env['devise.mapping'] = Devise.mappings[:user]
     sign_in user
   end
 end

@@ -4,7 +4,7 @@ module FlashHelper
     types_to_display.each do |type|
       next if flash[type].blank?
       rendered_flashes << render(
-        partial: 'layouts/flash',
+        partial: 'shared/flash',
         locals: { type: type, message: flash[type] }
       )
     end
