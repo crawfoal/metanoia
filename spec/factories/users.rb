@@ -1,11 +1,11 @@
 FactoryGirl.define do
-  ROLE_NAMES = [:admin, :athlete, :setter, :manager].freeze
+  role_names = [:admin, :athlete, :setter, :manager].freeze
 
   sequence :email do |n|
     "user#{n}@example.com"
   end
 
-  ROLE_NAMES.each do |role_name|
+  role_names.each do |role_name|
     sequence "#{role_name}_email".to_sym do |n|
       "#{role_name}#{n}@example.com"
     end
@@ -41,19 +41,26 @@ FactoryGirl.define do
         evaluator.employment_role_stories.each do |role_story|
           if user.persisted?
             evaluator.employer_gym.employments.create(role_story: role_story)
-          else
+          else # TODO: I don't think this every actually runs...
             evaluator.employer_gym.employments.build(role_story: role_story)
           end
         end
       end
     end
 
-    ROLE_NAMES.each do |role_name|
+    role_names.each do |role_name|
       factory role_name do
         email { generate "#{role_name}_email".to_sym }
 
-        after :build do |user|
+        transient do
+          other_roles nil
+        end
+
+        after :build do |user, evaluator|
           user.add_role role_name
+          Array(evaluator.other_roles).each do |role_name|
+            user.add_role role_name
+          end
         end
       end
     end

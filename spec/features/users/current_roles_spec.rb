@@ -2,8 +2,7 @@ require 'feature_helper'
 
 RSpec.feature 'User Roles', type: :feature, js: true do
   scenario 'user switches current role' do
-    user = create :admin
-    user.add_role :athlete
+    user = create :admin, other_roles: :athlete
     stubbed_sign_in user
 
     visit root_path

@@ -25,11 +25,7 @@ RSpec.describe GymPolicy do
   end
 
   context "for an admin who's current role isn't admin" do
-    let(:user) do
-      user = create :athlete
-      user.add_role :admin
-      user
-    end
+    let(:user) { create :athlete, other_roles: :admin }
 
     it { should forbid_new_and_create_actions }
     it { should forbid_edit_and_update_actions }

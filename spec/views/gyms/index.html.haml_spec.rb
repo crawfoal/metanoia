@@ -3,8 +3,7 @@ require 'view_helper'
 RSpec.describe 'gyms/index.html.haml', type: :view do
   context "when the user's current role isn't admin" do
     it "doesn't show the link to create a new gym" do
-      user = create :athlete
-      user.add_role :admin
+      user = create :athlete, other_roles: :admin
       allow(controller).to receive(:current_user).and_return(user)
       assign(:gyms, create_list(:gym, 2))
 
