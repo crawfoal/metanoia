@@ -19,7 +19,7 @@ RSpec.describe GymsController, type: :controller do
   it 'should check authorization for #create' do
     pretend_not_authorized :create?
 
-    post :create, { gym_form: attributes_for(:gym, :with_name) }
+    post :create, gym_form: attributes_for(:gym, :with_name)
 
     expect_standard_not_authorized_response
   end
@@ -35,7 +35,7 @@ RSpec.describe GymsController, type: :controller do
   it 'should check authorization for #update' do
     pretend_not_authorized :update?
 
-    get :update, { id: 1, gym_form: attributes_for(:gym, :with_name) }
+    get :update, id: 1, gym_form: attributes_for(:gym, :with_name)
 
     expect_standard_not_authorized_response
   end

@@ -119,7 +119,7 @@ RSpec.describe EmploymentForm, type: :model do
       ef = create :employment_form
 
       employee = ef.to_employee
-      
+
       expect(employee.email).to eq ef.email
     end
   end

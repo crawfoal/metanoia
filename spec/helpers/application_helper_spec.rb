@@ -10,7 +10,7 @@ RSpec.describe ApplicationHelper, type: :helper do
       expect(helper.render_as_local(:employment_form)).to eq \
         helper.render(
           partial: 'employments/form',
-          locals: { employment_form:  employment_form}
+          locals: { employment_form:  employment_form }
         ) # in the view/controller,     ^this is actually @employment_form
     end
 

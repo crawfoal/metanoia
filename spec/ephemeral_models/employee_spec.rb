@@ -15,7 +15,7 @@ RSpec.describe Employee do
       gym = create :gym
       user = create :setter, employed_at: gym
       employee = Employee.new(email: user.email, gym_id: gym.id)
-      
+
       expect { employee.roles }.to_not raise_error
     end
   end

@@ -8,7 +8,7 @@ RSpec.describe SectionsController, type: :controller do
     pretend_not_authorized :new?
 
     xhr :get, :new
-    
+
     expect_standard_not_authorized_response
   end
 end

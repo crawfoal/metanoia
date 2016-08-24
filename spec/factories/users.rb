@@ -58,8 +58,8 @@ FactoryGirl.define do
 
         after :build do |user, evaluator|
           user.add_role role_name
-          Array(evaluator.other_roles).each do |role_name|
-            user.add_role role_name
+          Array(evaluator.other_roles).each do |other_role_name|
+            user.add_role other_role_name
           end
         end
       end

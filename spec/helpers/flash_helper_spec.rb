@@ -33,7 +33,7 @@ RSpec.describe FlashHelper, type: :helper do
 
       # perform the actual test
       allow(helper).to receive(:flash).and_return(alert: '')
-      
+
       expect(helper.render_flash).to be_blank
     end
   end

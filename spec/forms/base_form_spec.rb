@@ -53,7 +53,7 @@ RSpec.describe BaseForm do
     it 'raises an error if the record is not valid' do
       form = SomeForm.new
       allow(form).to receive(:valid?).and_return(false)
-      
+
       expect { form.save! }.to \
         raise_error(/errors:\n\tmessage 1\n\tmessage 2\n/)
     end
