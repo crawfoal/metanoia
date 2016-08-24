@@ -22,7 +22,7 @@ RSpec.describe 'gyms/show.html.haml', type: :view do
       assign(:boulder_histogram, build(:climb_histogram, :empty_stub))
 
       render
-      
+
       expect(rendered).to_not have_selector '.route-histogram'
       expect(rendered).to_not have_selector '.boulder-histogram'
     end

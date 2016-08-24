@@ -16,7 +16,8 @@ RSpec.describe User, type: :model do
     it "sets the user's current role if it isn't already set" do
       user = build :user
 
-      expect { user.add_role :athlete }.to change { user.current_role }.to('athlete')
+      expect { user.add_role :athlete }.to \
+        change { user.current_role }.to('athlete')
     end
 
     it "doesn't set the user's current role if it is already defined" do

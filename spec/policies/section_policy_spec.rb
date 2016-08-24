@@ -23,7 +23,7 @@ RSpec.describe SectionPolicy do
 
   context 'for a setter who does not work at the gym' do
     let(:user) { create :setter }
-    
+
     it { should forbid_action :reset }
   end
 end

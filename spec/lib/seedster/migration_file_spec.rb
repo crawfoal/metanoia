@@ -19,7 +19,7 @@ RSpec.describe Seedster::MigrationFile do
         "#{Rails.root}/spec/lib/seedster/sample_migrations/"\
         "20160511115239_create_sam.rb"
       )
-      
+
       expect(migration.instantiate_migration).to be_a CreateSam
     end
   end

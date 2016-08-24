@@ -94,7 +94,7 @@ RSpec.describe ExtractValue do
     it "doesn't include collection keys pointing to nil values when the "\
        'collection is empty' do
       post = m::Post.new(body: 'Post body')
-      
+
       expect(post.value).to eq(body: 'Post body')
     end
 

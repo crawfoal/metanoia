@@ -46,7 +46,7 @@ climb_#{midnight_lightning.id}:
       dest_folder = "#{Rails.root}/tmp"
 
       Climb.export_fixtures into: dest_folder
-      
+
       expect(File.read("#{dest_folder}/climbs.yml")).to \
         include Climb.to_fixtures
     end
