@@ -10,5 +10,13 @@ FactoryGirl.define do
       climbs { gym.send(climb_type.downcase.pluralize) }
       grade_system { gym.send("#{climb_type.downcase}_grade_system") }
     end
+
+    trait :empty_stub do
+      transient do
+        gym nil
+        climbs Climb.none
+        grade_system { build_stubbed(:grade_system, :without_buckets) }
+      end
+    end
   end
 end
