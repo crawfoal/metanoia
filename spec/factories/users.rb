@@ -1,11 +1,9 @@
 FactoryGirl.define do
-  role_names = [:admin, :athlete, :setter, :manager].freeze
-
   sequence :email do |n|
     "user#{n}@example.com"
   end
 
-  role_names.each do |role_name|
+  Role.pluck(:name).each do |role_name|
     sequence "#{role_name}_email".to_sym do |n|
       "#{role_name}#{n}@example.com"
     end
@@ -48,7 +46,7 @@ FactoryGirl.define do
       end
     end
 
-    role_names.each do |role_name|
+    Role.pluck(:name).each do |role_name|
       factory role_name do
         email { generate "#{role_name}_email".to_sym }
 
