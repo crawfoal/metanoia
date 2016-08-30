@@ -21,7 +21,8 @@ RSpec.describe ClimbHistogram do
 
       it 'includes all of the climbs' do
         histogram = build :climb_histogram,
-                          gym_factory: :tiny_route_gym, climb_type: 'route'
+                          gym_factory: :tiny_route_gym,
+                          climb_type: 'route'
 
         total_count = histogram.data.map(&:last).reduce(&:+)
         expect(total_count).to eq Climb.count
