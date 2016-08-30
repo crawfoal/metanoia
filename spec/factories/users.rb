@@ -37,11 +37,7 @@ FactoryGirl.define do
     after :create do |user, evaluator|
       if evaluator.employer_gym.present?
         evaluator.employment_role_stories.each do |role_story|
-          if user.persisted?
-            evaluator.employer_gym.employments.create(role_story: role_story)
-          else # TODO: I don't think this every actually runs...
-            evaluator.employer_gym.employments.build(role_story: role_story)
-          end
+          evaluator.employer_gym.employments.create(role_story: role_story)
         end
       end
     end
