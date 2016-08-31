@@ -1,12 +1,6 @@
 require 'rails_helper'
 
 RSpec.describe EmploymentForm, type: :model do
-  let(:role_story_for_valid_ef) do
-    user = valid_ef.send(:user)
-    user.send("#{user.current_role}_story")
-  end
-  let(:valid_ef) { build :employment_form }
-
   it { should validate_presence_of :email }
   it { should validate_presence_of :role_name }
 
@@ -51,24 +45,28 @@ RSpec.describe EmploymentForm, type: :model do
 
   describe '#persist!' do
     it 'determines which role_story shoud be associated with the employment' do
-      user = create :setter
-      employment_form = build :employment_form, user: user
+      setter = create :setter
+      employment_form = build :employment_form,
+                              email: setter.email,
+                              role_name: 'setter'
 
       expect { employment_form.persist! }.to \
         change { employment_form.employment.role_story }.from(nil).
-        to(user.setter_story)
+        to(setter.setter_story)
     end
 
     it "creates a role story for the user if they don't have the role yet" do
       setter = create :setter
-      ef = build :employment_form, user: setter, role_name: 'manager'
+      ef = build :employment_form, email: setter.email, role_name: 'manager'
 
       expect { ef.persist! }.to change { setter.reload.manager_story }.from(nil)
     end
 
     it 'actually saves the employment record in the database' do
       setter = create :setter
-      employment_form = build :employment_form, user: setter
+      employment_form = build :employment_form,
+                              email: setter.email,
+                              role_name: 'setter'
 
       employment_form.persist!
 

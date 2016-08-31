@@ -1,18 +1,3 @@
-module GymFactoryHelper
-  def self.build_sections_if_empty(gym, evaluator)
-    return unless gym.sections.empty?
-    evaluator.section_names.each do |section_name|
-      gym.sections << FactoryGirl.build(:section, name: section_name)
-    end
-  end
-
-  def self.create_employees(gym, evaluator)
-    evaluator.num_employees.times do
-      FactoryGirl.create Employment.roles.sample, employed_at: gym
-    end
-  end
-end
-
 FactoryGirl.define do
   factory :gym do
     transient do
@@ -20,20 +5,43 @@ FactoryGirl.define do
       num_employees 0
     end
 
+    after :build do |gym|
+      def gym.build_sections(evaluator)
+        evaluator.section_names.each do |section_name|
+          sections << FactoryGirl.build(:section, name: section_name)
+        end
+      end
+
+      def gym.build_detailed_climbs(climb_type)
+        sections.each do |section|
+          section.climbs = FactoryGirl.build_list(
+            climb_type,
+            3,
+            :with_grade,
+            :with_color,
+            grade_system: send("#{climb_type}_grade_system")
+          )
+        end
+      end
+    end
+
     after :build do |gym, evaluator|
       gym.route_grade_system ||= GradeSystem.find_by_name! 'Yosemite'
       gym.boulder_grade_system ||= GradeSystem.find_by_name! 'Hueco'
-      GymFactoryHelper.build_sections_if_empty(gym, evaluator)
+      gym.build_sections(evaluator) if gym.sections.empty?
     end
 
     before :create do |gym|
+      # there is a validation that checks to see if all attributes are blank
       if gym.value.blank?
         gym.name = 'Gym Name'
       end
     end
 
     after :create do |gym, evaluator|
-      GymFactoryHelper.create_employees(gym, evaluator)
+      evaluator.num_employees.times do
+        FactoryGirl.create Employment.roles.sample, employed_at: gym
+      end
     end
 
     trait :with_name do
@@ -46,31 +54,15 @@ FactoryGirl.define do
 
     trait :with_detailed_boulders do
       after :build do |gym, evaluator|
-        GymFactoryHelper.build_sections_if_empty(gym, evaluator)
-        gym.sections.each do |section|
-          section.climbs = build_list(
-            :boulder,
-            3,
-            :with_grade,
-            :with_color,
-            grade_system: gym.boulder_grade_system
-          )
-        end
+        gym.build_sections(evaluator) if gym.sections.empty?
+        gym.build_detailed_climbs(:boulder)
       end
     end
 
     trait :with_detailed_routes do
       after :build do |gym, evaluator|
-        GymFactoryHelper.build_sections_if_empty(gym, evaluator)
-        gym.sections.each do |section|
-          section.climbs = build_list(
-            :route,
-            3,
-            :with_grade,
-            :with_color,
-            grade_system: gym.route_grade_system
-          )
-        end
+        gym.build_sections(evaluator) if gym.sections.empty?
+        gym.build_detailed_climbs(:route)
       end
     end
 
