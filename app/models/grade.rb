@@ -4,6 +4,7 @@ class Grade < ActiveRecord::Base
   validates_presence_of :grade_system
   scope :ordered, -> { order(:sequence_number) }
   belongs_to :bucket
+  has_many :climbs
 
   def self.null_object
     find(111)

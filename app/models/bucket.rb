@@ -3,9 +3,10 @@ class Bucket < ActiveRecord::Base
   has_many :grades
 
   def self.ordered
-    joins(:grades).
-      group('buckets.id').
-      select('buckets.*', 'min(grades.sequence_number) as sn').
-      order('sn')
+    joins(:grades).group('buckets.id').order('MIN(grades.sequence_number)')
+  end
+
+  def self.null_object
+    find(17)
   end
 end

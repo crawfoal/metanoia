@@ -17,37 +17,53 @@ class ClimbHistogram
   end
 
   private
+  def bucket_names_and_counts
+    # Use `or` once upgraded to Rails 5 - I think then it could also be moved
+    # to a scope in Grade called something like `with_null_bucket`. This could
+    # then be used to clean up the spec a little too.
+    Bucket.where(
+      'buckets.grade_system_id = ? OR buckets.id = ?',
+      @grade_system,
+      Bucket.null_object
+    ).
+    joins(<<-SQL).
+      LEFT JOIN (#{climbs_grades.to_sql}) climbs_grades
+      ON buckets.id = climbs_grades.bucket_id
+    SQL
+    group('buckets.name').
+    order('MIN(climbs_grades.sequence_number)').
+    count('climbs_grades.id')
+  end
 
   def grade_names_and_counts
-    grade_ids_and_names.map do |grade_id, name|
-      [name, counts_by_grade_id[grade_id] || 0]
-    end
+    grades_with_null.
+    joins(<<-SQL).
+      LEFT JOIN (#{@climbs.to_sql}) climbs
+      ON grades.id = climbs.grade_id
+    SQL
+    group('grades.name').
+    order('MIN(grades.sequence_number)').
+    count('climbs.id')
   end
 
-  def bucket_names_and_counts
-    bucket_names_and_grades.map do |name, grades|
-      bucket_count = grades.reduce(0) do |sum, grade|
-        sum + (counts_by_grade_id[grade.id] || 0)
-      end
-      [name, bucket_count]
-    end
+  def climbs_grades
+    grades_with_null.
+    select('grades.bucket_id, grades.sequence_number, climbs.*').
+    joins(<<-SQL)
+      LEFT JOIN (#{@climbs.to_sql}) climbs
+      ON grades.id = climbs.grade_id
+    SQL
   end
 
-  def bucket_names_and_grades
-    @grade_system.buckets.includes(:grades).map do |bucket|
-      [bucket.name, bucket.grades]
-    end
-  end
-
-  def counts_by_grade_id
-    @_cbg ||= @climbs.joins(:grade).group(:grade_id).count
-  end
-
-  def grade_ids_and_names
-    @_gin ||= grades.pluck(:id, :name) + Grade.null_object.pluck(:id, :name)
-  end
-
-  def grades
-    @_grades ||= Grade.where(grade_system_id: @grade_system.id).ordered
+  def grades_with_null
+    # Use `or` once upgraded to Rails 5 - I think then it could also be moved
+    # to a scope in Grade called something like `with_null_grade`. This could
+    # then be used to clean up the spec a little too. We can also then replaces
+    # this method with just directly calling that chain.
+    Grade.where(
+      'grades.grade_system_id = ? OR grades.id = ?',
+      @grade_system,
+      Grade.null_object
+    )
   end
 end

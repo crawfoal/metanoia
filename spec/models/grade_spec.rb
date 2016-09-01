@@ -5,6 +5,7 @@ RSpec.describe Grade, type: :model do
   it { should validate_presence_of :name }
   it { should validate_presence_of :grade_system }
   it { should belong_to :bucket }
+  it { should have_many :climbs }
 
   describe '.null_object' do
     it 'returns the null object for the grade model' do

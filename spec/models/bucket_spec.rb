@@ -16,4 +16,11 @@ RSpec.describe Bucket, type: :model do
          'V12 & ↑']
     end
   end
+
+  describe '.null_object' do
+    it 'returns the null object for the grade model' do
+      expect(Bucket.null_object).to eq \
+        GradeSystem.find_by_name('Null Grade System').buckets.first
+    end
+  end
 end
