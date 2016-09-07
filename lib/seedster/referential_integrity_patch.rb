@@ -5,10 +5,13 @@ module Seedster
   module ReferentialIntegrityPatch
     def wrap_with_transaction_that_disables_ri
       disable_all_user_triggers
+      tables_constraints = find_non_deferrable_constraints
+      alter_to_be_deferrable(tables_constraints)
       transaction do
         execute("SET CONSTRAINTS ALL DEFERRED")
         yield
       end
+      alter_to_be_non_deferrable(tables_constraints)
       enable_all_user_triggers
     end
 
@@ -30,6 +33,30 @@ module Seedster
       instance_methods(false).any? do |method_name|
         klass.respond_to? method_name
       end
+    end
+
+    def find_non_deferrable_constraints
+      execute(<<-SQL).values
+        SELECT table_name, constraint_name
+        FROM information_schema.table_constraints
+        WHERE constraint_type = 'FOREIGN KEY' AND is_deferrable = 'NO'
+      SQL
+    end
+
+    def alter_to_be_deferrable(tables_constraints)
+      statements = tables_constraints.collect do |table, constraint|
+        "ALTER TABLE #{quote_table_name(table)} "\
+        "ALTER CONSTRAINT #{constraint} DEFERRABLE"
+      end
+      statements.join(';')
+    end
+
+    def alter_to_be_non_deferrable(tables_constraints)
+      statements = tables_constraints.collect do |table, constraint|
+        "ALTER TABLE #{quote_table_name(table)} "\
+        "ALTER CONSTRAINT #{constraint} NOT DEFERRABLE"
+      end
+      statements.join(';')
     end
   end
 end
