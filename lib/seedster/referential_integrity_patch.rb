@@ -32,13 +32,13 @@ module Seedster
   end
 end
 
-class ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
-  if Seedster::ReferentialIntegrityPatch.monkey_patches?(self)
-    raise 'Whoops, `ActiveRecord::ConnectionAdapters::PostgreSQLAdapter` '\
-          'now implments one of the methods in '\
-          "`Seedster::ReferentialIntegrityPatch`, so we can't include that "\
-          'module in the class'
-  else
-    include Seedster::ReferentialIntegrityPatch
-  end
+if Seedster::ReferentialIntegrityPatch.monkey_patches? \
+     ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+  raise 'Whoops, `ActiveRecord::ConnectionAdapters::PostgreSQLAdapter` '\
+        'now implments one of the methods in '\
+        "`Seedster::ReferentialIntegrityPatch`, so we can't include that "\
+        'module in the class'
+else
+  ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.include \
+    Seedster::ReferentialIntegrityPatch
 end
