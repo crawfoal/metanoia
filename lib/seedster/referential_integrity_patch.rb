@@ -1,3 +1,5 @@
+require 'active_record/connection_adapters/postgresql_adapter'
+
 # delete once Rails PR #21233 is merged in and we've upgraded
 module Seedster
   module ReferentialIntegrityPatch
@@ -33,11 +35,12 @@ module Seedster
 end
 
 if Seedster::ReferentialIntegrityPatch.monkey_patches? \
-     ActiveRecord::Base.connection.class
-  raise 'Whoops, the Rails connection adapter that is in use now implments one'\
-        "of the methods in `Seedster::ReferentialIntegrityPatch`, so we can't "\
-        'include that module in the connection adapter class'
+     ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
+  raise 'Whoops, `ActiveRecord::ConnectionAdapters::PostgreSQLAdapter` '\
+        'now implments one of the methods in '\
+        "`Seedster::ReferentialIntegrityPatch`, so we can't include that "\
+        'module in the class'
 else
-  ActiveRecord::Base.connection.class.include \
+  ActiveRecord::ConnectionAdapters::PostgreSQLAdapter.include \
     Seedster::ReferentialIntegrityPatch
 end
