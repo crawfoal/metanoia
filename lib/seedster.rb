@@ -28,12 +28,7 @@ module Seedster
       # waiting on Rails PR #21233 - then can go back to simple one liner that
       # is in the else block
       # (see Seedster::ReferentialIntegrityPatch for transaction wrapper method)
-      if ActiveRecord::Base.connection.instance_of? \
-         ActiveRecord::ConnectionAdapters::PostgreSQLAdapter
-        ActiveRecord::Base.connection.wrap_with_transaction_that_disables_ri do
-          ActiveRecord::FixtureSet.create_fixtures(fixture_directory, tables)
-        end
-      else
+      ActiveRecord::Base.connection.disable_referential_integrity do
         ActiveRecord::FixtureSet.create_fixtures(fixture_directory, tables)
       end
     end
