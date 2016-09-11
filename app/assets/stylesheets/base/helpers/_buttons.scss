@@ -81,17 +81,17 @@
 @mixin no-color-button {
   color: $base-font-color;
 
-  @include background-stripes($lightest-gray, white);
+  @include no-color-background;
 
   &:hover,
   &:focus {
-    @include background-stripes(shade($lightest-gray, 20%), shade(white, 20%));
+    @include background-stripes(shade(color('grey', 'lighten-1'), 20%), shade(white, 20%));
     color: $base-font-color;
   }
 
   &:disabled {
     &:hover {
-      @include background-stripes($lightest-gray, white);
+      @include no-color-background;
     }
   }
 }

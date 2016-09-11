@@ -8,6 +8,10 @@
   );
 }
 
+@mixin no-color-background {
+  @include background-stripes(color('grey', 'lighten-2'), white);
+}
+
 @function text-color-for($background-color) {
   @if (lightness($background-color) > 50) {
     @return $base-font-color;

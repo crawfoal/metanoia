@@ -23,59 +23,49 @@ $small-spacing: $base-spacing / 2;
 $tiny-spacing: $small-spacing / 2;
 $base-z-index: 0;
 
-// Grays
-$dark-gray: #2e2e2e;
-$light-gray: lighten($dark-gray, 25%);
-$lighter-gray: lighten($light-gray, 25%);
-$lightest-gray: lighten($lighter-gray, 15%);
+// Colors
+$action-color-swatch: 'teal';
+$action-color: color($action-color-swatch);
+$action-color-hover: color($action-color-swatch, 'lighten-2');
+$accent-color: color('teal', 'accent-3');
+$accent-color-hover: lighten($accent-color, 15%);
 
-// Brand Colors
-$linen: #eae2d6;
-$oyster: #d5c3aa;
-$pewter: #867666;
-$lemon-tea: #e1b80d;
+// Font Colors
+$base-font-color: color('grey', 'darken-4');
+$light-font-color: color('grey', 'lighten-5');
+
+// Background and Border Colors
+$base-background-color: color('grey', 'lighten-5');
+$base-border-color: color('grey', 'lighten-1');
+
+$secondary-background-color: color('grey', 'lighten-3');
+$secondary-border-color: darken($secondary-background-color, 15%);
+
+$emphasis-background-color: $action-color;
 
 // Message Colors
-$brick-red: #b5433f;
-$light-brick-red: lighten($brick-red, 10%);
-$yellow: #ffd56e;
-$green: #649c43;
+$message-alert: color('red', 'lighten-1');
+$message-warning: color('yellow', 'lighten-1');
+$message-notice: color('green', 'lighten-1');
 
 // Climb Colors
 $climb-colors: (
-  red: #b71c1c,
-  pink: #ec407a,
-  purple: #7b1fa2,
-  blue: #0d47a1,
-  teal: #00838f,
-  green: #2e7d32,
-  yellow: #fdd835,
-  orange: #ef6c00,
-  brown: #6d4c41,
-  black: #000000,
-  white: #ffffff
+  red: color('red'),
+  pink: color('pink'),
+  purple: color('purple'),
+  blue: color('blue'),
+  teal: color('teal'),
+  green: color('green'),
+  yellow: color('yellow'),
+  orange: color('orange'),
+  brown: color('brown'),
+  black: color('shades', 'black'),
+  white: color('shades', 'white')
 );
-
-// Font Colors
-$base-font-color: $dark-gray;
-$light-font-color: white;
-$action-color: $pewter;
-$action-color-dark: darken($action-color, 13%);
-$action-color-light: lighten($action-color, 10%);
-$accent-color: $lemon-tea;
-$accent-color-light: lighten($accent-color, 20%);
-$subtle-accent-color: $oyster;
-
-// Background Colors
-$base-background-color: #fff;
-$secondary-background-color: $linen;
-$emphasis-background-color: $oyster;
 
 // Border
 $base-border-width: 1px;
-$base-border-color: $action-color-light;
 $base-border: $base-border-width solid $base-border-color;
-$secondary-border-color: darken($secondary-background-color, 15%);
 $secondary-border: $base-border-width solid $secondary-border-color;
 $dark-border: $base-border-width solid $base-font-color;
 
