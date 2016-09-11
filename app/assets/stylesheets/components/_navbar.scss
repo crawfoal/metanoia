@@ -88,8 +88,9 @@ nav {
       left: 0;
       right: 0;
       margin: auto;
-      width: fit-content;
       height: $navbar-height;
+
+      @include width(fit-content);
     }
   }
 
@@ -142,11 +143,12 @@ nav {
       padding: $padding;
 
       @include media($medium-screen) {
-        @include box-shadow(none);
+        @include menu-shadow;
 
-        background-color: $background-color;
+        background-color: $secondary-border-color;
         position: absolute;
         right: 0;
+        top: 3em;
       }
 
       select {

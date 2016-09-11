@@ -3,3 +3,9 @@
   -webkit-box-shaddow: $property-list;
   box-shadow: $property-list;
 }
+
+@mixin width($keyword) {
+  width: #{$keyword};
+  width: -moz-#{$keyword};
+  width: -webkit-#{$keyword};
+}
