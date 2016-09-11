@@ -1,18 +1,25 @@
+$navbar-height: 4rem;
+
 nav {
-  $background-color: $secondary-background-color;
+  $background-color: $action-color;
   $divider-border: 2px solid darken($background-color, 10%);
-  $font-color: $base-font-color;
+  $font-color: $light-font-color;
   $font-hover-color: tint($font-color, 25%);
   $font-size: 1rem;
-  $line-height: 4rem;
-  $logo-color: $accent-color;
-  $logo-hover-color: $accent-color-hover;
+  $line-height: $navbar-height;
+  $logo-color: $font-color;
+  $logo-hover-color: $font-hover-color;
   $padding: 1rem;
 
   background-color: $background-color;
   font-size: $font-size;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
 
   @include clearfix;
+  @include navbar-shadow;
 
   li {
     display: block;
@@ -67,6 +74,15 @@ nav {
 
     .fa {
       color: inherit;
+    }
+
+    #brand_name {
+      font-size: 1.5 * $font-size;
+    }
+
+    a > * {
+      display: inline;
+      vertical-align: middle;
     }
   }
 
@@ -140,4 +156,8 @@ nav {
       }
     }
   }
+}
+
+.spacer {
+  height: $navbar-height;
 }
