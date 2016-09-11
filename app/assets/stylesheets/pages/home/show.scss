@@ -8,7 +8,8 @@
 
   .overview {
     font-size: 2em;
-    height: 30em;
+    height: 15em;
+    margin-bottom: $small-spacing;
     text-align: center;
 
     @include background-stripes($accent-color, white, 3rem);
