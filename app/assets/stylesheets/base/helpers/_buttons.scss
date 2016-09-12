@@ -101,7 +101,7 @@
   @include compact-button;
 }
 
-@mixin button-group($color: $action-color, $unselected-background-color: $base-background-color, $item-container-selector: label, $item-selector: span) {
+@mixin button-group($color: $action-color, $unselected-background-color: $input-background-color, $item-container-selector: label, $item-selector: span) {
   $border-color: darken($color, 15%);
   $border: 1px solid $border-color;
   $inner-border: 1px solid lighten($border-color, 25%);

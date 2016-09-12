@@ -27,7 +27,7 @@ textarea {
 
 #{$all-text-inputs},
 select[multiple] {
-  background-color: $base-background-color;
+  background-color: $input-background-color;
   border: $base-border;
   border-radius: $base-border-radius;
   box-shadow: $form-box-shadow;
@@ -48,7 +48,7 @@ select[multiple] {
   }
 
   &:disabled {
-    background-color: shade($base-background-color, 5%);
+    background-color: shade($input-background-color, 5%);
     cursor: not-allowed;
 
     &:hover {
@@ -77,7 +77,7 @@ textarea {
 }
 
 select {
-  background-color: $base-background-color;
+  background-color: $input-background-color;
   // To create the url for the background image, make modifications below, then
   // copy and paste it at https://codepen.io/yoksel/details/JDqvs/. Take the
   // results and paste it in the quotation marks in url(...), after 'utf8,'. We
@@ -121,7 +121,7 @@ select {
   }
 
   &:disabled {
-    background-color: shade($base-background-color, 5%);
+    background-color: shade($input-background-color, 5%);
     cursor: not-allowed;
 
     &:hover {

@@ -35,13 +35,15 @@ $base-font-color: color('grey', 'darken-4');
 $light-font-color: color('grey', 'lighten-5');
 
 // Background and Border Colors
-$base-background-color: color('grey', 'lighten-5');
+$base-background-color: color('grey', 'lighten-3');
 $base-border-color: color('grey', 'lighten-1');
 
-$secondary-background-color: color('grey', 'lighten-3');
+$secondary-background-color: color('grey', 'lighten-5');
 $secondary-border-color: darken($secondary-background-color, 15%);
 
 $emphasis-background-color: $action-color;
+
+$input-background-color: transparent;
 
 // Message Colors
 $message-alert: color('red', 'lighten-1');
