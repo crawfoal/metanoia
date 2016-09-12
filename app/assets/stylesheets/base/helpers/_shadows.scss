@@ -3,5 +3,9 @@
 }
 
 @mixin menu-shadow {
-  @include box-shadow(0 4px 10px rgba(0, 0, 0, 0.26))
+  @include box-shadow(0 4px 10px rgba(0, 0, 0, 0.26));
+}
+
+@mixin card-shadow {
+  @include box-shadow(0 1px 2.5px rgba(0, 0, 0, 0.26));
 }

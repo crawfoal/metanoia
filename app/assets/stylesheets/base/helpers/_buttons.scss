@@ -144,3 +144,47 @@
     }
   }
 }
+
+@mixin vertical-button-group($color: $action-color, $unselected-background-color: $input-background-color, $item-container-selector: label, $item-selector: span) {
+  $border-color: $base-border-color;
+  $border: 1px solid $border-color;
+  $inner-border: 1px solid lighten($border-color, 10%);
+  $unselected-text-color: darken($unselected-background-color, 60%);
+  @if lightness($unselected-background-color) < 25 {
+    $unselected-text-color: lighten($unselected-background-color, 60%);
+  }
+
+  @include clearfix;
+
+  input {
+    display: none;
+  }
+
+  #{$item-container-selector} {
+    #{$item-selector} {
+      @include bitter-button($unselected-background-color, $unselected-text-color, 0);
+      border-top: 0;
+      border-radius: 0;
+      border-bottom: $inner-border;
+      border-left: $border;
+      border-right: $border;
+      width: 100%;
+    }
+
+    &:first-child #{$item-selector} {
+      @include border-top-radius($base-border-radius);
+      border-top: $border;
+    }
+
+    &:last-child #{$item-selector} {
+      @include border-bottom-radius($base-border-radius);
+      border-bottom: $border;
+    }
+
+    input:checked + #{$item-selector},
+    #{$item-selector}.active {
+      @include button-color($color, $border: $border);
+      box-shadow: inset 0 1px 2px darken($color, 10%);
+    }
+  }
+}

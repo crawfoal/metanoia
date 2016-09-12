@@ -28,14 +28,6 @@
   #current_section {
     @include flex-grow(1);
 
-    margin-top: $base-spacing;
-    margin-bottom: $base-spacing;
-
-    @include media($medium-screen) {
-      margin-left: $base-spacing;
-      margin-right: $base-spacing;
-    }
-
     .button_to {
       display: inline-block;
       float: right;
@@ -43,6 +35,16 @@
       #reset {
         margin-top: $base-spacing;
       }
+    }
+  }
+
+  #current_section,
+  .histograms {
+    margin-bottom: $base-spacing;
+
+    @include media($medium-screen) {
+      margin-left: $base-spacing;
+      margin-right: $base-spacing;
     }
   }
 
@@ -89,7 +91,7 @@
   .change-section {
     margin-top: $base-spacing;
 
-    @include bitter-button(white, $border: $dark-border);
+    @include bitter-button($secondary-background-color, $border: $dark-border);
     display: none;
 
     .fa {
@@ -98,25 +100,8 @@
   }
 
   .sections {
-    background-color: $emphasis-background-color;
-    padding: $small-spacing;
-    padding-bottom: 0;
-
-    > * {
-      a {
-        @include bitter-button(white, $border: 0);
-        border-radius: 0;
-        margin-bottom: $small-spacing;
-        overflow: hidden;
-        text-align: center;
-        text-overflow: ellipsis;
-        width: 100%;
-      }
-
-      a.active {
-        @include button-color($base-font-color);
-      }
-    }
+    @include vertical-button-group($unselected-background-color: $secondary-background-color, $item-container-selector: li, $item-selector: a);
+    @include card-shadow;
   }
 
   .new-climb-link {
