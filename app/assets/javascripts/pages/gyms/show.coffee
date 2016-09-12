@@ -15,6 +15,7 @@ $(document).on 'page:update', ->
   $('.gyms.show').on 'click', 'button.gym-details', ->
     $('#current_section').fadeOut ->
       $('#current_section').remove()
+      $('.sections a').removeClass('active')
       $('.histograms').show()
 
 $(window).resize ->
