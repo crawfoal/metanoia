@@ -86,6 +86,14 @@
     @include display(flex);
     @include flex-grow(1);
     @include flex-direction(column);
+
+    .route-histogram,
+    .boulder-histogram {
+      border: $base-border;
+      margin-bottom: $small-spacing;
+
+      @include card-shadow;
+    }
   }
 
   .change-section {
