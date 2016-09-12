@@ -102,9 +102,13 @@
 }
 
 @mixin button-group($color: $action-color, $unselected-background-color: $input-background-color, $item-container-selector: label, $item-selector: span) {
-  $border-color: darken($color, 15%);
+  $border-color: $base-border-color;
   $border: 1px solid $border-color;
-  $inner-border: 1px solid lighten($border-color, 25%);
+  $inner-border: 1px solid lighten($border-color, 10%);
+  $unselected-text-color: tint($unselected-background-color, 60%);
+  @if lightness($unselected-background-color) < 25 {
+    $unselected-text-color: shade($unselected-background-color, 60%);
+  }
 
   @include clearfix;
 
@@ -116,7 +120,7 @@
     float: left;
 
     #{$item-selector} {
-      @include bitter-button($unselected-background-color, $color, 0);
+      @include bitter-button($unselected-background-color, $unselected-text-color, 0);
       border-left: 0;
       border-radius: 0;
       border-right: $inner-border;
