@@ -19,7 +19,11 @@
       @each $color-name, $color-value in $climb-colors {
         &.#{$color-name} {
           background: none;
-          @include button-color($color-value);
+          @if $color-name == white {
+            @include button-color($color-value);
+          } @else {
+            @include button-color($color-value, $border: $color-value solid 1px);
+          }
         }
       }
     }
@@ -56,7 +60,7 @@
     display: block;
     margin: 0 auto;
 
-    @include button-color($secondary-background-color);
+    @include button-color($secondary-background-color, $border: $secondary-border);
 
     h1 {
       margin: 0;
@@ -87,7 +91,7 @@
 
     .route-histogram,
     .boulder-histogram {
-      border: $base-border;
+      border: $secondary-border;
       margin-bottom: $small-spacing;
     }
   }

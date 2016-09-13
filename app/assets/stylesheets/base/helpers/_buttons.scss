@@ -60,10 +60,10 @@
   &:focus {
     @if lightness($color) < 25 {
       background-color: tint($color, 20%);
-    } @else if lightness($color) < 75 {
-      background-color: shade($color, 20%);
+    } @else if lightness($color) < 60 {
+      background-color: tint($color, 25%);
     } @else {
-      background-color: shade($color, 10%);
+      background-color: shade($color, 5%);
     };
     color: $text-color;
   }
@@ -143,8 +143,7 @@
   }
 }
 
-@mixin vertical-button-group($color: $action-color, $unselected-background-color: $input-background-color, $item-container-selector: label, $item-selector: span) {
-  $border-color: $base-border-color;
+@mixin vertical-button-group($color: $action-color, $unselected-background-color: $input-background-color, $item-container-selector: label, $item-selector: span, $border-color: $base-border-color) {
   $border: 1px solid $border-color;
   $inner-border: 1px solid lighten($border-color, 10%);
   $unselected-text-color: darken($unselected-background-color, 60%);

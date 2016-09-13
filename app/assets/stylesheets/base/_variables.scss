@@ -26,7 +26,7 @@ $base-z-index: 0;
 // Colors
 $action-color: color('grey', 'darken-3');
 $action-color-hover: color('grey', 'darken-2');
-$accent-color: color('grey', 'darken-2');
+$accent-color: color('grey', 'darken-1');
 $accent-color-hover: lighten($accent-color, 15%);
 
 // Font Colors
@@ -37,7 +37,7 @@ $light-font-color: color('grey', 'lighten-5');
 $base-background-color: color('grey', 'lighten-4');
 $base-border-color: color('grey', 'lighten-1');
 
-$secondary-background-color: color('grey', 'lighten-5');
+$secondary-background-color: white;
 $secondary-border-color: darken($secondary-background-color, 15%);
 
 $input-background-color: transparent;
