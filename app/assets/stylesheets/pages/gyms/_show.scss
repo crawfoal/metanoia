@@ -78,13 +78,11 @@
     > * {
       margin-top: $base-spacing;
     }
-
-    .histograms {
-      min-width: 0;
-    }
   }
 
   .histograms {
+    min-width: 0;
+
     @include display(flex);
     @include flex-grow(1);
     @include flex-direction(column);
@@ -92,6 +90,7 @@
     .route-histogram,
     .boulder-histogram {
       border: $secondary-border;
+      background-color: $secondary-background-color;
       margin-bottom: $small-spacing;
     }
   }
