@@ -1,12 +1,13 @@
 require 'rails_helper'
 
 RSpec.describe Users::RegistrationsController, type: :controller do
+  before(:each) { set_devise_mapping }
+
   describe '#create' do
     context 'invalid params' do
       render_views
 
       it 'shows a customized error message' do
-        set_devise_mapping
         params = {
           email: 'amanda@example.com',
           password: 'password',

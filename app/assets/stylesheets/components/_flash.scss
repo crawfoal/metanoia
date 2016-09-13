@@ -19,13 +19,13 @@ div[class^='flash'] {
 }
 
 div.flash-notice {
-  @include color-flash($green);
+  @include color-flash($message-notice);
 }
 
 div.flash-warning {
-  @include color-flash($yellow);
+  @include color-flash($message-warning);
 }
 
 div.flash-alert {
-  @include color-flash($brick-red, white);
+  @include color-flash($message-alert);
 }

@@ -2,7 +2,7 @@
   text-align: center;
 
   span {
-    @include background-stripes($lightest-gray, white);
+    @include no-color-background;
 
     display: inline-block;
     padding: $tiny-spacing;

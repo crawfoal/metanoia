@@ -74,7 +74,7 @@ RSpec.describe GymsController, type: :controller do
   end
 
   describe '#update' do
-    it 'uses strong parameters' do
+    it do
       create_and_login_user :admin
       gym = build_stubbed :gym
       allow(Gym).to receive(:find).with(gym.id.to_s).and_return(gym)
@@ -83,7 +83,7 @@ RSpec.describe GymsController, type: :controller do
         gym_form: attributes_for(:gym, :with_name)
       }
 
-      expect(subject).to permit(
+      should permit(
         :name,
         sections_attributes: [:id, :name, :_destroy]
       ).for(:update, params: params).on(:gym_form)

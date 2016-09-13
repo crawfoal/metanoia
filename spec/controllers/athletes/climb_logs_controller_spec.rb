@@ -5,11 +5,11 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
   it { should route(:get, 'athletes/climb_logs').to(action: :index) }
 
   describe '#create' do
-    it 'uses strong parameters' do
+    it do
       create_and_login_user :athlete
       params = { climb_log: { climb_id: create(:climb).id }, format: 'js' }
 
-      expect(subject).to permit(:climb_id).for(
+      should permit(:climb_id).for(
         :create, params: params).on(:climb_log)
     end
 

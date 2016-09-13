@@ -26,7 +26,7 @@ RSpec.describe ClimbsController, type: :controller do
   end
 
   describe '#create' do
-    it 'uses strong parameters' do
+    it do
       create_and_login_user :setter
       params = {
         section_id: 1,
@@ -34,7 +34,7 @@ RSpec.describe ClimbsController, type: :controller do
         format: 'js'
       }
 
-      expect(subject).to permit(
+      should permit(
         :section_id, :color, :type, :grade_id, :teardown_date
       ).for(:create, params: params).on(:climb)
     end

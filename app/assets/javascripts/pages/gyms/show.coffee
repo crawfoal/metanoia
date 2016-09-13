@@ -12,9 +12,10 @@ $(document).on 'page:update', ->
     $(this).hide ->
       $(this).closest('.gym-info').find('.sections').slideDown()
 
-  $('.gyms.show').on 'click', 'button.gym-details', ->
+  $('.gyms.show').on 'click', '.gym-details', ->
     $('#current_section').fadeOut ->
       $('#current_section').remove()
+      $('.sections a').removeClass('active')
       $('.histograms').show()
 
 $(window).resize ->
