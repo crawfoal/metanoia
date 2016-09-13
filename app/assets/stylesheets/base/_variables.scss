@@ -24,10 +24,9 @@ $tiny-spacing: $small-spacing / 2;
 $base-z-index: 0;
 
 // Colors
-$action-color-swatch: 'teal';
-$action-color: color($action-color-swatch);
-$action-color-hover: color($action-color-swatch, 'lighten-2');
-$accent-color: color('teal', 'accent-3');
+$action-color: color('grey', 'darken-3');
+$action-color-hover: color('grey', 'darken-2');
+$accent-color: color('green');
 $accent-color-hover: lighten($accent-color, 15%);
 
 // Font Colors
@@ -35,13 +34,11 @@ $base-font-color: color('grey', 'darken-4');
 $light-font-color: color('grey', 'lighten-5');
 
 // Background and Border Colors
-$base-background-color: color('grey', 'lighten-3');
+$base-background-color: color('grey', 'lighten-4');
 $base-border-color: color('grey', 'lighten-1');
 
 $secondary-background-color: color('grey', 'lighten-5');
 $secondary-border-color: darken($secondary-background-color, 15%);
-
-$emphasis-background-color: $action-color;
 
 $input-background-color: transparent;
 
