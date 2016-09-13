@@ -24,7 +24,7 @@ RSpec.describe EmployeeList do
 
       employee_list.employees.each do |employee|
         expect(employee).to respond_to :email
-        expect(employee).to respond_to :roles
+        expect(employee).to respond_to :roles_in_words
       end
     end
   end

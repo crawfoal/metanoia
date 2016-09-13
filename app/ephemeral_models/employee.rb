@@ -6,7 +6,7 @@ class Employee
     @gym_id = gym_id
   end
 
-  def roles
+  def roles_in_words
     Employment.roles.select do |role_name|
       user.employed_at? @gym_id, with_role: role_name
     end.to_sentence(two_words_connector: ', ', last_word_connector: ', ')
