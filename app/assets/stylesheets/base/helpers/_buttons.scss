@@ -51,7 +51,7 @@
   color: $text-color;
 
   @if (lightness($color) > 90) {
-    border: $border or (2px solid shade($color, 15%));
+    border: $border or (1px solid shade($color, 15%));
   } @else {
     border: $border or 0;
   }
@@ -62,10 +62,8 @@
       background-color: tint($color, 20%);
     } @else if lightness($color) < 75 {
       background-color: shade($color, 20%);
-    } @else if lightness($color) < 97 {
-      background-color: shade($color, 10%);
     } @else {
-      background-color: $secondary-background-color;
+      background-color: shade($color, 10%);
     };
     color: $text-color;
   }

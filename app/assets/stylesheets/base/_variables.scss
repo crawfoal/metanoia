@@ -26,7 +26,7 @@ $base-z-index: 0;
 // Colors
 $action-color: color('grey', 'darken-3');
 $action-color-hover: color('grey', 'darken-2');
-$accent-color: color('green');
+$accent-color: color('grey', 'darken-2');
 $accent-color-hover: lighten($accent-color, 15%);
 
 // Font Colors

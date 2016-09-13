@@ -48,16 +48,15 @@
     float: right;
     margin-top: $small-spacing;
 
-    @include bitter-button(white, $border: $dark-border);
+    @include bitter-button;
   }
 
   .gym-details {
     border-radius: 0;
     display: block;
-    width: 100%;
+    margin: 0 auto;
 
-    @include button-color($secondary-background-color, $border: $base-border, $text-color: rgba(black, .5));
-    @include button-shadow;
+    @include button-color($secondary-background-color);
 
     h1 {
       margin: 0;
@@ -90,8 +89,6 @@
     .boulder-histogram {
       border: $base-border;
       margin-bottom: $small-spacing;
-
-      @include card-shadow;
     }
   }
 
@@ -100,7 +97,6 @@
 
     @include bitter-button($secondary-background-color, $border: $dark-border);
     display: none;
-    @include button-shadow;
 
     .fa {
       float: right;
@@ -109,7 +105,6 @@
 
   .sections {
     @include vertical-button-group($unselected-background-color: $secondary-background-color, $item-container-selector: li, $item-selector: a);
-    @include card-shadow;
   }
 
   .new-climb-link {
