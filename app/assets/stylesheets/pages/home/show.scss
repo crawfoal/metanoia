@@ -1,14 +1,8 @@
 .home.show {
-  h1 {
-    background-color: $subtle-accent-color;
-    color: $light-font-color;
-    padding: 1rem 0;
-    text-align: center;
-  }
-
   .overview {
     font-size: 2em;
-    height: 30em;
+    height: 15em;
+    margin-bottom: $small-spacing;
     text-align: center;
 
     @include background-stripes($accent-color, white, 3rem);
@@ -39,7 +33,7 @@
 
         &:hover,
         &:focus {
-          color: $action-color-dark;
+          color: lighten($base-font-color, 20%);
         }
 
         &.active {

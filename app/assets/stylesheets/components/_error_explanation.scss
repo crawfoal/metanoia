@@ -1,6 +1,7 @@
 #error_explanation {
-  color: white;
-  background-color: $brick-red;
+  $color: $message-alert;
+
+  background-color: $color;
   margin: 0 $small-spacing $base-spacing;
   margin-bottom: $base-spacing;
   padding: $small-spacing;
@@ -14,7 +15,7 @@
     margin: auto $small-spacing;
 
     li {
-      background-color: $light-brick-red;
+      background-color: lighten($color, 10%);
       margin-bottom: $tiny-spacing;
       padding: $tiny-spacing $small-spacing;
     }

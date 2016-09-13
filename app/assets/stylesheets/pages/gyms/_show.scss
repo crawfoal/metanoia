@@ -19,7 +19,11 @@
       @each $color-name, $color-value in $climb-colors {
         &.#{$color-name} {
           background: none;
-          @include button-color($color-value);
+          @if $color-name == white {
+            @include button-color($color-value);
+          } @else {
+            @include button-color($color-value, $border: $color-value solid 1px);
+          }
         }
       }
     }
@@ -28,21 +32,19 @@
   #current_section {
     @include flex-grow(1);
 
-    margin-top: $base-spacing;
+    .button_to {
+      display: inline-block;
+      float: right;
+    }
+  }
+
+  #current_section,
+  .histograms {
     margin-bottom: $base-spacing;
 
     @include media($medium-screen) {
       margin-left: $base-spacing;
       margin-right: $base-spacing;
-    }
-
-    .button_to {
-      display: inline-block;
-      float: right;
-
-      #reset {
-        margin-top: $base-spacing;
-      }
     }
   }
 
@@ -50,13 +52,15 @@
     float: right;
     margin-top: $small-spacing;
 
-    @include bitter-button(white, $border: $dark-border);
+    @include bitter-button;
   }
 
   .gym-details {
     border-radius: 0;
     display: block;
-    width: 100%;
+    margin: 0 auto;
+
+    @include button-color($secondary-background-color, $border: $secondary-border);
 
     h1 {
       margin: 0;
@@ -74,22 +78,27 @@
     > * {
       margin-top: $base-spacing;
     }
-
-    .histograms {
-      min-width: 0;
-    }
   }
 
   .histograms {
+    min-width: 0;
+
     @include display(flex);
     @include flex-grow(1);
     @include flex-direction(column);
+
+    .route-histogram,
+    .boulder-histogram {
+      border: $secondary-border;
+      background-color: $secondary-background-color;
+      margin-bottom: $small-spacing;
+    }
   }
 
   .change-section {
     margin-top: $base-spacing;
 
-    @include bitter-button(white, $border: $dark-border);
+    @include bitter-button($secondary-background-color, $border: $dark-border);
     display: none;
 
     .fa {
@@ -98,25 +107,7 @@
   }
 
   .sections {
-    background-color: $emphasis-background-color;
-    padding: $small-spacing;
-    padding-bottom: 0;
-
-    > * {
-      a {
-        @include bitter-button(white, $border: 0);
-        border-radius: 0;
-        margin-bottom: $small-spacing;
-        overflow: hidden;
-        text-align: center;
-        text-overflow: ellipsis;
-        width: 100%;
-      }
-
-      a.active {
-        @include button-color($base-font-color);
-      }
-    }
+    @include vertical-button-group($unselected-background-color: $secondary-background-color, $item-container-selector: li, $item-selector: a);
   }
 
   .new-climb-link {
