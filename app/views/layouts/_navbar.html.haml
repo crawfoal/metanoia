@@ -1,6 +1,7 @@
 %nav
   = link_to root_path, class: 'logo' do
     = fa_icon 'line-chart'
+    %span#brand_name Climbalytics
   = link_to '#', id: 'navbar_menu_button' do
     = fa_icon 'bars'
     Menu
@@ -8,8 +9,6 @@
     %ul#navbar_main_menu
       %li.nav-link
         = link_to 'Gyms', gyms_path
-      %li.nav-link
-        = link_to 'Ipsum', '#'
       - if user_signed_in? && (current_user.current_role == 'athlete')
         %li.nav-link
           = link_to 'My Log', athletes_climb_logs_path
@@ -24,3 +23,5 @@
             = link_to 'Switch Roles', '#'
             = form_for current_user, url: users_current_role_path, method: :put do |f|
               = f.collection_select :current_role, current_user.roles, :name, :name
+
+.spacer

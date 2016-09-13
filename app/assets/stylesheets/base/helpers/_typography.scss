@@ -1,0 +1,11 @@
+@mixin link-style {
+  color: $action-color;
+  text-decoration: none;
+  transition: color $base-duration $base-timing;
+
+  &:active,
+  &:focus,
+  &:hover {
+    color: $action-color-hover;
+  }
+}
