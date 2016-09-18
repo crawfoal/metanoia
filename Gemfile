@@ -11,7 +11,7 @@ gem 'puma', '~> 3.4.0'
 gem 'rack-timeout', '~> 0.4.2'
 
 # Print things in a neat format with `ap`
-gem 'awesome_print', '~> 1.6.1'
+gem 'awesome_print', '~> 1.7.0'
 # Use pry in console instead of irb
 gem 'pry', '~> 0.10.3'
 
