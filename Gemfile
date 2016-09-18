@@ -86,7 +86,7 @@ group :test do
   # Provides convenient one-liners that test common Rails functionality
   gem 'shoulda-matchers', '~> 3.1.1'
   # Provide matchers for testing Pundit policy classes
-  gem 'pundit-matchers', '~> 1.0.2'
+  gem 'pundit-matchers', '~> 1.1.0'
 
   # Use webmock to enforce whitelisting of hosts that can be sent requests during testing
   gem 'webmock', '~> 1.24.2'
