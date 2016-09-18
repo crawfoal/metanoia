@@ -29,7 +29,7 @@ gem 'turbolinks', '~> 2.5.3'
 gem 'haml', '~> 4.0.7'
 gem 'haml-rails', '~> 0.9.0'
 # Use Font Awesome for icons
-gem 'font-awesome-rails', '~> 4.6.1.0'
+gem 'font-awesome-rails', '~> 4.6.3.1'
 # Bourbon is a Sass mixin library
 gem 'bourbon', '~> 4.2.6'
 # Neat is a grid framework built with Bourbon
