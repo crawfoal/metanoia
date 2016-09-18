@@ -20,12 +20,6 @@ RSpec.describe Employment, type: :model do
       raise_error(/.*null value in column "role_story_id"/)
   end
 
-  describe '.roles' do
-    it 'includes all roles that can be chosen for the employment' do
-      expect(Employment.roles).to include :setter, :manager
-    end
-  end
-
   describe '#user' do
     it 'returns the user via with the role_story' do
       setter = create :setter
