@@ -65,7 +65,7 @@ group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', '~> 9.0.5'
   # Use guard to automatically run specs as files are saved
-  gem 'guard-rspec', '~> 4.6.5', require: false
+  gem 'guard-rspec', '~> 4.7.3', require: false
 
   # Use Bullet to detect N+1 query problems
   gem 'bullet', '~> 5.0.0'
