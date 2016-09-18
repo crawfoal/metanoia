@@ -63,7 +63,7 @@ gem 'table_print', '~> 1.5.6'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', '~> 8.2.4'
+  gem 'byebug', '~> 9.0.5'
   # Use guard to automatically run specs as files are saved
   gem 'guard-rspec', '~> 4.6.5', require: false
 

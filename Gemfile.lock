@@ -57,7 +57,7 @@ GEM
     bullet (5.0.0)
       activesupport (>= 3.0.0)
       uniform_notifier (~> 1.9.0)
-    byebug (8.2.5)
+    byebug (9.0.5)
     capybara (2.7.1)
       addressable
       mime-types (>= 1.16)
@@ -330,7 +330,7 @@ DEPENDENCIES
   awesome_print (~> 1.7.0)
   bourbon (~> 4.2.6)
   bullet (~> 5.0.0)
-  byebug (~> 8.2.4)
+  byebug (~> 9.0.5)
   capybara (~> 2.7.0)
   chartkick (~> 2.0.0)
   chromedriver-helper (~> 1.0.0)
