@@ -115,7 +115,7 @@ group :development do
   gem 'spring', '~> 1.6.4'
 
   # Use rails-erd to make entity-relationship diagrams of our models
-  gem 'rails-erd', '~> 1.4.7'
+  gem 'rails-erd', '~> 1.5.0'
 end
 
 group :production do
