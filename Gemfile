@@ -112,7 +112,7 @@ group :development do
   gem 'web-console', '~> 3.3.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'spring', '~> 1.6.4'
+  gem 'spring', '~> 1.7.2'
 
   # Use rails-erd to make entity-relationship diagrams of our models
   gem 'rails-erd', '~> 1.5.0'
