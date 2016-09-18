@@ -33,7 +33,7 @@ gem 'font-awesome-rails', '~> 4.6.1.0'
 # Bourbon is a Sass mixin library
 gem 'bourbon', '~> 4.2.6'
 # Neat is a grid framework built with Bourbon
-gem 'neat', '~> 1.7.4'
+gem 'neat', '~> 1.8.0'
 # Use chartkick to interface with GoogleCharts so that we can make HTML5/SVG
 # graphs to visualize data (e.g. how many climbs of each grade does this gym
 # have?)
