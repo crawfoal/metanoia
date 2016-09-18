@@ -43,4 +43,39 @@ RSpec.describe Employment, type: :model do
       expect(employment.role_name).to eq 'setter'
     end
   end
+
+  describe '#roles_for' do
+    it 'returns the role names for all of a users employments' do
+      user = create :setter
+      setter_employment = create :employment, role_story: user.setter_story
+      user.add_role :manager
+      manager_employment = create :employment,
+                                  gym: setter_employment.gym,
+                                  role_story: user.manager_story
+
+      expect(Employment.roles_for(user)).to include 'setter', 'manager'
+    end
+  end
+
+  describe '.for_user' do
+    it 'returns all employment records for the specified user' do
+      user = create :setter
+      setter_employment = create :employment, role_story: user.setter_story
+      user.add_role :manager
+      manager_employment = create :employment,
+                                 gym: setter_employment.gym,
+                                 role_story: user.manager_story
+
+      expect(Employment.for_user(user)).to include \
+        setter_employment, manager_employment
+    end
+
+    it 'accepts both user object and user id' do
+      user = create(:setter)
+      employment = create :employment, role_story: user.setter_story
+
+      expect(Employment.for_user(user).first).to eq employment
+      expect(Employment.for_user(user.id).first).to eq employment
+    end
+  end
 end

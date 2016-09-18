@@ -19,4 +19,15 @@ RSpec.describe Employee do
       expect { employee.roles_in_words }.to_not raise_error
     end
   end
+
+  describe '#roles' do
+    it 'returns an array of the role names' do
+      gym = create :gym
+      user = create :setter, employed_at: gym
+      create :employment_form, email: user.email, role_name: 'manager', gym: gym
+      employee = Employee.new(email: user.email, gym_id: gym.id)
+
+      expect(employee.roles).to include 'setter', 'manager'
+    end
+  end
 end

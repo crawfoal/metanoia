@@ -53,7 +53,7 @@ RSpec.describe User, type: :model do
       gym = create :gym
       setter = create :setter, employed_at: gym
 
-      expect(setter.employed_at?(gym, with_role: 'setter')).to be true
+      expect(setter.employed_at?(gym.id, with_role: 'setter')).to be true
     end
 
     it 'returns false if the user is employed at that gym, but not with that '\

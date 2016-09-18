@@ -7,13 +7,15 @@ class Employee
   end
 
   def roles_in_words
-    Employment.roles.select do |role_name|
-      user.employed_at? @gym_id, with_role: role_name
-    end.to_sentence(two_words_connector: ', ', last_word_connector: ', ')
+    roles.to_sentence(two_words_connector: ', ', last_word_connector: ', ')
   end
 
   def to_partial_path
     'employments/employee'
+  end
+
+  def roles
+    Gym.find(@gym_id).employments.roles_for(user)
   end
 
   private
