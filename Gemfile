@@ -95,7 +95,7 @@ group :test do
   gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
 
   # Use SimpleCov for test coverage reporting on local machines
-  gem 'simplecov', '~> 0.11.2', require: false
+  gem 'simplecov', '~> 0.12.0', require: false
 
   # Use launchy to automatically open page snapshots taken during feaure specs
   gem 'launchy', '~> 2.4.3'
