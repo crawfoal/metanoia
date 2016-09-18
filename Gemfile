@@ -37,7 +37,7 @@ gem 'neat', '~> 1.7.4'
 # Use chartkick to interface with GoogleCharts so that we can make HTML5/SVG
 # graphs to visualize data (e.g. how many climbs of each grade does this gym
 # have?)
-gem 'chartkick', '~> 2.0.0'
+gem 'chartkick', '~> 2.1.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
