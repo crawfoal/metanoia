@@ -92,7 +92,7 @@ group :test do
   gem 'webmock', '~> 1.24.2'
 
   # Report data from test suite to Code Climate
-  gem 'codeclimate-test-reporter', '~> 0.5.0', require: nil
+  gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
 
   # Use SimpleCov for test coverage reporting on local machines
   gem 'simplecov', '~> 0.11.2', require: false
