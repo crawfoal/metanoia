@@ -73,9 +73,9 @@ GEM
     codeclimate-test-reporter (0.6.0)
       simplecov (>= 0.7.1, < 1.0.0)
     coderay (1.1.1)
-    coffee-rails (4.1.1)
+    coffee-rails (4.2.1)
       coffee-script (>= 2.2.0)
-      railties (>= 4.0.0, < 5.1.x)
+      railties (>= 4.0.0, < 5.2.x)
     coffee-script (2.4.1)
       coffee-script-source
       execjs
@@ -332,7 +332,7 @@ DEPENDENCIES
   chartkick (~> 2.1.1)
   chromedriver-helper (~> 1.0.0)
   codeclimate-test-reporter (~> 0.6.0)
-  coffee-rails (~> 4.1.0)
+  coffee-rails (~> 4.2.1)
   database_cleaner (~> 1.5.1)
   devise (~> 4.0.0)
   factory_girl_rails (~> 4.7.0)
