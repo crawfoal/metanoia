@@ -34,7 +34,7 @@ class EmployeeList
   end
 
   def users_by_employment_role
-    Employment.roles.collect do |role_name|
+    Employable::RoleStories.role_names.collect do |role_name|
       [
         role_name,
         User.joins("#{role_name}_story": :employments).
