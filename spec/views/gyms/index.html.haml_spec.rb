@@ -7,7 +7,7 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
       allow(controller).to receive(:current_user).and_return(user)
       gyms = build_stubbed_list(:gym, 2)
       assign(:gyms, gyms)
-      stub_find_for *gyms
+      stub_find_for(*gyms)
 
       render
 
