@@ -89,7 +89,7 @@ group :test do
   gem 'pundit-matchers', '~> 1.1.0'
 
   # Use webmock to enforce whitelisting of hosts that can be sent requests during testing
-  gem 'webmock', '~> 1.24.2'
+  gem 'webmock', '~> 2.1.0'
 
   # Report data from test suite to Code Climate
   gem 'codeclimate-test-reporter', '~> 0.6.0', require: nil
