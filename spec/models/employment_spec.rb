@@ -49,9 +49,9 @@ RSpec.describe Employment, type: :model do
       user = create :setter
       setter_employment = create :employment, role_story: user.setter_story
       user.add_role :manager
-      manager_employment = create :employment,
-                                  gym: setter_employment.gym,
-                                  role_story: user.manager_story
+      create :employment,
+             gym: setter_employment.gym,
+             role_story: user.manager_story
 
       expect(Employment.roles_for(user)).to include 'setter', 'manager'
     end
@@ -63,8 +63,8 @@ RSpec.describe Employment, type: :model do
       setter_employment = create :employment, role_story: user.setter_story
       user.add_role :manager
       manager_employment = create :employment,
-                                 gym: setter_employment.gym,
-                                 role_story: user.manager_story
+                                  gym: setter_employment.gym,
+                                  role_story: user.manager_story
 
       expect(Employment.for_user(user)).to include \
         setter_employment, manager_employment
