@@ -54,7 +54,7 @@ class TableDependencyGraph
 
     # For example, suppose:
     # ```ruby
-    # class Comment < ActiveRecord::Base
+    # class Comment < ApplicationRecord
     #   belongs_to :commentable, polymorphic: true
     # end
     #

@@ -1,4 +1,4 @@
-class Membership < ActiveRecord::Base
+class Membership < ApplicationRecord
   belongs_to :athlete_story
   belongs_to :gym
   # This table is intended to have a "classification" column (or something like

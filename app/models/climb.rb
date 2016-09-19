@@ -1,4 +1,4 @@
-class Climb < ActiveRecord::Base
+class Climb < ApplicationRecord
   COLORS = {
     '#b71c1c' => 'Red',
     '#ec407a' => 'Pink',

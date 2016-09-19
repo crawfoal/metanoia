@@ -1,4 +1,4 @@
-class Bucket < ActiveRecord::Base
+class Bucket < ApplicationRecord
   belongs_to :grade_system, counter_cache: true
   has_many :grades
 

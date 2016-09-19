@@ -1,4 +1,4 @@
-class Grade < ActiveRecord::Base
+class Grade < ApplicationRecord
   belongs_to :grade_system
   validates_presence_of :name
   validates_presence_of :grade_system
