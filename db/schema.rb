@@ -1,4 +1,3 @@
-# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -20,28 +19,25 @@ ActiveRecord::Schema.define(version: 20160919001053) do
     t.integer  "user_id",    null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_athlete_stories_on_user_id", using: :btree
   end
-
-  add_index "athlete_stories", ["user_id"], name: "index_athlete_stories_on_user_id", using: :btree
 
   create_table "buckets", force: :cascade do |t|
     t.integer  "grade_system_id", null: false
     t.string   "name",            null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["grade_system_id"], name: "index_buckets_on_grade_system_id", using: :btree
   end
-
-  add_index "buckets", ["grade_system_id"], name: "index_buckets_on_grade_system_id", using: :btree
 
   create_table "climb_logs", force: :cascade do |t|
     t.integer  "athlete_story_id", null: false
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
     t.integer  "climb_id",         null: false
+    t.index ["athlete_story_id"], name: "index_climb_logs_on_athlete_story_id", using: :btree
+    t.index ["climb_id"], name: "index_climb_logs_on_climb_id", using: :btree
   end
-
-  add_index "climb_logs", ["athlete_story_id"], name: "index_climb_logs_on_athlete_story_id", using: :btree
-  add_index "climb_logs", ["climb_id"], name: "index_climb_logs_on_climb_id", using: :btree
 
   create_table "climbs", force: :cascade do |t|
     t.integer  "color"
@@ -51,10 +47,9 @@ ActiveRecord::Schema.define(version: 20160919001053) do
     t.integer  "section_id",                  null: false
     t.integer  "grade_id",      default: 111, null: false
     t.datetime "teardown_date"
+    t.index ["grade_id"], name: "index_climbs_on_grade_id", using: :btree
+    t.index ["section_id"], name: "index_climbs_on_section_id", using: :btree
   end
-
-  add_index "climbs", ["grade_id"], name: "index_climbs_on_grade_id", using: :btree
-  add_index "climbs", ["section_id"], name: "index_climbs_on_section_id", using: :btree
 
   create_table "employments", force: :cascade do |t|
     t.integer  "gym_id",          null: false
@@ -62,10 +57,9 @@ ActiveRecord::Schema.define(version: 20160919001053) do
     t.string   "role_story_type", null: false
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+    t.index ["gym_id"], name: "index_employments_on_gym_id", using: :btree
+    t.index ["role_story_type", "role_story_id"], name: "index_employments_on_role_story_type_and_role_story_id", using: :btree
   end
-
-  add_index "employments", ["gym_id"], name: "index_employments_on_gym_id", using: :btree
-  add_index "employments", ["role_story_type", "role_story_id"], name: "index_employments_on_role_story_type_and_role_story_id", using: :btree
 
   create_table "grade_systems", force: :cascade do |t|
     t.string   "name",                      null: false
@@ -81,10 +75,9 @@ ActiveRecord::Schema.define(version: 20160919001053) do
     t.datetime "updated_at",      null: false
     t.integer  "sequence_number", null: false
     t.integer  "bucket_id"
+    t.index ["bucket_id"], name: "index_grades_on_bucket_id", using: :btree
+    t.index ["grade_system_id"], name: "index_grades_on_grade_system_id", using: :btree
   end
-
-  add_index "grades", ["bucket_id"], name: "index_grades_on_bucket_id", using: :btree
-  add_index "grades", ["grade_system_id"], name: "index_grades_on_grade_system_id", using: :btree
 
   create_table "gyms", force: :cascade do |t|
     t.string   "name"
@@ -92,28 +85,25 @@ ActiveRecord::Schema.define(version: 20160919001053) do
     t.datetime "updated_at",              null: false
     t.integer  "route_grade_system_id",   null: false
     t.integer  "boulder_grade_system_id", null: false
+    t.index ["boulder_grade_system_id"], name: "index_gyms_on_boulder_grade_system_id", using: :btree
+    t.index ["route_grade_system_id"], name: "index_gyms_on_route_grade_system_id", using: :btree
   end
-
-  add_index "gyms", ["boulder_grade_system_id"], name: "index_gyms_on_boulder_grade_system_id", using: :btree
-  add_index "gyms", ["route_grade_system_id"], name: "index_gyms_on_route_grade_system_id", using: :btree
 
   create_table "manager_stories", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_manager_stories_on_user_id", using: :btree
   end
-
-  add_index "manager_stories", ["user_id"], name: "index_manager_stories_on_user_id", using: :btree
 
   create_table "memberships", force: :cascade do |t|
     t.integer  "athlete_story_id"
     t.integer  "gym_id"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.index ["athlete_story_id"], name: "index_memberships_on_athlete_story_id", using: :btree
+    t.index ["gym_id"], name: "index_memberships_on_gym_id", using: :btree
   end
-
-  add_index "memberships", ["athlete_story_id"], name: "index_memberships_on_athlete_story_id", using: :btree
-  add_index "memberships", ["gym_id"], name: "index_memberships_on_gym_id", using: :btree
 
   create_table "roles", force: :cascade do |t|
     t.string   "name"
@@ -121,27 +111,24 @@ ActiveRecord::Schema.define(version: 20160919001053) do
     t.string   "resource_type"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.index ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
+    t.index ["name"], name: "index_roles_on_name", using: :btree
   end
-
-  add_index "roles", ["name", "resource_type", "resource_id"], name: "index_roles_on_name_and_resource_type_and_resource_id", using: :btree
-  add_index "roles", ["name"], name: "index_roles_on_name", using: :btree
 
   create_table "sections", force: :cascade do |t|
     t.string   "name"
     t.integer  "gym_id",     null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["gym_id"], name: "index_sections_on_gym_id", using: :btree
   end
-
-  add_index "sections", ["gym_id"], name: "index_sections_on_gym_id", using: :btree
 
   create_table "setter_stories", force: :cascade do |t|
     t.integer  "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_setter_stories_on_user_id", using: :btree
   end
-
-  add_index "setter_stories", ["user_id"], name: "index_setter_stories_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -157,17 +144,15 @@ ActiveRecord::Schema.define(version: 20160919001053) do
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
     t.string   "current_role"
+    t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
-
-  add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
-  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
 
   create_table "users_roles", id: false, force: :cascade do |t|
     t.integer "user_id"
     t.integer "role_id"
+    t.index ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
   end
-
-  add_index "users_roles", ["user_id", "role_id"], name: "index_users_roles_on_user_id_and_role_id", using: :btree
 
   add_foreign_key "athlete_stories", "users"
   add_foreign_key "buckets", "grade_systems"
