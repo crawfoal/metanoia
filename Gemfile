@@ -71,7 +71,7 @@ group :development, :test do
   gem 'bullet'
 
   # Use RSpec for testing
-  gem 'rspec-rails', '~> 3.4.2'
+  gem 'rspec-rails', '~> 3.5.2'
   # Use Capybara to interract with the browser during specs.
   gem 'capybara'
   # Use Database cleaner to clean up between tests
