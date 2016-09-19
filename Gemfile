@@ -2,7 +2,7 @@ source 'https://rubygems.org'
 ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.7.1'
+gem 'rails', '5.0.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use puma so we can process concurrent requests
@@ -102,9 +102,6 @@ group :test do
 
   # Use ammeter to provide helpers for testing generators
   gem 'ammeter'
-
-  # Allows us to create pretend models in the specs
-  gem 'activerecord-tableless'
 end
 
 group :development do

@@ -3,10 +3,8 @@ require 'rails_helper'
 RSpec.describe Seedster::ActiveRecordHelpers do
   m = Module.new
 
-  class m::Post < ActiveRecord::Base
+  class m::Post < Tableless
     include Seedster::ActiveRecordHelpers
-
-    has_no_table database: :pretend_success
 
     only_allow_seeded_records
   end
