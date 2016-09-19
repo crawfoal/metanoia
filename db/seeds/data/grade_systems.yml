@@ -2,12 +2,16 @@
 grade_system_2:
   id: 2
   name: Hueco
+  buckets_count: 7
 grade_system_4:
   id: 4
   name: Yosemite
+  buckets_count: 8
 grade_system_7:
   id: 7
   name: Null Grade System
+  buckets_count: 1
 grade_system_14:
   id: 14
   name: Rainbow Scale
+  buckets_count: 0

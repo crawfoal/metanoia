@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160709150754) do
+ActiveRecord::Schema.define(version: 20160919001053) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,9 +68,10 @@ ActiveRecord::Schema.define(version: 20160709150754) do
   add_index "employments", ["role_story_type", "role_story_id"], name: "index_employments_on_role_story_type_and_role_story_id", using: :btree
 
   create_table "grade_systems", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "name",                      null: false
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+    t.integer  "buckets_count", default: 0, null: false
   end
 
   create_table "grades", force: :cascade do |t|
