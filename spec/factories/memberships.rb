@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :membership do
-    athlete_story nil
-    gym nil
+    athlete_story
+    gym
   end
 end
