@@ -1,41 +1,32 @@
-class Tableless < ApplicationRecord
-  def self.columns
-    @columns ||= []
+class Tableless
+  include ActiveModel::Model
+  include ActiveRecord::Callbacks
+
+  def initialize(*args)
+    @new_record = true
+    super(*args)
   end
 
-  def self.column(name, sql_type = nil, default = nil, null = true)
-    type = "ActiveRecord::Type::#{sql_type.to_s.camelize}".constantize.new
-    columns << ActiveRecord::ConnectionAdapters::Column.new(name.to_s, default, type, null, '')
-  end
-
-  def self.columns_hash
-    @columns_hash ||= Hash[columns.map { |column| [column.name, column] }]
-  end
-
-  def self.column_names
-    @column_names ||= columns.map { |column| column.name }
-  end
-
-  def self.column_defaults
-    @column_defaults ||= columns.map { |column| [column.name, nil] }.inject({}) { |m, e| m[e[0]] = e[1]; m }
-  end
-
-  # Override the save method to prevent exceptions.
-  def save(validate = true)
-    validate ? valid? : true
-  end
-
-  private
-
-  def self.load_schema!
-    columns_hash.each do |name, column|
-      self.define_attribute(
-        name,
-        column.sql_type_metadata,
-        default: column.default,
-        user_provided_default: false
-      )
+  def save
+    if valid?
+      run_callbacks(:save) { true }
+    else
+      false
     end
   end
 
+  def self.create!(*args)
+    record = new(*args)
+    if record.save!
+      @new_record = false
+    end
+  end
+
+  def save!
+    save || raise(ActiveRecord::RecordNotSaved, "Failed to save the record")
+  end
+
+  def new_record?
+    @new_record
+  end
 end

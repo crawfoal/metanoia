@@ -7,7 +7,7 @@ module Seedster
     module ClassMethods
       def only_allow_seeded_records
         before_save do
-          if new_record? or changed?
+          if new_record? || changed?
             throw(:abort) unless Seedster.migrating?
           end
         end
