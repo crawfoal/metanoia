@@ -74,6 +74,10 @@ RSpec.describe GymsController, type: :controller do
   end
 
   describe '#update' do
+    before :each do
+      allow(Gym).to receive(:includes).with(:sections).and_return(Gym)
+    end
+
     it do
       create_and_login_user :admin
       gym = build_stubbed :gym

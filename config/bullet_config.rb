@@ -31,6 +31,11 @@ module BulletConfig
     Bullet.add_whitelist(
       type: :n_plus_one_query,
       class_name: 'User',
+      association: :users_roles
+    )
+    Bullet.add_whitelist(
+      type: :n_plus_one_query,
+      class_name: 'User',
       association: :manager_story
     )
     Bullet.add_whitelist(
