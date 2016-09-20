@@ -18,7 +18,7 @@ RSpec.describe Seedster::ActiveRecordHelpers do
     end
 
     it 'creates a callback that allows record saving when Seedster is running'\
-       'a migration' do
+       ' a migration' do
       allow(Seedster).to receive(:migrating?).and_return(true)
 
       expect { m::Post.create! }.to_not raise_error

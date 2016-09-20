@@ -102,6 +102,9 @@ group :test do
 
   # Use ammeter to provide helpers for testing generators
   gem 'ammeter'
+
+  # rails-controller-testing allows us to use assert_template and assigns
+  gem 'rails-controller-testing'
 end
 
 group :development do

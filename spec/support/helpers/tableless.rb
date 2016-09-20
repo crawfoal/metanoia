@@ -1,5 +1,4 @@
 class Tableless < ApplicationRecord
-
   def self.columns
     @columns ||= []
   end

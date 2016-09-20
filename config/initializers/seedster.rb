@@ -4,7 +4,6 @@ Seedster.configure do |config|
   config.tables = [:grade_systems, :grades, :buckets, :roles]
 end
 
-# Change to ApplicationRecord in Rails 5.0
-class ActiveRecord::Base
+ApplicationRecord.class_eval do
   include Seedster::ActiveRecordHelpers
 end

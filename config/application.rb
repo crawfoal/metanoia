@@ -12,9 +12,6 @@ module Metanoia
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
 
-    # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
-
     # Customize the console
     console do
       # Use `ap` method to print pretty, well formated output (as opposed to `puts`)

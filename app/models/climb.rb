@@ -18,7 +18,7 @@ class Climb < ApplicationRecord
   validates_presence_of :section
   has_one :gym, through: :section
   belongs_to :grade
-  before_save :set_grade_default_if_blank
+  before_validation :set_grade_default_if_blank
 
   # The list of colors is duplicated here in order to ensure that the order used
   # in the enum declaration doesn't change. Once data has been entered in a
