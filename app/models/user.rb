@@ -1,4 +1,4 @@
-class User < ActiveRecord::Base
+class User < ApplicationRecord
   rolify after_add: :rolify_after_add
 
   def rolify_after_add(role)

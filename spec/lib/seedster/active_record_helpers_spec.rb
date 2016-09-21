@@ -3,10 +3,8 @@ require 'rails_helper'
 RSpec.describe Seedster::ActiveRecordHelpers do
   m = Module.new
 
-  class m::Post < ActiveRecord::Base
+  class m::Post < Tableless
     include Seedster::ActiveRecordHelpers
-
-    has_no_table database: :pretend_success
 
     only_allow_seeded_records
   end
@@ -20,7 +18,7 @@ RSpec.describe Seedster::ActiveRecordHelpers do
     end
 
     it 'creates a callback that allows record saving when Seedster is running'\
-       'a migration' do
+       ' a migration' do
       allow(Seedster).to receive(:migrating?).and_return(true)
 
       expect { m::Post.create! }.to_not raise_error

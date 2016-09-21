@@ -1,4 +1,4 @@
-class ClimbLog < ActiveRecord::Base
+class ClimbLog < ApplicationRecord
   belongs_to :athlete_story
   validates_presence_of :athlete_story
   belongs_to :climb

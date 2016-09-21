@@ -5,7 +5,9 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
     it "doesn't show the link to create a new gym" do
       user = create :athlete, other_roles: :admin
       allow(controller).to receive(:current_user).and_return(user)
-      assign(:gyms, build_stubbed_list(:gym, 2))
+      gyms = build_stubbed_list(:gym, 2)
+      assign(:gyms, gyms)
+      stub_find_for(*gyms)
 
       render
 
@@ -20,6 +22,7 @@ RSpec.describe 'gyms/index.html.haml', type: :view do
       user = create :manager, employed_at: employer_gym
       allow(controller).to receive(:current_user).and_return(user)
       assign(:gyms, [employer_gym, other_gym])
+      stub_find_for employer_gym, other_gym
 
       render
 

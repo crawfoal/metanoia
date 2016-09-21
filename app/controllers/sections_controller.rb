@@ -6,6 +6,6 @@ class SectionsController < ApplicationController
   end
 
   def show
-    @section = Section.find(params[:id])
+    @section = Section.includes(:gym).find(params[:id])
   end
 end

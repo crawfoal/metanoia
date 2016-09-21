@@ -40,7 +40,10 @@ FactoryGirl.define do
 
     after :create do |gym, evaluator|
       evaluator.num_employees.times do
-        FactoryGirl.create Employment.roles.sample, employed_at: gym
+        FactoryGirl.create(
+          Employable::RoleStories.role_names.sample,
+          employed_at: gym
+        )
       end
     end
 

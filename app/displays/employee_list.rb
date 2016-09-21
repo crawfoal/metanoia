@@ -24,17 +24,17 @@ class EmployeeList
 
   def create_or_update_employee(user, role_name)
     if @employees[user.id].present?
-      @employees[user.id].roles += ", #{role_name}"
+      @employees[user.id].roles_in_words += ", #{role_name}"
     else
       @employees[user.id] = OpenStruct.new(
         email: user.email,
-        roles: role_name.to_s
+        roles_in_words: role_name.to_s
       )
     end
   end
 
   def users_by_employment_role
-    Employment.roles.collect do |role_name|
+    Employable::RoleStories.role_names.collect do |role_name|
       [
         role_name,
         User.joins("#{role_name}_story": :employments).

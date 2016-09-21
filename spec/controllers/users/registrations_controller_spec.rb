@@ -14,7 +14,7 @@ RSpec.describe Users::RegistrationsController, type: :controller do
           password_confirmation: 'wrong'
         }
 
-        post :create, params
+        post :create, params: params
 
         expect(response.body).to include 'errors prevented you from signing up'
       end

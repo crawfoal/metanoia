@@ -24,7 +24,7 @@ class Athletes::ClimbLogsController < ApplicationController
       respond_to do |format|
         format.html do
           flash[:alert] = 'Sorry, only athletes have a climb log.'
-          redirect_to :back
+          redirect_back fallback_location: root_path
         end
 
         format.js do

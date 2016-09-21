@@ -1,4 +1,4 @@
-class ManagerStory < ActiveRecord::Base
+class ManagerStory < ApplicationRecord
   include Employable
   belongs_to :user
 end
