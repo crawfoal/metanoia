@@ -1,0 +1,29 @@
+#!/usr/bin/env ruby
+require 'pathname'
+require 'fileutils'
+include FileUtils
+
+# path to your application root.
+APP_ROOT = Pathname.new File.expand_path('../../', __FILE__)
+
+def system!(*args)
+  system(*args) || abort("\n== Command #{args} failed ==")
+end
+
+chdir APP_ROOT do
+  # This script will set up an existing Heroku review app for use.
+
+  print "\nPlease enter the name of the review app: "
+  STDOUT.flush
+  review_app_name = gets.chomp
+
+  puts "\n== Copying metanoia-staging db to #{review_app_name} db"
+  system! 'heroku pg:copy metanoia-staging::DATABASE_URL DATABASE_URL --app ' +
+          review_app_name
+
+  puts "\n== Running migrations =="
+  system! "heroku run rake db:migrate --app #{review_app_name}"
+
+  puts "\n== Resetarting app =="
+  system! "heroku restart --app #{review_app_name}"
+end
