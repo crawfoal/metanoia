@@ -1,4 +1,4 @@
-class Employment < ActiveRecord::Base
+class Employment < ApplicationRecord
   belongs_to :gym
   validates_presence_of :gym
 

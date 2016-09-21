@@ -21,7 +21,7 @@ class GymsController < ApplicationController
   end
 
   def show
-    @gym = Gym.find(params[:id])
+    @gym = Gym.includes(:sections).find(params[:id])
     @route_histogram =
       ClimbHistogram.new(@gym.routes.active, @gym.route_grade_system)
     @boulder_histogram =
@@ -29,11 +29,11 @@ class GymsController < ApplicationController
   end
 
   def edit
-    @gym_form ||= GymForm.new(Gym.find(params[:id]))
+    @gym_form ||= GymForm.new(Gym.includes(:sections).find(params[:id]))
   end
 
   def update
-    @gym_form = GymForm.new(Gym.find(params[:id]))
+    @gym_form = GymForm.new(Gym.includes(:sections).find(params[:id]))
     @gym_form.attributes = gym_form_params
     if @gym_form.save
       gym_name = @gym_form.name || 'Un-named gym'

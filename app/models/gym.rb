@@ -1,4 +1,4 @@
-class Gym < ActiveRecord::Base
+class Gym < ApplicationRecord
   include ExtractValue
   extract_value_from :name, collections: :sections
 

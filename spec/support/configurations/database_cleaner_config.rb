@@ -2,7 +2,9 @@ require 'database_cleaner'
 
 module DatabaseCleanerHelper
   def self.truncation_except_seeded_tables
-    [:truncation, { except: Seedster.tables }]
+    # I think that `+ %w(ar_internal_metadata)` can be removed once issue
+    # 445 in database_cleaner is resolved.
+    [:truncation, { except: Seedster.tables + %w(ar_internal_metadata) }]
   end
 end
 
@@ -22,7 +24,9 @@ RSpec.configure do |config|
         uncommitted transaction data setup over the spec's database connection.
       MSG
     end
-    DatabaseCleaner.clean_with(:truncation)
+    # I think that `except: 'ar_internal_metadata'` can be removed once issue
+    # 445 in database_cleaner is resolved.
+    DatabaseCleaner.clean_with(:truncation, except: 'ar_internal_metadata')
     Rails.application.load_seed
   end
 

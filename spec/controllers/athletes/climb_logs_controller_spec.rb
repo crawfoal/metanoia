@@ -21,7 +21,7 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
         format: 'js'
       }
 
-      xhr :post, :create, params
+      post :create, xhr: true, params: params
 
       expect(flash[:alert]).to be_present
     end
@@ -31,7 +31,7 @@ RSpec.describe Athletes::ClimbLogsController, type: :controller do
       params = { climb_log: { climb_id: create(:climb).id }, format: 'js' }
       request.env['HTTP_REFERER'] = 'starting_page'
 
-      xhr :post, :create, params
+      post :create, xhr: true, params: params
 
       expect(flash[:alert]).to eq 'Sorry, only athletes have a climb log.'
     end
