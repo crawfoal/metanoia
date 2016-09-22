@@ -7,7 +7,7 @@ FactoryGirl.define do
     end
 
     email { create(:user).email }
-    role_name { Employment.roles.sample.to_s }
+    role_name { Employable::RoleStories.role_names.sample.to_s }
 
     trait :with_unregistered_email do
       email 'fake_address@example.com'

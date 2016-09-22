@@ -44,13 +44,14 @@ class EmploymentForm < BaseForm
     url_helpers.gym_employments_path(gym)
   end
 
-  # This allows us to have the `Employment.roles` list change while the
-  # application is running (that is why I didn't use the built in inclusion
-  # matcher). It allows means that it doesn't matter if this file is loaded
-  # before the role story models (during eager loading).
+  # This allows us to have the `Employable::RoleStories.role_names` list change
+  # while the application is running (that is why I didn't use the built in
+  # inclusion matcher). It allows means that it doesn't matter if this file is
+  # loaded before the role story models (during eager loading).
   def role_name_must_be_whitelisted
-    unless role_name.present? && Employment.roles.include?(role_name.to_sym)
-      role_names_to_sentence = Employment.roles.to_sentence(
+    unless role_name.present? &&
+           Employable::RoleStories.role_names.include?(role_name.to_sym)
+      role_names_to_sentence = Employable::RoleStories.role_names.to_sentence(
         two_words_connector: ' or ',
         last_word_connector: ', or '
       )

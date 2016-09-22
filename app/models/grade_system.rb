@@ -1,4 +1,4 @@
-class GradeSystem < ActiveRecord::Base
+class GradeSystem < ApplicationRecord
   has_many :grades, dependent: :destroy
   validates_presence_of :name
   has_many :buckets

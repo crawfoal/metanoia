@@ -12,7 +12,7 @@ RSpec.describe ClimbsController, type: :controller do
   it 'should check authorization for #new' do
     pretend_not_authorized :new?
 
-    xhr :get, :new, section_id: 1
+    get :new, xhr: true, params: { section_id: 1 }
 
     expect_standard_not_authorized_response
   end
@@ -20,7 +20,9 @@ RSpec.describe ClimbsController, type: :controller do
   it 'should check authorization for #create' do
     pretend_not_authorized :create?
 
-    xhr :post, :create, section_id: 1, climb: attributes_for(:climb)
+    post :create,
+         xhr: true,
+         params: { section_id: 1, climb: attributes_for(:climb) }
 
     expect_standard_not_authorized_response
   end

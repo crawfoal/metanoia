@@ -1,4 +1,4 @@
-class AthleteStory < ActiveRecord::Base
+class AthleteStory < ApplicationRecord
   belongs_to :user
   validates_presence_of :user
   has_many :climb_logs

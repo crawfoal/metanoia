@@ -1,4 +1,4 @@
-class Section < ActiveRecord::Base
+class Section < ApplicationRecord
   include ExtractValue
   extract_value_from :name
 

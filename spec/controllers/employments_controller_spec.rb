@@ -16,7 +16,7 @@ RSpec.describe EmploymentsController, type: :controller do
     }
     pretend_not_authorized :create?
 
-    xhr :post, :create, params
+    post :create, xhr: true, params: params
 
     expect_standard_not_authorized_response
   end
@@ -26,7 +26,7 @@ RSpec.describe EmploymentsController, type: :controller do
     allow(Gym).to receive(:find).with(gym.id.to_s).and_return(gym)
     pretend_not_authorized :index?, 'EmployeeListPolicy'
 
-    get :index, gym_id: gym.id
+    get :index, params: { gym_id: gym.id }
 
     expect_standard_not_authorized_response
   end
@@ -41,7 +41,8 @@ RSpec.describe EmploymentsController, type: :controller do
       }
       pretend_authorized :create?
 
-      expect { xhr :post, :create, params }.to_not change { Role.count }
+      expect { post :create, xhr: true, params: params }.to_not change \
+        { Role.count }
     end
   end
 end

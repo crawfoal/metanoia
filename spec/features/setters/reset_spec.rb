@@ -12,6 +12,7 @@ RSpec.feature 'Section Reset', type: :feature, js: true do
     expect(page).to show_climbs(count: section.climbs.count)
 
     click_on 'Reset Section'
+    wait_for_ajax
     expect(page).to_not show_climbs
 
     reload_page

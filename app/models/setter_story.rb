@@ -1,4 +1,4 @@
-class SetterStory < ActiveRecord::Base
+class SetterStory < ApplicationRecord
   include Employable
   belongs_to :user
 end

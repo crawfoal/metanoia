@@ -1,12 +1,12 @@
 source 'https://rubygems.org'
-ruby '2.3.0'
+ruby '2.3.1'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '4.2.6'
+gem 'rails', '5.0.0.1'
 # Use postgresql as the database for Active Record
 gem 'pg', '~> 0.15'
 # Use puma so we can process concurrent requests
-gem 'puma'
+gem 'puma', '~> 3.4.0'
 # Time out long running request
 gem 'rack-timeout'
 
@@ -20,11 +20,11 @@ gem 'sass-rails', '~> 5.0'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
-gem 'coffee-rails', '~> 4.1.0'
+gem 'coffee-rails', '~> 4.2.1'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
-gem 'turbolinks'
+gem 'turbolinks', '~> 2.5.3'
 # Use haml instead of erb (for regular html views)
 gem 'haml'
 gem 'haml-rails'
@@ -37,7 +37,7 @@ gem 'neat'
 # Use chartkick to interface with GoogleCharts so that we can make HTML5/SVG
 # graphs to visualize data (e.g. how many climbs of each grade does this gym
 # have?)
-gem "chartkick"
+gem 'chartkick'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.0'
@@ -71,7 +71,7 @@ group :development, :test do
   gem 'bullet'
 
   # Use RSpec for testing
-  gem 'rspec-rails'
+  gem 'rspec-rails', '~> 3.5.2'
   # Use Capybara to interract with the browser during specs.
   gem 'capybara'
   # Use Database cleaner to clean up between tests
@@ -103,13 +103,13 @@ group :test do
   # Use ammeter to provide helpers for testing generators
   gem 'ammeter'
 
-  # Allows us to create pretend models in the specs
-  gem 'activerecord-tableless'
+  # rails-controller-testing allows us to use assert_template and assigns
+  gem 'rails-controller-testing'
 end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '~> 2.0'
+  gem 'web-console', '3.3.0'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
