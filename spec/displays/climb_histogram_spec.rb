@@ -54,7 +54,8 @@ RSpec.describe ClimbHistogram do
         histogram = build :climb_histogram, gym: gym, climb_type: 'boulder'
 
         expect(histogram.data.map(&:first)).to eq \
-          ['?'] + gym.boulder_grade_system.grades.ordered.map(&:name)
+          ['?'] + Grade.from(gym.boulder_grade_system.grades.ordered, :grades).
+            pluck(:name)
       end
 
       it 'returns an array of grade name and climb count pairs' do
