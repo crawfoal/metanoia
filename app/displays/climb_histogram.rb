@@ -19,24 +19,24 @@ class ClimbHistogram
   private
   def bucket_names_and_counts
     Bucket.null_or_where(grade_system: @grade_system).
-    left_join_subquery(climbs_grades, :climbs_grades).
-    group('buckets.name').
-    order('MIN(climbs_grades.sequence_number)').
-    count('climbs_grades.id')
+      left_join_subquery(climbs_grades, :climbs_grades).
+      group('buckets.name').
+      order('MIN(climbs_grades.sequence_number)').
+      count('climbs_grades.id')
   end
 
   def grade_names_and_counts
     grades_with_null.
-    left_join_subquery(@climbs, :climbs).
-    group('grades.name').
-    order('MIN(grades.sequence_number)').
-    count('climbs.id')
+      left_join_subquery(@climbs, :climbs).
+      group('grades.name').
+      order('MIN(grades.sequence_number)').
+      count('climbs.id')
   end
 
   def climbs_grades
     grades_with_null.
-    left_join_subquery(@climbs, :climbs).
-    select('grades.bucket_id, grades.sequence_number, climbs.*')
+      left_join_subquery(@climbs, :climbs).
+      select('grades.bucket_id, grades.sequence_number, climbs.*')
   end
 
   def grades_with_null
