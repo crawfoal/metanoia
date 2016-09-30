@@ -6,7 +6,6 @@ class Bucket < ApplicationRecord
     joins(:grades).group('buckets.id').order('MIN(grades.sequence_number)')
   end
 
-  def self.null_object
-    find(17)
-  end
+  include HasNullObject
+  null_object_id_is 17
 end
