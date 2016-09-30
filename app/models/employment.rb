@@ -16,16 +16,7 @@ class Employment < ApplicationRecord
   end
 
   def self.for_user(user)
-    user_id = user.try(:id) || user
-    conditions = "#{Employable::RoleStories.tables.first}.user_id = #{user_id}"
-    conditions =
-      Employable::RoleStories.tables[1..-1].
-        inject(conditions) do |conditions, table_name|
-          conditions + " OR #{table_name}.user_id = #{user_id}"
-        end
-    with_role_stories.where(conditions)
-    # once upgraded to Rails 5, do something like this:
-    # with_role_stories.merge(Employable::RoleStories.for_user(user))
+    with_role_stories.merge(Employable::RoleStories.for_user(user))
   end
 
   def self.with_role_stories
