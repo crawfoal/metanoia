@@ -4,9 +4,9 @@ ruby '2.3.1'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '5.0.0.1'
 # Use postgresql as the database for Active Record
-gem 'pg', '~> 0.15'
+gem 'pg', '~> 0.19'
 # Use puma so we can process concurrent requests
-gem 'puma', '~> 3.4.0'
+gem 'puma', '~> 3.6.0'
 # Time out long running request
 gem 'rack-timeout'
 
@@ -63,17 +63,17 @@ gem 'table_print'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug'
+  gem 'byebug', '~> 9.0.6'
   # Use guard to automatically run specs as files are saved
   gem 'guard-rspec', require: false
 
   # Use Bullet to detect N+1 query problems
-  gem 'bullet'
+  gem 'bullet', '~> 5.4.2'
 
   # Use RSpec for testing
   gem 'rspec-rails', '~> 3.5.2'
   # Use Capybara to interract with the browser during specs.
-  gem 'capybara'
+  gem 'capybara', '~> 2.9.2'
   # Use Database cleaner to clean up between tests
   gem 'database_cleaner'
   # Use Selenium-Webdriver to run feature specs that require JavaScript
@@ -101,7 +101,7 @@ group :test do
   gem 'launchy'
 
   # Use ammeter to provide helpers for testing generators
-  gem 'ammeter'
+  gem 'ammeter', '~> 1.1.4'
 
   # rails-controller-testing allows us to use assert_template and assigns
   gem 'rails-controller-testing'
@@ -109,7 +109,7 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> in views
-  gem 'web-console', '3.3.0'
+  gem 'web-console', '~> 3.3.1'
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
