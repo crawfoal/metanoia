@@ -3,12 +3,10 @@
 
   #climbs
     - section.climbs.active.includes(:grade).each do |climb|
-      = button_to climb.grade.name,
-                  athletes_climb_logs_path,
-                  class: climb.color_name,
-                  remote: true,
-                  method: :post,
-                  params: { 'climb_log[climb_id]': climb.id }
+      - if current_user.current_role == 'athlete'
+        = button_to_log_climb(climb)
+      - else
+        = button_to_log_climb(climb, disabled: true, class: 'no-interraction')
 
   - if policy(Climb.new(section: section)).create?
     = link_to 'Add Climb',

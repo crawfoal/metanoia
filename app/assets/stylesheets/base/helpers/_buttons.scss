@@ -39,8 +39,12 @@
   vertical-align: middle;
   white-space: nowrap;
 
-  &:disabled {
+  &:disabled.disabled {
     cursor: not-allowed;
+  }
+
+  &:disabled.no-interraction {
+    cursor: default;
   }
 
   @include button-color($color, $text-color, $border);
@@ -68,10 +72,19 @@
     color: $text-color;
   }
 
-  &:disabled {
+  &:disabled.disabled {
     opacity: 0.5;
     &:hover {
       background-color: $color;
+    }
+  }
+
+  &:disabled.no-interraction {
+    &:hover,
+    &:focus {
+      background: none;
+      background-color: $color;
+      cursor: default;
     }
   }
 }
@@ -87,9 +100,17 @@
     color: $base-font-color;
   }
 
-  &:disabled {
+  &:disabled.disabled {
     &:hover {
       @include no-color-background;
+    }
+  }
+
+  &:disabled.no-interraction {
+    &:hover,
+    &:focus {
+      @include no-color-background;
+      cursor: default;
     }
   }
 }

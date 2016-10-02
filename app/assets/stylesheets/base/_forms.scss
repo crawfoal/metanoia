@@ -47,7 +47,7 @@ select[multiple] {
     outline: none;
   }
 
-  &:disabled {
+  &:disabled.disabled {
     background-color: shade($input-background-color, 5%);
     cursor: not-allowed;
 
@@ -120,7 +120,7 @@ select {
     outline: none;
   }
 
-  &:disabled {
+  &:disabled.disabled {
     background-color: shade($input-background-color, 5%);
     cursor: not-allowed;
 

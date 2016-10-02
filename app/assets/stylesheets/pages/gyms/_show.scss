@@ -7,7 +7,7 @@
     @include display(flex);
     @include flex-wrap(wrap);
 
-    .button_to input[type="submit"] {
+    .button_to .climb {
       @include compact-bitter-button;
       @include no-color-button;
 
