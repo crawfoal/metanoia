@@ -43,6 +43,10 @@
     cursor: not-allowed;
   }
 
+  &:disabled.no-interraction {
+    cursor: default;
+  }
+
   @include button-color($color, $text-color, $border);
 }
 
@@ -74,6 +78,15 @@
       background-color: $color;
     }
   }
+
+  &:disabled.no-interraction {
+    &:hover,
+    &:focus {
+      background: none;
+      background-color: $color;
+      cursor: default;
+    }
+  }
 }
 
 @mixin no-color-button {
@@ -90,6 +103,14 @@
   &:disabled.disabled {
     &:hover {
       @include no-color-background;
+    }
+  }
+
+  &:disabled.no-interraction {
+    &:hover,
+    &:focus {
+      @include no-color-background;
+      cursor: default;
     }
   }
 }

@@ -29,4 +29,16 @@ RSpec.feature 'Athlete Climb Logs', type: :feature, js: true do
     expect(logs_index_page.current_gym_name).to_not eq original_gym_name
     expect(logs_index_page).to be_showing_valid_gym_section_and_logs_for user
   end
+
+  scenario "when the user's current role isn't athlete, the buttons don't act"\
+           ' clickable' do
+    setter = create :setter
+    gym = create :tiny_boulder_gym
+    stubbed_sign_in setter
+    visit gym_path(gym)
+    click_on gym.sections.first.name
+    wait_for_ajax
+
+    expect(page).to have_selector '.climb:disabled.no-interraction'
+  end
 end
