@@ -39,7 +39,7 @@
   vertical-align: middle;
   white-space: nowrap;
 
-  &:disabled {
+  &:disabled.disabled {
     cursor: not-allowed;
   }
 
@@ -68,7 +68,7 @@
     color: $text-color;
   }
 
-  &:disabled {
+  &:disabled.disabled {
     opacity: 0.5;
     &:hover {
       background-color: $color;
@@ -87,7 +87,7 @@
     color: $base-font-color;
   }
 
-  &:disabled {
+  &:disabled.disabled {
     &:hover {
       @include no-color-background;
     }
