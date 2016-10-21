@@ -5,19 +5,23 @@ module Seedster
   module ReferentialIntegrityPatch
     def wrap_with_transaction_that_disables_ri
       disable_all_user_triggers
-      tables_constraints = find_non_deferrable_constraints
-      puts "INFO: #{tables_constraints.size} non-deferrable constraints were "\
-           "found"
+      tables_constraints = find_non_deferrable_fk_constraints
+      print "INFO: #{tables_constraints.size} non-deferrable fk constraints "\
+           "were found... "
       alter_to_be_deferrable(tables_constraints)
-      puts 'INFO: we were able to temporarily make '\
-           "#{tables_constraints.size - find_non_deferrable_constraints.size} "\
-           'of them deferrable'
+      puts 'we were able to temporarily make '\
+           "#{tables_constraints.size - find_non_deferrable_fk_constraints.size}"\
+           ' of them deferrable'
       transaction do
         execute("SET CONSTRAINTS ALL DEFERRED")
         puts 'INFO: "SET CONSTRAINTS ALL DEFERRED" has executed'
         yield
       end
       alter_to_be_non_deferrable(tables_constraints)
+      puts 'INFO: attempted to switch modified fk constraints back to their '\
+           'original, non-deferrable status... there are now '\
+           "#{find_non_deferrable_fk_constraints.size} non-deferrable "\
+           'fk constraints'
       enable_all_user_triggers
     end
 
@@ -41,7 +45,7 @@ module Seedster
       end
     end
 
-    def find_non_deferrable_constraints
+    def find_non_deferrable_fk_constraints
       execute(<<-SQL).values
         SELECT table_name, constraint_name
         FROM information_schema.table_constraints
@@ -54,7 +58,7 @@ module Seedster
         "ALTER TABLE #{quote_table_name(table)} "\
         "ALTER CONSTRAINT #{constraint} DEFERRABLE"
       end
-      statements.join(';')
+      execute(statements.join(';'))
     end
 
     def alter_to_be_non_deferrable(tables_constraints)
@@ -62,7 +66,7 @@ module Seedster
         "ALTER TABLE #{quote_table_name(table)} "\
         "ALTER CONSTRAINT #{constraint} NOT DEFERRABLE"
       end
-      statements.join(';')
+      execute(statements.join(';'))
     end
   end
 end
